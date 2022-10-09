@@ -1,19 +1,34 @@
 import React, {useRef} from "react";
 
-const FileUploader = ({onFileSelectSuccess, onFileSelectError}) => {
+const FileUploader = ({
+  id,
+  exp_ext,
+  onFileSelectSuccess,
+  onFileSelectError,
+}) => {
   const fileInput = useRef(null);
 
   const handleFileInput = (e) => {
     // handle validations
     const file = e.target.files[0];
-    if (file.size > 1024 * 1024)
-      onFileSelectError({error: "File size cannot exceed more than 1MB"});
+    var extension = file.type;
+    console.log(extension);
+    if (extension !== exp_ext)
+      onFileSelectError(`Image must be ${exp_ext} file`);
     else onFileSelectSuccess(file);
   };
 
   return (
     <div>
-      <input type='file' onChange={handleFileInput} />
+      <label className='mb-3 mr-1' htmlFor={id}>
+        {id}
+      </label>
+      <input
+        className='form-control'
+        type='file'
+        id={id}
+        onChange={handleFileInput}
+      />
       <button onClick={(e) => fileInput.current && fileInput.current.click()} />
     </div>
   );
