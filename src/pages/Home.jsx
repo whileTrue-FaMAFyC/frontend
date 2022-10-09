@@ -1,8 +1,11 @@
-import {useState} from "react";
 import {Container} from "./styled";
+import {ListGames} from "../components";
 
 const Home = () => {
-  const [login, setState] = useState(false);
-  return <Container>{login ? <p>login</p> : <p>register</p>}</Container>;
+  return (
+    <Container>
+      <ListGames />
+    </Container>
+  );
 };
 export default Home;
