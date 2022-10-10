@@ -13,12 +13,25 @@ const Login = () => {
 
   const [success, setSuccess] = useState(false);
 
-  const onSubmit = (data) => {
-    let result = fetch("http://localhost:8000/", {
+  const onSubmit = async (data) => {
+    // data.preventDefault();
+    await fetch("http://localhost:8000/", {
       method: "POST",
       body: JSON.stringify(data),
-    });
-    console.log(data);
+    })
+      .then(async (response) => {
+        //const responseData = await response.json();
+        if (response.satus === 200) {
+          // No hubo errores :D
+          // guardo el token que recibí en LocalStorage
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+          }
+        }
+      })
+      .catch(() => {
+        alert("Network Error");
+      });
   };
 
   return (
@@ -26,7 +39,7 @@ const Login = () => {
       <h1>Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor='inputEmial'>Email</label>
+          <label htmlFor='inputEmail'>Email</label>
           <input
             type='text'
             placeholder='example@example.com'
@@ -46,6 +59,7 @@ const Login = () => {
           <input
             type='password'
             id='inputPassword'
+            placeholder='password'
             {...register("password", {
               required: true,
               pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})$/,
@@ -68,6 +82,11 @@ const Login = () => {
           Se mandó la solicitud de registro
         </div>
       )}
+      <div>
+        <p>Not a member?</p>
+        {/* Redirigir a registrar! */}
+        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Join us!</a>
+      </div>
     </div>
   );
 };
