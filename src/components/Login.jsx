@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
+//import {BrowserRouter as Router, Link} from "react-router-dom";
 //import {useHistory} from "react-router-dom";
 import "./Login.css";
 
@@ -28,6 +29,7 @@ const Login = () => {
             localStorage.setItem("user", JSON.stringify(response.data));
           }
         }
+        // handlear errores, ver códigos backend
       })
       .catch(() => {
         alert("Network Error");
@@ -86,6 +88,15 @@ const Login = () => {
         <p>Not a member?</p>
         {/* Redirigir a registrar! */}
         <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Join us!</a>
+        {/*        
+        <Router>
+          <div>
+            <Link to='/about'>
+              <button>Click</button>
+            </Link>
+          </div>
+        </Router>
+        */}
       </div>
     </div>
   );
