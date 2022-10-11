@@ -13,7 +13,7 @@ const Formulario = () => {
   const [success, setSuccess] = useState(false);
 
   const onSubmit = (data) => {
-    fetch(`https://634303a43f83935a784e2a0c.mockapi.io/register`, {
+    fetch(`${process.env.REACT_APP_REG_KEY}register`, {
       method: "POST",
       body: JSON.stringify(data),
     })
