@@ -16,20 +16,26 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     // data.preventDefault();
-    await fetch("http://localhost:8000/", {
+    await fetch("http://localhost:8000/login", {
       method: "POST",
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data),
     })
       .then(async (response) => {
         //const responseData = await response.json();
-        if (response.satus === 200) {
+        if (response.status === 401) {
+          alert("Invalid credentials");
+        } else if (response.status === 200) {
           // No hubo errores :D
           // guardo el token que recibí en LocalStorage
           if (response.data.accessToken) {
             localStorage.setItem("user", JSON.stringify(response.data));
           }
+        } else {
+          alert("Unknown error");
         }
         // handlear errores, ver códigos backend
+        // 401: credenciales inválidas
       })
       .catch(() => {
         alert("Network Error");
@@ -51,8 +57,12 @@ const Login = () => {
               pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
             })}
           />
-          {errors.email?.type === "pattern" && <p>Ingrese un email</p>}
-          {errors.email?.type === "required" && <p>Ingrese un email</p>}
+          {errors.email?.type === "pattern" && (
+            <p className='error'>Ingrese un email válido</p>
+          )}
+          {errors.email?.type === "required" && (
+            <p className='error'>Ingrese un email</p>
+          )}
         </div>
         <div>
           <label className='form-label' htmlFor='inputPassword'>
@@ -68,20 +78,21 @@ const Login = () => {
             })}
           />
           {errors.password?.type === "pattern" && (
-            <p class='error'>
+            <p className='error'>
               La contraseña debe contener al menos una mayuscula, minuscula y
               numero
             </p>
           )}
           {errors.password?.type === "required" && (
-            <p class='error'>Ingrese una contraseña</p>
+            <p className='error'>Ingrese una contraseña</p>
           )}
         </div>
         <button type='login'>Login</button>
       </form>
       {success && (
         <div className='alert alert-success mt-4' role='alert'>
-          Se mandó la solicitud de registro
+          Login exitoso!
+          {/*Acá redirigir a perfil de usuario?*/}
         </div>
       )}
       <div>
