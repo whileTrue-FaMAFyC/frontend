@@ -1,22 +1,19 @@
-import React, {useState} from "react";
-import FileUploader from "./fileUploader";
+import React, {useState, useEffect} from "react";
+import {useForm} from "react-hook-form";
 
 const Botsubmit = () => {
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState(null);
-  const [codigo, setCodigo] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    watch,
+  } = useForm();
   const [success, setSuccess] = useState(false);
 
-  const submitForm = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("avatar", avatar);
-    formData.append("codigo", codigo);
-
-    fetch("/", {
+  const submitForm = (data) => {
+    fetch("https://63446b7ddcae733e8fdef696.mockapi.io/botsubmit", {
       method: "POST",
-      body: formData,
+      body: JSON.stringify(data),
     })
       .then((res) => {
         setSuccess(true);
@@ -25,37 +22,77 @@ const Botsubmit = () => {
   };
 
   return (
-    <div>
-      <h1>SUBIR BOT</h1>
-      <form className='requires-validation'>
-        <label className='.form-content' htmlFor='name'>
-          name
-        </label>
-        <input
-          className='form-control'
-          type='text'
-          id='name'
-          onChange={(e) => setName(e.target.value)}
-          placeholder='Nombre del bot'
-        />
+    <div className='form-content'>
+      <h3 className='form-title'>SUBIR BOT</h3>
+      <form onSubmit={handleSubmit(submitForm)} className='requires-validation'>
+        <div className='form-content'>
+          <label className='form-content' htmlFor='name'>
+            nombre:
+          </label>
+          <input
+            className='form-content'
+            id='name'
+            type='text'
+            {...register("name", {
+              required: true,
+              pattern: /^[A-Za-z0-9 ]+$/i,
+            })}
+            placeholder='Nombre del bot'
+          />
+          {errors.name?.type === "required" && (
+            <p className='error'>Ingresar nombre</p>
+          )}
+          {errors.name?.type === "pattern" && (
+            <p className='error'>No se permiten caracteres especiales</p>
+          )}
+        </div>
 
-        <FileUploader
-          id='avatar'
-          exp_ext='image/png'
-          onFileSelectSuccess={(file) => setAvatar(file)}
-          onFileSelectError={(error) => alert(error)}
-        />
+        <div className='form-content'>
+          <label className='form-content' htmlFor='codigo'>
+            código:
+          </label>
+          <input
+            className='form-button'
+            id='codigo'
+            type='file'
+            {...register("codigo", {
+              required: true,
+              validate: (e) => {
+                return e[0].type === "text/x-python";
+              },
+            })}
+          />
+          {errors.codigo?.type === "required" && (
+            <p className='error'>Ingresar codigo</p>
+          )}
+          {errors.codigo?.type === "validate" && (
+            <p className='error'>Se necesita un archivo con extensión .py</p>
+          )}
+        </div>
 
-        <FileUploader
-          id='codigo'
-          exp_ext='text/x-python'
-          onFileSelectSuccess={(file) => setCodigo(file)}
-          onFileSelectError={(error) => alert(error)}
-        />
+        <div className='form-content'>
+          <label className='form-content' htmlFor='avatar'>
+            avatar:
+          </label>
+          <input
+            className='form-button'
+            id='avatar'
+            type='file'
+            {...register("avatar", {
+              required: false,
+              validate: (e) => {
+                return e[0].type === "image/png";
+              },
+            })}
+          />
+          {errors.avatar?.type === "validate" && (
+            <p className='error'>Se necesita un archivo con extensión .png</p>
+          )}
+        </div>
 
-        <input onClick={submitForm} type='submit' value='Submit' />
-        {success && <div role='alert'>Successfully added</div>}
+        <input className='form-button' type='submit' />
       </form>
+      {success && <div role='alert'>Successfully added</div>}
     </div>
   );
 };

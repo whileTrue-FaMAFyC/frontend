@@ -3,6 +3,7 @@ import React, {useRef} from "react";
 const FileUploader = ({
   id,
   exp_ext,
+  req,
   onFileSelectSuccess,
   onFileSelectError,
 }) => {
@@ -17,21 +18,35 @@ const FileUploader = ({
       onFileSelectError(`Image must be ${exp_ext} file`);
     else onFileSelectSuccess(file);
   };
-
-  return (
-    <div>
-      <label className='mb-3 mr-1' htmlFor={id}>
-        {id}
-      </label>
-      <input
-        className='form-control'
-        type='file'
-        id={id}
-        onChange={handleFileInput}
-      />
-      <button onClick={(e) => fileInput.current && fileInput.current.click()} />
-    </div>
-  );
+  if (req)
+    return (
+      <div>
+        <label className='mb-3 mr-1' htmlFor={id}>
+          {id + ":"}
+        </label>
+        <input
+          className='form-control'
+          type='file'
+          id={id}
+          onChange={handleFileInput}
+          required
+        />
+      </div>
+    );
+  else
+    return (
+      <div>
+        <label className='mb-3 mr-1' htmlFor={id}>
+          {id + ":"}
+        </label>
+        <input
+          className='form-control'
+          type='file'
+          id={id}
+          onChange={handleFileInput}
+        />
+      </div>
+    );
 };
 
 export default FileUploader;

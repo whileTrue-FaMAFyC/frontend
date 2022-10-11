@@ -4,11 +4,12 @@ import Botsubmit from "./components/botsubmit";
 
 describe("Botsubmit test", () => {
   test("Submit form", async () => {
+    window.alert = () => {};
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText("name");
-    const inputAvatar = screen.getByLabelText("avatar");
-    const inputCodigo = screen.getByLabelText("codigo");
+    const inputName = screen.getByLabelText("nombre:");
+    const inputAvatar = screen.getByLabelText("avatar:");
+    const inputCodigo = screen.getByLabelText("código:");
 
     var av = new File([""], "avatar.png");
     var cod = new File(["codigooo"], "codigo.py");
@@ -17,7 +18,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Submit/i});
+    const button = screen.getByRole("button", {name: "Submit"});
 
     userEvent.click(button);
 
