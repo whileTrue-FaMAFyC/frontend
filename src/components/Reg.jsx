@@ -13,7 +13,7 @@ const Formulario = () => {
   const [success, setSuccess] = useState(false);
 
   const onSubmit = (data) => {
-    fetch("/", {
+    fetch(`https://634303a43f83935a784e2a0c.mockapi.io/register`, {
       method: "POST",
       body: JSON.stringify(data),
     })
@@ -23,8 +23,8 @@ const Formulario = () => {
   };
 
   return (
-    <div className='formulario'>
-      <h1>Formulario</h1>
+    <div className='registro'>
+      <h1>Registro</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label className='form-label' htmlFor='inputUsername'>
