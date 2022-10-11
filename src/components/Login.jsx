@@ -18,17 +18,25 @@ const Login = () => {
     // data.preventDefault();
     await fetch("http://localhost:8000/login", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Credentials": "true",
+      },
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        const data = await response.json();
+        // console.log(data.accessToken);
         //const responseData = await response.json();
         if (response.status === 401) {
           alert("Invalid credentials");
         } else if (response.status === 200) {
+          // console.log("Status 200 !");
           // No hubo errores :D
           // guardo el token que recibí en LocalStorage
-          if (response.data.accessToken) {
+          if (data.accessToken) {
+            // console.log("ESTOY POR GUARDAR EL TOKEN");
             localStorage.setItem("user", JSON.stringify(response.data));
           }
         } else {
