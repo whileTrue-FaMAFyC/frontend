@@ -1,5 +1,13 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
+import {
+  StyledButton,
+  StyledEntryCard,
+  StyledInput,
+  StyledInputGroup,
+  EntryPage,
+  StyledError,
+} from "./styles";
 
 const Botsubmit = () => {
   const {
@@ -10,7 +18,7 @@ const Botsubmit = () => {
   const [success, setSuccess] = useState(false);
 
   const submitForm = (data) => {
-    fetch("https://63446b7ddcae733e8fdef696.mockapi.io/botsubmit", {
+    fetch(`${process.env.REACT_APP_API_KEY}`, {
       method: "POST",
       body: JSON.stringify(data),
     })
@@ -21,79 +29,86 @@ const Botsubmit = () => {
   };
 
   return (
-    <div className='form-content'>
-      <h3 className='form-title'>SUBIR BOT</h3>
-      <form onSubmit={handleSubmit(submitForm)} className='requires-validation'>
-        <div className='form-content'>
-          <label className='form-content' htmlFor='name'>
-            nombre:
-          </label>
-          <input
-            className='form-content'
-            id='name'
-            type='text'
-            {...register("name", {
-              required: true,
-              pattern: /^[A-Za-z0-9 ]+$/i,
-            })}
-            placeholder='Nombre del bot'
-          />
-          {errors.name?.type === "required" && (
-            <p className='error'>Ingresar nombre</p>
-          )}
-          {errors.name?.type === "pattern" && (
-            <p className='error'>No se permiten caracteres especiales</p>
-          )}
-        </div>
+    <EntryPage>
+      <StyledEntryCard>
+        <h2>SUBIR BOT</h2>
+        <form
+          onSubmit={handleSubmit(submitForm)}
+          className='requires-validation'>
+          <StyledInputGroup>
+            <label className='form-content' htmlFor='name'>
+              nombre:
+            </label>
+            <StyledInput
+              id='name'
+              type='text'
+              {...register("name", {
+                required: true,
+                pattern: /^[A-Za-z0-9 ]+$/i,
+              })}
+              placeholder='Nombre del bot'
+            />
+            {errors.name?.type === "required" && (
+              <StyledError>Ingresar nombre</StyledError>
+            )}
+            {errors.name?.type === "pattern" && (
+              <StyledError>No se permiten caracteres especiales</StyledError>
+            )}
+          </StyledInputGroup>
 
-        <div className='form-content'>
-          <label className='form-content' htmlFor='codigo'>
-            código:
-          </label>
-          <input
-            className='form-button'
-            id='codigo'
-            type='file'
-            accept='.py'
-            {...register("codigo", {
-              required: true,
-              validate: (e) => {
-                return e[0].type === "text/x-python";
-              },
-            })}
-          />
-          {errors.codigo?.type === "required" && (
-            <p className='error'>Ingresar codigo</p>
-          )}
-          {errors.codigo?.type === "validate" && (
-            <p className='error'>Se necesita un archivo con extensión .py</p>
-          )}
-        </div>
+          <StyledInputGroup>
+            <label className='form-content' htmlFor='codigo'>
+              código:
+            </label>
+            <StyledInput
+              id='codigo'
+              type='file'
+              accept='.py'
+              {...register("codigo", {
+                required: true,
+                validate: (e) => {
+                  return e[0].type === "text/x-python";
+                },
+              })}
+            />
+            {errors.codigo?.type === "required" && (
+              <StyledError>Ingresar codigo</StyledError>
+            )}
+            {errors.codigo?.type === "validate" && (
+              <StyledError>
+                Se necesita un archivo con extensión .py
+              </StyledError>
+            )}
+          </StyledInputGroup>
 
-        <div className='form-content'>
-          <label className='form-content' htmlFor='avatar'>
-            avatar:
-          </label>
-          <input
-            className='form-button'
-            id='avatar'
-            type='file'
-            accept='.png'
-            {...register("avatar", {
-              validate: (e) => {
-                return e[0] === undefined || e[0].type === "image/png";
-              },
-            })}
-          />
-          {errors.avatar?.type === "validate" && (
-            <p className='error'>Se necesita un archivo con extensión .png</p>
-          )}
-        </div>
+          <StyledInputGroup>
+            <label className='form-content' htmlFor='avatar'>
+              avatar:
+            </label>
+            <StyledInput
+              id='avatar'
+              type='file'
+              accept='.png'
+              {...register("avatar", {
+                validate: (e) => {
+                  return e[0] === undefined || e[0].type === "image/png";
+                },
+              })}
+            />
+            {errors.avatar?.type === "validate" && (
+              <StyledError>
+                Se necesita un archivo con extensión .png
+              </StyledError>
+            )}
+          </StyledInputGroup>
 
-        <input className='form-button' type='submit' value='Submit' />
-      </form>
-      {success && <div role='alert'>Subido exitosamente</div>}
-    </div>
+          <StyledButton type='submit' value='Submit'>
+            Subir
+          </StyledButton>
+        </form>
+        {success && <div role='alert'>Subido exitosamente</div>}
+      </StyledEntryCard>
+    </EntryPage>
   );
 };
 

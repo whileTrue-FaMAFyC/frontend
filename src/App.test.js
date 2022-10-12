@@ -17,7 +17,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Submit/i});
+    const button = screen.getByRole("button", {name: /Subir/i});
 
     userEvent.click(button);
 
@@ -37,11 +37,11 @@ describe("Botsubmit test", () => {
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Submit/i});
+    const button = screen.getByRole("button", {name: /Subir/i});
 
     userEvent.click(button);
 
-    const alert = await screen.getByLabelText("Subido exitosamente");
+    const alert = await screen.findByRole("alert");
 
     expect(alert).toBeInTheDocument();
   });
