@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 
 const Botsubmit = () => {
@@ -6,7 +6,6 @@ const Botsubmit = () => {
     register,
     handleSubmit,
     formState: {errors},
-    watch,
   } = useForm();
   const [success, setSuccess] = useState(false);
 
@@ -55,6 +54,7 @@ const Botsubmit = () => {
             className='form-button'
             id='codigo'
             type='file'
+            accept='.py'
             {...register("codigo", {
               required: true,
               validate: (e) => {
@@ -78,10 +78,10 @@ const Botsubmit = () => {
             className='form-button'
             id='avatar'
             type='file'
+            accept='.png'
             {...register("avatar", {
-              required: false,
               validate: (e) => {
-                return e[0].type === "image/png";
+                return e[0] === undefined || e[0].type === "image/png";
               },
             })}
           />
@@ -90,9 +90,9 @@ const Botsubmit = () => {
           )}
         </div>
 
-        <input className='form-button' type='submit' />
+        <input className='form-button' type='submit' value='Submit' />
       </form>
-      {success && <div role='alert'>Successfully added</div>}
+      {success && <div role='alert'>Subido exitosamente</div>}
     </div>
   );
 };
