@@ -121,7 +121,21 @@ const Formulario = () => {
           <label className='form-label' htmlFor='inputAvatar'>
             Avatar
           </label>
-          <input type='file' id='inputAvatar' {...register("avatar", {})} />
+          <input
+            type='file'
+            id='inputAvatar'
+            accept='.png'
+            {...register("avatar", {
+              validate: (val) => {
+                return val.length === 0 || val[0].type === "image/png";
+              },
+            })}
+          />
+          {errors.avatar?.type === "validate" && (
+            <p class='error'>
+              La extension del archivo es incorrecta, el archivo debe ser .png
+            </p>
+          )}
         </div>
         <button type='submit'>Enviar</button>
       </form>

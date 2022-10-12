@@ -11,12 +11,13 @@ describe("Formlario test", () => {
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
     const inputAvatar = screen.getByLabelText("Avatar");
+    const av = new File([""], "aaavatar.pdf");
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-    userEvent.type(inputAvatar, "../logo.svg");
+    userEvent.type(inputAvatar, av);
 
     const button = screen.getByRole("button");
 
