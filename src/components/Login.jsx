@@ -1,8 +1,15 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-//import {BrowserRouter as Router, Link} from "react-router-dom";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 //import {useHistory} from "react-router-dom";
-import "./Login.css";
+import {
+  StyledButton,
+  StyledEntryCard,
+  StyledInput,
+  StyledInputGroup,
+  EntryPage,
+  StyledError,
+} from "./Login.style";
 
 const Login = () => {
   const {
@@ -51,62 +58,66 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor='inputEmail'>Email</label>
-          <input
-            type='text'
-            placeholder='example@example.com'
-            id='inputEmail'
-            {...register("email", {
-              required: true,
-              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
-            })}
-          />
-          {errors.email?.type === "pattern" && (
-            <p className='error'>Ingrese un email válido</p>
-          )}
-          {errors.email?.type === "required" && (
-            <p className='error'>Ingrese un email</p>
-          )}
-        </div>
-        <div>
-          <label className='form-label' htmlFor='inputPassword'>
-            Password
-          </label>
-          <input
-            type='password'
-            id='inputPassword'
-            placeholder='password'
-            {...register("password", {
-              required: true,
-              pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})$/,
-            })}
-          />
-          {errors.password?.type === "pattern" && (
-            <p className='error'>
-              La contraseña debe contener al menos una mayuscula, minuscula y
-              numero
-            </p>
-          )}
-          {errors.password?.type === "required" && (
-            <p className='error'>Ingrese una contraseña</p>
-          )}
-        </div>
-        <button type='login'>Login</button>
-      </form>
-      {success && (
-        <div className='alert alert-success mt-4' role='alert'>
-          Login exitoso!
-          {/*Acá redirigir a perfil de usuario?*/}
-        </div>
-      )}
-      <div>
-        <p>Not a member?</p>
-        {/* Redirigir a registrar! */}
-        <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Join us!</a>
+    <EntryPage>
+      <StyledEntryCard>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <StyledInputGroup>
+            <label htmlFor='inputEmail'>Email</label>
+            <StyledInput
+              type='text'
+              placeholder='example@example.com'
+              id='inputEmail'
+              {...register("email", {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+              })}
+            />
+            {errors.email?.type === "pattern" && (
+              <StyledError>Ingrese un email válido</StyledError>
+            )}
+            {errors.email?.type === "required" && (
+              <StyledError>Ingrese un email</StyledError>
+            )}
+          </StyledInputGroup>
+          <StyledInputGroup>
+            <label className='form-label' htmlFor='inputPassword'>
+              Password
+            </label>
+            <StyledInput
+              type='password'
+              id='inputPassword'
+              placeholder='password'
+              {...register("password", {
+                required: true,
+                pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})$/,
+              })}
+            />
+            {errors.password?.type === "pattern" && (
+              <StyledError>
+                La contraseña debe contener al menos una mayuscula, minuscula y
+                numero
+              </StyledError>
+            )}
+            {errors.password?.type === "required" && (
+              <StyledError>Ingrese una contraseña</StyledError>
+            )}
+          </StyledInputGroup>
+          <StyledButton type='login'>Login</StyledButton>
+        </form>
+        {success && (
+          <div className='alert alert-success mt-4' role='alert'>
+            Login exitoso!
+            {/*Acá redirigir a perfil de usuario?*/}
+          </div>
+        )}
+        <span>
+          <p>Not a member?</p>
+          <Link to='/register'>Register</Link>
+        </span>
+        {/* Redirigir a registrar! 
+          <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Join us!</a>
+          */}
         {/*        
         <Router>
           <div>
@@ -116,8 +127,8 @@ const Login = () => {
           </div>
         </Router>
         */}
-      </div>
-    </div>
+      </StyledEntryCard>
+    </EntryPage>
   );
 };
 
