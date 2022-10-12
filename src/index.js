@@ -3,10 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 import Home from "./pages/Home";
+import {BrowserRouter as Router, Routes} from "react-router-dom";
+import {GlobalStyle} from "./index.style";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>
+  <Router>
+    <React.StrictMode>
+      <GlobalStyle />
+      <App />
+    </React.StrictMode>
+  </Router>
 );
