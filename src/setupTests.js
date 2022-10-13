@@ -5,7 +5,7 @@
 import "@testing-library/jest-dom";
 
 // src/setupTests.js
-import {server} from "./__mocks__/server.js";
+/* import {server} from "./__mocks__/server.js";
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
 
@@ -14,4 +14,4 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 
 // Clean up after the tests are finished.
-afterAll(() => server.close());
+afterAll(() => server.close()); */

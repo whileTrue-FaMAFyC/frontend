@@ -1,19 +1,19 @@
-import {render, screen, waitFor} from "@testing-library/react";
+import mockAxios from "axios";
 import {gamesMock} from "../__mocks__";
-import {ListGames} from "../components";
+import {getGames} from "../services";
 
 describe("Listar partidas", () => {
-  beforeEach(() => {
-    render(<ListGames />);
-  });
-
   it("Los nombres de partidas estan en el documento", async () => {
-    await waitFor(() => {
-      gamesMock.forEach(({name}) => {
-        expect(screen.getByText(name)).toBeInTheDocument();
-      });
+    mockAxios.get.mockResolvedValue({
+      data: gamesMock,
     });
+
+    const games = await getGames();
+
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `${process.env.REACT_APP_API_KEY}games`
+    );
+    expect(games).toEqual(gamesMock);
   });
 });
-
-//await waitForElementToBeRemoved(() =>screen.getByText("Loading"))
