@@ -4,7 +4,7 @@ export const Form = styled.form`
   width: 300px;
 `;
 
-export const Input = styled.input`
-  width: 100%;
-  height: 40px;
+export const Button = styled.button`
+  width: 100px;
+  height: 20px;
 `;

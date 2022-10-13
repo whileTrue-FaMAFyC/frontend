@@ -1,40 +1,28 @@
-import {useForm} from "react-hook-form";
-import {Form, Input} from "./FormUserVerify.styled";
+import {useForm, FormProvider} from "react-hook-form";
+import TextField from "../TextField/TextField";
+import {Form, Button} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: {errors},
-  } = useForm({mode: "all"});
+  const methods = useForm({mode: "all"});
 
   const onSubmit = (data) => {
     console.log("la data es data", data);
   };
 
   return (
-    <>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <p>Ingrese el codigo</p>
-        <Input
-          data-testid='code'
-          name='code'
+    <FormProvider {...methods}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+        <TextField
           type='text'
-          {...register("code", {
-            maxLength: {
-              value: 4,
-              message: "La cantidad maxima de caracteres es 4",
-            },
-            required: {
-              value: true,
-              message: "Ingrese el codigo",
-            },
-          })}
+          name='code'
+          maxLength={6}
+          maxLengthMessage='El codigo es de 6 digitos'
+          required
+          requiredMessage='Ingrese el codigo'
         />
-        <button type='submit'>Enviar</button>
+        <Button type='submit'>Enviar</Button>
       </Form>
-      {<p data-testid='error'>{errors?.code?.message}</p>}
-    </>
+    </FormProvider>
   );
 };
 export default FormUserVerify;
