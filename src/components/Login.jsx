@@ -36,15 +36,18 @@ const Login = () => {
         const data = await response.json();
         // console.log(data.accessToken);
         //const responseData = await response.json();
+        console.log(response.status);
         if (response.status === 401) {
           alert("Invalid credentials");
         } else if (response.status === 200) {
           // console.log("Status 200 !");
           // No hubo errores :D
           // guardo el token que recibí en LocalStorage
+          console.log("Por guardar");
           if (data.accessToken) {
             // console.log("ESTOY POR GUARDAR EL TOKEN");
-            localStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("user", data.accessToken);
+            setSuccess(true);
           }
         } else {
           alert("Unknown error");
@@ -60,33 +63,41 @@ const Login = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <StyledInputGroup>
-            <label htmlFor='inputEmail'>Email</label>
+        <h2 data-testid='Title'>Login</h2>
+        <form onSubmit={handleSubmit(onSubmit)} id='form'>
+          <StyledInputGroup data-testid='emailGroup'>
+            <label htmlFor='inputEmail' data-testid='titleEmail'>
+              Email
+            </label>
             <StyledInput
+              id='inputEmail'
+              data-testid='inputEmail'
               type='text'
               placeholder='example@example.com'
-              id='inputEmail'
               {...register("email", {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
               })}
             />
             {errors.email?.type === "pattern" && (
-              <StyledError>Ingrese un email válido</StyledError>
+              <StyledError data-testid='errorEmailNotValid'>
+                Ingrese un email válido
+              </StyledError>
             )}
             {errors.email?.type === "required" && (
-              <StyledError>Ingrese un email</StyledError>
+              <StyledError data-testid='errorEmailEmpty'>
+                Ingrese un email
+              </StyledError>
             )}
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputPassword'>
+          <StyledInputGroup data-testid='passwordGroup'>
+            <label htmlFor='inputPassword' data-testid='titlePassword'>
               Password
             </label>
             <StyledInput
               type='password'
               id='inputPassword'
+              data-testid='inputPassword'
               placeholder='password'
               {...register("password", {
                 required: true,
@@ -94,26 +105,32 @@ const Login = () => {
               })}
             />
             {errors.password?.type === "pattern" && (
-              <StyledError>
+              <StyledError data-testid='errorPasswordNotValid'>
                 La contraseña debe contener al menos una mayuscula, minuscula y
                 numero
               </StyledError>
             )}
             {errors.password?.type === "required" && (
-              <StyledError>Ingrese una contraseña</StyledError>
+              <StyledError data-testid='errorPasswordEmpty'>
+                Ingrese una contraseña
+              </StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='login'>Login</StyledButton>
+          <StyledButton type='login' role='button' data-testid='loginButton'>
+            Login
+          </StyledButton>
         </form>
         {success && (
-          <div className='alert alert-success mt-4' role='alert'>
+          <div role='alert' data-testid='loginExitoso'>
             Login exitoso!
             {/*Acá redirigir a perfil de usuario?*/}
           </div>
         )}
         <span>
-          <p>Not a member?</p>
-          <Link to='/register'>Register</Link>
+          <p data-testid='notAMemb'>Not a member?</p>
+          <Link to='/register' data-testid='linkToReg'>
+            Register
+          </Link>
         </span>
         {/* Redirigir a registrar! 
           <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Join us!</a>
