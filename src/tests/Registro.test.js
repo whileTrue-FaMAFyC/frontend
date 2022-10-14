@@ -3,6 +3,20 @@ import userEvent from "@testing-library/user-event";
 import Formulario from "../components/Reg";
 
 describe("Formulario test", () => {
+  // RENDERIZADO DE COMPONENTES
+  test("0. Renderizado del componente", async () => {
+    render(<Formulario />);
+
+    expect.toBeInTheDocument(screen.getByLabelText("Username"));
+    expect.toBeInTheDocument(screen.getByLabelText("Email"));
+    expect.toBeInTheDocument(screen.getByLabelText("Password"));
+    expect.toBeInTheDocument(screen.getByLabelText("Confirm password"));
+    expect.toBeInTheDocument(screen.getByLabelText(/Avatar/i));
+    expect.toBeInTheDocument(screen.getByRole("button"));
+
+    expect(alert);
+  });
+
   // TODOS LOS CAMPOS
   test("1. Nuevo usuario con todos los campos llenos", async () => {
     render(<Formulario />);
