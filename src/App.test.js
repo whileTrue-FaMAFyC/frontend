@@ -6,9 +6,9 @@ describe("Botsubmit test", () => {
   test("Submit form", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText("nombre:");
-    const inputAvatar = screen.getByLabelText("avatar:");
-    const inputCodigo = screen.getByLabelText("código:");
+    const inputName = screen.getByLabelText(/nombre:/i);
+    const inputAvatar = screen.getByLabelText(/avatar:/i);
+    const inputCodigo = screen.getByLabelText(/codigo:/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -17,7 +17,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Subir/i});
+    const button = screen.getByRole("button");
 
     userEvent.click(button);
 
@@ -29,8 +29,8 @@ describe("Botsubmit test", () => {
   test("form sin avatar", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText("nombre:");
-    const inputCodigo = screen.getByLabelText("código:");
+    const inputName = screen.getByLabelText(/nombre:/i);
+    const inputCodigo = screen.getByLabelText(/codigo:/i);
 
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 

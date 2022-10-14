@@ -58,26 +58,23 @@ const Botsubmit = () => {
 
           <StyledInputGroup>
             <label className='form-content' htmlFor='codigo'>
-              código:
+              codigo:
             </label>
             <StyledInput
               id='codigo'
               type='file'
               accept='.py'
               {...register("codigo", {
-                required: true,
                 validate: (e) => {
-                  return e[0].type === "text/x-python";
+                  return e.length !== 0 && e[0].type === "text/x-python";
                 },
               })}
             />
-            {errors.codigo?.type === "required" && (
+            {/* {errors.codigo?.type === "required" && (
               <StyledError>Ingresar codigo</StyledError>
-            )}
+            )} */}
             {errors.codigo?.type === "validate" && (
-              <StyledError>
-                Se necesita un archivo con extensión .py
-              </StyledError>
+              <StyledError>Ingrese un archivo con extensión .py</StyledError>
             )}
           </StyledInputGroup>
 
@@ -102,9 +99,7 @@ const Botsubmit = () => {
             )}
           </StyledInputGroup>
 
-          <StyledButton type='submit' value='Submit'>
-            Subir
-          </StyledButton>
+          <StyledButton type='submit'>Subir</StyledButton>
         </form>
         {success && <div role='alert'>Subido exitosamente</div>}
       </StyledEntryCard>
