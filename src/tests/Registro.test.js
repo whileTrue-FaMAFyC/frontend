@@ -27,7 +27,7 @@ describe("Formulario test", () => {
 
     const alert = await screen.findByRole("alertSuccess");
 
-    expect(alert).toBeInTheDocument;
+    expect(alert);
   });
   // CAMPOS REQUERIDOS
   test("2. Nuevo usuario sin nombre de usuario", async () => {
@@ -51,10 +51,8 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText("Ingrese un usuario");
 
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Ingrese un usuario");
   });
 
   test("3. Nuevo usuario sin email", async () => {
@@ -78,10 +76,7 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText("Ingrese un email");
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Ingrese un email");
   });
 
   test("4. Nuevo usuario sin contraseña y con confirmacion de contraseña lleno", async () => {
@@ -105,10 +100,7 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText("Ingrese una contraseña");
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Ingrese una contraseña");
   });
 
   test("5. Nuevo usuario sin contraseña y sin confirmacion de contraseña lleno", async () => {
@@ -131,10 +123,7 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert0 = await screen.findByText("Ingrese una contraseña");
-
-    expect(msgAlert0).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Ingrese una contraseña");
   });
 
   test("6. Nuevo usuario sin confirmacion de contraseña ", async () => {
@@ -158,10 +147,7 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText("Reingrese su contraseña");
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Reingrese su contraseña");
   });
 
   // CAMPO OPCIONAL
@@ -184,7 +170,7 @@ describe("Formulario test", () => {
 
     const alert = await screen.findByRole("alertSuccess");
 
-    expect(alert).toBeInTheDocument;
+    expect(alert);
   });
 
   // AVATAR
@@ -210,12 +196,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "La extension del archivo es incorrecta, el archivo debe ser .png"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
   // NOMBRE DE USUARIO
   test("9. Alerta por superar longitud de nombre de usuario", async () => {
@@ -236,12 +219,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "El campo username puede tener a lo sumo 16 caracteres"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   test("10. Alerta por pobre longitud de nombre de usuario", async () => {
@@ -262,12 +242,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "El campo username debe tener al menos 3 caracteres"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   // EMAIL
@@ -289,12 +266,7 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
-      "El formato del email es incorrecto"
-    );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("El formato del email es incorrecto");
   });
 
   // CONTRASEÑA
@@ -316,12 +288,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   test("13. Alerta por contraseña sin minuscula", async () => {
@@ -342,12 +311,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   test("14. Alerta por contraseña sin numero", async () => {
@@ -368,12 +334,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   test("15. Alerta por contraseña con pobre longitud", async () => {
@@ -394,12 +357,9 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText(
+    expect(alert).toHaveTextContent(
       "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
     );
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
   });
 
   // CONFIRMAR CONTRASEÑA
@@ -421,9 +381,6 @@ describe("Formulario test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    const msgAlert = await screen.findByText("Las contraseñas no coinciden");
-
-    expect(msgAlert).toBeInTheDocument;
-    expect(alert).toBeInTheDocument;
+    expect(alert).toHaveTextContent("Las contraseñas no coinciden");
   });
 });
