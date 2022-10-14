@@ -73,3 +73,45 @@ test("allows the user to login successfully", async () => {
   let token = localStorage.getItem("user");
   expect(token).toEqual(fakeUserResponse.accessToken);
 });
+
+test("error when email and password empty", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  const errorPasswordEmpty = await screen.findAllByTestId("errorPasswordEmpty");
+  expect.toBeInTheDocument(errorPasswordEmpty);
+
+  const errorEmailEmpty = await screen.findAllByTestId("errorEmailEmpty");
+  expect.toBeInTheDocument(errorEmailEmpty);
+
+  //const emailError = await screen.getByTestId("errorEmailNotValid");
+  //expect.toBeInTheDocument(emailError);
+  //expect.toBeInTheDocument(screen.getAllByText("Ingrese un email válido"));
+});
+
+test("error when email and password not valid", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "testing"},
+  });
+  fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "testing"},
+  });
+  fireEvent.click(screen.getByTestId("loginButton"));
+  const errorPasswordEmpty = await screen.findAllByTestId(
+    "errorPasswordNotValid"
+  );
+  expect.toBeInTheDocument(errorPasswordEmpty);
+  const errorEmailEmpty = await screen.findAllByTestId("errorEmailNotValid");
+  expect.toBeInTheDocument(errorEmailEmpty);
+});
