@@ -36,14 +36,12 @@ const Login = () => {
         const data = await response.json();
         // console.log(data.accessToken);
         //const responseData = await response.json();
-        console.log(response.status);
         if (response.status === 401) {
           alert("Invalid credentials");
         } else if (response.status === 200) {
           // console.log("Status 200 !");
           // No hubo errores :D
           // guardo el token que recibí en LocalStorage
-          console.log("Por guardar");
           if (data.accessToken) {
             // console.log("ESTOY POR GUARDAR EL TOKEN");
             localStorage.setItem("user", data.accessToken);
@@ -64,7 +62,7 @@ const Login = () => {
     <EntryPage>
       <StyledEntryCard>
         <h2 data-testid='Title'>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)} id='form'>
+        <form onSubmit={handleSubmit(onSubmit)} id='form' data-testid='form'>
           <StyledInputGroup data-testid='emailGroup'>
             <label htmlFor='inputEmail' data-testid='titleEmail'>
               Email

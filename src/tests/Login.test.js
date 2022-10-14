@@ -25,6 +25,27 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
+test("renders login component successfully", async () => {
+  render(
+    <div>
+      <Router>
+        <Login />
+      </Router>
+    </div>
+  );
+
+  expect.toBeInTheDocument(screen.getByTestId("Title"));
+  expect.toBeInTheDocument(screen.getByTestId("form"));
+  expect.toBeInTheDocument(screen.getByTestId("emailGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("titleEmail"));
+  expect.toBeInTheDocument(screen.getByTestId("passwordGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("titlePassword"));
+  expect.toBeInTheDocument(screen.getByTestId("inputPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("loginButton"));
+  expect.toBeInTheDocument(screen.getByTestId("notAMemb"));
+  expect.toBeInTheDocument(screen.getByTestId("linkToReg"));
+});
+
 test("allows the user to login successfully", async () => {
   render(
     <div>
