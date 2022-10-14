@@ -31,7 +31,7 @@ const Formulario = () => {
   };
 
   return (
-    <StyledEntryCard>
+    <EntryPage>
       <EntryPage className='registro'>
         <h1>Registro</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,15 +49,15 @@ const Formulario = () => {
               })}
             />
             {errors.username?.type === "required" && (
-              <StyledError>Ingrese un usuario</StyledError>
+              <StyledError role='alertError'>Ingrese un usuario</StyledError>
             )}
             {errors.username?.type === "maxLength" && (
-              <StyledError>
+              <StyledError role='alertError'>
                 El campo username puede tener a lo sumo 16 caracteres
               </StyledError>
             )}
             {errors.username?.type === "minLength" && (
-              <StyledError>
+              <StyledError role='alertError'>
                 El campo username debe tener al menos 3 caracteres
               </StyledError>
             )}
@@ -75,10 +75,12 @@ const Formulario = () => {
               })}
             />
             {errors.email?.type === "pattern" && (
-              <StyledError>El formato del email es incorrecto</StyledError>
+              <StyledError role='alertError'>
+                El formato del email es incorrecto
+              </StyledError>
             )}
             {errors.email?.type === "required" && (
-              <StyledError>Ingrese un email</StyledError>
+              <StyledError role='alertError'>Ingrese un email</StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -90,17 +92,24 @@ const Formulario = () => {
               id='inputPassword'
               {...register("password", {
                 required: true,
-                pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})$/,
+                pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/,
               })}
             />
             {errors.password?.type === "pattern" && (
-              <StyledError>
-                La contraseña debe contener al menos una mayuscula, minuscula y
-                numero
+              <StyledError role='alertError'>
+                La contraseña debe contener al menos 8 caracteres, una
+                mayúscula, minúscula y número
+              </StyledError>
+            )}
+            {errors.password?.type === "minLength" && (
+              <StyledError role='alertError'>
+                La contraseña debe tener al menos 8 caracteres
               </StyledError>
             )}
             {errors.password?.type === "required" && (
-              <StyledError>Ingrese una contraseña</StyledError>
+              <StyledError role='alertError'>
+                Ingrese una contraseña
+              </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -113,18 +122,21 @@ const Formulario = () => {
               {...register("confirmPassword", {
                 required: true,
                 validate: (val) => {
-                  if (watch("password") !== val) {
-                    return false;
-                  }
+                  return watch("password") === "" || watch("password") === val;
                 },
               })}
             />
             {errors.confirmPassword?.type === "validate" && (
-              <StyledError>Las contraseñas no coinciden</StyledError>
+              <StyledError role='alertError'>
+                Las contraseñas no coinciden
+              </StyledError>
             )}
-            {errors.email?.type === "required" && (
-              <StyledError>Ingrese nuevamente su contraseña</StyledError>
-            )}
+            {errors.confirmPassword?.type === "required" &&
+              watch("password") && (
+                <StyledError role='alertError'>
+                  Reingrese su contraseña
+                </StyledError>
+              )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputAvatar'>
@@ -141,7 +153,7 @@ const Formulario = () => {
               })}
             />
             {errors.avatar?.type === "validate" && (
-              <StyledError>
+              <StyledError role='alertError'>
                 La extension del archivo es incorrecta, el archivo debe ser .png
               </StyledError>
             )}
@@ -149,12 +161,14 @@ const Formulario = () => {
           <StyledButton type='submit'>Enviar</StyledButton>
         </form>
         {success && (
-          <StyledInputGroup className='alert alert-success mt-4' role='alert'>
+          <StyledInputGroup
+            className='alert alert-success mt-4'
+            role='alertSuccess'>
             Se mandó la solicitud de registro
           </StyledInputGroup>
         )}
       </EntryPage>
-    </StyledEntryCard>
+    </EntryPage>
   );
 };
 
