@@ -225,15 +225,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo1234567890a");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -255,15 +251,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Ro");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -286,15 +278,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lalaasdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -317,15 +305,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "soyunmaestro123");
     userEvent.type(inputConfirmPassword, "soyunmaestro123");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -347,15 +331,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "SOYUNMAESTRO123");
     userEvent.type(inputConfirmPassword, "SOYUNMAESTRO123");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -377,15 +357,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro");
     userEvent.type(inputConfirmPassword, "Soyunmaestro");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -407,15 +383,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soy1");
     userEvent.type(inputConfirmPassword, "Soy1");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
@@ -438,15 +410,11 @@ describe("Formulario test", () => {
     const inputEmail = screen.getByLabelText("Email");
     const inputPassword = screen.getByLabelText("Password");
     const inputConfirmPassword = screen.getByLabelText("Confirm password");
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro12");
-
-    const input = screen.getByLabelText(/Avatar/i);
-    userEvent.upload(input, av);
 
     const button = screen.getByRole("button");
 
