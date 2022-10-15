@@ -20,7 +20,31 @@ const Formulario = () => {
 
   const [success, setSuccess] = useState(false);
 
+  function getBase64(file, cb) {
+    if (file.length !== 0) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file[0]);
+      reader.onload = function () {
+        cb(reader.result);
+      };
+      reader.onerror = function (error) {
+        console.log("Error: ", error);
+      };
+    }
+  }
+  //source_code en vez de code
+
   const onSubmit = async (data) => {
+    const JSONdata = {};
+    JSONdata.username = data.username;
+    JSONdata.email = data.email;
+    JSONdata.password = data.password;
+
+    getBase64(data.avatar, (res) => {
+      JSONdata.avatar = res;
+    });
+    console.log(JSON.stringify(JSONdata));
+    console.log(JSONdata);
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -28,22 +52,27 @@ const Formulario = () => {
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(JSONdata),
     })
       .then(async (response) => {
         const data = await response.json();
-        if (response.status === 400) {
-          alert("Invalid credentials"); // VER CON CONSOLE.LOG COMO IMPRIMIR EL DETALLE DE LO QUE LLEGA EN EL RESPONSE
+        if (response.status === 201 || response.status === 200) {
+          setSuccess(true);
         } else if (response.status === 500) {
-          alert("Error interno"); // VER CON CONSOLE.LOG COMO IMPRIMIR EL DETALLE DE LO QUE LLEGA EN EL RESPONSE
-        } else if (response.status === 200) {
-          // No se, supongo que nada porque esta todo bien
+          alert(data.detail);
+          setSuccess(false);
+        } else if (response.status === 400) {
+          alert(data.detail);
+          setSuccess(false);
         } else {
           alert("Unknown error");
+          setSuccess(false);
         }
       })
-      .then((json) => setSuccess(true))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        alert(error);
+        setSuccess(false);
+      });
   };
 
   return (
@@ -58,6 +87,7 @@ const Formulario = () => {
             <StyledInput
               type='text'
               id='inputUsername'
+              data-testid='Username'
               {...register("username", {
                 required: true,
                 maxLength: 16,
@@ -85,6 +115,7 @@ const Formulario = () => {
             <StyledInput
               type='text'
               id='inputEmail'
+              data-testid='Email'
               {...register("email", {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
@@ -106,6 +137,7 @@ const Formulario = () => {
             <StyledInput
               type='password'
               id='inputPassword'
+              data-testid='Password'
               {...register("password", {
                 required: true,
                 pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/,
@@ -135,6 +167,7 @@ const Formulario = () => {
             <StyledInput
               type='password'
               id='inputConfirmPassword'
+              data-testid='Confirm password'
               {...register("confirmPassword", {
                 required: true,
                 validate: (val) => {
@@ -162,6 +195,7 @@ const Formulario = () => {
               type='file'
               id='inputAvatar'
               accept='.png'
+              data-testid='Avatar'
               {...register("avatar", {
                 validate: (val) => {
                   return val.length === 0 || val[0].type === "image/png";
@@ -183,6 +217,7 @@ const Formulario = () => {
             Se mandó la solicitud de registro
           </StyledInputGroup>
         )}
+        {/* PONER LA REDIRECCION AL LOGIN EN CASO DE QUE YA TENGA UNA CUENTA */}
       </StyledEntryCard>
     </EntryPage>
   );
