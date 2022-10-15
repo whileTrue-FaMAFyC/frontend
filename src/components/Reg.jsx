@@ -20,6 +20,33 @@ const Formulario = () => {
 
   const [success, setSuccess] = useState(false);
 
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState(null);
+
+  const fileToBase64 = (file, cb) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      cb(null, reader.result);
+    };
+    reader.onerror = function (error) {
+      cb(error, null);
+    };
+  };
+
+  const onUploadFileChange = ({target}) => {
+    console.log(target);
+    if (target.files < 1 || !target.validity.valid) {
+      return;
+    }
+    fileToBase64(target.files[0], (err, result) => {
+      if (result) {
+        setFile(result);
+        setFileName(target.files[0]);
+      }
+    });
+  };
+
   function getBase64(file, cb) {
     if (file.length !== 0) {
       let reader = new FileReader();
@@ -39,12 +66,7 @@ const Formulario = () => {
     JSONdata.username = data.username;
     JSONdata.email = data.email;
     JSONdata.password = data.password;
-
-    getBase64(data.avatar, (res) => {
-      JSONdata.avatar = res;
-    });
-    console.log(JSON.stringify(JSONdata));
-    console.log(JSONdata);
+    JSONdata.avatar = file;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -197,6 +219,7 @@ const Formulario = () => {
               accept='.png'
               data-testid='Avatar'
               {...register("avatar", {
+                onChange: onUploadFileChange,
                 validate: (val) => {
                   return val.length === 0 || val[0].type === "image/png";
                 },
