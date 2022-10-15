@@ -123,9 +123,8 @@ const Login = () => {
           </StyledButton>
         </form>
         {success && (
-          <div role='alert' data-testid='loginExitoso'>
+          <div role='loginExitoso' data-testid='loginExitoso'>
             Login exitoso!
-            {/*Acá redirigir a perfil de usuario?*/}
           </div>
         )}
         <span>

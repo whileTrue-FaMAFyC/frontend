@@ -67,7 +67,7 @@ test("allows the user to login successfully", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("alert");
+  const alert = await screen.findByRole("loginExitoso");
   console.log(alert);
   expect(alert).toBeInTheDocument(alert);
 
