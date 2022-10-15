@@ -25,7 +25,7 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-test("render login component successfully", async () => {
+test("render full login component successfully", async () => {
   render(
     <div>
       <Router>
@@ -72,23 +72,67 @@ test("allows the user to login successfully", async () => {
   expect(token).toEqual(fakeUserResponse.Authorization);
 });
 
-test("error when email and password empty", async () => {
+test("error when email empty", async () => {
   render(
     <Router>
       <Login />
     </Router>
   );
 
+  fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "asdASD123"},
+  });
+
   fireEvent.click(screen.getByTestId("loginButton"));
 
+  // email empty error should display
+  const errorEmailEmpty = await screen.findByTestId("errorEmailEmpty");
+  expect.toBeInTheDocument(errorEmailEmpty);
+
+  // email not valid error should not display
+  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
+  expect.not.toBeInTheDocument(errorEmailNotValid);
+  // password not valid error should not display
+  const errorPasswordNotValid = await screen.queryByTestId(
+    "errorPasswordNotValid"
+  );
+  expect.not.toBeInTheDocument(errorPasswordNotValid);
+  // password empty error should not display
+  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
+  expect.not.toBeInTheDocument(errorPasswordEmpty);
+});
+
+test("error when password empty", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "test@test.com"},
+  });
+
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  // password error should display
   const errorPasswordEmpty = await screen.findByTestId("errorPasswordEmpty");
   expect.toBeInTheDocument(errorPasswordEmpty);
 
-  const errorEmailEmpty = await screen.findByTestId("errorEmailEmpty");
-  expect.toBeInTheDocument(errorEmailEmpty);
+  // email error should not display
+  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
+  expect.not.toBeInTheDocument(errorEmailEmpty);
+  // email empty error should not display
+  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
+  expect.not.toBeInTheDocument(errorEmailNotValid);
+  // password not valid error should not display
+  const errorPasswordNotValid = await screen.queryByTestId(
+    "errorPasswordNotValid"
+  );
+  expect.not.toBeInTheDocument(errorPasswordNotValid);
 });
 
-test("error when email and password not valid", async () => {
+test("error when email not valid", async () => {
   render(
     <Router>
       <Login />
@@ -99,13 +143,58 @@ test("error when email and password not valid", async () => {
     target: {value: "testing"},
   });
   fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "asdASD123"},
+  });
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  // email not valid error should display
+  const errorEmailNotValid = await screen.findByTestId("errorEmailNotValid");
+  expect.toBeInTheDocument(errorEmailNotValid);
+
+  // password not valid error should not display
+  const errorPasswordNotValid = await screen.queryByTestId(
+    "errorPasswordNotValid"
+  );
+  expect.toBeInTheDocument(errorPasswordNotValid);
+
+  // email empty error should not display
+  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
+  expect.not.toBeInTheDocument(errorEmailEmpty);
+  // password empty error should not display
+  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
+  expect.not.toBeInTheDocument(errorPasswordEmpty);
+});
+
+test("error when password not valid", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "test@test.com"},
+  });
+  fireEvent.change(screen.getByTestId("inputPassword"), {
     target: {value: "testing"},
   });
   fireEvent.click(screen.getByTestId("loginButton"));
-  const errorPasswordEmpty = await screen.findByTestId("errorPasswordNotValid");
-  expect.toBeInTheDocument(errorPasswordEmpty);
-  const errorEmailEmpty = await screen.findByTestId("errorEmailNotValid");
-  expect.toBeInTheDocument(errorEmailEmpty);
+
+  // password not valid error should display
+  const errorPasswordNotValid = await screen.findByTestId(
+    "errorPasswordNotValid"
+  );
+  expect.toBeInTheDocument(errorPasswordNotValid);
+
+  // email empty error should not display
+  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
+  expect.not.toBeInTheDocument(errorEmailEmpty);
+  // email not valid error should not display
+  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
+  expect.not.toBeInTheDocument(errorEmailNotValid);
+  // password empty error should not display
+  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
+  expect.not.toBeInTheDocument(errorPasswordEmpty);
 });
 
 test("network error", async () => {
