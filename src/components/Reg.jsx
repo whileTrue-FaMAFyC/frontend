@@ -35,7 +35,6 @@ const Formulario = () => {
   };
 
   const onUploadFileChange = ({target}) => {
-    console.log(target);
     if (target.files < 1 || !target.validity.valid) {
       return;
     }
@@ -47,26 +46,14 @@ const Formulario = () => {
     });
   };
 
-  function getBase64(file, cb) {
-    if (file.length !== 0) {
-      let reader = new FileReader();
-      reader.readAsDataURL(file[0]);
-      reader.onload = function () {
-        cb(reader.result);
-      };
-      reader.onerror = function (error) {
-        console.log("Error: ", error);
-      };
-    }
-  }
-  //source_code en vez de code
-
   const onSubmit = async (data) => {
     const JSONdata = {};
     JSONdata.username = data.username;
     JSONdata.email = data.email;
     JSONdata.password = data.password;
-    JSONdata.avatar = file;
+    JSONdata.avatar = file == null ? "" : file;
+    JSONdata.avatarFilename = fileName.name;
+    console.log(JSON.stringify(JSONdata));
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -78,7 +65,7 @@ const Formulario = () => {
     })
       .then(async (response) => {
         const data = await response.json();
-        if (response.status === 201 || response.status === 200) {
+        if (response.status === 201) {
           setSuccess(true);
         } else if (response.status === 500) {
           alert(data.detail);
