@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getGames} from "../../services/endpoints";
+import {getGames} from "../../services/games.service";
 import ListGamesView from "./ListGamesView";
 
 const ListGames = () => {
@@ -8,7 +8,7 @@ const ListGames = () => {
   const callGetGames = async () => {
     try {
       const response = await getGames();
-      setGames(response);
+      setGames(response.data);
     } catch (error) {
       console.log(error);
     }

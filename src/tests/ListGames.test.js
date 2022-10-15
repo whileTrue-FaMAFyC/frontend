@@ -14,6 +14,6 @@ describe("Listar partidas", () => {
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${process.env.REACT_APP_API_KEY}games`
     );
-    expect(games).toEqual(gamesMock);
+    expect(games.data).toEqual(gamesMock);
   });
 });
