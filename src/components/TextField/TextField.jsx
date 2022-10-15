@@ -4,6 +4,8 @@ import {InputContainer, Input, InputError} from "./TextField.styled";
 const TextField = ({
   type,
   name,
+  minLength,
+  minLengthMessage,
   maxLength,
   maxLengthMessage,
   required,
@@ -19,12 +21,17 @@ const TextField = ({
   return (
     <InputContainer>
       <Input
+        data-testid={name}
         name={name}
         type={type}
         {...register(name, {
           maxLength: {
             value: maxLength,
-            message: `${maxLengthMessage} ${maxLength}`,
+            message: `${maxLengthMessage}`,
+          },
+          minLength: {
+            value: minLength,
+            message: `${minLengthMessage}`,
           },
           required: {
             value: required,
@@ -36,7 +43,9 @@ const TextField = ({
           },
         })}
       />
-      <InputError>{errors[name]?.message}</InputError>
+      <InputError data-testid={`${name}-error`}>
+        {errors[name]?.message}
+      </InputError>
     </InputContainer>
   );
 };
