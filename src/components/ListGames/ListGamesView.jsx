@@ -21,7 +21,7 @@ const ListGamesView = ({games}) => {
         </Thead>
         <Tbody>
           {games.map(({id, name, players}) => (
-            <Row key={id}>
+            <Row key={id} data-testid='row'>
               <Column>{name}</Column>
               <Column>{players}</Column>
             </Row>
