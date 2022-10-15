@@ -37,24 +37,30 @@ const Login = () => {
         // console.log(data.accessToken);
         //const responseData = await response.json();
         if (response.status === 401) {
-          alert("Invalid credentials");
+          // console.log(data.detail);
+          alert(data.detail);
+          setSuccess(false);
         } else if (response.status === 200) {
-          // console.log("Status 200 !");
+          //console.log("Status 200 !");
           // No hubo errores :D
           // guardo el token que recibí en LocalStorage
-          if (data.accessToken) {
+          //console.log(data);
+          if (data.Authorization) {
             // console.log("ESTOY POR GUARDAR EL TOKEN");
-            localStorage.setItem("user", data.accessToken);
+            localStorage.setItem("user", data.Authorization);
+            // console.log(localStorage.getItem("user"));
             setSuccess(true);
           }
         } else {
           alert("Unknown error");
+          setSuccess(false);
         }
         // handlear errores, ver códigos backend
         // 401: credenciales inválidas
       })
-      .catch(() => {
-        alert("Network Error");
+      .catch((error) => {
+        alert("Error!");
+        setSuccess(false);
       });
   };
 

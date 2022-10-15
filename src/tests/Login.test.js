@@ -25,7 +25,7 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-test("renders login component successfully", async () => {
+test("render login component successfully", async () => {
   render(
     <div>
       <Router>
@@ -83,15 +83,11 @@ test("error when email and password empty", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const errorPasswordEmpty = await screen.findAllByTestId("errorPasswordEmpty");
+  const errorPasswordEmpty = await screen.findByTestId("errorPasswordEmpty");
   expect.toBeInTheDocument(errorPasswordEmpty);
 
-  const errorEmailEmpty = await screen.findAllByTestId("errorEmailEmpty");
+  const errorEmailEmpty = await screen.findByTestId("errorEmailEmpty");
   expect.toBeInTheDocument(errorEmailEmpty);
-
-  //const emailError = await screen.getByTestId("errorEmailNotValid");
-  //expect.toBeInTheDocument(emailError);
-  //expect.toBeInTheDocument(screen.getAllByText("Ingrese un email válido"));
 });
 
 test("error when email and password not valid", async () => {
@@ -108,10 +104,34 @@ test("error when email and password not valid", async () => {
     target: {value: "testing"},
   });
   fireEvent.click(screen.getByTestId("loginButton"));
-  const errorPasswordEmpty = await screen.findAllByTestId(
-    "errorPasswordNotValid"
-  );
+  const errorPasswordEmpty = await screen.findByTestId("errorPasswordNotValid");
   expect.toBeInTheDocument(errorPasswordEmpty);
-  const errorEmailEmpty = await screen.findAllByTestId("errorEmailNotValid");
+  const errorEmailEmpty = await screen.findByTestId("errorEmailNotValid");
   expect.toBeInTheDocument(errorEmailEmpty);
+});
+
+test("network error", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+  server.use(
+    rest.post("http://localhost:8000/login", (req, res, ctx) => {
+      return res(ctx.status(500), ctx.json({message: "Internal server error"}));
+    })
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "sadfASDF234"},
+  });
+
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  //const alert = await screen.getByTestId("alert");
+  //expect(alert).toHaveTextContent("Unknown error");
+  //expect(window.localStorage.getItem("user")).toBeNull();
 });
