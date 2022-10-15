@@ -6,12 +6,12 @@ import * as React from "react";
 // import API mocking utilities from Mock Service Worker.
 import {rest} from "msw";
 import {setupServer} from "msw/node";
-// import testing utilities
+// import testing utilitiess
 import {render, fireEvent, screen} from "@testing-library/react";
 import Login from "../components/Login";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
-const fakeUserResponse = {accessToken: "fake_user_token"};
+const fakeUserResponse = {Authorization: "fake_user_token"};
 const server = setupServer(
   rest.post("http://localhost:8000/login", (req, res, ctx) => {
     return res(ctx.json(fakeUserResponse));
@@ -64,14 +64,12 @@ test("allows the user to login successfully", async () => {
   });
 
   fireEvent.click(screen.getByTestId("loginButton"));
+
   const alert = await screen.findByRole("alert");
-  // .toHaveTextContent() comes from jest-dom's assertions
-  // otherwise you could use expect(alert.textContent).toMatch(/congrats/i)
-  // but jest-dom will give you better error messages which is why it's recommended
-  expect(alert).toHaveTextContent("Login exitoso!");
+  expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
-  expect(token).toEqual(fakeUserResponse.accessToken);
+  expect(token).toEqual(fakeUserResponse.Authorization);
 });
 
 test("error when email and password empty", async () => {
@@ -131,7 +129,33 @@ test("network error", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  //const alert = await screen.getByTestId("alert");
-  //expect(alert).toHaveTextContent("Unknown error");
-  //expect(window.localStorage.getItem("user")).toBeNull();
+  // No existe token para el usuario
+  let token = localStorage.getItem("user");
+  expect(token).toEqual(null);
+});
+
+test("invalid credentials", async () => {
+  render(
+    <Router>
+      <Login />
+    </Router>
+  );
+  server.use(
+    rest.post("http://localhost:8000/login", (req, res, ctx) => {
+      return res(ctx.status(401), ctx.json({message: "Unknown user"}));
+    })
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "sadfASDF234"},
+  });
+
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  // No existe token para el usuario
+  let token = localStorage.getItem("user");
+  expect(token).toEqual(null);
 });

@@ -55,8 +55,6 @@ const Login = () => {
           alert("Unknown error");
           setSuccess(false);
         }
-        // handlear errores, ver códigos backend
-        // 401: credenciales inválidas
       })
       .catch((error) => {
         alert("Error!");
