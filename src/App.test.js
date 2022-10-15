@@ -4,6 +4,8 @@ import Botsubmit from "./components/botsubmit";
 
 describe("Botsubmit test", () => {
   test("Submit form", async () => {
+    const jsdomAlert = window.alert; // remember the jsdom alert
+    window.alert = () => {};
     render(<Botsubmit />);
 
     const inputName = screen.getByLabelText(/nombre:/i);
@@ -45,4 +47,21 @@ describe("Botsubmit test", () => {
 
     expect(alert).toBeInTheDocument();
   });
+
+  test("Alerts campos obligatorios", async () => {
+    render(<Botsubmit />);
+
+    const button = screen.getByRole("button", {name: /Subir/i});
+
+    userEvent.click(button);
+
+    const error_name = await screen.findByRole("invalid_name");
+    const error_codigo = await screen.findByRole("invalid_codigo");
+    //const alert = await screen.findByRole("alert");
+
+    expect(error_name).toBeInTheDocument;
+    expect(error_codigo).toBeInTheDocument;
+  });
+
+  //test("Nombre invalido");
 });
