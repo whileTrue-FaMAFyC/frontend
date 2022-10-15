@@ -36,8 +36,9 @@ test("render full login component successfully", async () => {
 
   expect.toBeInTheDocument(screen.getByTestId("Title"));
   expect.toBeInTheDocument(screen.getByTestId("form"));
-  expect.toBeInTheDocument(screen.getByTestId("emailGroup"));
-  expect.toBeInTheDocument(screen.getByTestId("titleEmail"));
+  expect.toBeInTheDocument(screen.getByTestId("usernameOrEmailGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("titleUsrenameOrEmail"));
+  expect.toBeInTheDocument(screen.getByTestId("inputUsernameOrEmail"));
   expect.toBeInTheDocument(screen.getByTestId("passwordGroup"));
   expect.toBeInTheDocument(screen.getByTestId("titlePassword"));
   expect.toBeInTheDocument(screen.getByTestId("inputPassword"));
@@ -48,7 +49,7 @@ test("render full login component successfully", async () => {
   expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
-test("allows the user to login successfully", async () => {
+test("allows the user to login successfully with email", async () => {
   render(
     <div>
       <Router>
@@ -58,7 +59,7 @@ test("allows the user to login successfully", async () => {
   );
 
   // fill out the form
-  fireEvent.change(screen.getByTestId("inputEmail"), {
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
     target: {value: "seba@gmail.com"},
   });
   fireEvent.change(screen.getByTestId("inputPassword"), {
@@ -68,14 +69,39 @@ test("allows the user to login successfully", async () => {
   fireEvent.click(screen.getByTestId("loginButton"));
 
   const alert = await screen.findByRole("loginExitoso");
-  console.log(alert);
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
   expect(token).toEqual(fakeUserResponse.Authorization);
 });
 
-test("error when email empty", async () => {
+test("allows the user to login successfully with username", async () => {
+  render(
+    <div>
+      <Router>
+        <Login />
+      </Router>
+    </div>
+  );
+
+  // fill out the form
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
+    target: {value: "sebagir"},
+  });
+  fireEvent.change(screen.getByTestId("inputPassword"), {
+    target: {value: "sadfASDF234"},
+  });
+
+  fireEvent.click(screen.getByTestId("loginButton"));
+
+  const alert = await screen.findByRole("loginExitoso");
+  expect(alert).toBeInTheDocument(alert);
+
+  let token = localStorage.getItem("user");
+  expect(token).toEqual(fakeUserResponse.Authorization);
+});
+
+test("error when username or email empty", async () => {
   render(
     <Router>
       <Login />
@@ -89,8 +115,10 @@ test("error when email empty", async () => {
   fireEvent.click(screen.getByTestId("loginButton"));
 
   // email empty error should display
-  const errorEmailEmpty = await screen.findByTestId("errorEmailEmpty");
-  expect.toBeInTheDocument(errorEmailEmpty);
+  const errorUsernameOrEmailEmpty = await screen.findByTestId(
+    "errorUsernameOrEmailEmpty"
+  );
+  expect.toBeInTheDocument(errorUsernameOrEmailEmpty);
 
   // email not valid error should not display
   const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
@@ -114,7 +142,7 @@ test("error when password empty", async () => {
     </Router>
   );
 
-  fireEvent.change(screen.getByTestId("inputEmail"), {
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
     target: {value: "test@test.com"},
   });
 
@@ -125,8 +153,10 @@ test("error when password empty", async () => {
   expect.toBeInTheDocument(errorPasswordEmpty);
 
   // email error should not display
-  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
-  expect.not.toBeInTheDocument(errorEmailEmpty);
+  const errorUsernameOrEmailEmpty = await screen.queryByTestId(
+    "errorUsernameOrEmailEmpty"
+  );
+  expect.not.toBeInTheDocument(errorUsernameOrEmailEmpty);
   // email empty error should not display
   const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
   expect.not.toBeInTheDocument(errorEmailNotValid);
@@ -139,41 +169,6 @@ test("error when password empty", async () => {
   expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
-test("error when email not valid", async () => {
-  render(
-    <Router>
-      <Login />
-    </Router>
-  );
-
-  fireEvent.change(screen.getByTestId("inputEmail"), {
-    target: {value: "testing"},
-  });
-  fireEvent.change(screen.getByTestId("inputPassword"), {
-    target: {value: "asdASD123"},
-  });
-  fireEvent.click(screen.getByTestId("loginButton"));
-
-  // email not valid error should display
-  const errorEmailNotValid = await screen.findByTestId("errorEmailNotValid");
-  expect.toBeInTheDocument(errorEmailNotValid);
-
-  // password not valid error should not display
-  const errorPasswordNotValid = await screen.queryByTestId(
-    "errorPasswordNotValid"
-  );
-  expect.toBeInTheDocument(errorPasswordNotValid);
-
-  // email empty error should not display
-  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
-  expect.not.toBeInTheDocument(errorEmailEmpty);
-  // password empty error should not display
-  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
-  expect.not.toBeInTheDocument(errorPasswordEmpty);
-
-  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
-});
-
 test("error when password not valid", async () => {
   render(
     <Router>
@@ -181,7 +176,7 @@ test("error when password not valid", async () => {
     </Router>
   );
 
-  fireEvent.change(screen.getByTestId("inputEmail"), {
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
     target: {value: "test@test.com"},
   });
   fireEvent.change(screen.getByTestId("inputPassword"), {
@@ -196,8 +191,10 @@ test("error when password not valid", async () => {
   expect.toBeInTheDocument(errorPasswordNotValid);
 
   // email empty error should not display
-  const errorEmailEmpty = await screen.queryByTestId("errorEmailEmpty");
-  expect.not.toBeInTheDocument(errorEmailEmpty);
+  const errorUsernameOrEmailEmpty = await screen.queryByTestId(
+    "errorUsernameOrEmailEmpty"
+  );
+  expect.not.toBeInTheDocument(errorUsernameOrEmailEmpty);
   // email not valid error should not display
   const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
   expect.not.toBeInTheDocument(errorEmailNotValid);
@@ -220,7 +217,7 @@ test("network error", async () => {
     })
   );
 
-  fireEvent.change(screen.getByTestId("inputEmail"), {
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
     target: {value: "seba@gmail.com"},
   });
   fireEvent.change(screen.getByTestId("inputPassword"), {
@@ -248,7 +245,7 @@ test("invalid credentials", async () => {
     })
   );
 
-  fireEvent.change(screen.getByTestId("inputEmail"), {
+  fireEvent.change(screen.getByTestId("inputUsernameOrEmail"), {
     target: {value: "seba@gmail.com"},
   });
   fireEvent.change(screen.getByTestId("inputPassword"), {

@@ -67,28 +67,24 @@ const Login = () => {
       <StyledEntryCard>
         <h2 data-testid='Title'>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)} id='form' data-testid='form'>
-          <StyledInputGroup data-testid='emailGroup'>
-            <label htmlFor='inputEmail' data-testid='titleEmail'>
-              Email
+          <StyledInputGroup data-testid='usernameOrEmailGroup'>
+            <label
+              htmlFor='inputUsernameOrEmail'
+              data-testid='titleUsrenameOrEmail'>
+              Username or Email
             </label>
             <StyledInput
-              id='inputEmail'
-              data-testid='inputEmail'
+              id='inputUsernameOrEmail'
+              data-testid='inputUsernameOrEmail'
               type='text'
-              placeholder='example@example.com'
-              {...register("email", {
+              placeholder='your username or email'
+              {...register("username_or_email", {
                 required: true,
-                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
               })}
             />
-            {errors.email?.type === "pattern" && (
-              <StyledError data-testid='errorEmailNotValid'>
-                Ingrese un email válido
-              </StyledError>
-            )}
-            {errors.email?.type === "required" && (
-              <StyledError data-testid='errorEmailEmpty'>
-                Ingrese un email
+            {errors.username_or_email?.type === "required" && (
+              <StyledError data-testid='errorUsernameOrEmailEmpty'>
+                Ingrese su username o email
               </StyledError>
             )}
           </StyledInputGroup>
