@@ -3,7 +3,7 @@ import {rest} from "msw";
 
 export const handlers = [
   // Handles a POST /login request
-  rest.post(`${process.env.REACT_APP_REG_KEY}register`, (req, res, ctx) => {
+  rest.post("http://localhost:8000/signup", (req, res, ctx) => {
     return res(ctx.json({success: true}));
   }),
 ];

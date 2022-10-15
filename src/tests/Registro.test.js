@@ -397,4 +397,9 @@ describe("Formulario test", () => {
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent("Las contraseñas no coinciden");
   });
+
+  // TESTS QUE FALTAN:
+  // CHEQUEAR QUE LLEGUE DEL BACK NOMBRE DE USUARIO EN USO CUANDO YA EXISTA EL QUE LE PASO
+  // CHEQUEAR QUE LLEGUE DEL BACK EMAIL EN USO CUANDO YA EXISTA EL QUE LE PASO
+  // PREGUNTARLE A TONI SI SE LE OCURRE ALGUN OTRO SOBRE LA INTERACCION CON EL BACK
 });

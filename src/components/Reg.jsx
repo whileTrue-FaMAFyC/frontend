@@ -20,19 +20,35 @@ const Formulario = () => {
 
   const [success, setSuccess] = useState(false);
 
-  const onSubmit = (data) => {
-    fetch(`${process.env.REACT_APP_REG_KEY}register`, {
+  const onSubmit = async (data) => {
+    await fetch("http://localhost:8000/signup", {
       method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Credentials": "true",
+      },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status === 400) {
+          alert("Invalid credentials"); // VER CON CONSOLE.LOG COMO IMPRIMIR EL DETALLE DE LO QUE LLEGA EN EL RESPONSE
+        } else if (response.status === 500) {
+          alert("Error interno"); // VER CON CONSOLE.LOG COMO IMPRIMIR EL DETALLE DE LO QUE LLEGA EN EL RESPONSE
+        } else if (response.status === 200) {
+          // No se, supongo que nada porque esta todo bien
+        } else {
+          alert("Unknown error");
+        }
+      })
       .then((json) => setSuccess(true))
       .catch((error) => console.log(error));
   };
 
   return (
     <EntryPage>
-      <EntryPage className='registro'>
+      <StyledEntryCard className='registro'>
         <h1>Registro</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
@@ -167,7 +183,7 @@ const Formulario = () => {
             Se mandó la solicitud de registro
           </StyledInputGroup>
         )}
-      </EntryPage>
+      </StyledEntryCard>
     </EntryPage>
   );
 };
