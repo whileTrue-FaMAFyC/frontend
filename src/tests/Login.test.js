@@ -44,6 +44,8 @@ test("render full login component successfully", async () => {
   expect.toBeInTheDocument(screen.getByTestId("loginButton"));
   expect.toBeInTheDocument(screen.getByTestId("notAMemb"));
   expect.toBeInTheDocument(screen.getByTestId("linkToReg"));
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("allows the user to login successfully", async () => {
@@ -66,6 +68,7 @@ test("allows the user to login successfully", async () => {
   fireEvent.click(screen.getByTestId("loginButton"));
 
   const alert = await screen.findByRole("alert");
+  console.log(alert);
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -100,6 +103,8 @@ test("error when email empty", async () => {
   // password empty error should not display
   const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
   expect.not.toBeInTheDocument(errorPasswordEmpty);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("error when password empty", async () => {
@@ -130,6 +135,8 @@ test("error when password empty", async () => {
     "errorPasswordNotValid"
   );
   expect.not.toBeInTheDocument(errorPasswordNotValid);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("error when email not valid", async () => {
@@ -163,6 +170,8 @@ test("error when email not valid", async () => {
   // password empty error should not display
   const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
   expect.not.toBeInTheDocument(errorPasswordEmpty);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("error when password not valid", async () => {
@@ -195,6 +204,8 @@ test("error when password not valid", async () => {
   // password empty error should not display
   const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
   expect.not.toBeInTheDocument(errorPasswordEmpty);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("network error", async () => {
@@ -221,6 +232,8 @@ test("network error", async () => {
   // No existe token para el usuario
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
 
 test("invalid credentials", async () => {
@@ -247,4 +260,6 @@ test("invalid credentials", async () => {
   // No existe token para el usuario
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
+
+  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
 });
