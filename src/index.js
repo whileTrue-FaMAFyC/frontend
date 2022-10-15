@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/App";
-import Home from "./pages/Home";
 import Login from "./components/Login";
 import {GlobalStyle} from "./components/Login.style";
 import {BrowserRouter as Router} from "react-router-dom";

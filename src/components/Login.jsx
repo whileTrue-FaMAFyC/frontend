@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 //import {useHistory} from "react-router-dom";
 import {
   StyledButton,
@@ -16,7 +16,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: {errors},
-    watch,
   } = useForm();
 
   const [success, setSuccess] = useState(false);
@@ -119,7 +118,7 @@ const Login = () => {
           </StyledButton>
         </form>
         {success && (
-          <div role='loginExitoso' data-testid='loginExitoso'>
+          <div role='alert' data-testid='loginExitoso'>
             Login exitoso!
           </div>
         )}

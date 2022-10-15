@@ -68,7 +68,7 @@ test("allows the user to login successfully with email", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("loginExitoso");
+  const alert = await screen.findByRole("alert");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -94,7 +94,7 @@ test("allows the user to login successfully with username", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("loginExitoso");
+  const alert = await screen.findByRole("alert");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
