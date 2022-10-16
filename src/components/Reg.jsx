@@ -52,8 +52,7 @@ const Formulario = () => {
     JSONdata.email = data.email;
     JSONdata.password = data.password;
     JSONdata.avatar = file == null ? "" : file;
-    JSONdata.avatarFilename = fileName.name;
-    console.log(JSON.stringify(JSONdata));
+    JSONdata.avatarFilename = file == null ? "" : fileName.name;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
