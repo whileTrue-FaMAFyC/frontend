@@ -77,7 +77,7 @@ test("move to login", async () => {
   expect.toBeInTheDocument(screen.getByText("You are in login"));
 });
 
-test("move to home", async () => {
+test("move to register", async () => {
   render(
     <div>
       <Router>
