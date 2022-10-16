@@ -1,5 +1,7 @@
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import axios from "axios";
+import {getRobotsNames} from "../services";
 
 import {
   StyledButton,
@@ -17,6 +19,23 @@ const FormPartidaConfig = () => {
     formState: {errors},
     watch,
   } = useForm();
+
+  const [robotsNames, setRobotsNames] = useState([]);
+
+  const callGetRobotsNames = async () => {
+    try {
+      const response = await getRobotsNames();
+      setRobotsNames(response.data);
+      console.log(robotsNames);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    callGetRobotsNames();
+    console.log(robotsNames);
+  }, []);
 
   const [success, setSuccess] = useState(false);
 
@@ -45,6 +64,9 @@ const FormPartidaConfig = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
+        } else if (response.status === 400 || response.status === 401) {
+          alert(data.detail);
+          setSuccess(false);
         } else {
           alert("Unknown error");
           setSuccess(false);
@@ -196,14 +218,14 @@ const FormPartidaConfig = () => {
             <label className='form-label' htmlFor='inputRobot'>
               Elegir robot
             </label>
-            <StyledInput
-              type='text'
+            <select
               id='inputRobot'
               data-testid='nameRobot'
-              {...register("nameRobot", {
-                required: true,
-              })}
-            />
+              {...register("nameRobot", {required: true})}>
+              {robotsNames.map((a) => (
+                <option value={a.id}>{a.robotName}</option>
+              ))}
+            </select>
             {errors.nameRobot?.type === "required" && (
               <StyledError role='alertError'>Ingrese un robot</StyledError>
             )}
