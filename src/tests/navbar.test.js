@@ -8,7 +8,7 @@ import {rest} from "msw";
 import {setupServer} from "msw/node";
 // import testing utilitiess
 import {render, fireEvent, screen} from "@testing-library/react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import App from "../components/App";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 

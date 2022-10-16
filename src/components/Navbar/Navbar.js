@@ -13,7 +13,7 @@ function Navbar({children}) {
       <NavItemLink to='/register' data-testid='toReg'>
         Register
       </NavItemLink>
-      <NavItemLink to='/listgames' data-testid='toReg'>
+      <NavItemLink to='/listgames' data-testid='toListGames'>
         ListGames
       </NavItemLink>
     </StyledNavbar>
