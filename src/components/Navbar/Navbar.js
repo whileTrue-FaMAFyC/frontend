@@ -13,6 +13,9 @@ function Navbar({children}) {
       <NavItemLink to='/register' data-testid='toReg'>
         Register
       </NavItemLink>
+      <NavItemLink to='/listgames' data-testid='toReg'>
+        ListGames
+      </NavItemLink>
     </StyledNavbar>
   );
 }
