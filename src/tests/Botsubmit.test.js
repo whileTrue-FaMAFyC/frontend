@@ -3,6 +3,8 @@ import userEvent from "@testing-library/user-event";
 import Botsubmit from "../components/Botsubmit";
 import {server} from "../mocks/server";
 import {rest} from "msw";
+import * as fs from "node:fs/promises";
+import {act} from "react-dom/test-utils";
 
 const jsdomAlert = window.alert; // remember the jsdom alert
 window.alert = (e) => {
@@ -155,7 +157,7 @@ describe("Botsubmit test", () => {
     const inputAvatar = screen.getByLabelText(/avatar:/i);
     const inputCodigo = screen.getByLabelText(/codigo:/i);
 
-    var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
+    var av = new File(["avatar"], "avatar.png", {type: "image/jpeg"});
 
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputAvatar, av);
@@ -177,7 +179,7 @@ describe("Botsubmit test", () => {
     const inputAvatar = screen.getByLabelText(/avatar:/i);
     const inputCodigo = screen.getByLabelText(/codigo:/i);
 
-    var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
+    var av = new File(["avatar"], "avatar.png", {type: "image/jpg"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
     userEvent.upload(inputAvatar, av);
@@ -224,7 +226,7 @@ describe("Botsubmit test", () => {
     const inputAvatar = screen.getByLabelText(/avatar:/i);
     const inputCodigo = screen.getByLabelText(/codigo:/i);
 
-    var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
+    var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
     userEvent.type(
@@ -244,23 +246,16 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  test("Servidor caido", async () => {
+  test("Avatar muy largo", async () => {
     render(<Botsubmit />);
-
-    server.use(
-      rest.post(`${process.env.REACT_APP_API_KEY}`, (req, res, ctx) => {
-        return res(
-          ctx.status(500),
-          ctx.json({message: "Internal server error"})
-        );
-      })
-    );
 
     const inputName = screen.getByLabelText(/nombre:/i);
     const inputAvatar = screen.getByLabelText(/avatar:/i);
     const inputCodigo = screen.getByLabelText(/codigo:/i);
 
-    var av = new File(["avatar"], "avatar.png", {type: "image/png"});
+    var av = new File([new ArrayBuffer(40001)], "avatar.png", {
+      type: "image/png",
+    });
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
     userEvent.type(inputName, "Marcelo");
@@ -271,6 +266,60 @@ describe("Botsubmit test", () => {
 
     userEvent.click(button);
 
+    const invalid_avatar = await screen.findByRole("invalid_avatar");
+
+    expect(invalid_avatar).toBeInTheDocument();
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
+
+  test("Codigo muy largo", async () => {
+    render(<Botsubmit />);
+
+    const inputName = screen.getByLabelText(/nombre:/i);
+    const inputCodigo = screen.getByLabelText(/codigo:/i);
+
+    var cod = new File([new ArrayBuffer(43334)], "codigo.py", {
+      type: "text/x-python",
+    });
+
+    userEvent.type(inputName, "Marcelo");
+    userEvent.upload(inputCodigo, cod);
+
+    const button = screen.getByRole("button");
+
+    userEvent.click(button);
+
+    const invalid_code = await screen.findByRole("invalid_code");
+
+    expect(invalid_code).toBeInTheDocument();
+    expect(screen.queryByRole("invalid_avatar")).not.toBeInTheDocument;
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
+  });
+
+  //Test de integracion
+  //   test("Servidor caido", async () => {
+  //     render(<Botsubmit />);
+
+  //     server.use(
+  //       rest.post(`${process.env.REACT_APP_API_KEY}`, (req, res, ctx) => {
+  //         return res(ctx.json({status: 500, message: "Internal server error"}));
+  //       })
+  //     );
+  //     const inputName = screen.getByLabelText(/nombre:/i);
+  //     const inputAvatar = screen.getByLabelText(/avatar:/i);
+  //     const inputCodigo = screen.getByLabelText(/codigo:/i);
+
+  //     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
+  //     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
+
+  //     userEvent.type(inputName, "Marcelo");
+  //     userEvent.upload(inputAvatar, av);
+  //     userEvent.upload(inputCodigo, cod);
+
+  //     const button = screen.getByRole("button");
+
+  //     userEvent.click(button);
+
+  //     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
+  //   });
 });

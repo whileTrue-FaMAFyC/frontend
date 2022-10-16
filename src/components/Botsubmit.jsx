@@ -52,17 +52,17 @@ const Botsubmit = () => {
     data.avatar__fn = fileName_av;
     console.log(data);
     //const token = localStorage.getItem("token");
-    await fetch(`${process.env.REACT_APP_API_KEY}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Access-Control-Allow-Credentials": "true",
-        //Authorization: `${token}`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then(async (response) => {
+    try {
+      await fetch(`${process.env.REACT_APP_API_KEY}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Credentials": "true",
+          //Authorization: `${token}`,
+        },
+        body: JSON.stringify(data),
+      }).then(async (response) => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           //console.log("Status 200 !");
@@ -76,12 +76,13 @@ const Botsubmit = () => {
           // }
           setSuccess(true);
         } else {
-          // console.log();
           alert(data);
           setSuccess(false);
         }
-      })
-      .catch((err) => alert(err));
+      });
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
