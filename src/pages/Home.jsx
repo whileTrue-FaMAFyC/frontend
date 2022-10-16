@@ -1,11 +1,4 @@
-import {Container} from "./styled";
-import {ListGames} from "../components";
-
 const Home = () => {
-  return (
-    <Container>
-      <ListGames />
-    </Container>
-  );
+  return <div data-testid='home'>You are home</div>;
 };
 export default Home;
