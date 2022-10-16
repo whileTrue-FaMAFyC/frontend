@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getGames} from "../../services/games.service";
+import {getGames} from "../../services";
 import ListGamesView from "./ListGamesView";
 
 const ListGames = () => {

@@ -1,7 +1,20 @@
 export const gamesMock = [
-  {id: 1, name: "game50", players: 1},
-  {id: 2, name: "game51", players: 2},
-  {id: 3, name: "game52", players: 3},
-  {id: 4, name: "game53", players: 4},
-  {id: 5, name: "game54", players: 4},
+  {
+    match_info: {
+      match_id: 1,
+      name: "Solo robots pros",
+      creator_user: {username: "robotucora"},
+      max_players: 4,
+    },
+    robots_joined: 4,
+  },
+  {
+    match_info: {
+      match_id: 2,
+      name: "Busco amigos",
+      creator_user: {username: "Alone"},
+      max_players: 4,
+    },
+    robots_joined: 2,
+  },
 ];

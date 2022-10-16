@@ -8,11 +8,16 @@ describe("Listar partidas", () => {
     mockAxios.get.mockResolvedValue({
       data: gamesMock,
     });
+
     render(<ListGames />);
 
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `${process.env.REACT_APP_API_KEY}matches/list-matches`
+    );
+
     await waitFor(() => {
-      gamesMock.forEach(({name}) => {
-        expect(screen.getByText(name)).toBeInTheDocument();
+      gamesMock.forEach(({match_info}) => {
+        expect(screen.getByText(match_info.name)).toBeInTheDocument();
       });
     });
   });
