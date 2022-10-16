@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link} from "react-router-dom";
-//import {useHistory} from "react-router-dom";
 import {
   StyledButton,
   StyledEntryCard,
@@ -21,7 +20,6 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data) => {
-    // data.preventDefault();
     await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
@@ -33,22 +31,15 @@ const Login = () => {
     })
       .then(async (response) => {
         const data = await response.json();
-        // console.log(data.accessToken);
-        //const responseData = await response.json();
         if (response.status === 401) {
-          // console.log(data.detail);
           alert(data.detail);
           setSuccess(false);
         } else if (response.status === 200) {
-          //console.log("Status 200 !");
-          // No hubo errores :D
-          // guardo el token que recibí en LocalStorage
-          //console.log(data);
           if (data.Authorization) {
-            // console.log("ESTOY POR GUARDAR EL TOKEN");
             localStorage.setItem("user", data.Authorization);
-            // console.log(localStorage.getItem("user"));
             setSuccess(true);
+          } else {
+            setSuccess(false);
           }
         } else {
           alert("Unknown error");
