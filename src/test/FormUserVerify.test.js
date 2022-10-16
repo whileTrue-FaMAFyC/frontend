@@ -36,7 +36,7 @@ describe("Componente de verificacion de codigo", () => {
 
   it("El usuario verifica su cuenta con exito", async () => {
     mockAxios.put.mockResolvedValue({
-      data: {details: "account verified successfully", status: 200},
+      data: {detail: "account verified successfully", status: 200},
     });
 
     userEvent.type(input, "123456");
@@ -50,8 +50,8 @@ describe("Componente de verificacion de codigo", () => {
   });
 
   it("El usuario ya esta verificado", async () => {
-    mockAxios.put.mockResolvedValue({
-      data: {details: "user already verified", status: 400},
+    mockAxios.put.mockRejectedValue({
+      response: {data: {detail: "user already verified"}},
     });
     userEvent.type(input, "123456");
     userEvent.click(button);
@@ -59,7 +59,5 @@ describe("Componente de verificacion de codigo", () => {
     await waitFor(() => {
       expect(screen.getByText("user already verified")).toBeInTheDocument();
     });
-
-    screen.debug();
   });
 });

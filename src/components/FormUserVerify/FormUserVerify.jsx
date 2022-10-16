@@ -1,6 +1,7 @@
 import {useState} from "react";
+import {useParams} from "react-router-dom";
 import {useForm, FormProvider} from "react-hook-form";
-import {verifyUser} from "../../services/verifyuser.service";
+import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
 import {Form, Button} from "./FormUserVerify.styled";
 
@@ -8,13 +9,14 @@ const FormUserVerify = () => {
   const [message, setMessage] = useState("");
   const methods = useForm({mode: "all"});
 
+  let {username} = useParams();
+
   const onSubmit = async (data) => {
-    const username = "israel";
     try {
-      const response = await verifyUser(data.code, username);
-      setMessage(response.data.details);
+      await verifyUser(data.code, username);
+      setMessage("account verified successfully");
     } catch (error) {
-      console.log(error);
+      setMessage(error.response.data.detail);
     }
   };
 
