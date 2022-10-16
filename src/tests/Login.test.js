@@ -5,7 +5,7 @@ import {rest} from "msw";
 import {setupServer} from "msw/node";
 // import testing utilitiess
 import {render, fireEvent, screen} from "@testing-library/react";
-import Login from "../components/Login";
+import Login from "../components/Login/Login";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
 const fakeUserResponse = {Authorization: "fake_user_token"};

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Login from "./components/Login";
-import {GlobalStyle} from "./components/Login.style";
+import Login from "./components/Login/Login";
+import {GlobalStyle} from "./components/Login/Login.style";
 import {BrowserRouter as Router} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
