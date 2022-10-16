@@ -1,12 +1,17 @@
-import {render, screen, waitFor} from "@testing-library/react";
+import mockAxios from "axios";
+import {cleanup, render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {FormUserVerify} from "../components";
-import mockAxios from "axios";
 
 describe("Componente de verificacion de codigo", () => {
   let button;
   let input;
   let error;
+
+  afterEach(cleanup);
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   beforeEach(() => {
     render(<FormUserVerify />);
@@ -27,5 +32,34 @@ describe("Componente de verificacion de codigo", () => {
     await waitFor(() => {
       expect(error).toHaveTextContent("El codigo es de 6 digitos");
     });
+  });
+
+  it("El usuario verifica su cuenta con exito", async () => {
+    mockAxios.put.mockResolvedValue({
+      data: {details: "account verified successfully", status: 200},
+    });
+
+    userEvent.type(input, "123456");
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText("account verified successfully")
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("El usuario ya esta verificado", async () => {
+    mockAxios.put.mockResolvedValue({
+      data: {details: "user already verified", status: 400},
+    });
+    userEvent.type(input, "123456");
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(screen.getByText("user already verified")).toBeInTheDocument();
+    });
+
+    screen.debug();
   });
 });

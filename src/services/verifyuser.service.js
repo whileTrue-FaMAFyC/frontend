@@ -1,10 +1,9 @@
 import axios from "axios";
 
-export const verifyUser = async () => {
-  const response = await axios.get(
-    `https://6341d10916ffb7e275d86e37.mockapi.io/api/games`
-    /*     {verification_code: data.code} */
+export const verifyUser = async (code, username) => {
+  const response = await axios.put(
+    `${process.env.REACT_APP_API_KEY}/verifyUser/${username}`,
+    {verification_code: code}
   );
-
   return response;
 };

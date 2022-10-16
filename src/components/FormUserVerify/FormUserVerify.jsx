@@ -9,14 +9,10 @@ const FormUserVerify = () => {
   const methods = useForm({mode: "all"});
 
   const onSubmit = async (data) => {
+    const username = "israel";
     try {
-      const response = await verifyUser();
-      console.log("Response:", response);
-      if (response.statusText !== "OK") {
-        setMessage(response.data.details);
-        throw new Error(`Error with status code: ${response.status}`);
-      }
-      setMessage("Account verified successfully!");
+      const response = await verifyUser(data.code, username);
+      setMessage(response.data.details);
     } catch (error) {
       console.log(error);
     }
