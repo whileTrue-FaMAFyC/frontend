@@ -1,6 +1,3 @@
-// __tests__/login.js
-// again, these first two imports are something you'd normally handle in
-// your testing framework configuration rather than importing them in every file.
 import "@testing-library/jest-dom";
 import * as React from "react";
 // import API mocking utilities from Mock Service Worker.
