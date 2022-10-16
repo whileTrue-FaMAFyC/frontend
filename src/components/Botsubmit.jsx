@@ -34,15 +34,22 @@ const Botsubmit = () => {
   };
 
   const onUploadFileChange = ({target}, setFile, setFileName) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    setFileName(target.files[0].name);
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
+    if (target !== null) {
+      if (target.files < 1 || !target.validity.valid) {
+        return;
       }
-    });
+      if (target.files[0] !== undefined) {
+        setFileName(target.files[0].name);
+        fileToBase64(target.files[0], (err, result) => {
+          if (result) {
+            setFile(result);
+          }
+        });
+      } else {
+        setFileName("");
+        setFile("");
+      }
+    }
   };
 
   const submitForm = async (data) => {
@@ -51,7 +58,7 @@ const Botsubmit = () => {
     data.source_code_fn = fileName_cod;
     data.avatar__fn = fileName_av;
     console.log(data);
-    //const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     try {
       await fetch(`${process.env.REACT_APP_API_KEY}`, {
         method: "POST",
@@ -59,21 +66,12 @@ const Botsubmit = () => {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Credentials": "true",
-          //Authorization: `${token}`,
+          Authorization: `${token}`,
         },
         body: JSON.stringify(data),
       }).then(async (response) => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
-          //console.log("Status 200 !");
-          // No hubo errores :D
-          // guardo el token que recibí en LocalStorage
-          //console.log(data);
-          // if (data.Authorization) {
-          //   // console.log("ESTOY POR GUARDAR EL TOKEN");
-          //   localStorage.setItem("user", data.Authorization);
-          //   // console.log(localStorage.getItem("user"));
-          // }
           setSuccess(true);
         } else {
           alert(data);
