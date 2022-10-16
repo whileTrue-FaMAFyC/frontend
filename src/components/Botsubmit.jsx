@@ -10,14 +10,6 @@ import {
 } from "./styles";
 
 const Botsubmit = () => {
-  // const express = require("express");
-  // const bodyParser = require("body-parser");
-
-  // const app = express();
-  // // Express 4.0
-  // app.use(bodyParser.json({limit: "10mb"}));
-  // app.use(bodyParser.urlencoded({extended: true, limit: "10mb"}));
-
   const {
     register,
     handleSubmit,
@@ -41,10 +33,11 @@ const Botsubmit = () => {
     };
   };
 
-  const onUploadFileChange = ({target}, setFile) => {
+  const onUploadFileChange = ({target}, setFile, setFileName) => {
     if (target.files < 1 || !target.validity.valid) {
       return;
     }
+    setFileName(target.files[0].name);
     fileToBase64(target.files[0], (err, result) => {
       if (result) {
         setFile(result);
@@ -55,7 +48,9 @@ const Botsubmit = () => {
   const submitForm = async (data) => {
     data.source_code = file_cod;
     data.avatar = file_av;
-    //console.log(data);
+    data.source_code_fn = fileName_cod;
+    data.avatar__fn = fileName_av;
+    console.log(data);
     //const token = localStorage.getItem("token");
     await fetch(`${process.env.REACT_APP_API_KEY}`, {
       method: "POST",
@@ -105,12 +100,18 @@ const Botsubmit = () => {
               type='text'
               {...register("name", {
                 required: true,
+                maxLength: 40,
                 pattern: /^[A-Za-z0-9 ]+$/i,
               })}
               placeholder='Nombre del bot'
             />
             {errors.name?.type === "required" ? (
               <StyledError role='no_name'>Ingresar nombre</StyledError>
+            ) : null}
+            {errors.name?.type === "maxLength" ? (
+              <StyledError role='invalid_name_size'>
+                El nombre del bot debe tener como máximo 40 caracteres
+              </StyledError>
             ) : null}
             {errors.name?.type === "pattern" ? (
               <StyledError role='invalid_name'>
@@ -129,16 +130,20 @@ const Botsubmit = () => {
               accept='.py'
               {...register("source_code", {
                 onChange: (t) => {
-                  onUploadFileChange(t, setFile_cod);
+                  onUploadFileChange(t, setFile_cod, setFileName_cod);
                 },
                 validate: (e) => {
-                  return e.length !== 0 && e[0].type === "text/x-python";
+                  return (
+                    e.length !== 0 &&
+                    e[0].type === "text/x-python" &&
+                    e[0].size < 40000
+                  );
                 },
               })}
             />
             {errors.source_code?.type === "validate" ? (
               <StyledError role='invalid_code'>
-                Ingrese un archivo con extensión .py
+                Ingrese un archivo con extensión .py de menos de 40 kB
               </StyledError>
             ) : null}
           </StyledInputGroup>
@@ -150,29 +155,36 @@ const Botsubmit = () => {
             <StyledInput
               id='avatar'
               type='file'
-              accept='.png'
+              accept='image/*'
               {...register("avatar", {
                 onChange: (t) => {
-                  onUploadFileChange(t, setFile_av);
+                  onUploadFileChange(t, setFile_av, setFileName_av);
                 },
                 validate: (e) => {
-                  return e.length === 0 || e[0].type === "image/png";
+                  return (
+                    e.length === 0 ||
+                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
+                  );
                 },
               })}
             />
             {errors.avatar?.type === "validate" ? (
               <StyledError role='invalid_avatar'>
-                Se necesita un archivo con extensión .png
+                Se necesita un archivo con extensión .png o .jpg de menos de 40
+                kB
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
           <StyledButton type='submit'>Subir</StyledButton>
         </form>
-        {success ? <div role='alert'>Subido exitosamente</div> : null}
+        {success ? <div role='dialog'>Subido exitosamente</div> : null}
       </StyledEntryCard>
     </EntryPage>
   );
 };
+
+// FALTAN TESTS DE INTERACCION CON EL BACK
+// * nombre ya existente entre sus robots
 
 export default Botsubmit;
