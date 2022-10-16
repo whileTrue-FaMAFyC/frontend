@@ -1,11 +1,4 @@
-import {Container} from "./styled";
-import {FormUserVerify} from "../components";
-
 const Home = () => {
-  return (
-    <Container>
-      <FormUserVerify />
-    </Container>
-  );
+  return <div data-testid='home'>You are home</div>;
 };
 export default Home;
