@@ -1,4 +1,4 @@
-import Botsubmit from "./botsubmit";
+import Botsubmit from "./Botsubmit";
 
 function App() {
   return (
