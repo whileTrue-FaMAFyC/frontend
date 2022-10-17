@@ -57,9 +57,8 @@ const Botsubmit = () => {
   const submitForm = async (data) => {
     data.source_code = file_cod;
     data.avatar = file_av;
-    data.source_code_fn = fileName_cod;
-    data.avatar__fn = fileName_av;
-    const token = localStorage.getItem("token");
+    data.bot_filename = fileName_cod;
+    const token = localStorage.getItem("user");
     try {
       await fetch(`${process.env.REACT_APP_API_KEY}`, {
         method: "POST",
@@ -75,7 +74,6 @@ const Botsubmit = () => {
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
         } else {
-          alert(data);
           setSuccess(false);
           setFailure_data(data.detail);
         }
