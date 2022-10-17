@@ -22,14 +22,16 @@ const ListGamesView = ({games}) => {
           </Row>
         </Thead>
         <Tbody>
-          {games.map(({match_info, robots_joined}) => (
-            <Row key={match_info.match_id} data-testid='row'>
-              <Column>{match_info.name}</Column>
-              <Column>{match_info.creator_user.username}</Column>
-              <Column>{match_info.max_players}</Column>
-              <Column>{robots_joined}</Column>
-            </Row>
-          ))}
+          {games.map(
+            ({match_id, creator_user, max_players, name, robots_joined}) => (
+              <Row key={match_id} data-testid='row'>
+                <Column>{name}</Column>
+                <Column>{creator_user.username}</Column>
+                <Column>{max_players}</Column>
+                <Column>{robots_joined}</Column>
+              </Row>
+            )
+          )}
         </Tbody>
       </Table>
     </Container>

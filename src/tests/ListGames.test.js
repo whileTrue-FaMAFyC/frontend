@@ -21,8 +21,8 @@ describe("Listar partidas", () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
-      gamesMock.forEach(({match_info}) => {
-        expect(screen.getByText(match_info.name)).toBeInTheDocument();
+      gamesMock.forEach(({name}) => {
+        expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
   });
