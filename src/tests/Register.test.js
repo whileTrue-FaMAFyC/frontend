@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Formulario from "../components/Register";
+import Formulario from "../components/Register/Register";
 import {server} from "../__mocks__/server.js";
 import {rest} from "msw";
 
