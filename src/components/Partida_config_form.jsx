@@ -1,6 +1,5 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
-import axios from "axios";
 import {getRobotsNames} from "../services";
 
 import {
@@ -44,16 +43,16 @@ const FormPartidaConfig = () => {
     const JSONdata = {};
     JSONdata.name = data.name;
     JSONdata.password = data.password;
-    JSONdata.minPlayers = data.minPlayers;
-    JSONdata.maxPlayers = data.maxPlayers;
-    JSONdata.numberGames = data.numberGames;
-    JSONdata.numberRounds = data.numberRounds;
-    JSONdata.nameRobot = data.nameRobot;
-    JSONdata.userToken = token;
+    JSONdata.min_players = data.minPlayers;
+    JSONdata.max_players = data.maxPlayers;
+    JSONdata.num_games = data.numberGames;
+    JSONdata.num_rounds = data.numberRounds;
+    JSONdata.creator_robot = data.nameRobot;
     console.log(JSON.stringify(JSONdata));
     await fetch("https://634303a43f83935a784e2a0c.mockapi.io/:partida", {
       method: "POST",
       headers: {
+        authorization: `${token}`,
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
@@ -64,7 +63,7 @@ const FormPartidaConfig = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-        } else if (response.status === 400 || response.status === 401) {
+        } else if (response.status === 401 || response.status === 409) {
           alert(data.detail);
           setSuccess(false);
         } else {
@@ -222,6 +221,7 @@ const FormPartidaConfig = () => {
               id='inputRobot'
               data-testid='nameRobot'
               {...register("nameRobot", {required: true})}>
+              <option>* Seleccione un robot *</option>
               {robotsNames.map((a) => (
                 <option value={a.id}>{a.robotName}</option>
               ))}
