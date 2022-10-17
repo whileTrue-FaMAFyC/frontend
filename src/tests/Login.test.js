@@ -7,13 +7,10 @@ import {setupServer} from "msw/node";
 import {render, fireEvent, screen} from "@testing-library/react";
 import Login from "../components/Login/Login";
 import {BrowserRouter as Router, Link} from "react-router-dom";
+import {handlers} from "../__mocks__/handlers";
 
 const fakeUserResponse = {Authorization: "fake_user_token"};
-const server = setupServer(
-  rest.post("http://localhost:8000/login", (req, res, ctx) => {
-    return res(ctx.json(fakeUserResponse));
-  })
-);
+const server = setupServer(...handlers);
 
 beforeAll(() => server.listen());
 afterEach(() => {

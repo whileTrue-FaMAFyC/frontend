@@ -1,6 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import Home from "../pages/Home";
-import {Login, ListGames, Register, Navbar} from "../components";
+import {Login, ListGames, Register, Navbar, Botsubmit} from "../components";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
           <Route path='/listgames' element={<ListGames />} />
+          <Route path='/botsubmit' element={<Botsubmit />} />
         </Routes>
       </div>
     </div>

@@ -16,6 +16,9 @@ function Navbar({children}) {
       <NavItemLink to='/listgames' data-testid='toListGames'>
         ListGames
       </NavItemLink>
+      <NavItemLink to='/botsubmit' data-testid='toBotsubmit'>
+        Botsubmit
+      </NavItemLink>
     </StyledNavbar>
   );
 }
