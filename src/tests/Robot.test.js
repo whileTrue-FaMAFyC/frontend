@@ -1,19 +1,16 @@
-// __tests__/login.js
-// again, these first two imports are something you'd normally handle in
-// your testing framework configuration rather than importing them in every file.
 import "@testing-library/jest-dom";
 import React from "react";
 import {render, screen} from "@testing-library/react";
 import Robot from "../components/Robot";
 
-test("render board component successfully", async () => {
+test("render board component successfully", () => {
   render(<Robot />);
 
-  expect.toBeInTheDocument(screen.findByRole("board"));
+  expect(screen.findByTestId("board")).toBeInTheDocument;
 });
 
-test("render robot component successfully", async () => {
+test("render robot component successfully", () => {
   render(<Robot />);
 
-  expect.toBeInTheDocument(screen.findByRole("robot"));
+  expect(screen.findByTestId("robot")).toBeInTheDocument;
 });

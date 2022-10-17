@@ -15,20 +15,19 @@ const Robot = () => {
 
   const PlaneVariants = {
     animationOne: {
-      x: [0, 300, 300, 0, 0, 0],
+      x: [0, 300, 300, 0, 0],
       y: [0, 0, 300, 300, 0],
       transition: {
-        x: {duration: 5},
-        y: {duration: 5},
+        duration: 5,
       },
     },
   };
 
   return (
     <EntryPage>
-      <StyledBoard role='board'>
-        <motion.div role='robot' variants={PlaneVariants} animate={animation}>
-          <Bot />
+      <StyledBoard data-testid='board'>
+        <motion.div variants={PlaneVariants} animate={animation}>
+          <Bot data-testid='robot' />
         </motion.div>
       </StyledBoard>
     </EntryPage>
