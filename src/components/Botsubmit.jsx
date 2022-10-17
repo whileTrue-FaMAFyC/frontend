@@ -22,7 +22,6 @@ const Botsubmit = () => {
   const [fileName_cod, setFileName_cod] = useState(null); //filename del codigo
 
   const [file_av, setFile_av] = useState(null); //base64 del avatar
-  const [fileName_av, setFileName_av] = useState(null); //filename del avatar
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -157,7 +156,9 @@ const Botsubmit = () => {
               accept='image/*'
               {...register("avatar", {
                 onChange: (t) => {
-                  onUploadFileChange(t, setFile_av, setFileName_av);
+                  onUploadFileChange(t, setFile_av, (e) => {
+                    return e;
+                  });
                 },
                 validate: (e) => {
                   return (
