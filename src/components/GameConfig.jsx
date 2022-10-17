@@ -23,15 +23,7 @@ const FormPartidaConfig = () => {
 
   const onSubmit = async (data) => {
     const token = await localStorage.getItem("user");
-    const JSONdata = {};
-    JSONdata.name = data.name;
-    JSONdata.password = data.password;
-    JSONdata.min_players = data.minPlayers;
-    JSONdata.max_players = data.maxPlayers;
-    JSONdata.num_games = data.numberGames;
-    JSONdata.num_rounds = data.numberRounds;
-    JSONdata.creator_robot = data.nameRobot;
-    await fetch("http://localhost:8000/signup", {
+    await fetch("http://localhost:8000/matches/new-match", {
       method: "POST",
       headers: {
         authorization: `${token}`,
@@ -39,12 +31,13 @@ const FormPartidaConfig = () => {
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(JSONdata),
+      body: JSON.stringify(data),
     })
       .then(async (response) => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSuccess(true);
+          setFailure_data("");
         } else {
           alert(data.detail);
           setSuccess(false);
@@ -115,7 +108,7 @@ const FormPartidaConfig = () => {
             <label>Mínimo de jugadores</label>
             <select
               data-testid='minPlayers'
-              {...register("minPlayers", {required: true})}>
+              {...register("min_players", {required: true})}>
               <option value='2'>2</option>
               <option value='3'>3</option>
               <option value='4'>4</option>
@@ -125,17 +118,17 @@ const FormPartidaConfig = () => {
             <label>Máximo de jugadores</label>
             <select
               data-testid='maxPlayers'
-              {...register("maxPlayers", {
+              {...register("max_players", {
                 required: true,
                 validate: (val) => {
-                  return val >= watch("minPlayers");
+                  return val >= watch("min_players");
                 },
               })}>
               <option value='2'>2</option>
               <option value='3'>3</option>
               <option value='4'>4</option>
             </select>
-            {errors.maxPlayers?.type === "validate" && (
+            {errors.max_players?.type === "validate" && (
               <StyledError role='alertError'>
                 El máximo de jugadores debe ser mayor o igual al mínimo
                 establecido
@@ -143,52 +136,52 @@ const FormPartidaConfig = () => {
             )}
           </StyledInputGroup>
           <StyledInputGroup>
-            <label className='form-label' htmlFor='inputNumberGames'>
+            <label className='form-label' htmlFor='inputnum_games'>
               Numero de juegos
             </label>
             <StyledInput
               type='text'
-              id='inputNumberGames'
+              id='inputnum_games'
               data-testid='nGames'
-              {...register("numberGames", {
+              {...register("num_games", {
                 required: true,
                 validate: (val) => {
                   return 1 <= val && val <= 200;
                 },
               })}
             />
-            {errors.numberGames?.type === "required" && (
+            {errors.num_games?.type === "required" && (
               <StyledError role='alertError'>
                 Ingrese el numero de juegos
               </StyledError>
             )}
-            {errors.numberGames?.type === "validate" && (
+            {errors.num_games?.type === "validate" && (
               <StyledError role='alertError'>
                 Ingrese un número entero entre 1 y 200
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
-            <label className='form-label' htmlFor='inputNumberRounds'>
+            <label className='form-label' htmlFor='inputnum_rounds'>
               Numero de rondas
             </label>
             <StyledInput
               type='text'
-              id='inputNumberRounds'
+              id='inputnum_rounds'
               data-testid='nRounds'
-              {...register("numberRounds", {
+              {...register("num_rounds", {
                 required: true,
                 validate: (val) => {
                   return 1 <= val && val <= 10000;
                 },
               })}
             />
-            {errors.numberRounds?.type === "required" && (
+            {errors.num_rounds?.type === "required" && (
               <StyledError role='alertError'>
                 Ingrese el numero de rondas
               </StyledError>
             )}
-            {errors.numberRounds?.type === "validate" && (
+            {errors.num_rounds?.type === "validate" && (
               <StyledError role='alertError'>
                 Ingrese un número entero entre 1 y 10000
               </StyledError>
@@ -200,13 +193,13 @@ const FormPartidaConfig = () => {
             </label>
             <StyledInput
               type='text'
-              id='nameRobot'
+              id='creator_robot'
               data-testid='nameRobot'
-              {...register("nameRobot", {
+              {...register("creator_robot", {
                 required: true,
               })}
             />{" "}
-            {errors.nameRobot?.type === "required" && (
+            {errors.creator_robot?.type === "required" && (
               <StyledError role='alertError'>Ingrese un robot</StyledError>
             )}
           </StyledInputGroup>
