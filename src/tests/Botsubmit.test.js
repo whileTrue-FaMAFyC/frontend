@@ -1,7 +1,7 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Botsubmit from "../components/Botsubmit";
-import {server} from "../mocks/server";
+import {server} from "../__mocks__/server";
 import {rest} from "msw";
 
 const jsdomAlert = window.alert; // remember the jsdom alert
