@@ -51,7 +51,8 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    // const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByText("Se mandó la solicitud de registro");
 
     expect(alert);
   });
@@ -81,7 +82,7 @@ describe("Configuracion de partida test", () => {
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert);
+    expect(alert).toHaveTextContent("Ingrese un nombre para la partida");
   });
 
   test("3. Nueva partida sin número de juegos", async () => {
@@ -189,7 +190,7 @@ describe("Configuracion de partida test", () => {
 
     // const alert = await screen.findByRole("alertSuccess");
     expect(inputMinPlayers).toHaveValue("2");
-    // expect(alert);
+    expect(alert);
   });
 
   test("7. Nueva partida con maximo de jugadores default (sin seleccionar)", async () => {

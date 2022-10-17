@@ -1,6 +1,5 @@
 import {useForm} from "react-hook-form";
-import {useState, useEffect} from "react";
-import {getRobotsNames} from "../services";
+import {useState} from "react";
 
 import {
   StyledButton,
@@ -19,23 +18,6 @@ const FormPartidaConfig = () => {
     watch,
   } = useForm();
 
-  const [robotsNames, setRobotsNames] = useState([]);
-
-  const callGetRobotsNames = async () => {
-    try {
-      const response = await getRobotsNames();
-      setRobotsNames(response.data);
-      console.log(robotsNames);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    callGetRobotsNames();
-    console.log(robotsNames);
-  }, []);
-
   const [success, setSuccess] = useState(false);
 
   const onSubmit = async (data) => {
@@ -49,7 +31,7 @@ const FormPartidaConfig = () => {
     JSONdata.num_rounds = data.numberRounds;
     JSONdata.creator_robot = data.nameRobot;
     console.log(JSON.stringify(JSONdata));
-    await fetch("https://634303a43f83935a784e2a0c.mockapi.io/:partida", {
+    await fetch("https://634303a43f83935a784e2a0c.mockapi.io/partida", {
       method: "POST",
       headers: {
         authorization: `${token}`,
@@ -63,11 +45,11 @@ const FormPartidaConfig = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-        } else if (response.status === 401 || response.status === 409) {
+        } else if (response.status === 400 || response.status === 401) {
           alert(data.detail);
           setSuccess(false);
         } else {
-          alert("Unknown error");
+          alert(data.detail);
           setSuccess(false);
         }
       })
@@ -217,15 +199,14 @@ const FormPartidaConfig = () => {
             <label className='form-label' htmlFor='inputRobot'>
               Elegir robot
             </label>
-            <select
-              id='inputRobot'
+            <StyledInput
+              type='text'
+              id='nameRobot'
               data-testid='nameRobot'
-              {...register("nameRobot", {required: true})}>
-              <option>* Seleccione un robot *</option>
-              {robotsNames.map((a) => (
-                <option value={a.id}>{a.robotName}</option>
-              ))}
-            </select>
+              {...register("nameRobot", {
+                required: true,
+              })}
+            />{" "}
             {errors.nameRobot?.type === "required" && (
               <StyledError role='alertError'>Ingrese un robot</StyledError>
             )}
@@ -234,7 +215,7 @@ const FormPartidaConfig = () => {
         </form>
         {success && (
           <div className='alert alert-success mt-4' role='alertSuccess'>
-            Se mandó la solicitud de registro
+            La partida se creo exitosamente
           </div>
         )}
       </StyledEntryCard>
