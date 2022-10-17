@@ -1,5 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 
 import {
   StyledButton,
@@ -18,10 +19,12 @@ const Formulario = () => {
     watch,
   } = useForm();
 
-  const [success, setSuccess] = useState(false);
-
+  const [success, setSuccess] = useState(false); //Form subido con exito
+  const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
+
+  const navigate = useNavigate();
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -66,15 +69,12 @@ const Formulario = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-        } else if (response.status === 500) {
-          alert(data.detail);
-          setSuccess(false);
-        } else if (response.status === 400) {
-          alert(data.detail);
-          setSuccess(false);
+          localStorage.setItem("", data.username);
+          navigate(`/verify/${data.username}`);
         } else {
-          alert("Unknown error");
+          alert(data.detail);
           setSuccess(false);
+          setFailure_data(data.detail);
         }
       })
       .catch((error) => {
@@ -206,8 +206,11 @@ const Formulario = () => {
               data-testid='Avatar'
               {...register("avatar", {
                 onChange: onUploadFileChange,
-                validate: (val) => {
-                  return val.length === 0 || val[0].type === "image/png";
+                validate: (e) => {
+                  return (
+                    e.length === 0 ||
+                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
+                  );
                 },
               })}
             />
@@ -220,13 +223,19 @@ const Formulario = () => {
           <StyledButton type='submit'>Enviar</StyledButton>
         </form>
         {success && (
-          <StyledInputGroup
-            className='alert alert-success mt-4'
-            role='alertSuccess'>
+          <div className='alert alert-success mt-4' role='alertSuccess'>
             Se mandó la solicitud de registro
-          </StyledInputGroup>
+          </div>
         )}
-        {/* PONER LA REDIRECCION AL LOGIN EN CASO DE QUE YA TENGA UNA CUENTA */}
+        {failure_data !== "" ? (
+          <div role='alertServer'>{failure_data}</div>
+        ) : null}
+        <span>
+          <p data-testid='notAMemb'>¿Ya tenes cuenta?</p>
+          <Link to='/login' data-testid='linkToReg'>
+            Logueate
+          </Link>
+        </span>
       </StyledEntryCard>
     </EntryPage>
   );
