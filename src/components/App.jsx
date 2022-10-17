@@ -1,9 +1,6 @@
-import Navbar from "./Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import Home from "../pages/Home";
-import Login from "./Login/Login";
-import Register from "./Register";
-import ListGames from "./ListGames/ListGames";
+import {Login, ListGames, Register, Navbar} from "../components";
 
 function App() {
   return (

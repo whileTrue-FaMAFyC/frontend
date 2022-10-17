@@ -4,9 +4,18 @@ import userEvent from "@testing-library/user-event";
 import {FormUserVerify} from "../components";
 
 describe("Componente de verificacion de codigo", () => {
+  let msg;
   let button;
   let input;
   let error;
+
+  let url = `${process.env.REACT_APP_API_KEY}verifyuser/${localStorage.getItem(
+    "username"
+  )}`;
+  let verification_code = "123456";
+  let successMsg = "account verified successfully";
+  let notSuccessMsg = "user already verified";
+  let notSuccessMsg2 = "wrong verification code";
 
   afterEach(cleanup);
   afterEach(() => {
@@ -18,6 +27,7 @@ describe("Componente de verificacion de codigo", () => {
     button = screen.getByRole("button");
     input = screen.getByTestId("code");
     error = screen.getByTestId("code-error");
+    msg = screen.getByTestId("msg");
   });
 
   it("Deberia aparecer un error al ingresar mas de 6 digitos", async () => {
@@ -36,28 +46,50 @@ describe("Componente de verificacion de codigo", () => {
 
   it("El usuario verifica su cuenta con exito", async () => {
     mockAxios.put.mockResolvedValue({
-      data: {detail: "account verified successfully", status: 200},
+      data: {detail: successMsg},
     });
 
-    userEvent.type(input, "123456");
+    userEvent.type(input, verification_code);
     userEvent.click(button);
 
     await waitFor(() => {
-      expect(
-        screen.getByText("account verified successfully")
-      ).toBeInTheDocument();
+      expect(msg).toHaveTextContent(successMsg);
+      expect(mockAxios.put).toHaveBeenCalledTimes(1);
+      expect(mockAxios.put).toHaveBeenCalledWith(url, {
+        verification_code,
+      });
     });
   });
 
   it("El usuario ya esta verificado", async () => {
     mockAxios.put.mockRejectedValue({
-      response: {data: {detail: "user already verified"}},
+      response: {data: {detail: notSuccessMsg}},
     });
-    userEvent.type(input, "123456");
+    userEvent.type(input, verification_code);
     userEvent.click(button);
 
     await waitFor(() => {
-      expect(screen.getByText("user already verified")).toBeInTheDocument();
+      expect(mockAxios.put).toHaveBeenCalledTimes(1);
+      expect(mockAxios.put).toHaveBeenCalledWith(url, {
+        verification_code,
+      });
+      expect(msg).toHaveTextContent(notSuccessMsg);
+    });
+  });
+
+  it("El codigo es invalido", async () => {
+    mockAxios.put.mockRejectedValue({
+      response: {data: {detail: notSuccessMsg2}},
+    });
+    userEvent.type(input, verification_code);
+    userEvent.click(button);
+
+    await waitFor(() => {
+      expect(msg).toHaveTextContent(notSuccessMsg2);
+      expect(mockAxios.put).toHaveBeenCalledTimes(1);
+      expect(mockAxios.put).toHaveBeenCalledWith(url, {
+        verification_code,
+      });
     });
   });
 });

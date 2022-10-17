@@ -7,7 +7,7 @@ const ListGames = () => {
 
   const callGetGames = async () => {
     try {
-      const response = await getGames();
+      const response = await getGames(localStorage.getItem("user"));
       setGames(response.data);
     } catch (error) {
       console.log(error);
