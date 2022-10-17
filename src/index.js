@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
 import Home from "./pages/Home";
-import Formulario from "./components/Reg";
-import {GlobalStyle} from "./components/Reg.style";
+import Formulario from "./components/Register";
+import {GlobalStyle} from "./components/Register.style";
 import {BrowserRouter as Router} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
