@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Formulario from "../components/Reg";
+import Formulario from "../components/Register";
 import {server} from "../__mocks__/server.js";
 
 import {todoOk_201, todoMal_400} from "../__mocks__/handlers";

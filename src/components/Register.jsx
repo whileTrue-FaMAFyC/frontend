@@ -9,7 +9,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-} from "./Reg.style";
+} from "./Register.style";
 
 const Formulario = () => {
   const {
@@ -50,12 +50,8 @@ const Formulario = () => {
   };
 
   const onSubmit = async (data) => {
-    const JSONdata = {};
-    JSONdata.username = data.username;
-    JSONdata.email = data.email;
-    JSONdata.password = data.password;
-    JSONdata.avatar = file == null ? "" : file;
-    JSONdata.avatarFilename = file == null ? "" : fileName.name;
+    data.avatar = file == null ? "" : file;
+    data.avatarFilename = file == null ? "" : fileName.name;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -63,7 +59,7 @@ const Formulario = () => {
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(JSONdata),
+      body: JSON.stringify(data),
     })
       .then(async (response) => {
         const data = await response.json();
