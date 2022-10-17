@@ -92,5 +92,5 @@ test("move to register", async () => {
 
   fireEvent.click(screen.getByTestId("toReg"));
 
-  expect.toBeInTheDocument(screen.getByText("You are in register"));
+  expect.toBeInTheDocument(screen.getByText("Registro"));
 });
