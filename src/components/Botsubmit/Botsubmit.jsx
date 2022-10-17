@@ -59,7 +59,7 @@ const Botsubmit = () => {
     data.bot_filename = fileName_cod;
     const token = localStorage.getItem("user");
     try {
-      await fetch(`${process.env.REACT_APP_API_KEY}`, {
+      await fetch("http://localhost:8000/bot-create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -184,8 +184,5 @@ const Botsubmit = () => {
     </EntryPage>
   );
 };
-
-// FALTAN TESTS DE INTERACCION CON EL BACK
-// * nombre ya existente entre sus robots
 
 export default Botsubmit;

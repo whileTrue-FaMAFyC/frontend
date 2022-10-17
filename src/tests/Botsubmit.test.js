@@ -1,6 +1,6 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Botsubmit from "../components/Botsubmit";
+import Botsubmit from "../components/Botsubmit/Botsubmit";
 import {server} from "../__mocks__/server";
 import {rest} from "msw";
 

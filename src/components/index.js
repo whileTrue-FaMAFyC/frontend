@@ -5,3 +5,4 @@ export {default as Login} from "./Login/Login";
 export {default as Navbar} from "./Navbar/Navbar";
 export {default as Register} from "./Register";
 export {default as TextField} from "./TextField/TextField";
+export {default as Botsubmit} from "./Botsubmit/Botsubmit";
