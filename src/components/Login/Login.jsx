@@ -8,7 +8,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-} from "./Login.style";
+} from "./Login.styled";
 
 const Login = () => {
   const {

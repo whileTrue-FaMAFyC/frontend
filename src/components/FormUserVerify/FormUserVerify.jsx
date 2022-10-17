@@ -1,19 +1,16 @@
 import {useState} from "react";
-import {useParams} from "react-router-dom";
 import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
-import {Form, Button} from "./FormUserVerify.styled";
+import {Form, Button, Msg} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
   const [message, setMessage] = useState("");
   const methods = useForm({mode: "all"});
 
-  let {username} = useParams();
-
   const onSubmit = async (data) => {
     try {
-      await verifyUser(data.code, username);
+      await verifyUser(data.code, localStorage.getItem("username"));
       setMessage("account verified successfully");
     } catch (error) {
       setMessage(error.response.data.detail);
@@ -23,7 +20,7 @@ const FormUserVerify = () => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <p>{message}</p>
+        <Msg data-testid='msg'>{message}</Msg>
         <TextField
           type='text'
           name='code'

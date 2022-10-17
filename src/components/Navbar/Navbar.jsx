@@ -1,5 +1,5 @@
 import React from "react";
-import {StyledNavbar, NavItemLink} from "./navbar.style";
+import {StyledNavbar, NavItemLink} from "./Navbar.styled";
 
 function Navbar({children}) {
   return (

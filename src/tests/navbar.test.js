@@ -74,7 +74,7 @@ test("move to login", async () => {
 
   fireEvent.click(screen.getByTestId("toLogin"));
 
-  expect.toBeInTheDocument(screen.getByText("You are in login"));
+  expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
 });
 
 test("move to register", async () => {
