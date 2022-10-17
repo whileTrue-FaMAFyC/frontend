@@ -15,21 +15,13 @@ const Robot = () => {
     }, 1000);
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(cycleAnimation, 1000); // start "animationTwo" after 1 second
-  //   setTimeout(cycleAnimation, 2000); // start "animationThree" after 2 seconds
-  //   setTimeout(cycleAnimation, 3000);
-  //   setTimeout(cycleAnimation, 4000);
-  //   setTimeout(cycleAnimation, 5000);
-  // }, []);
-
   const PlaneVariants = {
     animationOne: {
-      x: [0, 150, 150, 0, 0],
-      y: [0, 0, 150, 150, 0],
+      x: [0, 300, 300, 0, 0],
+      y: [0, 0, 300, 300, 0],
       transition: {
-        x: {yoyo: Infinity, duration: 5},
-        y: {yoyo: Infinity, duration: 5},
+        x: {duration: 5},
+        y: {duration: 5},
       },
     },
     // animationTwo: {
@@ -56,10 +48,11 @@ const Robot = () => {
 
   return (
     <EntryPage>
-      <motion.div variants={PlaneVariants} animate={animation}>
-        <Bot />
-      </motion.div>
-      <StyledBoard />
+      <StyledBoard>
+        <motion.div variants={PlaneVariants} animate={animation}>
+          <Bot />
+        </motion.div>
+      </StyledBoard>
     </EntryPage>
   );
 };

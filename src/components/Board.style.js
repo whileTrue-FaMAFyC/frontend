@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const StyledBoard = styled.div`
   display: flex;
-  //align-items: center;
-  //margin-top: px;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: stretch;
   width: 500px;
   height: 500px;
   padding: 30px;
