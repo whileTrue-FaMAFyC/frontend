@@ -9,5 +9,6 @@ import Robot from "../components/Robot";
 test("render board component successfully", async () => {
   render(<Robot />);
 
+  expect.toBeInTheDocument(screen.findByRole("board"));
   expect.toBeInTheDocument(screen.findByRole("robot"));
 });

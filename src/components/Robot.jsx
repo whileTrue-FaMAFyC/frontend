@@ -1,5 +1,3 @@
-import {Piece} from "./Piece.style";
-//import "robot.png" from "../../public"
 import {ReactComponent as Bot} from "./robot-line.svg";
 import {motion} from "framer-motion";
 import {EntryPage, StyledBoard} from "./Board.style";
@@ -13,7 +11,7 @@ const Robot = () => {
     setTimeout(() => {
       cycleAnimation();
     }, 1000);
-  }, []);
+  }, [cycleAnimation]);
 
   const PlaneVariants = {
     animationOne: {
@@ -24,32 +22,12 @@ const Robot = () => {
         y: {duration: 5},
       },
     },
-    // animationTwo: {
-    //   x: 150,
-    //   y: 0,
-    //   transition: {duration: 1.0},
-    // },
-    // animationThree: {
-    //   x: 150,
-    //   y: 150,
-    //   transition: {duration: 1.0},
-    // },
-    // animationFour: {
-    //   x: 0,
-    //   y: 150,
-    //   transition: {duration: 1.0},
-    // },
-    // animationFive: {
-    //   x: 0,
-    //   y: 0,
-    //   transition: {duration: 1.0},
-    // },
   };
 
   return (
     <EntryPage>
-      <StyledBoard>
-        <motion.div variants={PlaneVariants} animate={animation}>
+      <StyledBoard role='board'>
+        <motion.div role='robot' variants={PlaneVariants} animate={animation}>
           <Bot />
         </motion.div>
       </StyledBoard>
