@@ -15,12 +15,14 @@ const Botsubmit = () => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-  const [success, setSuccess] = useState(false);
-  const [file_cod, setFile_cod] = useState(null);
-  const [fileName_cod, setFileName_cod] = useState(null);
+  const [success, setSuccess] = useState(false); //Form subido con exito
+  const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
 
-  const [file_av, setFile_av] = useState(null);
-  const [fileName_av, setFileName_av] = useState(null);
+  const [file_cod, setFile_cod] = useState(null); //base64 del codigo
+  const [fileName_cod, setFileName_cod] = useState(null); //filename del codigo
+
+  const [file_av, setFile_av] = useState(null); //base64 del avatar
+  const [fileName_av, setFileName_av] = useState(null); //filename del avatar
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -57,7 +59,6 @@ const Botsubmit = () => {
     data.avatar = file_av;
     data.source_code_fn = fileName_cod;
     data.avatar__fn = fileName_av;
-    console.log(data);
     const token = localStorage.getItem("token");
     try {
       await fetch(`${process.env.REACT_APP_API_KEY}`, {
@@ -76,6 +77,7 @@ const Botsubmit = () => {
         } else {
           alert(data);
           setSuccess(false);
+          setFailure_data(data.detail);
         }
       });
     } catch (err) {
@@ -178,6 +180,7 @@ const Botsubmit = () => {
           <StyledButton type='submit'>Subir</StyledButton>
         </form>
         {success ? <div role='dialog'>Subido exitosamente</div> : null}
+        {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
       </StyledEntryCard>
     </EntryPage>
   );

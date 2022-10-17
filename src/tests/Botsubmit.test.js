@@ -3,8 +3,6 @@ import userEvent from "@testing-library/user-event";
 import Botsubmit from "../components/Botsubmit";
 import {server} from "../mocks/server";
 import {rest} from "msw";
-import * as fs from "node:fs/promises";
-import {act} from "react-dom/test-utils";
 
 const jsdomAlert = window.alert; // remember the jsdom alert
 window.alert = (e) => {
@@ -297,29 +295,34 @@ describe("Botsubmit test", () => {
   });
 
   //Test de integracion
-  //   test("Servidor caido", async () => {
-  //     render(<Botsubmit />);
+  test("Servidor caido", async () => {
+    render(<Botsubmit />);
 
-  //     server.use(
-  //       rest.post(`${process.env.REACT_APP_API_KEY}`, (req, res, ctx) => {
-  //         return res(ctx.json({status: 500, message: "Internal server error"}));
-  //       })
-  //     );
-  //     const inputName = screen.getByLabelText(/nombre:/i);
-  //     const inputAvatar = screen.getByLabelText(/avatar:/i);
-  //     const inputCodigo = screen.getByLabelText(/codigo:/i);
+    server.use(
+      rest.post(`${process.env.REACT_APP_API_KEY}`, (req, res, ctx) => {
+        return res.once(
+          ctx.status(500),
+          ctx.json({detail: "Internal server error"})
+        );
+      })
+    );
+    const inputName = screen.getByLabelText(/nombre:/i);
+    const inputAvatar = screen.getByLabelText(/avatar:/i);
+    const inputCodigo = screen.getByLabelText(/codigo:/i);
 
-  //     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
-  //     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
+    var av = new File(["avatar"], "avatar.png", {type: "image/png"});
+    var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
-  //     userEvent.type(inputName, "Marcelo");
-  //     userEvent.upload(inputAvatar, av);
-  //     userEvent.upload(inputCodigo, cod);
+    userEvent.type(inputName, "Marcelo");
+    userEvent.upload(inputAvatar, av);
+    userEvent.upload(inputCodigo, cod);
 
-  //     const button = screen.getByRole("button");
+    const button = screen.getByRole("button");
 
-  //     userEvent.click(button);
-
-  //     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
-  //   });
+    userEvent.click(button);
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      "Internal server error"
+    );
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
+  });
 });
