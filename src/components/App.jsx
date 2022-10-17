@@ -1,6 +1,13 @@
 import {Route, Routes} from "react-router-dom";
 import Home from "../pages/Home";
-import {Login, ListGames, Register, Navbar, Botsubmit} from "../components";
+import {
+  Login,
+  ListGames,
+  Register,
+  Navbar,
+  Botsubmit,
+  GameConfig,
+} from "../components";
 
 function App() {
   return (
@@ -13,6 +20,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/listgames' element={<ListGames />} />
           <Route path='/botsubmit' element={<Botsubmit />} />
+          <Route path='/gameconfig' element={<GameConfig />} />
         </Routes>
       </div>
     </div>

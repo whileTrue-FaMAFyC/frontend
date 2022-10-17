@@ -19,6 +19,9 @@ function Navbar({children}) {
       <NavItemLink to='/botsubmit' data-testid='toBotsubmit'>
         Botsubmit
       </NavItemLink>
+      <NavItemLink to='/gameconfig' data-testid='toGameConfig'>
+        GameConfig
+      </NavItemLink>
     </StyledNavbar>
   );
 }

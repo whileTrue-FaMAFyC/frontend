@@ -6,3 +6,4 @@ export {default as Navbar} from "./Navbar/Navbar";
 export {default as Register} from "./Register/Register";
 export {default as TextField} from "./TextField/TextField";
 export {default as Botsubmit} from "./Botsubmit/Botsubmit";
+export {default as GameConfig} from "./GameConfig/GameConfig";
