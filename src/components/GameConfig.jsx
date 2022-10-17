@@ -18,7 +18,8 @@ const FormPartidaConfig = () => {
     watch,
   } = useForm();
 
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(false); //Form subido con exito
+  const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
 
   const onSubmit = async (data) => {
     const token = await localStorage.getItem("user");
@@ -30,7 +31,6 @@ const FormPartidaConfig = () => {
     JSONdata.num_games = data.numberGames;
     JSONdata.num_rounds = data.numberRounds;
     JSONdata.creator_robot = data.nameRobot;
-    console.log(JSON.stringify(JSONdata));
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -45,17 +45,16 @@ const FormPartidaConfig = () => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSuccess(true);
-        } else if (response.status === 400 || response.status === 401) {
-          alert(data.detail);
-          setSuccess(false);
         } else {
           alert(data.detail);
           setSuccess(false);
+          setFailure_data(data.detail);
         }
       })
       .catch((error) => {
         alert(error);
         setSuccess(false);
+        setFailure_data(data.detail);
       });
   };
 
@@ -216,10 +215,14 @@ const FormPartidaConfig = () => {
         {success && (
           <StyledInputGroup
             className='alert alert-success mt-4'
-            role='alertSuccess'>
+            role='alertSuccess'
+            data-testid='exito'>
             La partida se creó exitosamente
           </StyledInputGroup>
         )}
+        {failure_data !== "" ? (
+          <div role='alertServer'>{failure_data}</div>
+        ) : null}
       </StyledEntryCard>
     </EntryPage>
   );

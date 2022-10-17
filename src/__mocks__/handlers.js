@@ -6,14 +6,14 @@ import {rest} from "msw";
 export const todoOk_201 = rest.post(
   "http://localhost:8000/signup",
   async (req, res, ctx) => {
-    return res(ctx.status(201), ctx.json({detail: "ala"}));
+    return res(ctx.json({status: 200}));
   }
 );
 
 export const todoMal_400 = rest.post(
   "http://localhost:8000/signup",
   async (req, res, ctx) => {
-    return res(ctx.status(400), ctx.json({detail: "ala"}));
+    return res(ctx.status(401), ctx.json({detail: "Server error"}));
   }
 );
 // ];
