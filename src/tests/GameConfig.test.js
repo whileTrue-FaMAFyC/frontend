@@ -1,8 +1,8 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import FormPartidaConfig from "../components/GameConfig";
+import FormPartidaConfig from "../components/GameConfig/GameConfig";
 import {server} from "../__mocks__/server.js";
-import {todoOk_201, todoMal_400} from "../__mocks__/handlers";
+import {rest} from "msw";
 
 // NO SE PUEDEN TESTEAR LOS INPUTS NUMERICOS
 // REVISAR TEST 1 - 6 - 8
@@ -54,8 +54,6 @@ describe("Configuracion de partida test", () => {
   });
 
   test("1. Nueva partida con todos los campos llenos", async () => {
-    server.use(todoOk_201);
-
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
@@ -133,8 +131,6 @@ describe("Configuracion de partida test", () => {
   });
 
   test("6. Nueva partida con minimo de jugadores default (sin seleccionar)", async () => {
-    server.use(todoOk_201);
-
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMaxPlayers, "2");
@@ -150,8 +146,6 @@ describe("Configuracion de partida test", () => {
   });
 
   test("7. Nueva partida con maximo de jugadores default (sin seleccionar)", async () => {
-    server.use(todoOk_201);
-
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
@@ -168,8 +162,6 @@ describe("Configuracion de partida test", () => {
 
   // CAMPOS OPCIONALES
   test("8. Nueva partida sin contraseña", async () => {
-    server.use(todoOk_201);
-
     userEvent.type(inputName, "RocoloGames");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
@@ -390,7 +382,14 @@ describe("Configuracion de partida test", () => {
   });
 
   test("21. Error de server", async () => {
-    server.use(todoMal_400);
+    server.use(
+      rest.post(
+        "http://localhost:8000/matches/new-match",
+        async (req, res, ctx) => {
+          return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
+        }
+      )
+    );
 
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
