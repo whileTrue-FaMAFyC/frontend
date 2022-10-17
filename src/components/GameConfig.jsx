@@ -213,12 +213,12 @@ const FormPartidaConfig = () => {
           <StyledButton type='submit'>Crear</StyledButton>
         </form>
         {success && (
-          <StyledInputGroup
+          <div
             className='alert alert-success mt-4'
             role='alertSuccess'
             data-testid='exito'>
             La partida se creó exitosamente
-          </StyledInputGroup>
+          </div>
         )}
         {failure_data !== "" ? (
           <div role='alertServer'>{failure_data}</div>
