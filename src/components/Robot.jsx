@@ -15,7 +15,7 @@ const Robot = () => {
 
   const PlaneVariants = {
     animationOne: {
-      x: [0, 300, 300, 0, 0],
+      x: [0, 300, 300, 0, 0, 0],
       y: [0, 0, 300, 300, 0],
       transition: {
         x: {duration: 5},

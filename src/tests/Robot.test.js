@@ -10,5 +10,10 @@ test("render board component successfully", async () => {
   render(<Robot />);
 
   expect.toBeInTheDocument(screen.findByRole("board"));
+});
+
+test("render robot component successfully", async () => {
+  render(<Robot />);
+
   expect.toBeInTheDocument(screen.findByRole("robot"));
 });
