@@ -2,57 +2,65 @@ import {Piece} from "./Piece.style";
 //import "robot.png" from "../../public"
 import {ReactComponent as Bot} from "./robot-line.svg";
 import {motion} from "framer-motion";
-
-// const Robot = () => {
-//   return (
-//     <motion.div
-//       role='robot'
-//       transition={{duration: 2, x: [100, 100], y: [100, 100]}}
-//       animate={{
-//         x: [100, 100],
-//         y: [100, 100],
-//         scale: [1, 2],
-//       }}>
-//       <Bot />
-//     </motion.div>
-//     //{/* <Piece color='red'></Piece> */}
-//   );
-// };
-
-const containerStyle = {
-  position: "relative",
-  width: "12rem",
-  height: "12rem",
-  boxSizing: "border-box",
-};
-
-const circleStyle = {
-  display: "block",
-  width: "12rem",
-  height: "12rem",
-  border: "0.5rem solid #ffffff",
-  borderTop: "0.5rem solid #ffffff",
-  borderRadius: "50%",
-  position: "absolute",
-  boxSizing: "border-box",
-  top: 100,
-  left: 500,
-};
-
-const spinTransition = {
-  loop: Infinity,
-  ease: "linear",
-  duration: 10,
-};
+import {EntryPage, StyledBoard} from "./Board.style";
+import {useEffect} from "react";
+import {useCycle} from "framer-motion";
 
 const Robot = () => {
+  const [animation, cycleAnimation] = useCycle("animationOne");
+
+  useEffect(() => {
+    setTimeout(() => {
+      cycleAnimation();
+    }, 1000);
+  }, []);
+
+  // useEffect(() => {
+  //   setTimeout(cycleAnimation, 1000); // start "animationTwo" after 1 second
+  //   setTimeout(cycleAnimation, 2000); // start "animationThree" after 2 seconds
+  //   setTimeout(cycleAnimation, 3000);
+  //   setTimeout(cycleAnimation, 4000);
+  //   setTimeout(cycleAnimation, 5000);
+  // }, []);
+
+  const PlaneVariants = {
+    animationOne: {
+      x: [0, 150, 150, 0, 0],
+      y: [0, 0, 150, 150, 0],
+      transition: {
+        x: {yoyo: Infinity, duration: 5},
+        y: {yoyo: Infinity, duration: 5},
+      },
+    },
+    // animationTwo: {
+    //   x: 150,
+    //   y: 0,
+    //   transition: {duration: 1.0},
+    // },
+    // animationThree: {
+    //   x: 150,
+    //   y: 150,
+    //   transition: {duration: 1.0},
+    // },
+    // animationFour: {
+    //   x: 0,
+    //   y: 150,
+    //   transition: {duration: 1.0},
+    // },
+    // animationFive: {
+    //   x: 0,
+    //   y: 0,
+    //   transition: {duration: 1.0},
+    // },
+  };
+
   return (
-    <motion.div
-      style={circleStyle}
-      animate={{rotate: 360}}
-      transition={spinTransition}>
-      <Bot />
-    </motion.div>
+    <EntryPage>
+      <motion.div variants={PlaneVariants} animate={animation}>
+        <Bot />
+      </motion.div>
+      <StyledBoard />
+    </EntryPage>
   );
 };
 
