@@ -1,11 +1,7 @@
 import Botsubmit from "./Botsubmit";
 
 function App() {
-  return (
-    <div>
-      <Botsubmit />
-    </div>
-  );
+  return <Botsubmit />;
 }
 
 export default App;
