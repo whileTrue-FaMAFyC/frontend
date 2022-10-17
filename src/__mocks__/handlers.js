@@ -10,17 +10,7 @@ export const handlers = [
     return res(ctx.json(fakeUserResponse));
   }),
 
-  rest.post(
-    "http://localhost:8000/signup",
-    async (req, res, ctx) => {
-      return res(ctx.status(201), ctx.json({status: 201}));
-    }
-  );
-
-  rest.post(
-    "http://localhost:8000/signup",
-    async (req, res, ctx) => {
-      return res(ctx.status(401), ctx.json({detail: "Server error"}));
-    }
-  );
+  rest.post("http://localhost:8000/signup", async (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({status: 201}));
+  }),
 ];

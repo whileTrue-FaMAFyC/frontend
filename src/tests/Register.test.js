@@ -2,6 +2,7 @@ import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Formulario from "../components/Register";
 import {server} from "../__mocks__/server.js";
+import {rest} from "msw";
 
 import {todoOk_201, todoMal_400} from "../__mocks__/handlers";
 import {BrowserRouter as Router} from "react-router-dom";
@@ -55,8 +56,6 @@ describe("Formulario test", () => {
 
   // TODOS LOS CAMPOS
   test("1. Nuevo usuario con todos los campos llenos", async () => {
-    server.use(todoOk_201);
-
     const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
 
     userEvent.type(inputUsername, "Rocolo");
@@ -150,8 +149,6 @@ describe("Formulario test", () => {
 
   // CAMPO OPCIONAL
   test("7. Nuevo usuario sin avatar (con campos opcionales vacíos)", async () => {
-    server.use(todoOk_201);
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
@@ -295,7 +292,11 @@ describe("Formulario test", () => {
   });
 
   test("17. Error de server", async () => {
-    server.use(todoMal_400);
+    server.use(
+      rest.post("http://localhost:8000/signup", async (req, res, ctx) => {
+        return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
+      })
+    );
 
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
