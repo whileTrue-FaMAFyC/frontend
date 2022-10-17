@@ -20,7 +20,7 @@ function Navbar({children}) {
         Botsubmit
       </NavItemLink>
       <NavItemLink to='/gameconfig' data-testid='toGameConfig'>
-        GameConfig
+        Crear Partida
       </NavItemLink>
     </StyledNavbar>
   );
