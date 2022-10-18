@@ -8,19 +8,19 @@ function Navbar({children}) {
         Home
       </NavItemLink>
       <NavItemLink to='/login' data-testid='toLogin'>
-        Log in
+        Log In
       </NavItemLink>
       <NavItemLink to='/register' data-testid='toReg'>
         Register
       </NavItemLink>
       <NavItemLink to='/listgames' data-testid='toListGames'>
-        ListGames
+        List Matches
       </NavItemLink>
       <NavItemLink to='/botsubmit' data-testid='toBotsubmit'>
-        Botsubmit
+        Bot Submit
       </NavItemLink>
       <NavItemLink to='/gameconfig' data-testid='toGameConfig'>
-        Crear Partida
+        Create Match
       </NavItemLink>
     </StyledNavbar>
   );

@@ -7,6 +7,7 @@ import {
   Navbar,
   Botsubmit,
   GameConfig,
+  FormUserVerify
 } from "../components";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/listgames' element={<ListGames />} />
           <Route path='/botsubmit' element={<Botsubmit />} />
           <Route path='/gameconfig' element={<GameConfig />} />
+          <Route path='/verify' element={<FormUserVerify />} />
         </Routes>
       </div>
     </div>

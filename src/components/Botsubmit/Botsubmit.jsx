@@ -59,7 +59,7 @@ const Botsubmit = () => {
     data.bot_filename = fileName_cod;
     const token = localStorage.getItem("user");
     try {
-      await fetch("http://localhost:8000/bot-create", {
+      await fetch("http://localhost:8000/create-bot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

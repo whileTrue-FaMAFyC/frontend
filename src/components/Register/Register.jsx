@@ -65,10 +65,9 @@ const Formulario = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-          localStorage.setItem("", data.username);
-          navigate(`/verify/${data.username}`);
+          localStorage.setItem("username", data.username);
+          navigate(`/verify`);
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
