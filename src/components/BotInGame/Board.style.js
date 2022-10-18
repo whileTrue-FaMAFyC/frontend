@@ -4,6 +4,7 @@ export const StyledBoard = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: stretch;
+  margin-top: 50px;
   width: 500px;
   height: 500px;
   padding: 30px;
