@@ -1,8 +1,4 @@
-import {useState} from "react";
-import {Container} from "./styled";
-
 const Home = () => {
-  const [login, setState] = useState(false);
-  return <Container>{login ? <p>login</p> : <p>register</p>}</Container>;
+  return <div data-testid='home'>You are home</div>;
 };
 export default Home;
