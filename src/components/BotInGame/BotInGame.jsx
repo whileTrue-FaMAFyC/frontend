@@ -4,7 +4,7 @@ import {EntryPage, StyledBoard} from "./Board.style";
 import {useEffect} from "react";
 import {useCycle} from "framer-motion";
 
-const Robot = () => {
+const BotInGame = () => {
   const [animation, cycleAnimation] = useCycle("animationOne");
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const Robot = () => {
   );
 };
 
-export default Robot;
+export default BotInGame;
