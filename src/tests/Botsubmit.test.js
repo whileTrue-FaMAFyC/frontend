@@ -193,30 +193,6 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  test("Avatar invalido", async () => {
-    render(<Botsubmit />);
-
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
-
-    var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
-    var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
-
-    userEvent.type(inputName, "Marcelo");
-    userEvent.upload(inputAvatar, av);
-    userEvent.upload(inputCodigo, cod);
-
-    const button = screen.getByRole("button");
-
-    userEvent.click(button);
-
-    const invalid_avatar = await screen.findByRole("invalid_avatar");
-
-    expect(invalid_avatar).toBeInTheDocument();
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
-  });
-
   test("Nombre muy largo", async () => {
     render(<Botsubmit />);
 

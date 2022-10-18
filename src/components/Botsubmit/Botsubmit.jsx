@@ -133,7 +133,7 @@ const Botsubmit = () => {
                 validate: (e) => {
                   return (
                     e.length !== 0 &&
-                    e[0].type === "text/x-python" &&
+                    new RegExp("python").test(e[0].type) &&
                     e[0].size < 40000
                   );
                 },
