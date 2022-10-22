@@ -117,7 +117,11 @@ const Login = () => {
             Successful login
           </div>
         )}
-        {sent && failure_data !== "" && <div role='alert'>{failure_data}</div>}
+        {sent && failure_data !== "" && (
+          <div role='alert' data-testid='error'>
+            {failure_data}
+          </div>
+        )}
         <span>
           <p data-testid='notAMemb'>Not a member?</p>
           <Link to='/register' data-testid='linkToReg'>

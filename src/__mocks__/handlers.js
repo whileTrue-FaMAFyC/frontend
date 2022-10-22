@@ -1,7 +1,7 @@
 // src/mocks/handlers.js
 import {rest} from "msw";
 
-const fakeUserResponse = {Authorization: "fake_user_token"};
+export const fakeUserResponse = {Authorization: "fake_user_token"};
 
 export const handlers = [
   rest.post("http://localhost:8000/create-bot", (req, res, ctx) => {
