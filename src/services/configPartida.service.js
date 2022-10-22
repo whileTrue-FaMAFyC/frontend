@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getRobotsNames = async () => {
-  const response = await axios.get(
-    `https://634303a43f83935a784e2a0c.mockapi.io/robots`
-  );
+export const getRobotsNames = async (token) => {
+  const response = await axios.get(`http://localhost:8000/list-robots`, {
+    headers: {Authorization: token},
+  });
   return response;
 };

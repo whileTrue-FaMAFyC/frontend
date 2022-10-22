@@ -1,5 +1,6 @@
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {getRobotsNames} from "../../services";
 
 import {
   StyledButton,
@@ -20,6 +21,20 @@ const FormPartidaConfig = () => {
 
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
+  const [robotsNames, setRobotsNames] = useState([]);
+
+  const callGetRobotsNames = async () => {
+    try {
+      const response = await getRobotsNames(localStorage.getItem(`user`));
+      setRobotsNames(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    callGetRobotsNames();
+  }, []);
 
   const onSubmit = async (data) => {
     const token = await localStorage.getItem("user");
@@ -191,14 +206,15 @@ const FormPartidaConfig = () => {
             <label className='form-label' htmlFor='inputRobot'>
               Elegir robot
             </label>
-            <StyledInput
-              type='text'
-              id='creator_robot'
+            <select
+              id='inputRobot'
               data-testid='nameRobot'
-              {...register("creator_robot", {
-                required: true,
-              })}
-            />{" "}
+              {...register("creator_robot", {required: true})}>
+              <option value=''>* Seleccione un robot *</option>
+              {robotsNames.map((a) => (
+                <option value={a.name}>{a.name}</option>
+              ))}
+            </select>
             {errors.creator_robot?.type === "required" && (
               <StyledError role='alertError'>Ingrese un robot</StyledError>
             )}
