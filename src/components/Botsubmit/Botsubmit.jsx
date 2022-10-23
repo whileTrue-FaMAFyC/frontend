@@ -18,10 +18,10 @@ const Botsubmit = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
 
-  const [file_cod, setFile_cod] = useState(null); //base64 del codigo
-  const [fileName_cod, setFileName_cod] = useState(null); //filename del codigo
+  const [file_cod, setFile_cod] = useState(""); //base64 del codigo
+  const [fileName_cod, setFileName_cod] = useState(""); //filename del codigo
 
-  const [file_av, setFile_av] = useState(null); //base64 del avatar
+  const [file_av, setFile_av] = useState(""); //base64 del avatar
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -72,6 +72,7 @@ const Botsubmit = () => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
+          setFailure_data("");
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
@@ -85,13 +86,13 @@ const Botsubmit = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        <h2>SUBIR BOT</h2>
+        <h2>BOT SUBMIT</h2>
         <form
           onSubmit={handleSubmit(submitForm)}
           className='requires-validation'>
           <StyledInputGroup>
             <label className='form-content' htmlFor='name'>
-              nombre:
+              name:
             </label>
             <StyledInput
               id='name'
@@ -104,23 +105,23 @@ const Botsubmit = () => {
               placeholder='Nombre del bot'
             />
             {errors.name?.type === "required" ? (
-              <StyledError role='no_name'>Ingresar nombre</StyledError>
+              <StyledError role='no_name'>Name is required</StyledError>
             ) : null}
             {errors.name?.type === "maxLength" ? (
               <StyledError role='invalid_name_size'>
-                El nombre del bot debe tener como máximo 40 caracteres
+                Bot's name must have less than 40 characters
               </StyledError>
             ) : null}
             {errors.name?.type === "pattern" ? (
               <StyledError role='invalid_name'>
-                No se permiten caracteres especiales
+                Special characters are not allowed
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
           <StyledInputGroup>
             <label className='form-content' htmlFor='source_code'>
-              codigo:
+              code:
             </label>
             <StyledInput
               id='source_code'
@@ -141,7 +142,7 @@ const Botsubmit = () => {
             />
             {errors.source_code?.type === "validate" ? (
               <StyledError role='invalid_code'>
-                Ingrese un archivo con extensión .py de menos de 40 kB
+                Insert .py file under 40 KB
               </StyledError>
             ) : null}
           </StyledInputGroup>
@@ -170,15 +171,14 @@ const Botsubmit = () => {
             />
             {errors.avatar?.type === "validate" ? (
               <StyledError role='invalid_avatar'>
-                Se necesita un archivo con extensión .png o .jpg de menos de 40
-                kB
+                Insert image under 40 KB
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
-          <StyledButton type='submit'>Subir</StyledButton>
+          <StyledButton type='submit'>Submit</StyledButton>
         </form>
-        {success ? <div role='dialog'>Subido exitosamente</div> : null}
+        {success ? <div role='dialog'>Successfully added</div> : null}
         {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
       </StyledEntryCard>
     </EntryPage>
