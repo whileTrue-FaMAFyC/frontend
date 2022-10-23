@@ -1,6 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
 import {
   StyledButton,
@@ -23,6 +24,7 @@ const Formulario = () => {
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
+  const [clickButton, setClickButton] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,6 +52,7 @@ const Formulario = () => {
   };
 
   const onSubmit = async (data) => {
+    setClickButton(true)
     data.avatar = file == null ? "" : file;
     data.avatarFilename = file == null ? "" : fileName.name;
     await fetch("http://localhost:8000/signup", {
@@ -68,11 +71,13 @@ const Formulario = () => {
           localStorage.setItem("username", data.username);
           navigate(`/verify`);
         } else {
+          setClickButton(false)
           setSuccess(false);
           setFailure_data(data.detail);
         }
       })
       .catch((error) => {
+        setClickButton(false)
         alert(error);
         setSuccess(false);
       });
@@ -215,7 +220,17 @@ const Formulario = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Enviar</StyledButton>
+          <Button
+    isLoading = {clickButton}
+    // onClick= {() => setClickButton(true)}
+    variant='solid'
+    colorScheme='red'
+    type="submit"
+    loadingText='Submitting'
+    spinnerPlacement='end'
+  >
+    Submit
+  </Button>
         </form>
         {success && (
           <div className='alert alert-success mt-4' role='alertSuccess'>
