@@ -4,10 +4,8 @@ import userEvent from "@testing-library/user-event";
 import {FormUserVerify} from "../components";
 
 describe("Componente de verificacion de codigo", () => {
-  let button;
   let input;
   let error;
-
   let url = `${process.env.REACT_APP_API_KEY}verifyuser/${localStorage.getItem(
     "username"
   )}`;
@@ -16,16 +14,15 @@ describe("Componente de verificacion de codigo", () => {
   let notSuccessMsg = "User already verified";
   let notSuccessMsg2 = "Wrong verification code";
 
+  beforeEach(() => {
+    render(<FormUserVerify />);
+    input = screen.getByTestId("code");
+    error = screen.getByTestId("code-error");
+  });
+
   afterEach(cleanup);
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  beforeEach(() => {
-    render(<FormUserVerify />);
-    button = screen.getByRole("button");
-    input = screen.getByTestId("code");
-    error = screen.getByTestId("code-error");
   });
 
   it("Deberia aparecer un error al ingresar mas de 6 digitos", async () => {
@@ -48,7 +45,6 @@ describe("Componente de verificacion de codigo", () => {
     });
 
     userEvent.type(input, verification_code);
-    userEvent.click(button);
 
     await waitFor(() => {
       expect(screen.getByTestId("success")).toHaveTextContent(successMsg);
@@ -63,8 +59,8 @@ describe("Componente de verificacion de codigo", () => {
     mockAxios.put.mockRejectedValue({
       response: {data: {detail: notSuccessMsg}},
     });
+
     userEvent.type(input, verification_code);
-    userEvent.click(button);
 
     await waitFor(() => {
       expect(mockAxios.put).toHaveBeenCalledTimes(1);
@@ -79,8 +75,8 @@ describe("Componente de verificacion de codigo", () => {
     mockAxios.put.mockRejectedValue({
       response: {data: {detail: notSuccessMsg2}},
     });
+
     userEvent.type(input, verification_code);
-    userEvent.click(button);
 
     await waitFor(() => {
       expect(screen.getByTestId("error")).toHaveTextContent(notSuccessMsg2);

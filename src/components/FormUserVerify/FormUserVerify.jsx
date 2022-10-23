@@ -1,12 +1,13 @@
-import {useState} from "react";
+import {useEffect, useState, useRef} from "react";
 import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
-import {Form, Button, FeedBack} from "./FormUserVerify.styled";
+import {Form, FeedBack} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const ref = useRef();
   const methods = useForm({mode: "all"});
 
   const onSubmit = async (data) => {
@@ -18,9 +19,14 @@ const FormUserVerify = () => {
     }
   };
 
+  useEffect(() => {
+    if (methods.watch("code").length !== 6) return;
+    ref.current.submit();
+  }, [methods.watch("code")]);
+
   return (
     <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form ref={ref} onSubmit={methods.handleSubmit(onSubmit)}>
         {error && (
           <FeedBack data-testid='error' color='red'>
             {error}
@@ -41,7 +47,6 @@ const FormUserVerify = () => {
           required
           requiredMessage='Enter the code'
         />
-        <Button type='submit'>Send</Button>
       </Form>
     </FormProvider>
   );
