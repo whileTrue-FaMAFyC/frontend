@@ -10,3 +10,7 @@ export const Button = styled.button`
 `;
 
 export const Msg = styled.p``;
+
+export const FeedBack = styled.p`
+  color: ${({color}) => color};
+`;
