@@ -7,8 +7,9 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  Div,
 } from "./styles";
-import CircularProgress from "@mui/material/CircularProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Botsubmit = () => {
   const {
@@ -182,13 +183,14 @@ const Botsubmit = () => {
             ) : null}
           </StyledInputGroup>
 
-          {!loading ? <StyledButton type='submit'>Submit</StyledButton> : null}
+          {!loading ? (
+            <StyledButton type='submit'>Submit</StyledButton>
+          ) : (
+            <Div>
+              <CircularProgress data-testid='loader' />
+            </Div>
+          )}
         </form>
-        {loading ? (
-          <EntryPage>
-            <CircularProgress data-testid='loader' />
-          </EntryPage>
-        ) : null}
         {success ? <div role='dialog'>Successfully added</div> : null}
         {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
       </StyledEntryCard>

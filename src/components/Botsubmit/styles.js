@@ -86,6 +86,13 @@ export const EntryPage = styled.div`
   background-color: #fbfbfb;
 `;
 
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  flex-direction: column;
+`;
+
 export const GlobalStyle = createGlobalStyle`
     * {
         margin: 0;
