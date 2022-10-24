@@ -190,31 +190,6 @@ const Formulario = () => {
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputAvatar'>
-              Avatar
-            </label>
-            <StyledInput
-              type='file'
-              id='inputAvatar'
-              accept='.png'
-              data-testid='Avatar'
-              {...register("avatar", {
-                onChange: onUploadFileChange,
-                validate: (e) => {
-                  return (
-                    e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
-                  );
-                },
-              })}
-            />
-            {errors.avatar?.type === "validate" && (
-              <StyledError role='alertError'>
-                La extension del archivo es incorrecta, el archivo debe ser .png
-              </StyledError>
-            )}
-          </StyledInputGroup>
           <StyledButton type='submit'>Enviar</StyledButton>
         </form>
         {success && (
