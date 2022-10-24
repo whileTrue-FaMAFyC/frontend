@@ -182,7 +182,7 @@ const Botsubmit = () => {
             ) : null}
           </StyledInputGroup>
 
-          <StyledButton type='submit'>Submit</StyledButton>
+          {!loading ? <StyledButton type='submit'>Submit</StyledButton> : null}
         </form>
         {loading ? (
           <EntryPage>

@@ -11,7 +11,9 @@ window.alert = (e) => {
 
 describe("Botsubmit test", () => {
   test("Form completo", async () => {
-    render(<Botsubmit />);
+    const submitFormSpy = jest.fn();
+
+    render(<Botsubmit onSubmit={submitFormSpy} />);
 
     const inputName = screen.getByLabelText(/name:/i);
     const inputAvatar = screen.getByLabelText(/avatar:/i);
@@ -37,6 +39,7 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("invalid_name")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_code")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_avatar")).not.toBeInTheDocument;
+    expect(submitFormSpy).toHaveBeenCalledTimes(0);
   });
 
   test("form sin avatar", async () => {
