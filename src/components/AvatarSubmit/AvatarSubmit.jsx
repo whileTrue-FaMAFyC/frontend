@@ -133,7 +133,9 @@ const AvatarSubmit = () => {
             })}
           />
           {errors.avatar?.type === "validate" && (
-            <StyledError role='alertError'>Invalid file</StyledError>
+            <StyledError role='alertError'>
+              The file must be an image of at most 40KB
+            </StyledError>
           )}
           <StyledButton type='submit'>Submit</StyledButton>
         </form>
