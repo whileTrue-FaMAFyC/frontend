@@ -70,7 +70,7 @@ const AvatarSubmit = () => {
         : file;
     data.avatarFilename = file == null ? "defaultAvatar.png" : fileName.name;
     const token = localStorage.getItem("user");
-    await fetch("http://localhost:8000/signup", {
+    await fetch(`http://localhost:8000/load-avatar/${token}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
