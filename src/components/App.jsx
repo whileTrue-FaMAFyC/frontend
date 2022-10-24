@@ -9,6 +9,7 @@ import {
   GameConfig,
   FormUserVerify,
   BotInGame,
+  AvatarSubmit,
 } from "../components";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path='/gameconfig' element={<GameConfig />} />
           <Route path='/verify' element={<FormUserVerify />} />
           <Route path='/botInGame' element={<BotInGame />} />
+          <Route path='/avatarSubmit' element={<AvatarSubmit />} />
         </Routes>
       </div>
     </div>
