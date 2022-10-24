@@ -25,6 +25,7 @@ const Botsubmit = () => {
   const [file_av, setFile_av] = useState(""); //base64 del avatar
 
   const [loading, setLoading] = useState(false); //processing post to server state
+
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -185,7 +186,7 @@ const Botsubmit = () => {
         </form>
         {loading ? (
           <EntryPage>
-            <CircularProgress />
+            <CircularProgress data-testid='loader' />
           </EntryPage>
         ) : null}
         {success ? <div role='dialog'>Successfully added</div> : null}
