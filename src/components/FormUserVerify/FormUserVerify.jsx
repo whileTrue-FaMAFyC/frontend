@@ -3,7 +3,7 @@ import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
 import {useNavigate} from "react-router-dom";
-import {Form, FeedBack} from "./FormUserVerify.styled";
+import {Form, FeedBack, Title} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ const FormUserVerify = () => {
   return (
     <FormProvider {...methods}>
       <Form ref={ref} onSubmit={methods.handleSubmit(onSubmit)}>
+        <Title>We have sent a code to your email</Title>
         {error && (
           <FeedBack data-testid='error' color='red'>
             {error}
