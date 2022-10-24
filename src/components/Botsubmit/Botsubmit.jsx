@@ -8,6 +8,7 @@ import {
   EntryPage,
   StyledError,
 } from "./styles";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Botsubmit = () => {
   const {
@@ -23,6 +24,7 @@ const Botsubmit = () => {
 
   const [file_av, setFile_av] = useState(""); //base64 del avatar
 
+  const [loading, setLoading] = useState(false); //processing post to server state
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -54,6 +56,7 @@ const Botsubmit = () => {
   };
 
   const submitForm = async (data) => {
+    setLoading(true);
     data.source_code = file_cod;
     data.avatar = file_av;
     data.bot_filename = fileName_cod;
@@ -69,6 +72,7 @@ const Botsubmit = () => {
         },
         body: JSON.stringify(data),
       }).then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
@@ -79,6 +83,7 @@ const Botsubmit = () => {
         }
       });
     } catch (err) {
+      setLoading(false);
       alert(err);
     }
   };
@@ -178,6 +183,11 @@ const Botsubmit = () => {
 
           <StyledButton type='submit'>Submit</StyledButton>
         </form>
+        {loading ? (
+          <EntryPage>
+            <CircularProgress />
+          </EntryPage>
+        ) : null}
         {success ? <div role='dialog'>Successfully added</div> : null}
         {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
       </StyledEntryCard>
