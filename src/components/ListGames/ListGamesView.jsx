@@ -6,6 +6,7 @@ import {
   Column,
   Tbody,
   Row,
+  Feedback,
 } from "./ListGames.styled";
 
 const ListGamesView = ({games}) => {
@@ -23,9 +24,9 @@ const ListGamesView = ({games}) => {
         </Thead>
         <Tbody>
           {games.length < 1 && (
-            <Row>
+            <Feedback>
               <Column>No games availables</Column>
-            </Row>
+            </Feedback>
           )}
           {games.map(
             ({match_id, creator_user, max_players, name, robots_joined}) => (

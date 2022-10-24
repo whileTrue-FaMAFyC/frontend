@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -38,19 +38,11 @@ export const Thead = styled.thead`
 
 export const Column = styled.td`
   width: 100%;
-
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Colfax";
-`;
-
-export const Ellipsis = styled.p`
-  max-width: 120px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const Tbody = styled.tbody`
@@ -71,6 +63,7 @@ export const Tbody = styled.tbody`
     background-color: #252c32;
     border-radius: 10px;
   }
+
   &::-webkit-scrollbar-track {
     width: 10px;
     margin: 3px 0px;
@@ -92,4 +85,23 @@ export const Row = styled.tr`
     background-color: #0a0e13;
   }
   cursor: pointer;
+`;
+
+export const Feedback = styled.tr`
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  color: #fff;
+`;
+
+export const Ellipsis = styled.p`
+  max-width: 120px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+export const Refresh = styled.button`
+  width: 300px;
+  height: 25px;
 `;
