@@ -3,7 +3,6 @@ import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
 import {Form, Button, Msg} from "./FormUserVerify.styled";
-import {useNavigate} from "react-router-dom";
 
 const FormUserVerify = () => {
   const [message, setMessage] = useState("");
