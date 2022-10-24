@@ -8,13 +8,11 @@ import {useNavigate} from "react-router-dom";
 const FormUserVerify = () => {
   const [message, setMessage] = useState("");
   const methods = useForm({mode: "all"});
-  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       await verifyUser(data.code, localStorage.getItem("username"));
       setMessage("account verified successfully");
-      navigate(`/AvatarSubmit`);
     } catch (error) {
       setMessage(error.response.data.detail);
     }
