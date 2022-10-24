@@ -1,4 +1,5 @@
 import {Route, Routes} from "react-router-dom";
+
 import Home from "../pages/Home";
 import {
   Login,
@@ -9,7 +10,6 @@ import {
   GameConfig,
   BotInGame,
 } from "../components";
-
 import Verify from "../pages/Verify/Verify";
 
 function App() {

@@ -1,6 +1,7 @@
 import mockAxios from "axios";
 import {cleanup, render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom";
 import {FormUserVerify} from "../components";
 
 describe("Componente de verificacion de codigo", () => {
@@ -15,7 +16,11 @@ describe("Componente de verificacion de codigo", () => {
   let notSuccessMsg2 = "Wrong verification code";
 
   beforeEach(() => {
-    render(<FormUserVerify />);
+    render(
+      <BrowserRouter>
+        <FormUserVerify />
+      </BrowserRouter>
+    );
     input = screen.getByTestId("code");
     error = screen.getByTestId("code-error");
   });

@@ -2,18 +2,21 @@ import {useEffect, useState, useRef} from "react";
 import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
+import {useNavigate} from "react-router-dom";
 import {Form, FeedBack} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const ref = useRef();
   const methods = useForm({mode: "all"});
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   const onSubmit = async (data) => {
     try {
       await verifyUser(data.code, localStorage.getItem("username"));
       setSuccess("Account verified successfully");
+      navigate("/avatarSubmit");
     } catch (error) {
       setError(error.response.data.detail.normalize());
     }
