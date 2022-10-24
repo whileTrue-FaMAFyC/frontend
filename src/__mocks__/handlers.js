@@ -2,6 +2,7 @@
 import {rest} from "msw";
 
 const fakeUserResponse = {Authorization: "fake_user_token"};
+const username = "ElMasGrande";
 
 export const handlers = [
   rest.post("http://localhost:8000/create-bot", (req, res, ctx) => {
@@ -17,6 +18,12 @@ export const handlers = [
     "http://localhost:8000/matches/new-match",
     async (req, res, ctx) => {
       return res(ctx.status(201), ctx.json({status: 201}));
+    }
+  ),
+  rest.post(
+    `http://localhost:8000/load-avatar/${localStorage.getItem("username")}`,
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
     }
   ),
 ];
