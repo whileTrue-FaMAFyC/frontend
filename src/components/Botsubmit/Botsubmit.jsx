@@ -9,7 +9,8 @@ import {
   StyledError,
   Div,
 } from "./styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {CircularProgress} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 const Botsubmit = () => {
   const {
@@ -24,6 +25,7 @@ const Botsubmit = () => {
   const [fileName_cod, setFileName_cod] = useState(""); //filename del codigo
 
   const [file_av, setFile_av] = useState(""); //base64 del avatar
+  const [imgAvatar, setImgAvatar] = useState(null); //image to show on form
 
   const [loading, setLoading] = useState(false); //processing post to server state
 
@@ -54,6 +56,16 @@ const Botsubmit = () => {
         setFileName("");
         setFile("");
       }
+    }
+  };
+
+  const onChangePicture = (e) => {
+    if (e.target.files[0]) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgAvatar(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
@@ -158,15 +170,29 @@ const Botsubmit = () => {
             <label className='form-content' htmlFor='avatar'>
               avatar:
             </label>
+            <Avatar
+              style={{
+                height: 100,
+                width: 100,
+                verticalAlign: "middle",
+                position: "relative",
+                left: "124px",
+                justifyContent: "center",
+                top: "2px",
+              }}
+              spacing={2}
+              src={imgAvatar}
+            />
             <StyledInput
               id='avatar'
               type='file'
               accept='image/*'
               {...register("avatar", {
-                onChange: (t) => {
-                  onUploadFileChange(t, setFile_av, (e) => {
+                onChange: (file) => {
+                  onUploadFileChange(file, setFile_av, (e) => {
                     return e;
                   });
+                  onChangePicture(file);
                 },
                 validate: (e) => {
                   return (
