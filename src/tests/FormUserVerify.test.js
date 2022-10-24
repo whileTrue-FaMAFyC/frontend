@@ -2,6 +2,7 @@ import mockAxios from "axios";
 import {cleanup, render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {FormUserVerify} from "../components";
+import {BrowserRouter as Router} from "react-router-dom";
 
 describe("Componente de verificacion de codigo", () => {
   let msg;
@@ -23,7 +24,13 @@ describe("Componente de verificacion de codigo", () => {
   });
 
   beforeEach(() => {
-    render(<FormUserVerify />);
+    render(
+      <div>
+        <Router>
+          <FormUserVerify />;
+        </Router>
+      </div>
+    );
     button = screen.getByRole("button");
     input = screen.getByTestId("code");
     error = screen.getByTestId("code-error");

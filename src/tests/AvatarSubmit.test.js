@@ -2,20 +2,12 @@ import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import AvatarSubmit from "../components/AvatarSubmit/AvatarSubmit";
 import {server} from "../__mocks__/server.js";
-import {rest} from "msw";
-
-import {todoOk_201, todoMal_400} from "../__mocks__/handlers";
 import {BrowserRouter as Router} from "react-router-dom";
 
 describe("Avatar test", () => {
   beforeEach(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
-
-  const jsdomAlert = window.alert; // remember the jsdom alert
-  window.alert = (e) => {
-    console.log(e);
-  };
 
   // Declaration of variables
   let inputAvatar;
