@@ -8,6 +8,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledSuccess,
 } from "./Login.styled";
 
 const Login = () => {
@@ -113,9 +114,9 @@ const Login = () => {
           </StyledButton>
         </form>
         {success && (
-          <div role='alert' data-testid='loginExitoso'>
+          <StyledSuccess role='alert' data-testid='loginExitoso'>
             Successful login
-          </div>
+          </StyledSuccess>
         )}
         {sent && failure_data !== "" && (
           <StyledError role='alert' data-testid='error'>
