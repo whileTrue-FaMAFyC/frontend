@@ -118,9 +118,9 @@ const Login = () => {
           </div>
         )}
         {sent && failure_data !== "" && (
-          <div role='alert' data-testid='error'>
+          <StyledError role='alert' data-testid='error'>
             {failure_data}
-          </div>
+          </StyledError>
         )}
         <span>
           <p data-testid='notAMemb'>Not a member?</p>
