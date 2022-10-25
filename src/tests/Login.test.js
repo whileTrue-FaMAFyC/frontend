@@ -2,15 +2,14 @@ import "@testing-library/jest-dom";
 import * as React from "react";
 // import API mocking utilities from Mock Service Worker.
 import {rest} from "msw";
-import {setupServer} from "msw/node";
 // import testing utilitiess
 import {render, fireEvent, screen} from "@testing-library/react";
 import Login from "../components/Login/Login";
 import {BrowserRouter as Router, Link} from "react-router-dom";
-import {handlers} from "../__mocks__/handlers";
+import {server} from "../__mocks__/server.js";
+import {fakeUserResponse} from "../__mocks__/handlers.js";
 
-const fakeUserResponse = {Authorization: "fake_user_token"};
-const server = setupServer(...handlers);
+//const fakeUserResponse = {Authorization: "fake_user_token"};
 
 beforeAll(() => server.listen());
 afterEach(() => {
@@ -40,7 +39,7 @@ test("render full login component successfully", async () => {
   expect.toBeInTheDocument(screen.findByTestId("notAMemb"));
   expect.toBeInTheDocument(screen.findByTestId("linkToReg"));
 
-  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("succesfulLogin"));
 });
 
 test("allows the user to login successfully with email", async () => {
@@ -62,7 +61,7 @@ test("allows the user to login successfully with email", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("alert");
+  const alert = await screen.findByTestId("succesfulLogin");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -88,7 +87,7 @@ test("allows the user to login successfully with username", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("alert");
+  const alert = await screen.findByTestId("succesfulLogin");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -108,25 +107,11 @@ test("error when username or email empty", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  // email empty error should display
-  const errorUsernameOrEmailEmpty = await screen.findByTestId(
-    "errorUsernameOrEmailEmpty"
-  );
-  expect.toBeInTheDocument(errorUsernameOrEmailEmpty);
-
-  // email not valid error should not display
-  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
-  expect.not.toBeInTheDocument(errorEmailNotValid);
-  // password not valid error should not display
-  const errorPasswordNotValid = await screen.queryByTestId(
-    "errorPasswordNotValid"
-  );
-  expect.not.toBeInTheDocument(errorPasswordNotValid);
-  // password empty error should not display
-  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
-  expect.not.toBeInTheDocument(errorPasswordEmpty);
-
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.toBeInTheDocument(screen.findByTestId("errorUsernameOrEmailEmpty"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordNotValid"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordEmpty"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("error when password empty", async () => {
@@ -142,25 +127,13 @@ test("error when password empty", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  // password error should display
-  const errorPasswordEmpty = await screen.findByTestId("errorPasswordEmpty");
-  expect.toBeInTheDocument(errorPasswordEmpty);
-
-  // email error should not display
-  const errorUsernameOrEmailEmpty = await screen.queryByTestId(
-    "errorUsernameOrEmailEmpty"
+  expect.toBeInTheDocument(screen.findByTestId("errorPasswordEmpty"));
+  expect.not.toBeInTheDocument(
+    screen.queryByTestId("errorUsernameOrEmailEmpty")
   );
-  expect.not.toBeInTheDocument(errorUsernameOrEmailEmpty);
-  // email empty error should not display
-  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
-  expect.not.toBeInTheDocument(errorEmailNotValid);
-  // password not valid error should not display
-  const errorPasswordNotValid = await screen.queryByTestId(
-    "errorPasswordNotValid"
-  );
-  expect.not.toBeInTheDocument(errorPasswordNotValid);
-
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordNotValid"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("error when password not valid", async () => {
@@ -178,25 +151,13 @@ test("error when password not valid", async () => {
   });
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  // password not valid error should display
-  const errorPasswordNotValid = await screen.findByTestId(
-    "errorPasswordNotValid"
+  expect.toBeInTheDocument(screen.findByTestId("errorPasswordNotValid"));
+  expect.not.toBeInTheDocument(
+    screen.queryByTestId("errorUsernameOrEmailEmpty")
   );
-  expect.toBeInTheDocument(errorPasswordNotValid);
-
-  // email empty error should not display
-  const errorUsernameOrEmailEmpty = await screen.queryByTestId(
-    "errorUsernameOrEmailEmpty"
-  );
-  expect.not.toBeInTheDocument(errorUsernameOrEmailEmpty);
-  // email not valid error should not display
-  const errorEmailNotValid = await screen.queryByTestId("errorEmailNotValid");
-  expect.not.toBeInTheDocument(errorEmailNotValid);
-  // password empty error should not display
-  const errorPasswordEmpty = await screen.queryByTestId("errorPasswordEmpty");
-  expect.not.toBeInTheDocument(errorPasswordEmpty);
-
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordEmpty"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("network error", async () => {
@@ -224,7 +185,8 @@ test("network error", async () => {
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
 
-  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("succesfulLogin"));
+  expect.toBeInTheDocument(screen.findByTestId("error"));
 });
 
 test("invalid credentials", async () => {
@@ -252,5 +214,6 @@ test("invalid credentials", async () => {
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
 
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
+  expect.toBeInTheDocument(screen.findByTestId("error"));
 });

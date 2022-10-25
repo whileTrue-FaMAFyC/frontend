@@ -22,7 +22,6 @@ describe("Formulario test", () => {
   let inputEmail;
   let inputPassword;
   let inputConfirmPassword;
-  let inputAvatar;
   let button;
 
   beforeEach(() => {
@@ -38,7 +37,6 @@ describe("Formulario test", () => {
     inputEmail = screen.getByTestId("Email");
     inputPassword = screen.getByTestId("Password");
     inputConfirmPassword = screen.getByTestId("Confirm password");
-    inputAvatar = screen.getByTestId(/Avatar/i);
     button = screen.getByRole("button");
   });
 
@@ -48,7 +46,6 @@ describe("Formulario test", () => {
     expect.toBeInTheDocument(screen.getByTestId("Email"));
     expect.toBeInTheDocument(screen.getByTestId("Password"));
     expect.toBeInTheDocument(screen.getByTestId("Confirm password"));
-    expect.toBeInTheDocument(screen.getByTestId(/Avatar/i));
     expect.toBeInTheDocument(screen.getByRole("button"));
 
     expect(alert);
@@ -56,14 +53,10 @@ describe("Formulario test", () => {
 
   // TODOS LOS CAMPOS
   test("1. Nuevo usuario con todos los campos llenos", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -73,13 +66,9 @@ describe("Formulario test", () => {
   });
   // CAMPOS REQUERIDOS
   test("2. Nuevo usuario sin nombre de usuario", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -89,13 +78,9 @@ describe("Formulario test", () => {
   });
 
   test("3. Nuevo usuario sin email", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -104,13 +89,9 @@ describe("Formulario test", () => {
   });
 
   test("4. Nuevo usuario sin contraseña y con confirmacion de contraseña lleno", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -119,12 +100,8 @@ describe("Formulario test", () => {
   });
 
   test("5. Nuevo usuario sin contraseña y sin confirmacion de contraseña lleno", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -133,13 +110,9 @@ describe("Formulario test", () => {
   });
 
   test("6. Nuevo usuario sin confirmacion de contraseña ", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "image/png"});
-
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
 
     userEvent.click(button);
 
@@ -161,24 +134,6 @@ describe("Formulario test", () => {
     expect(alert);
   });
 
-  // AVATAR
-  test("8. Alerta por avatar con extensión invalida", async () => {
-    const av = new File(["holis"], "aaavatar.pdf", {type: "application/pdf"});
-
-    userEvent.type(inputUsername, "Rocolo");
-    userEvent.type(inputEmail, "lala@asdsad.com");
-    userEvent.type(inputPassword, "Soyunmaestro123");
-    userEvent.type(inputConfirmPassword, "Soyunmaestro123");
-
-    userEvent.upload(inputAvatar, av);
-
-    userEvent.click(button);
-
-    const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent(
-      "La extension del archivo es incorrecta, el archivo debe ser .png"
-    );
-  });
   // NOMBRE DE USUARIO
   test("9. Alerta por superar longitud de nombre de usuario", async () => {
     userEvent.type(inputUsername, "Rocolo1234567890a");
