@@ -9,7 +9,7 @@ import {
   StyledSuccess,
   StyledError,
   Div,
-} from "./styles";
+} from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 
