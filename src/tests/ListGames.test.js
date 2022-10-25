@@ -26,4 +26,10 @@ describe("Listar partidas", () => {
       });
     });
   });
+
+  it("No hay partidas disponibles", async () => {
+    mockAxios.get.mockResolvedValue({data: []});
+    render(<ListGames />);
+    expect(await screen.findByText("No games availables")).toBeInTheDocument();
+  });
 });
