@@ -8,7 +8,9 @@ const ListGames = () => {
   const callGetGames = async () => {
     try {
       const response = await getGames(localStorage.getItem("user"));
-      setGames(response.data);
+      if (response.data.length) {
+        setGames(response.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -16,7 +18,7 @@ const ListGames = () => {
 
   useEffect(() => {
     callGetGames();
-  }, []);
+  }, [games]);
 
   return <ListGamesView games={games} />;
 };

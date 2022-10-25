@@ -6,12 +6,13 @@ import {
   Column,
   Tbody,
   Row,
+  Feedback,
 } from "./ListGames.styled";
 
 const ListGamesView = ({games}) => {
   return (
     <Container>
-      <Title>Lista de partidas</Title>
+      <Title>Game list</Title>
       <Table>
         <Thead>
           <Row>
@@ -22,6 +23,11 @@ const ListGamesView = ({games}) => {
           </Row>
         </Thead>
         <Tbody>
+          {games.length < 1 && (
+            <Feedback>
+              <Column>No games availables</Column>
+            </Feedback>
+          )}
           {games.map(
             ({match_id, creator_user, max_players, name, robots_joined}) => (
               <Row key={match_id} data-testid='row'>
