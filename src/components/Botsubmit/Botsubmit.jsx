@@ -71,6 +71,7 @@ const Botsubmit = () => {
   };
 
   const submitForm = async (data) => {
+    setFailure_data("");
     setLoading(true);
     data.source_code = file_cod;
     data.avatar = file_av;
@@ -91,7 +92,6 @@ const Botsubmit = () => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
-          setFailure_data("");
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
@@ -99,7 +99,8 @@ const Botsubmit = () => {
       });
     } catch (err) {
       setLoading(false);
-      alert(err);
+      setSuccess(false);
+      setFailure_data("Network error");
     }
   };
 
@@ -112,7 +113,7 @@ const Botsubmit = () => {
           className='requires-validation'>
           <StyledInputGroup>
             <label className='form-content' htmlFor='name'>
-              name:
+              Name
             </label>
             <StyledInput
               id='name'
@@ -140,7 +141,7 @@ const Botsubmit = () => {
 
           <StyledInputGroup className='hide-if-value'>
             <label className='form-content' htmlFor='source_code'>
-              code:
+              Code
             </label>
             <StyledInput
               id='source_code'
@@ -168,7 +169,7 @@ const Botsubmit = () => {
 
           <StyledInputGroup>
             <label className='form-content' htmlFor='avatar'>
-              avatar:
+              Avatar
             </label>
             <Avatar
               style={{

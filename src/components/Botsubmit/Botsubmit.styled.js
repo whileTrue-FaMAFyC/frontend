@@ -7,8 +7,7 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   padding: 8px 16px;
   outline: none;
-  background-color: #dedede;
-  color: #252c32;
+  background-color: #00c8c8;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -16,7 +15,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: turquoise;
+    background-color: #009595;
   }
 `;
 
@@ -83,7 +82,7 @@ export const StyledInputGroup = styled.div`
   label {
     display: inline-block;
     margin-bottom: 0.5rem;
-    color: #888888;
+    color: #fff;
   }
 `;
 

@@ -15,9 +15,9 @@ describe("Botsubmit test", () => {
 
     render(<Botsubmit onSubmit={submitFormSpy} />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -45,8 +45,8 @@ describe("Botsubmit test", () => {
   test("form sin avatar", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
@@ -83,9 +83,9 @@ describe("Botsubmit test", () => {
   test("name invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -107,9 +107,9 @@ describe("Botsubmit test", () => {
   test("Codigo invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/plain"});
@@ -131,9 +131,9 @@ describe("Botsubmit test", () => {
   test("Avatar invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -155,9 +155,9 @@ describe("Botsubmit test", () => {
   test("Falta codigo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/jpeg"});
 
@@ -177,9 +177,9 @@ describe("Botsubmit test", () => {
   test("Falta name", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/jpg"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -200,9 +200,9 @@ describe("Botsubmit test", () => {
   test("name muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -228,9 +228,9 @@ describe("Botsubmit test", () => {
   test("Avatar muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File([new ArrayBuffer(40001)], "avatar.png", {
       type: "image/png",
@@ -254,8 +254,8 @@ describe("Botsubmit test", () => {
   test("Codigo muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var cod = new File([new ArrayBuffer(43334)], "codigo.py", {
       type: "text/x-python",
@@ -286,9 +286,9 @@ describe("Botsubmit test", () => {
         );
       })
     );
-    const inputName = screen.getByLabelText(/name:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/code:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
