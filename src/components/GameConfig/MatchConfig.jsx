@@ -9,9 +9,9 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-} from "./GameConfig.styled.js";
+} from "./MatchConfig.styled.js";
 
-const FormPartidaConfig = () => {
+const MatchConfig = () => {
   const {
     register,
     handleSubmit,
@@ -240,4 +240,4 @@ const FormPartidaConfig = () => {
   );
 };
 
-export default FormPartidaConfig;
+export default MatchConfig;

@@ -1,6 +1,6 @@
 import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import FormPartidaConfig from "../components/GameConfig/GameConfig";
+import FormPartidaConfig from "../components/GameConfig/MatchConfig";
 import {server} from "../__mocks__/server.js";
 import {rest} from "msw";
 import {setupServer} from "msw/node";
@@ -27,19 +27,7 @@ describe("Configuracion de partida test", () => {
   let inputNameRobot;
   let button;
 
-  // const server = setupServer(
-  //   rest.get("http://localhost:8000/list-robots", (req, res, ctx) => {
-  //     return res(ctx.json({name: "Soyunrobot"}));
-  //   })
-  // );
-  // global.fetch = jest.fn(() =>
-  //   Promise.resolve({
-  //     json: () => Promise.resolve({data: {0: {name: "Soyunrobot"}}}),
-  //   })
-  // );
-
   beforeEach(async () => {
-    // fetch.mockClear();
     mockAxios.get.mockResolvedValue({data: robotsMock});
     render(<FormPartidaConfig />);
 
