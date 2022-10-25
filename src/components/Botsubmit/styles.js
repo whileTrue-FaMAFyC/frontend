@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
@@ -7,8 +7,8 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   padding: 8px 16px;
   outline: none;
-  background-color: #2f8bfd;
-  color: #ffffff;
+  background-color: #dedede;
+  color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: #0072ff;
+    background-color: turquoise;
   }
 `;
 
@@ -26,7 +26,7 @@ export const StyledEntryCard = styled.div`
   border-radius: 5px;
   padding: 50px;
   margin-bottom: 40px;
-  background-color: #ffffff;
+  background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   h2 {
@@ -41,7 +41,7 @@ export const StyledEntryCard = styled.div`
   }
   a {
     margin-left: 4px;
-    color: #2f8bfd;
+    color: #fff;
   }
 `;
 
@@ -49,23 +49,32 @@ export const StyledInput = styled.input`
   width: 100%;
   outline: none;
   padding: 8px 16px;
-  border: 1px solid #e0e6e8;
+  border: 1px solid turquoise;
   border-radius: 4px;
   font-size: 1rem;
-  color: #888888;
+  color: #0f1519;
+  -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
+  background-color: #252c32;
   &::placeholder {
-    color: #dedede;
+    color: black;
   }
   &:focus {
     box-shadow: 0 0 0 2px rgb(169, 172, 255, 0.5);
+    color: #dedede;
   }
 `;
 
 export const StyledError = styled.p`
   font-size: 12px;
-  padding: 3px;
+  padding: 5px;
   color: red;
+`;
+
+export const StyledSuccess = styled.p`
+  font-size: 12px;
+  padding: 5px;
+  color: turquoise;
 `;
 
 export const StyledInputGroup = styled.div`
@@ -83,29 +92,12 @@ export const EntryPage = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
 `;
 
 export const Div = styled.div`
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #252c32;
   flex-direction: column;
-`;
-
-export const GlobalStyle = createGlobalStyle`
-    * {
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        text-decoration: none;
-        box-sizing: border-box;
-    }
-    body {
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: #333;
-        -webkit-font-smoothing: antialised;
-        -moz-osx-font-smoothing: grayscale;
-    }
 `;

@@ -6,6 +6,7 @@ import {
   StyledInput,
   StyledInputGroup,
   EntryPage,
+  StyledSuccess,
   StyledError,
   Div,
 } from "./styles";
@@ -105,7 +106,7 @@ const Botsubmit = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        <h2>BOT SUBMIT</h2>
+        <h2 style={{color: "white"}}>BOT SUBMIT</h2>
         <form
           onSubmit={handleSubmit(submitForm)}
           className='requires-validation'>
@@ -121,7 +122,6 @@ const Botsubmit = () => {
                 maxLength: 40,
                 pattern: /^[A-Za-z0-9 ]+$/i,
               })}
-              placeholder='Nombre del bot'
             />
             {errors.name?.type === "required" ? (
               <StyledError role='no_name'>Name is required</StyledError>
@@ -138,7 +138,7 @@ const Botsubmit = () => {
             ) : null}
           </StyledInputGroup>
 
-          <StyledInputGroup>
+          <StyledInputGroup className='hide-if-value'>
             <label className='form-content' htmlFor='source_code'>
               code:
             </label>
@@ -178,7 +178,7 @@ const Botsubmit = () => {
                 position: "relative",
                 left: "124px",
                 justifyContent: "center",
-                top: "2px",
+                bottom: "10px",
               }}
               spacing={2}
               src={imgAvatar}
@@ -217,8 +217,12 @@ const Botsubmit = () => {
             </Div>
           )}
         </form>
-        {success ? <div role='dialog'>Successfully added</div> : null}
-        {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
+        {success ? (
+          <StyledSuccess role='dialog'>Successfully added</StyledSuccess>
+        ) : null}
+        {failure_data !== "" ? (
+          <StyledError role='alert'>{failure_data}</StyledError>
+        ) : null}
       </StyledEntryCard>
     </EntryPage>
   );
