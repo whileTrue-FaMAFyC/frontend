@@ -37,6 +37,7 @@ const FormPartidaConfig = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    setFailure_data("");
     const token = await localStorage.getItem("user");
     await fetch("http://localhost:8000/matches/new-match", {
       method: "POST",
@@ -69,11 +70,11 @@ const FormPartidaConfig = () => {
   return (
     <EntryPage>
       <StyledEntryCard className='form_crear_partida'>
-        <h1>Crear Partida</h1>
+        <h2>Create match</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputName'>
-              Nombre de la partida
+              Name:
             </label>
             <StyledInput
               type='text'
@@ -86,24 +87,22 @@ const FormPartidaConfig = () => {
               })}
             />
             {errors.name?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese un nombre para la partida
-              </StyledError>
+              <StyledError role='alertError'>Name is required.</StyledError>
             )}
             {errors.name?.type === "maxLength" && (
               <StyledError role='alertError'>
-                El nombre debe tener a lo sumo 16 caracteres
+                The name must have at most 16 characters.
               </StyledError>
             )}
             {errors.name?.type === "minLength" && (
               <StyledError role='alertError'>
-                El nombre debe tener al menos 3 caracteres
+                The name must have at least 3 characters.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputPassword'>
-              Contraseña (opcional)
+              Password (optional):
             </label>
             <StyledInput
               type='password'
@@ -115,12 +114,12 @@ const FormPartidaConfig = () => {
             />
             {errors.password?.type === "maxLength" && (
               <StyledError role='alertError'>
-                La contraseña debe tener a lo sumo 16 caracteres
+                The password must have at most 16 characters.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Mínimo de jugadores</label>
+            <label>Min players:</label>
             <select
               data-testid='minPlayers'
               {...register("min_players", {required: true})}>
@@ -130,7 +129,7 @@ const FormPartidaConfig = () => {
             </select>
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Máximo de jugadores</label>
+            <label>Max players:</label>
             <select
               data-testid='maxPlayers'
               {...register("max_players", {
@@ -145,14 +144,14 @@ const FormPartidaConfig = () => {
             </select>
             {errors.max_players?.type === "validate" && (
               <StyledError role='alertError'>
-                El máximo de jugadores debe ser mayor o igual al mínimo
-                establecido
+                The maximum number of players must be greater than or equal to
+                the minimum established.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_games'>
-              Numero de juegos
+              Number of games:
             </label>
             <StyledInput
               type='text'
@@ -167,18 +166,18 @@ const FormPartidaConfig = () => {
             />
             {errors.num_games?.type === "required" && (
               <StyledError role='alertError'>
-                Ingrese el numero de juegos
+                Number of games is required.
               </StyledError>
             )}
             {errors.num_games?.type === "validate" && (
               <StyledError role='alertError'>
-                Ingrese un número entero entre 1 y 200
+                Enter an integer between 1 and 200.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_rounds'>
-              Numero de rondas
+              Number of rounds:
             </label>
             <StyledInput
               type='text'
@@ -193,40 +192,44 @@ const FormPartidaConfig = () => {
             />
             {errors.num_rounds?.type === "required" && (
               <StyledError role='alertError'>
-                Ingrese el numero de rondas
+                Number of rounds is required.
               </StyledError>
             )}
             {errors.num_rounds?.type === "validate" && (
               <StyledError role='alertError'>
-                Ingrese un número entero entre 1 y 10000
+                Enter an integer between 1 and 10000.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputRobot'>
-              Elegir robot
+              Robot:
             </label>
             <select
               id='inputRobot'
               data-testid='nameRobot'
               {...register("creator_robot", {required: true})}>
-              <option value=''>* Seleccione un robot *</option>
               {robotsNames.map((a) => (
-                <option value={a.name}>{a.name}</option>
+                <option key={a.name} value={a.name}>
+                  {a.name}
+                </option>
               ))}
+              <option key={""} value=''>
+                * Choose a robot *
+              </option>
             </select>
             {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un robot</StyledError>
+              <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Crear</StyledButton>
+          <StyledButton type='submit'>Create</StyledButton>
         </form>
         {success && (
           <div
             className='alert alert-success mt-4'
             role='alertSuccess'
             data-testid='exito'>
-            La partida se creó exitosamente
+            The match was created successfully.
           </div>
         )}
         {failure_data !== "" ? (

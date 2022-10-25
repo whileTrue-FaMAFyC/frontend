@@ -81,7 +81,7 @@ const Formulario = () => {
   return (
     <EntryPage>
       <StyledEntryCard className='registro'>
-        <h1>Registro</h1>
+        <h2>Registro</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputUsername'>
