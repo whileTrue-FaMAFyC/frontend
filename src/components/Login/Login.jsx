@@ -114,7 +114,7 @@ const Login = () => {
           </StyledButton>
         </form>
         {success && (
-          <StyledSuccess role='alert' data-testid='loginExitoso'>
+          <StyledSuccess role='alert' data-testid='succesfulLogin'>
             Successful login
           </StyledSuccess>
         )}

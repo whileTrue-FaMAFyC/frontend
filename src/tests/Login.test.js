@@ -39,7 +39,7 @@ test("render full login component successfully", async () => {
   expect.toBeInTheDocument(screen.findByTestId("notAMemb"));
   expect.toBeInTheDocument(screen.findByTestId("linkToReg"));
 
-  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("succesfulLogin"));
 });
 
 test("allows the user to login successfully with email", async () => {
@@ -61,7 +61,7 @@ test("allows the user to login successfully with email", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByRole("alert");
+  const alert = await screen.findByTestId("succesfulLogin");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -87,7 +87,7 @@ test("allows the user to login successfully with username", async () => {
 
   fireEvent.click(screen.getByTestId("loginButton"));
 
-  const alert = await screen.findByTestId("loginExitoso");
+  const alert = await screen.findByTestId("succesfulLogin");
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
@@ -111,7 +111,7 @@ test("error when username or email empty", async () => {
   expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
   expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordNotValid"));
   expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordEmpty"));
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("error when password empty", async () => {
@@ -133,7 +133,7 @@ test("error when password empty", async () => {
   );
   expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
   expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordNotValid"));
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("error when password not valid", async () => {
@@ -157,7 +157,7 @@ test("error when password not valid", async () => {
   );
   expect.not.toBeInTheDocument(screen.queryByTestId("errorEmailNotValid"));
   expect.not.toBeInTheDocument(screen.queryByTestId("errorPasswordEmpty"));
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
 });
 
 test("network error", async () => {
@@ -185,7 +185,7 @@ test("network error", async () => {
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
 
-  expect.not.toBeInTheDocument(screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(screen.queryByTestId("succesfulLogin"));
   expect.toBeInTheDocument(screen.findByTestId("error"));
 });
 
@@ -214,6 +214,6 @@ test("invalid credentials", async () => {
   let token = localStorage.getItem("user");
   expect(token).toEqual(null);
 
-  expect.not.toBeInTheDocument(await screen.queryByTestId("loginExitoso"));
+  expect.not.toBeInTheDocument(await screen.queryByTestId("succesfulLogin"));
   expect.toBeInTheDocument(screen.findByTestId("error"));
 });
