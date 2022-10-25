@@ -11,7 +11,7 @@ import {
   StyledError,
 } from "./Register.style";
 
-const Formulario = () => {
+const RegisterForm = () => {
   const {
     register,
     handleSubmit,
@@ -25,6 +25,7 @@ const Formulario = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setFailure_data("");
     const username = data.username;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
@@ -54,8 +55,8 @@ const Formulario = () => {
 
   return (
     <EntryPage>
-      <StyledEntryCard className='registro'>
-        <h1>Registro</h1>
+      <StyledEntryCard className='register'>
+        <h1>Register</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputUsername'>
@@ -72,16 +73,16 @@ const Formulario = () => {
               })}
             />
             {errors.username?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un usuario</StyledError>
+              <StyledError role='alertError'>Username is required</StyledError>
             )}
             {errors.username?.type === "maxLength" && (
               <StyledError role='alertError'>
-                El campo username puede tener a lo sumo 16 caracteres
+                Username must be at most 16 characters long.
               </StyledError>
             )}
             {errors.username?.type === "minLength" && (
               <StyledError role='alertError'>
-                El campo username debe tener al menos 3 caracteres
+                Username must be at least 3 characters long.
               </StyledError>
             )}
           </StyledInputGroup>
@@ -100,11 +101,11 @@ const Formulario = () => {
             />
             {errors.email?.type === "pattern" && (
               <StyledError role='alertError'>
-                El formato del email es incorrecto
+                The email format is incorrect
               </StyledError>
             )}
             {errors.email?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un email</StyledError>
+              <StyledError role='alertError'>Email is required</StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -122,19 +123,17 @@ const Formulario = () => {
             />
             {errors.password?.type === "pattern" && (
               <StyledError role='alertError'>
-                La contraseña debe contener al menos 8 caracteres, una
-                mayúscula, minúscula y número
+                The password must contain at least 8 characters, one uppercase,
+                lowercase and number
               </StyledError>
             )}
             {errors.password?.type === "minLength" && (
               <StyledError role='alertError'>
-                La contraseña debe tener al menos 8 caracteres
+                The password must contain at least 8 characters
               </StyledError>
             )}
             {errors.password?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese una contraseña
-              </StyledError>
+              <StyledError role='alertError'>Password is required</StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -154,30 +153,30 @@ const Formulario = () => {
             />
             {errors.confirmPassword?.type === "validate" && (
               <StyledError role='alertError'>
-                Las contraseñas no coinciden
+                Passwords do not match
               </StyledError>
             )}
             {errors.confirmPassword?.type === "required" &&
               watch("password") && (
                 <StyledError role='alertError'>
-                  Reingrese su contraseña
+                  Enter your password again
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Enviar</StyledButton>
+          <StyledButton type='submit'>Submit</StyledButton>
         </form>
         {success && (
           <div className='alert alert-success mt-4' role='alertSuccess'>
-            Se mandó la solicitud de registro
+            A verification email was sent
           </div>
         )}
         {failure_data !== "" ? (
           <div role='alertServer'>{failure_data}</div>
         ) : null}
         <span>
-          <p data-testid='notAMemb'>¿Ya tenes cuenta?</p>
+          <p data-testid='notAMemb'>Already have an account?</p>
           <Link to='/login' data-testid='linkToReg'>
-            Logueate
+            Login
           </Link>
         </span>
       </StyledEntryCard>
@@ -185,4 +184,4 @@ const Formulario = () => {
   );
 };
 
-export default Formulario;
+export default RegisterForm;

@@ -1,13 +1,13 @@
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Formulario from "../components/Register/Register";
+import RegisterForm from "../components/Register/Register";
 import {server} from "../__mocks__/server.js";
 import {rest} from "msw";
 
 import {todoOk_201, todoMal_400} from "../__mocks__/handlers";
 import {BrowserRouter as Router} from "react-router-dom";
 
-describe("Formulario test", () => {
+describe("Register form test", () => {
   beforeEach(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
@@ -28,7 +28,7 @@ describe("Formulario test", () => {
     render(
       <div>
         <Router>
-          <Formulario />;
+          <RegisterForm />;
         </Router>
       </div>
     );
@@ -41,7 +41,7 @@ describe("Formulario test", () => {
   });
 
   // RENDERIZADO DE COMPONENTES
-  test("0. Renderizado del componente", async () => {
+  test("0. Render components successfully", async () => {
     expect.toBeInTheDocument(screen.getByTestId("Username"));
     expect.toBeInTheDocument(screen.getByTestId("Email"));
     expect.toBeInTheDocument(screen.getByTestId("Password"));
@@ -52,7 +52,7 @@ describe("Formulario test", () => {
   });
 
   // TODOS LOS CAMPOS
-  test("1. Nuevo usuario con todos los campos llenos", async () => {
+  test("1. New user with all fields completed", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
@@ -65,7 +65,7 @@ describe("Formulario test", () => {
     expect(alert);
   });
   // CAMPOS REQUERIDOS
-  test("2. Nuevo usuario sin nombre de usuario", async () => {
+  test("2. New user without username", async () => {
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
@@ -77,7 +77,7 @@ describe("Formulario test", () => {
     expect(alert).toHaveTextContent("Ingrese un usuario");
   });
 
-  test("3. Nuevo usuario sin email", async () => {
+  test("3. New user without email", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputPassword, "Soyunmaestro123");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
@@ -88,7 +88,7 @@ describe("Formulario test", () => {
     expect(alert).toHaveTextContent("Ingrese un email");
   });
 
-  test("4. Nuevo usuario sin contraseña y con confirmacion de contraseña lleno", async () => {
+  test("4. New user without password and with full password confirmation", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputConfirmPassword, "Soyunmaestro123");
@@ -99,7 +99,7 @@ describe("Formulario test", () => {
     expect(alert).toHaveTextContent("Ingrese una contraseña");
   });
 
-  test("5. Nuevo usuario sin contraseña y sin confirmacion de contraseña lleno", async () => {
+  test("5. New user without password and without full password confirmation", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
 
@@ -109,7 +109,7 @@ describe("Formulario test", () => {
     expect(alert).toHaveTextContent("Ingrese una contraseña");
   });
 
-  test("6. Nuevo usuario sin confirmacion de contraseña ", async () => {
+  test("6. New user without password confirmation", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
@@ -121,7 +121,7 @@ describe("Formulario test", () => {
   });
 
   // CAMPO OPCIONAL
-  test("7. Nuevo usuario sin avatar (con campos opcionales vacíos)", async () => {
+  test("7. New user without avatar", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
@@ -135,7 +135,7 @@ describe("Formulario test", () => {
   });
 
   // NOMBRE DE USUARIO
-  test("9. Alerta por superar longitud de nombre de usuario", async () => {
+  test("9. Alert for exceeding user name length", async () => {
     userEvent.type(inputUsername, "Rocolo1234567890a");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
