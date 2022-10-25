@@ -74,7 +74,7 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un usuario");
+    expect(alert).toHaveTextContent("Username is required");
   });
 
   test("3. New user without email", async () => {
@@ -85,7 +85,7 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("Ingrese un email");
+    expect(alert).toHaveTextContent("Email is required");
   });
 
   test("4. New user without password and with full password confirmation", async () => {
@@ -96,7 +96,7 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("Ingrese una contraseña");
+    expect(alert).toHaveTextContent("Password is required");
   });
 
   test("5. New user without password and without full password confirmation", async () => {
@@ -106,7 +106,7 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("Ingrese una contraseña");
+    expect(alert).toHaveTextContent("Password is required");
   });
 
   test("6. New user without password confirmation", async () => {
@@ -117,7 +117,7 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("Reingrese su contraseña");
+    expect(alert).toHaveTextContent("Enter your password again");
   });
 
   // CAMPO OPCIONAL
@@ -145,7 +145,7 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "El campo username puede tener a lo sumo 16 caracteres"
+      "Username must be at most 16 characters long."
     );
   });
 
@@ -159,7 +159,7 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "El campo username debe tener al menos 3 caracteres"
+      "Username must be at least 3 characters long."
     );
   });
 
@@ -173,11 +173,11 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("El formato del email es incorrecto");
+    expect(alert).toHaveTextContent("The email format is incorrect");
   });
 
   // CONTRASEÑA
-  test("12. Alerta por contraseña sin mayuscula", async () => {
+  test("12. Uncapitalized password alert", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "soyunmaestro123");
@@ -187,11 +187,11 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
   });
 
-  test("13. Alerta por contraseña sin minuscula", async () => {
+  test("13. Alert for password without lower case", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "SOYUNMAESTRO123");
@@ -201,11 +201,11 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
   });
 
-  test("14. Alerta por contraseña sin numero", async () => {
+  test("14. Alert for unnumbered password", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro");
@@ -215,11 +215,11 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
   });
 
-  test("15. Alerta por contraseña con pobre longitud", async () => {
+  test("15. Poor password length alert", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soy1");
@@ -229,12 +229,12 @@ describe("Register form test", () => {
 
     const alert = await screen.findByRole("alertError");
     expect(alert).toHaveTextContent(
-      "La contraseña debe contener al menos 8 caracteres, una mayúscula, minúscula y número"
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
   });
 
   // CONFIRMAR CONTRASEÑA
-  test("16. Alerta por no coincidencia entre las contraseñas", async () => {
+  test("16. Password mismatch alert", async () => {
     userEvent.type(inputUsername, "Rocolo");
     userEvent.type(inputEmail, "lala@asdsad.com");
     userEvent.type(inputPassword, "Soyunmaestro123");
@@ -243,10 +243,10 @@ describe("Register form test", () => {
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
-    expect(alert).toHaveTextContent("Las contraseñas no coinciden");
+    expect(alert).toHaveTextContent("Passwords do not match");
   });
 
-  test("17. Error de server", async () => {
+  test("17. Server error", async () => {
     server.use(
       rest.post("http://localhost:8000/signup", async (req, res, ctx) => {
         return res.once(ctx.status(401), ctx.json({detail: "Server error"}));

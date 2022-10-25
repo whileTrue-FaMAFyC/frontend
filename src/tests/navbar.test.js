@@ -76,21 +76,3 @@ test("move to login", async () => {
 
   expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
 });
-
-test("move to register", async () => {
-  render(
-    <div>
-      <Router>
-        <App />
-      </Router>
-    </div>
-  );
-
-  expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
-
-  fireEvent.click(screen.getByTestId("toReg"));
-
-  expect.toBeInTheDocument(screen.getByText("Registro"));
-});
