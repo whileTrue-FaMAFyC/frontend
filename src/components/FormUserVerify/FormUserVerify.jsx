@@ -1,13 +1,12 @@
-import {useEffect, useState, useRef} from "react";
+import {useState} from "react";
 import {useForm, FormProvider} from "react-hook-form";
 import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
 import {useNavigate} from "react-router-dom";
-import {Form, FeedBack, Title} from "./FormUserVerify.styled";
+import {Form, FeedBack, Title, Button} from "./FormUserVerify.styled";
 
 const FormUserVerify = () => {
   const navigate = useNavigate();
-  const ref = useRef();
   const methods = useForm({mode: "all"});
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -22,14 +21,9 @@ const FormUserVerify = () => {
     }
   };
 
-  useEffect(() => {
-    if (methods.watch("code").length !== 6) return;
-    ref.current.submit();
-  }, [methods.watch("code")]);
-
   return (
     <FormProvider {...methods}>
-      <Form ref={ref} onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form onSubmit={methods.handleSubmit(onSubmit)}>
         <Title>We have sent a code to your email</Title>
         {error && (
           <FeedBack data-testid='error' color='red'>
@@ -51,6 +45,7 @@ const FormUserVerify = () => {
           required
           requiredMessage='Enter the code'
         />
+        <Button type='submit'>Send</Button>
       </Form>
     </FormProvider>
   );

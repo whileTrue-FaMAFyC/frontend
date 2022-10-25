@@ -6,6 +6,7 @@ import {FormUserVerify} from "../components";
 
 describe("Componente de verificacion de codigo", () => {
   let input;
+  let button;
   let error;
   let url = `${process.env.REACT_APP_API_KEY}verifyuser/${localStorage.getItem(
     "username"
@@ -21,6 +22,7 @@ describe("Componente de verificacion de codigo", () => {
         <FormUserVerify />
       </BrowserRouter>
     );
+    button = screen.getByRole("button");
     input = screen.getByTestId("code");
     error = screen.getByTestId("code-error");
   });
@@ -50,6 +52,7 @@ describe("Componente de verificacion de codigo", () => {
     });
 
     userEvent.type(input, verification_code);
+    userEvent.click(button);
 
     await waitFor(() => {
       expect(screen.getByTestId("success")).toHaveTextContent(successMsg);
@@ -66,6 +69,7 @@ describe("Componente de verificacion de codigo", () => {
     });
 
     userEvent.type(input, verification_code);
+    userEvent.click(button);
 
     await waitFor(() => {
       expect(mockAxios.put).toHaveBeenCalledTimes(1);
@@ -82,6 +86,7 @@ describe("Componente de verificacion de codigo", () => {
     });
 
     userEvent.type(input, verification_code);
+    userEvent.click(button);
 
     await waitFor(() => {
       expect(screen.getByTestId("error")).toHaveTextContent(notSuccessMsg2);
