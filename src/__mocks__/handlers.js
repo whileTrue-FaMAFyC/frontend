@@ -17,7 +17,7 @@ export const handlers = [
   rest.post(
     "http://localhost:8000/matches/new-match",
     async (req, res, ctx) => {
-      return res(ctx.status(201), ctx.json({status: 201}));
+      return res(ctx.status(201), ctx.json({status: 201, name: "Soyunrobot"}));
     }
   ),
   rest.post(
