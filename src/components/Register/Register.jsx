@@ -21,37 +21,11 @@ const Formulario = () => {
 
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState(null);
 
   const navigate = useNavigate();
 
-  const fileToBase64 = (file, cb) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(null, reader.result);
-    };
-    reader.onerror = function (error) {
-      cb(error, null);
-    };
-  };
-
-  const onUploadFileChange = ({target}) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
-        setFileName(target.files[0]);
-      }
-    });
-  };
-
   const onSubmit = async (data) => {
-    data.avatar = file == null ? "" : file;
-    data.avatarFilename = file == null ? "" : fileName.name;
+    const username = data.username;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -65,7 +39,7 @@ const Formulario = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-          localStorage.setItem("username", data.username);
+          localStorage.setItem("username", username);
           navigate(`/verify`);
         } else {
           setSuccess(false);
@@ -189,31 +163,6 @@ const Formulario = () => {
                   Reingrese su contraseña
                 </StyledError>
               )}
-          </StyledInputGroup>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputAvatar'>
-              Avatar
-            </label>
-            <StyledInput
-              type='file'
-              id='inputAvatar'
-              accept='.png'
-              data-testid='Avatar'
-              {...register("avatar", {
-                onChange: onUploadFileChange,
-                validate: (e) => {
-                  return (
-                    e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
-                  );
-                },
-              })}
-            />
-            {errors.avatar?.type === "validate" && (
-              <StyledError role='alertError'>
-                La extension del archivo es incorrecta, el archivo debe ser .png
-              </StyledError>
-            )}
           </StyledInputGroup>
           <StyledButton type='submit'>Enviar</StyledButton>
         </form>
