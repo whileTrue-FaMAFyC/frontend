@@ -11,13 +11,13 @@ window.alert = (e) => {
 
 describe("Botsubmit test", () => {
   test("Form completo", async () => {
-    const jsdomAlert = window.alert; // remember the jsdom alert
-    window.alert = () => {};
-    render(<Botsubmit />);
+    const submitFormSpy = jest.fn();
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    render(<Botsubmit onSubmit={submitFormSpy} />);
+
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -33,38 +33,41 @@ describe("Botsubmit test", () => {
     const succ_sub = await screen.findByRole("dialog");
 
     expect(succ_sub).toBeInTheDocument();
+    expect(screen.queryByTestId("loader")).not.toBeInTheDocument;
     expect(screen.queryByRole("no_name")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_name_size")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_name")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_code")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_avatar")).not.toBeInTheDocument;
+    expect(submitFormSpy).toHaveBeenCalledTimes(0);
   });
 
   test("form sin avatar", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Subir/i});
+    const button = screen.getByRole("button", {name: /Submit/i});
 
     userEvent.click(button);
 
     const succ_sub = await screen.findByRole("dialog");
 
     expect(succ_sub).toBeInTheDocument();
+    expect(await screen.queryByTestId("loader")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_avatar")).not.toBeInTheDocument;
   });
 
   test("Alerts campos obligatorios", async () => {
     render(<Botsubmit />);
 
-    const button = screen.getByRole("button", {name: /Subir/i});
+    const button = screen.getByRole("button", {name: /Submit/i});
 
     userEvent.click(button);
 
@@ -73,15 +76,16 @@ describe("Botsubmit test", () => {
 
     expect(error_name).toBeInTheDocument;
     expect(error_codigo).toBeInTheDocument;
+    expect(screen.queryByTestId("loader")).not.toBeInTheDocument;
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  test("Nombre invalido", async () => {
+  test("name invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -103,9 +107,9 @@ describe("Botsubmit test", () => {
   test("Codigo invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/plain"});
@@ -127,9 +131,9 @@ describe("Botsubmit test", () => {
   test("Avatar invalido", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -151,9 +155,9 @@ describe("Botsubmit test", () => {
   test("Falta codigo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/jpeg"});
 
@@ -170,12 +174,12 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  test("Falta nombre", async () => {
+  test("Falta name", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/jpg"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -193,12 +197,12 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  test("Nombre muy largo", async () => {
+  test("name muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -217,15 +221,16 @@ describe("Botsubmit test", () => {
     const invalid_name_size = await screen.findByRole("invalid_name_size");
 
     expect(invalid_name_size).toBeInTheDocument();
+    expect(screen.queryByTestId("loader")).not.toBeInTheDocument;
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
   test("Avatar muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File([new ArrayBuffer(40001)], "avatar.png", {
       type: "image/png",
@@ -249,8 +254,8 @@ describe("Botsubmit test", () => {
   test("Codigo muy largo", async () => {
     render(<Botsubmit />);
 
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var cod = new File([new ArrayBuffer(43334)], "codigo.py", {
       type: "text/x-python",
@@ -270,7 +275,6 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 
-  //Test de integracion
   test("Servidor caido", async () => {
     render(<Botsubmit />);
 
@@ -282,9 +286,9 @@ describe("Botsubmit test", () => {
         );
       })
     );
-    const inputName = screen.getByLabelText(/nombre:/i);
-    const inputAvatar = screen.getByLabelText(/avatar:/i);
-    const inputCodigo = screen.getByLabelText(/codigo:/i);
+    const inputName = screen.getByLabelText(/Name/i);
+    const inputAvatar = screen.getByLabelText(/Avatar/i);
+    const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
@@ -299,6 +303,7 @@ describe("Botsubmit test", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Internal server error"
     );
+    expect(await screen.queryByTestId("loader")).not.toBeInTheDocument;
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument;
   });
 });

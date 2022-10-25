@@ -8,6 +8,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledSuccess,
 } from "./Login.styled";
 
 const Login = () => {
@@ -18,8 +19,12 @@ const Login = () => {
   } = useForm();
 
   const [success, setSuccess] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [failure_data, setFailure_data] = useState("");
 
   const onSubmit = async (data) => {
+    setFailure_data("");
+    setSent(true);
     await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
@@ -32,22 +37,23 @@ const Login = () => {
       .then(async (response) => {
         const data = await response.json();
         if (response.status === 401) {
-          alert(data.detail);
+          setFailure_data(data.detail);
           setSuccess(false);
         } else if (response.status === 200) {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
             setSuccess(true);
           } else {
+            setFailure_data("Unknown Error");
             setSuccess(false);
           }
         } else {
-          alert("Unknown error");
+          setFailure_data("Unknown Error");
           setSuccess(false);
         }
       })
       .catch((error) => {
-        alert("Error!");
+        setFailure_data("Network Error");
         setSuccess(false);
       });
   };
@@ -74,7 +80,7 @@ const Login = () => {
             />
             {errors.username_or_email?.type === "required" && (
               <StyledError data-testid='errorUsernameOrEmailEmpty'>
-                Ingrese su username o email
+                Enter your username or email
               </StyledError>
             )}
           </StyledInputGroup>
@@ -94,13 +100,12 @@ const Login = () => {
             />
             {errors.password?.type === "pattern" && (
               <StyledError data-testid='errorPasswordNotValid'>
-                La contraseña debe contener al menos una mayuscula, minuscula y
-                numero
+                Password must contain uppercase lowercase and a number
               </StyledError>
             )}
             {errors.password?.type === "required" && (
               <StyledError data-testid='errorPasswordEmpty'>
-                Ingrese una contraseña
+                Enter your password
               </StyledError>
             )}
           </StyledInputGroup>
@@ -109,9 +114,14 @@ const Login = () => {
           </StyledButton>
         </form>
         {success && (
-          <div role='alert' data-testid='loginExitoso'>
-            Login exitoso!
-          </div>
+          <StyledSuccess role='alert' data-testid='succesfulLogin'>
+            Successful login
+          </StyledSuccess>
+        )}
+        {sent && failure_data !== "" && (
+          <StyledError role='alert' data-testid='error'>
+            {failure_data}
+          </StyledError>
         )}
         <span>
           <p data-testid='notAMemb'>Not a member?</p>

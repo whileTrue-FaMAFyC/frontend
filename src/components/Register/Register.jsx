@@ -11,7 +11,7 @@ import {
   StyledError,
 } from "./Register.style";
 
-const Formulario = () => {
+const RegisterForm = () => {
   const {
     register,
     handleSubmit,
@@ -21,37 +21,12 @@ const Formulario = () => {
 
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState(null);
 
   const navigate = useNavigate();
 
-  const fileToBase64 = (file, cb) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(null, reader.result);
-    };
-    reader.onerror = function (error) {
-      cb(error, null);
-    };
-  };
-
-  const onUploadFileChange = ({target}) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
-        setFileName(target.files[0]);
-      }
-    });
-  };
-
   const onSubmit = async (data) => {
-    data.avatar = file == null ? "" : file;
-    data.avatarFilename = file == null ? "" : fileName.name;
+    setFailure_data("");
+    const username = data.username;
     await fetch("http://localhost:8000/signup", {
       method: "POST",
       headers: {
@@ -65,7 +40,7 @@ const Formulario = () => {
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
-          localStorage.setItem("username", data.username);
+          localStorage.setItem("username", username);
           navigate(`/verify`);
         } else {
           setSuccess(false);
@@ -98,16 +73,16 @@ const Formulario = () => {
               })}
             />
             {errors.username?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un usuario</StyledError>
+              <StyledError role='alertError'>Username is required</StyledError>
             )}
             {errors.username?.type === "maxLength" && (
               <StyledError role='alertError'>
-                El campo username puede tener a lo sumo 16 caracteres
+                Username must be at most 16 characters long.
               </StyledError>
             )}
             {errors.username?.type === "minLength" && (
               <StyledError role='alertError'>
-                El campo username debe tener al menos 3 caracteres
+                Username must be at least 3 characters long.
               </StyledError>
             )}
           </StyledInputGroup>
@@ -126,11 +101,11 @@ const Formulario = () => {
             />
             {errors.email?.type === "pattern" && (
               <StyledError role='alertError'>
-                El formato del email es incorrecto
+                The email format is incorrect
               </StyledError>
             )}
             {errors.email?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un email</StyledError>
+              <StyledError role='alertError'>Email is required</StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -148,19 +123,17 @@ const Formulario = () => {
             />
             {errors.password?.type === "pattern" && (
               <StyledError role='alertError'>
-                La contraseña debe contener al menos 8 caracteres, una
-                mayúscula, minúscula y número
+                The password must contain at least 8 characters, one uppercase,
+                lowercase and number
               </StyledError>
             )}
             {errors.password?.type === "minLength" && (
               <StyledError role='alertError'>
-                La contraseña debe tener al menos 8 caracteres
+                The password must contain at least 8 characters
               </StyledError>
             )}
             {errors.password?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese una contraseña
-              </StyledError>
+              <StyledError role='alertError'>Password is required</StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -180,55 +153,30 @@ const Formulario = () => {
             />
             {errors.confirmPassword?.type === "validate" && (
               <StyledError role='alertError'>
-                Las contraseñas no coinciden
+                Passwords do not match
               </StyledError>
             )}
             {errors.confirmPassword?.type === "required" &&
               watch("password") && (
                 <StyledError role='alertError'>
-                  Reingrese su contraseña
+                  Enter your password again
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputAvatar'>
-              Avatar
-            </label>
-            <StyledInput
-              type='file'
-              id='inputAvatar'
-              accept='.png'
-              data-testid='Avatar'
-              {...register("avatar", {
-                onChange: onUploadFileChange,
-                validate: (e) => {
-                  return (
-                    e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
-                  );
-                },
-              })}
-            />
-            {errors.avatar?.type === "validate" && (
-              <StyledError role='alertError'>
-                La extension del archivo es incorrecta, el archivo debe ser .png
-              </StyledError>
-            )}
-          </StyledInputGroup>
-          <StyledButton type='submit'>Enviar</StyledButton>
+          <StyledButton type='submit'>Submit</StyledButton>
         </form>
         {success && (
           <div className='alert alert-success mt-4' role='alertSuccess'>
-            Se mandó la solicitud de registro
+            A verification email was sent
           </div>
         )}
         {failure_data !== "" ? (
           <div role='alertServer'>{failure_data}</div>
         ) : null}
         <span>
-          <p data-testid='notAMemb'>¿Ya tenes cuenta?</p>
+          <p data-testid='notAMemb'>Already have an account?</p>
           <Link to='/login' data-testid='linkToReg'>
-            Logueate
+            Login
           </Link>
         </span>
       </StyledEntryCard>
@@ -236,4 +184,4 @@ const Formulario = () => {
   );
 };
 
-export default Formulario;
+export default RegisterForm;

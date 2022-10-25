@@ -49,7 +49,6 @@ export const StyledInput = styled.input`
   width: 100%;
   outline: none;
   padding: 8px 16px;
-  border: 1px solid #e0e6e8;
   border-radius: 4px;
   font-size: 1rem;
   color: #888888;
@@ -84,6 +83,7 @@ export const EntryPage = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #fbfbfb;
+  padding: 20px;
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -94,6 +94,7 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         box-sizing: border-box;
     }
+
     body {
         font-size: 16px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
