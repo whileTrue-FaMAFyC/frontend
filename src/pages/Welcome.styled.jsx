@@ -16,6 +16,9 @@ export const StyledEntryCard = styled.div`
   width: 100%;
   max-width: 450px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 50px;
   margin-bottom: 40px;
   background-color: #252c32;
@@ -24,6 +27,7 @@ export const StyledEntryCard = styled.div`
   display: block;
   h2 {
     font-weight: 500;
+    font-size: 3em;
     margin-bottom: 50px;
   }
   span {
@@ -39,11 +43,14 @@ export const StyledEntryCard = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  width: ${(props) => (props.full ? "100%" : null)};
+  width: 100%;
+  height: 100%;
   min-width: 64px;
   border: 0;
   border-radius: 4px;
   padding: 8px 16px;
+  margin: 5px;
+
   outline: none;
   background-color: #00c8c8;
   //color: #252c32;

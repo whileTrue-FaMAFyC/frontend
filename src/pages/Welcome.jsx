@@ -11,16 +11,20 @@ const Welcome = () => {
       data-testid='home'>
       <StyledEntryCard>
         <h2>PyRobots</h2>
-        <StyledButton>
-          <Link to='/register' data-testid='linkToReg'>
-            Register
-          </Link>
-        </StyledButton>
-        <StyledButton>
-          <Link to='/login' data-testid='linkToLogin'>
-            Login
-          </Link>
-        </StyledButton>
+        <div>
+          <StyledButton>
+            <Link to='/login' data-testid='linkToLogin'>
+              Login
+            </Link>
+          </StyledButton>
+        </div>
+        <div>
+          <StyledButton>
+            <Link to='/register' data-testid='linkToReg'>
+              Register
+            </Link>
+          </StyledButton>
+        </div>
       </StyledEntryCard>
     </WelcomeImg>
   );

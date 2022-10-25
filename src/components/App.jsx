@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import Home from "../pages/Home";
+import Welcome from "../pages/Welcome";
 import {
   Login,
   ListGames,
@@ -16,7 +16,7 @@ function App() {
       <div>
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Welcome />} />
           <Route path='/register' element={<Register />} />
           <Route path='/listgames' element={<ListGames />} />
           <Route path='/botsubmit' element={<Botsubmit />} />
