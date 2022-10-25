@@ -6,7 +6,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #0f1519;
+  /*   background-color: #0f1519; */
   padding: 30px;
   gap: 30px;
 `;
