@@ -27,7 +27,7 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     setFailure_data("");
     const username = data.username;
-    await fetch("http://localhost:8000/signup", {
+    await fetch(`${process.env.REACT_APP_API_KEY}signup`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
