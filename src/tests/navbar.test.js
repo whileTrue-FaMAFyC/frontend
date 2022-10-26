@@ -13,7 +13,7 @@ import App from "../components/App";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
 // const server = setupServer(
-//   rest.post("http://localhost:8000/", (req, res, ctx) => {
+//   rest.post(`${process.env.REACT_APP_API_KEY}", (req, res, ctx) => {
 //     return res(ctx.json(fakeUserResponse));
 //   })
 // );

@@ -248,7 +248,7 @@ describe("Register form test", () => {
 
   test("17. Server error", async () => {
     server.use(
-      rest.post("http://localhost:8000/signup", async (req, res, ctx) => {
+      rest.post(`${process.env.REACT_APP_API_KEY}signup", async (req, res, ctx) => {
         return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
       })
     );

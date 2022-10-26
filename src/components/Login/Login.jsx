@@ -25,7 +25,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     setFailure_data("");
     setSent(true);
-    await fetch("http://localhost:8000/login", {
+    await fetch(`${process.env.REACT_APP_API_KEY}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

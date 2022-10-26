@@ -167,7 +167,7 @@ test("network error", async () => {
     </Router>
   );
   server.use(
-    rest.post("http://localhost:8000/login", (req, res, ctx) => {
+    rest.post(`${process.env.REACT_APP_API_KEY}login", (req, res, ctx) => {
       return res(ctx.status(500), ctx.json({message: "Internal server error"}));
     })
   );
@@ -196,7 +196,7 @@ test("invalid credentials", async () => {
     </Router>
   );
   server.use(
-    rest.post("http://localhost:8000/login", (req, res, ctx) => {
+    rest.post(`${process.env.REACT_APP_API_KEY}login", (req, res, ctx) => {
       return res(ctx.status(401), ctx.json({message: "Unknown user"}));
     })
   );

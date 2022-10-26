@@ -279,7 +279,7 @@ describe("Botsubmit test", () => {
     render(<Botsubmit />);
 
     server.use(
-      rest.post("http://localhost:8000/create-bot", (req, res, ctx) => {
+      rest.post(`${process.env.process.env.REACT_APP_API_KEY}create-bot", (req, res, ctx) => {
         return res.once(
           ctx.status(500),
           ctx.json({detail: "Internal server error"})
