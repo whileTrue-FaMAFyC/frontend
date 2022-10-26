@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 import {
   StyledButton,
   StyledEntryCard,
@@ -21,10 +22,14 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const [sent, setSent] = useState(false);
   const [failure_data, setFailure_data] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setFailure_data("");
     setSent(true);
+    setLoading(false);
     await fetch("http://localhost:8000/login", {
       method: "POST",
       headers: {
@@ -35,6 +40,7 @@ const Login = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 401) {
           setFailure_data(data.detail);
@@ -43,6 +49,7 @@ const Login = () => {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
             setSuccess(true);
+            navigate("/");
           } else {
             setFailure_data("Unknown Error");
             setSuccess(false);
@@ -55,6 +62,7 @@ const Login = () => {
       .catch((error) => {
         setFailure_data("Network Error");
         setSuccess(false);
+        setLoading(false);
       });
   };
 
@@ -73,6 +81,7 @@ const Login = () => {
               id='inputUsernameOrEmail'
               data-testid='inputUsernameOrEmail'
               type='text'
+              autoComplete='off'
               placeholder='your username or email'
               {...register("username_or_email", {
                 required: true,
@@ -109,9 +118,15 @@ const Login = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='login' role='button' data-testid='loginButton'>
-            Login
-          </StyledButton>
+          {loading ? (
+            <div>
+              <CircularProgress data-testid='loader' />
+            </div>
+          ) : (
+            <StyledButton type='login' role='button' data-testid='loginButton'>
+              Login
+            </StyledButton>
+          )}
         </form>
         {success && (
           <StyledSuccess role='alert' data-testid='succesfulLogin'>
