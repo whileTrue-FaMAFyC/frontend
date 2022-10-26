@@ -23,7 +23,7 @@ export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_KEY}matches/new-match`,
     async (req, res, ctx) => {
-      return res(ctx.status(201), ctx.json({status: 201}));
+      return res(ctx.status(201), ctx.json({status: 201, name: "Soyunrobot"}));
     }
   ),
   rest.post(

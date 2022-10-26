@@ -9,9 +9,9 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-} from "./GameConfig.styled.js";
+} from "./MatchConfig.styled.js";
 
-const FormPartidaConfig = () => {
+const MatchConfig = () => {
   const {
     register,
     handleSubmit,
@@ -37,6 +37,7 @@ const FormPartidaConfig = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    setFailure_data("");
     const token = await localStorage.getItem("user");
     await fetch(`${process.env.REACT_APP_API_KEY}matches/new-match`, {
       method: "POST",
@@ -239,4 +240,4 @@ const FormPartidaConfig = () => {
   );
 };
 
-export default FormPartidaConfig;
+export default MatchConfig;

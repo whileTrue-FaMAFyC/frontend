@@ -55,8 +55,8 @@ const RegisterForm = () => {
 
   return (
     <EntryPage>
-      <StyledEntryCard className='register'>
-        <h1>Register</h1>
+      <StyledEntryCard className='registro'>
+        <h2>Registro</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputUsername'>

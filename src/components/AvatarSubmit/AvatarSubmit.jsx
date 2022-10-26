@@ -62,7 +62,6 @@ const AvatarSubmit = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     setFailure_data("");
     data.avatar = file == null ? "" : file;
     const username = localStorage.getItem("username");
