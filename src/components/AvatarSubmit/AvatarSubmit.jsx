@@ -22,7 +22,6 @@ const AvatarSubmit = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const navigate = useNavigate();
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
   const fileToBase64 = (file, cb) => {
@@ -37,20 +36,26 @@ const AvatarSubmit = () => {
   };
 
   const onUploadFileChange = ({target}) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
-        setFileName(target.files[0]);
+    if (target !== null) {
+      if (target.files < 1 || !target.validity.valid) {
+        return;
       }
-    });
+      if (target.files[0] !== undefined) {
+        fileToBase64(target.files[0], (err, result) => {
+          if (result) {
+            setFile(result);
+            setFileName(target.files[0]);
+          }
+        });
+      } else {
+        setFileName("");
+        setFile("");
+      }
+    }
   };
 
   const onChangePicture = (e) => {
-    if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
+    if (e?.target.files[0]) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -77,7 +82,7 @@ const AvatarSubmit = () => {
         const data = await response.json();
         if (response.status === 200) {
           setSuccess(true);
-          navigate(`/`);
+          navigate(`/login`);
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
@@ -117,14 +122,21 @@ const AvatarSubmit = () => {
             accept='image/*'
             data-testid='Avatar'
             {...register("avatar", {
-              onChange: (avatar) => {
-                onChangePicture(avatar);
-                onUploadFileChange(avatar);
+              onChange: (file) => {
+                onUploadFileChange(file);
+                if (
+                  file?.target.files[0] !== undefined &&
+                  file?.target.files[0] !== null
+                ) {
+                  onChangePicture(file);
+                } else {
+                  setImgData(null);
+                }
               },
               validate: (file) => {
                 return (
                   file.length === 0 ||
-                  (new RegExp("image/*").test(file[0].type) &&
+                  (new RegExp(".*.(jpe?g|png)$").test(file[0].name) &&
                     file[0].size < 40000)
                 );
               },
@@ -132,7 +144,8 @@ const AvatarSubmit = () => {
           />
           {errors.avatar?.type === "validate" && (
             <StyledError role='alertError'>
-              The file must be an image of at most 40KB
+              The file must be an image of extension .png, .jpg or .jpeg from at
+              most 40KB.
             </StyledError>
           )}
           <StyledButton type='submit'>Submit</StyledButton>

@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 import {
   Container,
   Title,
@@ -11,8 +12,9 @@ import {
   Button,
 } from "./ListGames.styled";
 
-const ListGamesView = ({games, refresh}) => {
+const ListGamesView = ({games, refresh, loading}) => {
   const navigate = useNavigate();
+
   return (
     <Container>
       <Title>Match list</Title>
@@ -29,6 +31,13 @@ const ListGamesView = ({games, refresh}) => {
           </Row>
         </Thead>
         <Tbody>
+          {loading && (
+            <Feedback>
+              <Column>
+                <CircularProgress data-testid='list-progress' />
+              </Column>
+            </Feedback>
+          )}
           {games.length < 1 && (
             <Feedback>
               <Column>No games availables</Column>

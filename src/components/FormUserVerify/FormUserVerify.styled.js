@@ -1,27 +1,30 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  width: 300px;
-  padding: 25px;
+  width: 350px;
+  padding: 50px 30px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
   background-color: #252c32;
+  /*   background-color: #0f1519; */
+  /*   box-shadow: 0px 0px 7px 1px rgb(39, 147, 198); */
+  gap: 10px;
 `;
 
 export const Title = styled.p`
   color: #fff;
   font-weight: 500;
   font-size: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 `;
 
 export const Button = styled.button`
   width: 100%;
   height: 30px;
+  margin-top: 10px;
   outline: none;
   border: none;
   /*   background-color: rgb(0, 100, 100); */
@@ -45,5 +48,10 @@ export const Button = styled.button`
 `;
 
 export const FeedBack = styled.p`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: ${({color}) => color};
+  margin-bottom: 10px;
 `;

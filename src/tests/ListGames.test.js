@@ -54,14 +54,17 @@ describe("Listar partidas", () => {
     const buttonRefresh = screen.getByRole("button", {name: "Refresh"});
 
     userEvent.click(buttonRefresh);
+    const progress = screen.getByTestId("list-progress");
 
+    expect(progress).toBeInTheDocument();
     await waitFor(() => {
+      expect(progress).not.toBeInTheDocument();
       expect(mockAxios.get).toHaveBeenCalledTimes(2);
       gamesMock.forEach(({name}) => {
         expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
 
-    screen.debug();
+    // screen.debug();
   });
 });

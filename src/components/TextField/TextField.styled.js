@@ -9,13 +9,11 @@ export const InputContainer = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  /*   height: 50px; */
   padding: 8px 16px;
   /*   background-color: #0a0e13; */
-  background-color: #252c32;
   outline: none;
 
-  border: 1px solid #2793c6;
+  /*   border: 1px solid #2793c6; */
   border: 1px solid #00c8c8;
   border-radius: 4px;
   color: #fff;
@@ -28,6 +26,8 @@ export const Input = styled.input`
     border: 1px solid #00c8c8;
   }
   font-size: 16px;
+  /*   background-color: #0f1519; */
+  background-color: #252c32;
 `;
 
 export const InputError = styled.p`

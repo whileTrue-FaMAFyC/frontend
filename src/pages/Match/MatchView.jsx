@@ -9,6 +9,7 @@ import {
   MatchInfo,
   PlayersInfo,
   Wrapper,
+  ResultsWrapper,
   StyledButton,
   StyledError,
   StyledSelect,
@@ -170,12 +171,13 @@ const MatchView = ({match, match_id}) => {
 
               <StyledButton
                 type='button'
-                onClick={() =>
+                onClick={() => {
                   leaveMatch(
                     localStorage.getItem("user"),
                     localStorage.getItem("match_id")
-                  )
-                }
+                  );
+                  match.im_in = false;
+                }}
                 data-testid='leaveButton'
                 enabledColor={!match.im_in}
                 disabled={!match.im_in}>
@@ -194,17 +196,23 @@ const MatchView = ({match, match_id}) => {
             />
           )}
         </Wrapper>
-      </SuperWrapper>
 
-      {match.results.length > 0 &&
-        match.results.map((winner, index) => (
-          <div key={index}>
-            <p data-testid='Results'>RESULTADOS</p>
-            <p data-testid='user_winner'>{winner.username}</p>
-            <p>{winner.robot_name}</p>
-          </div>
-        ))}
-      {match.started && <p>start</p>}
+        {match.results.length > 0 && (
+          <ResultsWrapper>
+            <div>
+              {match.results.length === 1 && <h2>Winner</h2>}
+              {match.results.length > 1 && <h2>Winners</h2>}
+              {match.results.map((winner, index) => (
+                <div key={index}>
+                  <p data-testid='user_winner'>{winner.username}</p>
+                </div>
+              ))}
+            </div>
+          </ResultsWrapper>
+        )}
+
+        {match.started && <p style={{color: "#252c32"}}>start</p>}
+      </SuperWrapper>
     </Container>
   );
 };

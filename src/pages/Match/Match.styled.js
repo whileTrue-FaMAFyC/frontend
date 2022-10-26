@@ -145,3 +145,13 @@ export const StyledInput = styled.input`
     color: #0f1519;
   }
 `;
+
+export const ResultsWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  align-self: center;
+  margin: 20px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  padding: 5px;
+`;
