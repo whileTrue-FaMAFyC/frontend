@@ -20,18 +20,15 @@ const SimCreate = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [robotsNames, setRobotsNames] = useState([]);
-  const [selected, setSelected] = useState([]);
-  const [showRobot3, setShowRobot3] = useState(true);
-  const [showRobot4, setShowRobot4] = useState(true);
-
-  const [robots, setRobots] = useState([]);
+  const [showRobot3, setShowRobot3] = useState(false);
+  const [showRobot4, setShowRobot4] = useState(false);
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
     } catch (error) {
-      console.log("An error occurred!");
+      setFailure_data(error);
     }
   };
 
@@ -42,7 +39,7 @@ const SimCreate = () => {
   const onSubmit = async (data) => {
     setFailure_data("");
     const token = localStorage.getItem("user");
-    await fetch("https://63446b7ddcae733e8fdef696.mockapi.io/:simCreate", {
+    await fetch("https://63446b7ddcae733e8fdef696.mockapi.io/simCreate", {
       method: "POST",
       headers: {
         authorization: `${token}`,
@@ -82,7 +79,7 @@ const SimCreate = () => {
             <select
               id='inputRobot1'
               data-testid='nameRobot1'
-              {...register("creator_robot", {required: true})}>
+              {...register("robot1", {required: true})}>
               {robotsNames.map((a) => (
                 <option key={a.name} value={a.name}>
                   {a.name}
@@ -103,7 +100,10 @@ const SimCreate = () => {
             <select
               id='inputRobot2'
               data-testid='nameRobot2'
-              {...register("creator_robot", {required: true})}>
+              {...register("robot2", {
+                required: true,
+                onChange: () => setShowRobot3(true),
+              })}>
               {robotsNames.map((a) => (
                 <option key={a.name} value={a.name}>
                   {a.name}
@@ -117,29 +117,28 @@ const SimCreate = () => {
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          {!showRobot3 ? (
+          {showRobot3 ? (
             <StyledInputGroup>
               <label className='form-label' htmlFor='inputRobot3'>
                 Robot 3:
               </label>
               <select
-                hidden={showRobot3}
                 id='inputRobot3'
                 data-testid='nameRobot3'
-                {...register("creator_robot")}>
+                {...register("robot3", {onChange: () => setShowRobot4(true)})}>
                 {robotsNames.map((a) => (
                   <option key={a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}
                 <option key={""} value=''>
-                  * Choose a robot *
+                  * No robot *
                 </option>
               </select>
             </StyledInputGroup>
           ) : null}
 
-          {!showRobot4 ? (
+          {showRobot4 ? (
             <StyledInputGroup>
               <label className='form-label' htmlFor='inputRobot4'>
                 Robot 4:
@@ -147,26 +146,18 @@ const SimCreate = () => {
               <select
                 id='inputRobot4'
                 data-testid='nameRobot4'
-                {...register("creator_robot")}>
+                {...register("robot4")}>
                 {robotsNames.map((a) => (
                   <option key={a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}
                 <option key={""} value=''>
-                  * Choose a robot *
+                  * No robot *
                 </option>
               </select>
             </StyledInputGroup>
           ) : null}
-
-          <StyledButton
-            type='button'
-            onClick={() => {
-              !showRobot3 ? setShowRobot4(false) : setShowRobot3(false);
-            }}>
-            Add bot
-          </StyledButton>
 
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_rounds'>
@@ -199,15 +190,12 @@ const SimCreate = () => {
         </form>
 
         {success && (
-          <div
-            className='alert alert-success mt-4'
-            role='alertSuccess'
-            data-testid='exito'>
+          <div className='alert alert-success mt-4' data-testid='success'>
             The simulation is about to start!
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <div data-testid='alertServer'>{failure_data}</div>
         ) : null}
       </StyledEntryCard>
     </EntryPage>
