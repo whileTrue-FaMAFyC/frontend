@@ -1,7 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
-import {MultiSelect} from "react-multi-select-component";
 import {
   StyledButton,
   StyledEntryCard,
@@ -22,18 +21,15 @@ const SimCreate = () => {
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [robotsNames, setRobotsNames] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [showRobot3, setShowRobot3] = useState(true);
+  const [showRobot4, setShowRobot4] = useState(true);
 
   const [robots, setRobots] = useState([]);
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
-      setRobots(
-        response.data.map((a) => {
-          return {label: `${a.name}`, value: `${a.name}`};
-        })
-      );
-      console.log("Executed");
+      setRobotsNames(response.data);
     } catch (error) {
       console.log("An error occurred!");
     }
@@ -80,23 +76,98 @@ const SimCreate = () => {
         <h2>Create simulation</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
-            <label>Robots:</label>
-            <MultiSelect
-              options={robots}
-              value={selected}
-              onChange={setSelected}
-              // {...register("robots", {
-              //   required: true,
-              //   onChange: (bots) => {
-              //     console.log(bots);
-              //   },
-              // })}
-              labelledBy='Select robots'
-            />
-            {errors.robots?.type === "required" && (
-              <StyledError role='alertError'>Robots are required.</StyledError>
+            <label className='form-label' htmlFor='inputRobot1'>
+              Robot 1:
+            </label>
+            <select
+              id='inputRobot1'
+              data-testid='nameRobot1'
+              {...register("creator_robot", {required: true})}>
+              {robotsNames.map((a) => (
+                <option key={a.name} value={a.name}>
+                  {a.name}
+                </option>
+              ))}
+              <option key={""} value=''>
+                * Choose a robot *
+              </option>
+            </select>
+            {errors.creator_robot?.type === "required" && (
+              <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
+          <StyledInputGroup>
+            <label className='form-label' htmlFor='inputRobot2'>
+              Robot 2:
+            </label>
+            <select
+              id='inputRobot2'
+              data-testid='nameRobot2'
+              {...register("creator_robot", {required: true})}>
+              {robotsNames.map((a) => (
+                <option key={a.name} value={a.name}>
+                  {a.name}
+                </option>
+              ))}
+              <option key={""} value=''>
+                * Choose a robot *
+              </option>
+            </select>
+            {errors.creator_robot?.type === "required" && (
+              <StyledError role='alertError'>Robot is required.</StyledError>
+            )}
+          </StyledInputGroup>
+          {!showRobot3 ? (
+            <StyledInputGroup>
+              <label className='form-label' htmlFor='inputRobot3'>
+                Robot 3:
+              </label>
+              <select
+                hidden={showRobot3}
+                id='inputRobot3'
+                data-testid='nameRobot3'
+                {...register("creator_robot")}>
+                {robotsNames.map((a) => (
+                  <option key={a.name} value={a.name}>
+                    {a.name}
+                  </option>
+                ))}
+                <option key={""} value=''>
+                  * Choose a robot *
+                </option>
+              </select>
+            </StyledInputGroup>
+          ) : null}
+
+          {!showRobot4 ? (
+            <StyledInputGroup>
+              <label className='form-label' htmlFor='inputRobot4'>
+                Robot 4:
+              </label>
+              <select
+                id='inputRobot4'
+                data-testid='nameRobot4'
+                {...register("creator_robot")}>
+                {robotsNames.map((a) => (
+                  <option key={a.name} value={a.name}>
+                    {a.name}
+                  </option>
+                ))}
+                <option key={""} value=''>
+                  * Choose a robot *
+                </option>
+              </select>
+            </StyledInputGroup>
+          ) : null}
+
+          <StyledButton
+            type='button'
+            onClick={() => {
+              !showRobot3 ? setShowRobot4(false) : setShowRobot3(false);
+            }}>
+            Add bot
+          </StyledButton>
+
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_rounds'>
               Number of rounds:
@@ -123,26 +194,16 @@ const SimCreate = () => {
               </StyledError>
             )}
           </StyledInputGroup>
+
           <StyledButton type='submit'>Create</StyledButton>
         </form>
-
-        {selected && (
-          <div style={{marginTop: 20, lineHeight: "25px"}}>
-            <div>
-              <b>Robots selected</b>
-              {selected.map((x) => (
-                <li key={x.label}>{x.value}</li>
-              ))}
-            </div>
-          </div>
-        )}
 
         {success && (
           <div
             className='alert alert-success mt-4'
             role='alertSuccess'
             data-testid='exito'>
-            The match was created successfully.
+            The simulation is about to start!
           </div>
         )}
         {failure_data !== "" ? (
