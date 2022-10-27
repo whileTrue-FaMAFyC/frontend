@@ -5,7 +5,7 @@ export const ContainerStyle = styled.div`
   width: 200px;
   background-color: #e0e0d0;
   border-radius: 50px;
-  margin: 50px;
+  margin: 5px;
   display: table;
 `;
 
@@ -27,4 +27,10 @@ export const LabelStyles = styled.span`
   color: white;
   display: table-cell;
   vertical-align: middle;
+`;
+
+export const Name = styled.p`
+  font-size: 15px;
+  padding: 3px;
+  color: black;
 `;

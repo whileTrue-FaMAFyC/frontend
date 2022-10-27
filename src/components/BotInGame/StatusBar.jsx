@@ -1,15 +1,23 @@
-import {ContainerStyle, FillerStyles, LabelStyles} from "./StatusBar.styled";
+import {
+  ContainerStyle,
+  FillerStyles,
+  LabelStyles,
+  Name,
+} from "./StatusBar.styled";
 
-const ProgressBar = (props) => {
-  const {bgcolor, completed} = props;
+const StatusBar = (props) => {
+  const {bgcolor, completed, name} = props;
 
   return (
-    <ContainerStyle>
-      <FillerStyles width={completed} bgcolor={bgcolor}>
-        <LabelStyles>{`${completed}`}</LabelStyles>
-      </FillerStyles>
-    </ContainerStyle>
+    <div>
+      <Name>{name}</Name>
+      <ContainerStyle>
+        <FillerStyles width={completed} bgcolor={bgcolor}>
+          <LabelStyles>{`${completed}`}</LabelStyles>
+        </FillerStyles>
+      </ContainerStyle>
+    </div>
   );
 };
 
-export default ProgressBar;
+export default StatusBar;
