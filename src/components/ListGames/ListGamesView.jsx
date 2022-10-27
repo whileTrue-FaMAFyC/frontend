@@ -10,6 +10,12 @@ import {
 } from "./ListGames.styled";
 
 const ListGamesView = ({games}) => {
+
+  const handleClick = (creator_user, match_name) => {
+    const ws = new WebSocket(`ws://localhost:8000/ws/join-lobby/${creator_user}/${match_name}`,
+    `${localStorage.getItem("user")}`)
+    ws.send(creator_user)
+  }
   return (
     <Container>
       <Title>Game list</Title>
@@ -30,7 +36,7 @@ const ListGamesView = ({games}) => {
           )}
           {games.map(
             ({match_id, creator_user, max_players, name, robots_joined}) => (
-              <Row key={match_id} data-testid='row'>
+              <Row key={match_id} data-testid='row' onClick={() =>handleClick(creator_user, name)}>
                 <Column>{name}</Column>
                 <Column>{creator_user.username}</Column>
                 <Column>{max_players}</Column>
