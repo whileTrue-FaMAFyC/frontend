@@ -25,6 +25,9 @@ function Navbar({children}) {
       <NavItemLink to='/botInGame' data-testid='botInGame'>
         Bot In Game
       </NavItemLink>
+      <NavItemLink to='/simCreate' data-testid='simCreate'>
+        Sim Create
+      </NavItemLink>
     </StyledNavbar>
   );
 }

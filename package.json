@@ -23,6 +23,7 @@
     "react-dom": "^18.2.0",
     "react-emotion": "^10.0.0",
     "react-hook-form": "^7.37.0",
+    "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.0",
     "styled-components": "^5.3.6",
