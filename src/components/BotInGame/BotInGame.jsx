@@ -1,37 +1,65 @@
 import {ReactComponent as Bot} from "./robot-line.svg";
-import {motion} from "framer-motion";
-import {EntryPage, StyledBoard} from "./Board.style";
-import {useEffect} from "react";
-import {useCycle} from "framer-motion";
+import {Robot, StyledBoard, EntryPage, RedRocket} from "./Board.style";
+import React, {useEffect, useState} from "react";
 
-const BotInGame = () => {
-  const [animation, cycleAnimation] = useCycle("animationOne");
-
-  useEffect(() => {
-    setTimeout(() => {
-      cycleAnimation();
-    }, 1000);
-  }, [cycleAnimation]);
-
-  const PlaneVariants = {
-    animationOne: {
-      x: [0, 300, 300, 0, 0],
-      y: [0, 0, 300, 300, 0],
-      transition: {
-        duration: 5,
-      },
+const Board = (props) => {
+  const [coordinates1, setCoordinates1] = useState([
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
     },
-  };
+  ]);
+  const [coordinates2, setCoordinates2] = useState({
+    x: Math.floor(Math.random() * 100) + 1,
+    y: Math.floor(Math.random() * 100),
+  });
+  const [coordinatesRocket1, setCoordinatesRocket1] = useState([
+    {
+      x: 100,
+      y: 100,
+    },
+    {
+      x: 50,
+      y: 50,
+    },
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
+    },
+  ]);
+  let i = 0;
+  useEffect(() => {
+    setInterval(() => {
+      console.log(i);
+      setCoordinates1({
+        x: Math.floor(Math.random() * 100) + 1,
+        y: Math.floor(Math.random() * 100),
+      });
+      setCoordinates2({
+        x: Math.floor(Math.random() * 100) + 1,
+        y: Math.floor(Math.random() * 100),
+      });
+      setCoordinatesRocket1({
+        x: coordinatesRocket1[i].x,
+        y: coordinatesRocket1[i].y,
+      });
+      i++;
+    }, 2000);
+  }, []);
 
   return (
     <EntryPage>
-      <StyledBoard data-testid='board'>
-        <motion.div variants={PlaneVariants} animate={animation}>
-          <Bot data-testid='robot' />
-        </motion.div>
+      <StyledBoard>
+        <Robot coordinates={coordinates1}>
+          <Bot />
+        </Robot>
+        <Robot coordinates={coordinates2}>
+          <Bot />
+        </Robot>
+        <RedRocket coordinates={coordinatesRocket1} />
       </StyledBoard>
     </EntryPage>
   );
 };
 
-export default BotInGame;
+export default Board;
