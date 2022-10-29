@@ -7,11 +7,113 @@ import {
   Navbar,
   Botsubmit,
   GameConfig,
-  BotInGame,
+  Simulation,
   AvatarSubmit,
 } from "../components";
 import Verify from "../pages/Verify/Verify";
 import ListMatches from "../pages/ListMatches/ListMatches";
+
+const props = {
+  names: ["Wallee", "Eva", "Rocoloco"],
+  simulation: [
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+    {
+      coordinates: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100),
+        },
+      ],
+    },
+  ],
+};
 
 function App() {
   return (
@@ -26,7 +128,7 @@ function App() {
           <Route path='/botsubmit' element={<Botsubmit />} />
           <Route path='/gameconfig' element={<GameConfig />} />
           <Route path='/verify' element={<Verify />} />
-          <Route path='/botInGame' element={<BotInGame />} />
+          <Route path='/simulation' element={<Simulation props={props} />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
         </Routes>
       </div>
