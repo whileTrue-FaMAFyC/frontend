@@ -1,5 +1,11 @@
 import {ReactComponent as Bot} from "./robot-line.svg";
-import {Robot, StyledBoard, EntryPage, RedRocket} from "./Board.style";
+import {
+  Robot,
+  StyledBoard,
+  EntryPage,
+  RedRocket,
+  RedCross,
+} from "./Board.style";
 import React, {useEffect, useState} from "react";
 
 const Board = (props) => {
@@ -57,6 +63,10 @@ const Board = (props) => {
           <Bot />
         </Robot>
         <RedRocket coordinates={coordinatesRocket1} />
+        <RedCross
+          coordinates={coordinatesRocket1}
+          estado={coordinatesRocket1}
+        />
       </StyledBoard>
     </EntryPage>
   );

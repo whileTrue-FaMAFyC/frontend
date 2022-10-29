@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Rocket} from "@styled-icons/entypo";
+import {Rocket, Cross} from "@styled-icons/entypo";
 
 export const StyledBoard = styled.div`
   position: relative;
@@ -36,6 +36,17 @@ export const RedRocket = styled(Rocket)`
   position: absolute;
   left: ${(props) => `${props.coordinates.x}%`};
   top: ${(props) => `${props.coordinates.y}%`};
+  border-radius: inherit;
+  transition: 1s ease-in-out;
+`;
+
+export const RedCross = styled(Cross)`
+  color: Red;
+  height: 10%;
+  position: absolute;
+  left: ${(props) => `${props.coordinates.x}%`};
+  top: ${(props) => `${props.coordinates.y}%`};
+  visibility: ${(props) => `${props.estado}`};
   border-radius: inherit;
   transition: 1s ease-in-out;
 `;
