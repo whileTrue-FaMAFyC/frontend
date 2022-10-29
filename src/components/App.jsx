@@ -4,13 +4,14 @@ import {
   Register,
   Botsubmit,
   GameConfig,
+  Simulation,
   AvatarSubmit,
   RobotsLibrary,
   SimCreate,
   Navbar,
 } from "../components";
-import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
-import PasswordRestore from "./PasswordRestore/PasswordRestore";
+import Verify from "../pages/Verify/Verify";
+import ListMatches from "../pages/ListMatches/ListMatches";
 
 function App() {
   return (
