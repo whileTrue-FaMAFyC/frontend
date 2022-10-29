@@ -29,6 +29,14 @@ export const Button = styled.button`
     background-color: #00c8c8;
     color: #fff;
   }
+
+  background: rgb(39, 147, 198);
+  background: linear-gradient(
+    90deg,
+    rgba(39, 147, 198, 1) 25%,
+    rgba(24, 172, 212, 1) 76%,
+    rgba(15, 188, 222, 1) 100%
+  );
 `;
 
 export const FeedBack = styled.p`
