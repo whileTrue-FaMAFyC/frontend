@@ -26,4 +26,10 @@ export const handlers = [
       return res(ctx.json({status: 200, success: true}));
     }
   ),
+  rest.post(
+    "https://63446b7ddcae733e8fdef696.mockapi.io/simCreate",
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
+    }
+  ),
 ];

@@ -8,6 +8,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledSuccess,
 } from "./SimCreate.styled.js";
 
 const SimCreate = () => {
@@ -63,7 +64,7 @@ const SimCreate = () => {
       .catch((error) => {
         alert(error);
         setSuccess(false);
-        setFailure_data(data.detail);
+        setFailure_data("Network error");
       });
   };
 
@@ -80,17 +81,19 @@ const SimCreate = () => {
               id='inputRobot1'
               data-testid='nameRobot1'
               {...register("robot1", {required: true})}>
+              <option key={"inputRobot1" + ""} value=''>
+                * Choose a robot *
+              </option>
               {robotsNames.map((a) => (
-                <option key={a.name} value={a.name}>
+                <option key={"inputRobot1_" + a.name} value={a.name}>
                   {a.name}
                 </option>
               ))}
-              <option key={""} value=''>
-                * Choose a robot *
-              </option>
             </select>
-            {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Robot is required.</StyledError>
+            {errors.robot1?.type === "required" && (
+              <StyledError data-testid='requiredRobot1'>
+                Robot is required.
+              </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -104,17 +107,19 @@ const SimCreate = () => {
                 required: true,
                 onChange: () => setShowRobot3(true),
               })}>
+              <option key={"inputRobot2_" + ""} value=''>
+                * Choose a robot *
+              </option>
               {robotsNames.map((a) => (
-                <option key={a.name} value={a.name}>
+                <option key={"inputRobot2_" + a.name} value={a.name}>
                   {a.name}
                 </option>
               ))}
-              <option key={""} value=''>
-                * Choose a robot *
-              </option>
             </select>
-            {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Robot is required.</StyledError>
+            {errors.robot2?.type === "required" && (
+              <StyledError data-testid='requiredRobot2'>
+                Robot is required.
+              </StyledError>
             )}
           </StyledInputGroup>
           {showRobot3 ? (
@@ -126,14 +131,14 @@ const SimCreate = () => {
                 id='inputRobot3'
                 data-testid='nameRobot3'
                 {...register("robot3", {onChange: () => setShowRobot4(true)})}>
+                <option key={"inputRobot3_" + ""} value=''>
+                  * No robot *
+                </option>
                 {robotsNames.map((a) => (
-                  <option key={a.name} value={a.name}>
+                  <option key={"inputRobot3_" + a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}
-                <option key={""} value=''>
-                  * No robot *
-                </option>
               </select>
             </StyledInputGroup>
           ) : null}
@@ -147,14 +152,14 @@ const SimCreate = () => {
                 id='inputRobot4'
                 data-testid='nameRobot4'
                 {...register("robot4")}>
+                <option key={"inputRobot4_" + ""} value=''>
+                  * No robot *
+                </option>
                 {robotsNames.map((a) => (
-                  <option key={a.name} value={a.name}>
+                  <option key={"inputRobot4_" + a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}
-                <option key={""} value=''>
-                  * No robot *
-                </option>
               </select>
             </StyledInputGroup>
           ) : null}
@@ -175,27 +180,29 @@ const SimCreate = () => {
               })}
             />
             {errors.num_rounds?.type === "required" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='requiredNRounds'>
                 Number of rounds is required.
               </StyledError>
             )}
             {errors.num_rounds?.type === "validate" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='valNRounds'>
                 Enter an integer between 1 and 10000.
               </StyledError>
             )}
           </StyledInputGroup>
 
-          <StyledButton type='submit'>Create</StyledButton>
+          <StyledButton data-testid='button' type='submit'>
+            Create
+          </StyledButton>
         </form>
 
         {success && (
-          <div className='alert alert-success mt-4' data-testid='success'>
+          <StyledSuccess data-testid='success'>
             The simulation is about to start!
-          </div>
+          </StyledSuccess>
         )}
         {failure_data !== "" ? (
-          <div data-testid='alertServer'>{failure_data}</div>
+          <StyledError data-testid='failure'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
     </EntryPage>
