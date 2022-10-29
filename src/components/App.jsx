@@ -9,7 +9,7 @@ import {
   GameConfig,
   BotInGame,
   AvatarSubmit,
-  ShowRobots,
+  RobotsLibrary,
 } from "../components";
 import Verify from "../pages/Verify/Verify";
 import ListMatches from "../pages/ListMatches/ListMatches";
@@ -29,7 +29,7 @@ function App() {
           <Route path='/verify' element={<Verify />} />
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
-          <Route path='/showrobots' element={<ShowRobots />} />
+          <Route path='/library' element={<RobotsLibrary />} />
         </Routes>
       </div>
     </div>

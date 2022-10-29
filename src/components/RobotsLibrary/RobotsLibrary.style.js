@@ -1,4 +1,6 @@
 import styled, {createGlobalStyle} from "styled-components";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
@@ -88,11 +90,17 @@ export const StyledSuccess = styled.p`
 `;
 
 export const EntryPage = styled.div`
-  display: flex;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
   background-color: #0f1519;
+  text-align: center;
+  padding: 30px;
+  h2 {
+    font-weight: 500;
+    top: 150px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
