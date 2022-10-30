@@ -9,9 +9,9 @@ const StatusBar = (props) => {
   const {bgcolor, completed, name} = props;
 
   return (
-    <div>
-      <Name>{name}</Name>
-      <ContainerStyle>
+    <div data-testid='name-and-bar'>
+      <Name data-testid='name'>{name}</Name>
+      <ContainerStyle data-testid='bar'>
         <FillerStyles width={completed} bgcolor={bgcolor}>
           <LabelStyles>{`${completed}`}</LabelStyles>
         </FillerStyles>
