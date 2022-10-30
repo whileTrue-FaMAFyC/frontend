@@ -16,7 +16,7 @@ export const Title = styled.p`
 `;
 
 export const Button = styled.button`
-  width: 50%;
+  width: 100%;
   height: 30px;
   outline: none;
   border: none;

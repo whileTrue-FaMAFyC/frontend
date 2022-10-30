@@ -1,21 +1,12 @@
 import {useEffect, useState} from "react";
-import {joinGame} from "../../services";
+import {useMatch} from "../../contexts/MatchContext";
 import {Container, Button} from "./Match.styled";
-import useMatch from "../../hooks/useMatch";
 
 const Match = () => {
-  const {dispatch, match} = useMatch();
+  const {match, dispatch} = useMatch();
   const [socket, setSocket] = useState(
     !match.results && new WebSocket(process.env.REACT_APP_WEB_SOCKET)
   );
-
-  const handleJoinGame = async () => {
-    try {
-      await joinGame(localStorage.getItem("user"));
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     socket.onmessage = (e) => {
@@ -23,7 +14,7 @@ const Match = () => {
       dispatch({type: data.action, payload: data});
     };
 
-    return () => socket.close(1001, "Exit");
+    return () => socket.close(1000, "Exit");
   }, [socket]);
 
   return (
