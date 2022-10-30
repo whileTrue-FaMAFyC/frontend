@@ -5,7 +5,7 @@ import {Board} from "./Board";
 const Simulation = ({props}) => {
   const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
-  const [coordinates, setCoordinates] = useState([]);
+  const [robots, setRobots] = useState([]);
   // useState({
   //   x: Math.floor(Math.random() * 100) + 1,
   //   y: Math.floor(Math.random() * 100),
@@ -23,12 +23,12 @@ const Simulation = ({props}) => {
   });
 
   const drawFrame = (frame) => {
-    setCoordinates(frame.coordinates);
+    setRobots(frame.robots);
   };
 
   return (
     <EntryPage>
-      <Board names={names} coordinates={coordinates} />
+      <Board names={names} robots={robots} />
     </EntryPage>
   );
 };

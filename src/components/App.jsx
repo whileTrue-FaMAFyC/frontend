@@ -14,101 +14,145 @@ import Verify from "../pages/Verify/Verify";
 import ListMatches from "../pages/ListMatches/ListMatches";
 
 const props = {
-  names: ["Wallee", "Eva", "Rocoloco"],
+  names: ["Wallee", "Eva", "Rocoloco", "Mario"],
   simulation: [
     {
-      coordinates: [
+      robots: [
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
-        },
-      ],
-    },
-    {
-      coordinates: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
       ],
     },
     {
-      coordinates: [
+      robots: [
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
-        },
-      ],
-    },
-    {
-      coordinates: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: true,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
       ],
     },
     {
-      coordinates: [
+      robots: [
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: true,
+          died: false,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
       ],
     },
     {
-      coordinates: [
+      robots: [
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: true,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100),
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: true,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      ],
+    },
+    {
+      robots: [
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: true,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
       ],
     },
