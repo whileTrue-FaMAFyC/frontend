@@ -81,11 +81,11 @@ const SimCreate = () => {
               id='inputRobot1'
               data-testid='nameRobot1'
               {...register("robot1", {required: true})}>
-              <option key={"inputRobot1" + ""} value=''>
+              <option key={""} value=''>
                 * Choose a robot *
               </option>
               {robotsNames.map((a) => (
-                <option key={"inputRobot1_" + a.name} value={a.name}>
+                <option key={a.name} value={a.name}>
                   {a.name}
                 </option>
               ))}
@@ -107,11 +107,11 @@ const SimCreate = () => {
                 required: true,
                 onChange: () => setShowRobot3(true),
               })}>
-              <option key={"inputRobot2_" + ""} value=''>
+              <option key={""} value=''>
                 * Choose a robot *
               </option>
               {robotsNames.map((a) => (
-                <option key={"inputRobot2_" + a.name} value={a.name}>
+                <option key={a.name} value={a.name}>
                   {a.name}
                 </option>
               ))}
@@ -131,11 +131,11 @@ const SimCreate = () => {
                 id='inputRobot3'
                 data-testid='nameRobot3'
                 {...register("robot3", {onChange: () => setShowRobot4(true)})}>
-                <option key={"inputRobot3_" + ""} value=''>
+                <option key={""} value=''>
                   * No robot *
                 </option>
                 {robotsNames.map((a) => (
-                  <option key={"inputRobot3_" + a.name} value={a.name}>
+                  <option key={a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}
@@ -152,11 +152,11 @@ const SimCreate = () => {
                 id='inputRobot4'
                 data-testid='nameRobot4'
                 {...register("robot4")}>
-                <option key={"inputRobot4_" + ""} value=''>
+                <option key={""} value=''>
                   * No robot *
                 </option>
                 {robotsNames.map((a) => (
-                  <option key={"inputRobot4_" + a.name} value={a.name}>
+                  <option key={a.name} value={a.name}>
                     {a.name}
                   </option>
                 ))}

@@ -78,13 +78,13 @@ export const StyledInput = styled.input`
 export const StyledError = styled.p`
   font-size: 12px;
   padding: 3px;
-  color: #be0000;
+  color: red;
 `;
 
 export const StyledSuccess = styled.p`
   font-size: 12px;
   padding: 3px;
-  color: green;
+  color: turquoise;
 `;
 
 export const EntryPage = styled.div`
