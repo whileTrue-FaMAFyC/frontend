@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import StatusBar from "./StatusBar";
+import {StyledEntryCard} from "./StatusBar.styled";
 
 const RobotsStatus = (props) => {
   const [completed, setCompleted] = useState(0);
@@ -9,21 +10,18 @@ const RobotsStatus = (props) => {
     setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 2000);
   }, []);
 
-  // <StatusBar bgcolor={"#6a1b9a"} completed={completed} />
-  // <StatusBar bgcolor={"#6a1b9a"} completed={completed} />
-  // <StatusBar bgcolor={"#6a1b9a"} completed={completed} />
-
   return (
-    <div>
+    <StyledEntryCard>
+      <h2>Daño</h2>
       {health.map((health, idx) => (
         <StatusBar
           key={idx}
-          bgcolor={"#6a1b9a"}
+          bgcolor={"#00c8c8"}
           name={names[idx]}
           completed={health}
         />
       ))}
-    </div>
+    </StyledEntryCard>
   );
 };
 

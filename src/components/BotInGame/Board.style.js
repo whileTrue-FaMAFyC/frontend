@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const StyledBoard = styled.div`
-  display: flex;
   align-items: flex-start;
+  display: center;
   justify-content: stretch;
-  margin-top: 50px;
+  margin: auto;
   width: 500px;
   height: 500px;
   padding: 30px;
@@ -16,9 +16,11 @@ export const StyledBoard = styled.div`
 `;
 
 export const EntryPage = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
 `;
