@@ -28,9 +28,7 @@ const Simulation = ({props}) => {
 
   return (
     <EntryPage>
-      <StyledBoard>
-        <Board names={names} coordinates={coordinates} />
-      </StyledBoard>
+      <Board names={names} coordinates={coordinates} />
     </EntryPage>
   );
 };

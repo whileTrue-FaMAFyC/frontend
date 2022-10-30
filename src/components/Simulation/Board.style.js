@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const StyledBoard = styled.div`
   display: grid;
-  grid-template-columns: repeat(100, auto);
-  grid-template-rows: repeat(100, auto);
+  grid-template-columns: repeat(100, 4px);
+  grid-template-rows: repeat(100, 4px);
   justify-content: center;
-  position: relative;
+  //position: relative;
   margin-top: 50px;
   width: 500px;
   height: 500px;
@@ -13,21 +13,25 @@ export const StyledBoard = styled.div`
   background-color: #f2be5c;
   border: 5px inset #bb7032;
   border-radius: 5px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: 1s ease-in-out;
+  //box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 `;
 
 export const Robot = styled.div`
-  position: absolute;
-  /* grid-area: ${(props) =>
-    props.coordinates.y /
-    props.coordinates.x /
-    props.coordinates.y /
-    props.coordinates.x}; */
-  //grid-row: ${(props) => props.coordinates.y / props.coordinates.y};
-  left: ${(props) => `${props.coordinates.x}%`};
-  top: ${(props) => `${props.coordinates.y}%`};
+  //position: absolute;
+  grid-area: ${(props) =>
+    `${props.coordinates.y} /
+    ${props.coordinates.x} /
+    ${props.coordinates.y} /
+    ${props.coordinates.x}`};
+  /* grid-column-start: ;
+  grid-column-end: ;
+  grid-row-start: ${(props) => props.coordinates.y / props.coordinates.y};
+  grid-row-end: */
+  /* left: ${(props) => `${props.coordinates.x}%`};
+  top: ${(props) => `${props.coordinates.y}%`}; */
   border-radius: inherit;
-  transition: 1s ease-in-out;
+  transition: grid-area 1s ease-in-out;
 `;
 
 export const EntryPage = styled.div`
