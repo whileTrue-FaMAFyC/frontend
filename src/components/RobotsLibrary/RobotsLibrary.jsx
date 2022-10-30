@@ -31,9 +31,14 @@ const RobotsLibrary = () => {
   }, []);
   return (
     <StyledEntryCard>
-      <Title>Game list</Title>
+      <Title data-testid='title'>Game list</Title>
       <Table>
         <Tbody>
+          {robotsNames.length < 1 && (
+            <Feedback>
+              <Column>No robots availables</Column>
+            </Feedback>
+          )}
           {robotsNames.map(({avatar, name}) => (
             <Row key={name} data-testid='row'>
               <Column>

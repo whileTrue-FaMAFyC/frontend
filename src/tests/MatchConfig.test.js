@@ -33,7 +33,7 @@ describe("Configuracion de partida test", () => {
 
     await waitFor(() => {
       robotsMock.forEach(({name}) => {
-        expect(screen.getByText("Soyunrobot")).toBeInTheDocument();
+        expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
 
