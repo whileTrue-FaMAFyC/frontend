@@ -5,8 +5,8 @@ export const StyledBoard = styled.div`
   display: center;
   justify-content: stretch;
   margin: auto;
-  width: 500px;
-  height: 500px;
+  width: 750px;
+  height: 750px;
   padding: 30px;
   color: #bf7636;
   background-color: #f2be5c;
@@ -17,7 +17,7 @@ export const StyledBoard = styled.div`
 
 export const EntryPage = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   grid-gap: 20px;
   align-items: center;
   flex-direction: column;

@@ -4,7 +4,7 @@ import {StyledEntryCard} from "./StatusBar.styled";
 
 const RobotsStatus = (props) => {
   const [completed, setCompleted] = useState(0);
-  const {names, health} = props;
+  const {names, health, colors} = props;
 
   useEffect(() => {
     setInterval(() => setCompleted(Math.floor(Math.random() * 100) + 1), 2000);
@@ -16,7 +16,7 @@ const RobotsStatus = (props) => {
       {health.map((health, idx) => (
         <StatusBar
           key={idx}
-          bgcolor={"#00c8c8"}
+          bgcolor={colors[idx]}
           name={names[idx]}
           completed={health}
         />
