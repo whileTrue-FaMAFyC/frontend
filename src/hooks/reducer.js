@@ -5,10 +5,6 @@ export const matchReducer = (state, action) => {
     initial_info: {
       ...payload,
     },
-    new_player: {
-      ...state,
-      players: [...state.players, payload.players],
-    },
   };
 
   return dict[type] || state;

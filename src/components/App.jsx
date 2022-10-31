@@ -9,7 +9,6 @@ import {
   AvatarSubmit,
 } from "../components";
 import {ListMatches, Verify, Home, Match} from "../pages";
-import MatchProvider from "../contexts/MatchContext";
 function App() {
   return (
     <div className='App'>
@@ -24,10 +23,8 @@ function App() {
           <Route path='/verify' element={<Verify />} />
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
-          <MatchProvider>
-            <Route path='/listgames' element={<ListMatches />} />
-            <Route path='/match/:id' element={<Match />} />
-          </MatchProvider>
+          <Route path='/listgames' element={<ListMatches />} />
+          <Route path='/match/:id' element={<Match />} />
         </Routes>
       </div>
     </div>
