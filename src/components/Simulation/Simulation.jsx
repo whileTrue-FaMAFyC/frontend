@@ -1,6 +1,7 @@
 import {StyledBoard, EntryPage} from "./Board.style";
 import React, {useEffect, useState} from "react";
 import {Board} from "./Board";
+import {useRef} from "react";
 
 const Simulation = ({props}) => {
   const {names, simulation} = props;
@@ -14,16 +15,21 @@ const Simulation = ({props}) => {
   //   x: Math.floor(Math.random() * 100) + 1,
   //   y: Math.floor(Math.random() * 100),
   // });
+  const interval = useRef(null);
 
   useEffect(() => {
-    setInterval(() => {
+    interval.current = setInterval(() => {
       drawFrame(simulation[nframe]);
       setNframe(nframe + 1);
     }, 2000);
+    return () => clearInterval(interval.current);
   });
 
   const drawFrame = (frame) => {
-    setRobots(frame.robots);
+    if (nframe <= 4) {
+      console.log(nframe);
+      setRobots(frame.robots);
+    }
   };
 
   return (

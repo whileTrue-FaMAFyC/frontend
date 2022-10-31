@@ -50,7 +50,7 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
@@ -61,7 +61,7 @@ const props = {
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
-          harmed: true,
+          harmed: false,
           died: false,
         },
         {
@@ -74,46 +74,6 @@ const props = {
     },
     {
       robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: true,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: true,
-          died: false,
-        },
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
@@ -126,6 +86,18 @@ const props = {
           harmed: false,
           died: false,
         },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
       ],
     },
     {
@@ -134,6 +106,12 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
+          died: true,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
           died: false,
         },
         {
@@ -142,11 +120,33 @@ const props = {
           harmed: false,
           died: false,
         },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      ],
+    },
+    {
+      robots: [
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: true,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
