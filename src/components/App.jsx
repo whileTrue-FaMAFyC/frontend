@@ -19,8 +19,8 @@ const props = {
     {
       robots: [
         {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+          x: 0,
+          y: 0,
           harmed: false,
           died: false,
         },
@@ -37,8 +37,8 @@ const props = {
           died: false,
         },
         {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+          x: 0,
+          y: 100,
           harmed: false,
           died: false,
         },
@@ -49,8 +49,8 @@ const props = {
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
+          harmed: true,
+          died: false,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
