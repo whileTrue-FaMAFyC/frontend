@@ -10,7 +10,6 @@ describe("Match test", () => {
 
   beforeEach(async () => {
     server = new WS(URL_SOCKET);
-    /*     server.close(); */
   });
 
   afterEach(() => {
@@ -18,7 +17,7 @@ describe("Match test", () => {
     WS.clean();
   });
 
-  /*   it("El creador de la partida ingresa al lobby", async () => {
+  it("El creador de la partida ingresa al lobby", async () => {
     mockAxios.get.mockResolvedValue({data: responseNewMatch});
     render(<Match />);
 
@@ -26,7 +25,7 @@ describe("Match test", () => {
       expect(screen.getByText(responseNewMatch.host)).toBeInTheDocument();
     });
     screen.debug();
-  }); */
+  });
 
   it("Se une un jugador a la partida y el host recibe el evento", async () => {
     mockAxios.get.mockResolvedValue({data: responseNewMatch});
@@ -42,7 +41,7 @@ describe("Match test", () => {
 
     setTimeout(() => {
       server.send(JSON.stringify(responseNewPlayer));
-    }, 300);
+    }, 1);
 
     await waitFor(() => {
       expect(screen.getByText("El pepe")).toBeInTheDocument();
