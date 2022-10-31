@@ -3,13 +3,10 @@ import {Robot} from "@styled-icons/remix-fill";
 import {Stars} from "@styled-icons/bootstrap";
 
 export const StyledBoard = styled.div`
-  /* display: grid;
-  grid-template-columns: repeat(100, 4px);
-  grid-template-rows: repeat(100, 4px); */
   position: relative;
-  margin-top: 200px;
-  width: 500px;
-  height: 500px;
+  margin-top: 100px;
+  width: 750px;
+  height: 750px;
   color: #bf7636;
   background-color: #f2be5c;
   border: 5px inset #bb7032;
@@ -32,17 +29,18 @@ export const StyledRobot = styled.div`
 export const Bot = styled(Robot)`
   width: 25px;
   height: 25px;
+  justify-content: center;
 `;
 
 export const Harm = styled(Stars)`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: black;
-  ${({harmed}) => !harmed && `hidden={true};`}
 `;
 
 export const StyledHarm = styled.div`
-  margin: 0%;
+  position: absolute;
+  top: 50%;
 `;
 
 export const EntryPage = styled.div`
