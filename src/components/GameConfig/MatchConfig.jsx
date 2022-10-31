@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
-import {getRobotsNames} from "../../services";
+import {getRobotsNames, joinMatch, leaveMatch} from "../../services";
 
 import {
   StyledButton,
@@ -9,6 +9,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledSelect,
 } from "./MatchConfig.styled.js";
 
 const MatchConfig = () => {
@@ -22,6 +23,7 @@ const MatchConfig = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [robotsNames, setRobotsNames] = useState([]);
+  const [imIn, setImIn] = useState(false);
 
   const callGetRobotsNames = async () => {
     try {
@@ -31,6 +33,15 @@ const MatchConfig = () => {
       console.log(error);
     }
   };
+
+  const joined = () => {
+    setImIn(true);
+  };
+
+  const notJoined = () => {
+    setImIn(false);
+  };
+  console.log(imIn);
 
   useEffect(() => {
     callGetRobotsNames();
@@ -222,7 +233,52 @@ const MatchConfig = () => {
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Create</StyledButton>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <StyledSelect
+                    enabledColor={success}
+                    disabled={success}
+                    id='inputRaobot'
+                    data-testid='nameRaobot'
+                    {...register("creator_robot", {required: true})}>
+                    {robotsNames.map((a) => (
+                      <option key={a.name} value={a.name}>
+                        {a.name}
+                      </option>
+                    ))}
+                    <option key={""} value=''>
+                      * Choose a robot *
+                    </option>
+                  </StyledSelect>
+                  {errors.creator_robot?.type === "required" && (
+                    <StyledError role='alertError'>
+                      Robot is required.
+                    </StyledError>
+                  )}
+                </td>
+                <td>
+                  <StyledButton
+                    type='submit'
+                    onClick={joined && joinMatch}
+                    enabledColor={success}
+                    disabled={success}>
+                    Join
+                  </StyledButton>
+                </td>
+                <td>
+                  <StyledButton
+                    type='submit'
+                    onClick={notJoined && leaveMatch}
+                    enabledColor={!success}
+                    disabled={!success}>
+                    leave
+                  </StyledButton>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </form>
         {success && (
           <div

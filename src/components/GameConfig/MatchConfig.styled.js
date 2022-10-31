@@ -7,7 +7,8 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   padding: 8px 16px;
   outline: none;
-  background-color: #00c8c8;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
   //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
@@ -18,6 +19,13 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: #009595;
   }
+`;
+
+export const StyledSelect = styled.select`
+  left: 20px;
+  margin: 10px;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
 `;
 
 export const StyledEntryCard = styled.div`
