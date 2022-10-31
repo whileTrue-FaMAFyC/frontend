@@ -11,6 +11,8 @@ import {
   StyledError,
   StyledSuccess,
 } from "./Login.styled";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 const Login = () => {
   const {
@@ -23,6 +25,9 @@ const Login = () => {
   const [sent, setSent] = useState(false);
   const [failure_data, setFailure_data] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [winner, setWinner] = useState("Seba");
+  const {width, height} = useWindowSize();
 
   const navigate = useNavigate();
 
@@ -144,6 +149,12 @@ const Login = () => {
             Register
           </Link>
         </span>
+        {winner !== "" && (
+          <div>
+            <Confetti width={width} height={height} />
+            <h1>The winner is {winner}</h1>
+          </div>
+        )}
       </StyledEntryCard>
     </EntryPage>
   );
