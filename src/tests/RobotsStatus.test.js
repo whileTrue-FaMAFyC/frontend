@@ -21,6 +21,7 @@ test("render robots status bar successfully", async () => {
     <RobotsStatus
       names={["Wallee", "Eva", "Roberto", "Rocoloco"]}
       health={[60, 50, 30, 100]}
+      colors={["red", "green", "blue", "pink"]}
     />
   );
 

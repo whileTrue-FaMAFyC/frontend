@@ -29,7 +29,7 @@ const BotInGame = () => {
       <RobotsStatus
         names={["Wallee", "Eva", "Roberto", "Rocoloco"]}
         health={[60, 50, 30, 100]}
-        colors={["#00c8c8", "red", "green", "blue"]}
+        colors={["#00c8c8", "red", "green", "pink"]}
       />
       <StyledBoard data-testid='board'>
         <motion.div variants={PlaneVariants} animate={animation}>
