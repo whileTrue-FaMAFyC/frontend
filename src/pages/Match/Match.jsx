@@ -8,7 +8,7 @@ const Match = () => {
   const {id} = useParams();
   const {match, dispatch} = useMatch();
 
-  /*   const callGetMatchInfo = async () => {
+  const callGetMatchInfo = async () => {
     try {
       const response = await getMatchInfo(localStorage.getItem("user"), id);
       dispatch({type: "initial_info", payload: response.data});
@@ -20,7 +20,7 @@ const Match = () => {
   useEffect(() => {
     callGetMatchInfo();
   }, []);
- */
+
   return (
     <Container>
       {Object.keys(match.user_robot).map((key, index) => (
