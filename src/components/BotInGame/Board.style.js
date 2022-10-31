@@ -30,13 +30,24 @@ export const EntryPage = styled.div`
   background-color: #fbfbfb;
 `;
 
-export const RedRocket = styled(Rocket)`
-  color: Red;
+export const RedRocket = styled.div`
   height: 10%;
   position: absolute;
-  left: ${(props) => `${props.coordinates.x}%`};
-  top: ${(props) => `${props.coordinates.y}%`};
-  border-radius: inherit;
+  height: ${(props) => (props.coordinates.exploded ? `30px` : `10px`)}; //12px;
+  width: ${(props) => (props.coordinates.exploded ? `30px` : `10px`)}; //12px;
+  opacity: ${(props) => (props.coordinates.exploded ? `30%` : `100%`)};
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  left: ${(props) =>
+    props.coordinates.exploded
+      ? `${props.coordinates.x - 2}%`
+      : `${props.coordinates.x - 0.5}%`};
+  top: ${(props) =>
+    props.coordinates.exploded
+      ? `${props.coordinates.y - 2}%`
+      : `${props.coordinates.y - 0.5}%`};
+  /* border-radius: inherit; */
   transition: 1s ease-in-out;
 `;
 

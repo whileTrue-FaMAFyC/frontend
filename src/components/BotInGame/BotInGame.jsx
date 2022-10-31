@@ -23,14 +23,37 @@ const Board = (props) => {
     {
       x: 100,
       y: 100,
+      exploded: true,
     },
     {
       x: 50,
       y: 50,
+      exploded: true,
     },
     {
       x: Math.floor(Math.random() * 100) + 1,
       y: Math.floor(Math.random() * 100),
+      exploded: true,
+    },
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
+      exploded: false,
+    },
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
+      exploded: false,
+    },
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
+      exploded: false,
+    },
+    {
+      x: Math.floor(Math.random() * 100) + 1,
+      y: Math.floor(Math.random() * 100),
+      exploded: true,
     },
   ]);
   let i = 0;
@@ -63,10 +86,6 @@ const Board = (props) => {
           <Bot />
         </Robot>
         <RedRocket coordinates={coordinatesRocket1} />
-        <RedCross
-          coordinates={coordinatesRocket1}
-          estado={coordinatesRocket1}
-        />
       </StyledBoard>
     </EntryPage>
   );
