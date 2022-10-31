@@ -1,4 +1,11 @@
 export const responseNewPlayer = {
+  host: "",
   action: "new_player",
-  player: {name: "El pepe", robot: "RobotPepe"},
+  players: {name: "El pepe", robot: "RobotPepe"},
+};
+
+export const responseNewMatch = {
+  host: "Host",
+  players: [{name: "Host", robot: "RobotHost"}],
+  results: null,
 };
