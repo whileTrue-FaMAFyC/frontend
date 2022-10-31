@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const StyledButton = styled.button`
   //width: ${(props) => (props.full ? "100%" : null)};
-  width: 100%;
+  width: 330px;
+  //width: auto;
   border: 0;
   border-radius: 4px;
   padding: 8px 16px;
