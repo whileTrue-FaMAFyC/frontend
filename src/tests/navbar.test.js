@@ -13,7 +13,7 @@ import App from "../components/App";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
 // const server = setupServer(
-//   rest.post("http://localhost:8000/", (req, res, ctx) => {
+//   rest.post(`${process.env.REACT_APP_API_KEY}", (req, res, ctx) => {
 //     return res(ctx.json(fakeUserResponse));
 //   })
 // );
@@ -55,8 +55,7 @@ test("move to home", async () => {
   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
   fireEvent.click(screen.getByTestId("toHome"));
-
-  expect.toBeInTheDocument(screen.getByText("You are home"));
+  expect.toBeInTheDocument(screen.getByText("PyRobots"));
 });
 
 test("move to login", async () => {
@@ -73,24 +72,5 @@ test("move to login", async () => {
   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
   fireEvent.click(screen.getByTestId("toLogin"));
-
   expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
-});
-
-test("move to register", async () => {
-  render(
-    <div>
-      <Router>
-        <App />
-      </Router>
-    </div>
-  );
-
-  expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
-
-  fireEvent.click(screen.getByTestId("toReg"));
-
-  expect.toBeInTheDocument(screen.getByText("Registro"));
 });

@@ -18,7 +18,7 @@ const ListGames = () => {
 
   useEffect(() => {
     callGetGames();
-  }, [games]);
+  }, [setGames]);
 
   return <ListGamesView games={games} />;
 };

@@ -1,18 +1,18 @@
-import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import FormPartidaConfig from "../components/GameConfig/GameConfig";
+import FormPartidaConfig from "../components/GameConfig/MatchConfig";
 import {server} from "../__mocks__/server.js";
 import {rest} from "msw";
-
-// NO SE PUEDEN TESTEAR LOS INPUTS NUMERICOS
-// REVISAR TEST 1 - 6 - 8
+import {setupServer} from "msw/node";
+import {robotsMock} from "../__mocks__/robots";
+import mockAxios from "axios";
 
 describe("Configuracion de partida test", () => {
   beforeEach(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  const jsdomAlert = window.alert; // remember the jsdom alert
+  const jsdomAlert = window.alert;
   window.alert = (e) => {
     console.log(e);
   };
@@ -27,8 +27,15 @@ describe("Configuracion de partida test", () => {
   let inputNameRobot;
   let button;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    mockAxios.get.mockResolvedValue({data: robotsMock});
     render(<FormPartidaConfig />);
+
+    await waitFor(() => {
+      robotsMock.forEach(({name}) => {
+        expect(screen.getByText("Soyunrobot")).toBeInTheDocument();
+      });
+    });
 
     inputName = screen.getByTestId("name");
     inputPassword = screen.getByTestId("password");
@@ -40,7 +47,7 @@ describe("Configuracion de partida test", () => {
     button = screen.getByRole("button");
   });
 
-  test("0. Renderizado del componente", async () => {
+  test("0. Render components successfully", async () => {
     expect.toBeInTheDocument(screen.getByTestId("name"));
     expect.toBeInTheDocument(screen.getByTestId("password"));
     expect.toBeInTheDocument(screen.getByTestId("minPlayers"));
@@ -53,69 +60,69 @@ describe("Configuracion de partida test", () => {
     expect(alert);
   });
 
-  test("1. Nueva partida con todos los campos llenos", async () => {
+  test("1. New match with all fields completed", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "3");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertSuccess");
 
-    expect(alert).toHaveTextContent("La partida se creó exitosamente");
+    expect(alert).toHaveTextContent("The match was created successfully.");
   });
 
   // CAMPOS REQUERIDOS
-  test("2. Nueva partida sin nombre", async () => {
+  test("2. New match without name", async () => {
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un nombre para la partida");
+    expect(alert).toHaveTextContent("Name is required.");
   });
 
-  test("3. Nueva partida sin número de juegos", async () => {
+  test("3. New match without number of games", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese el numero de juegos");
+    expect(alert).toHaveTextContent("Number of games is required.");
   });
 
-  test("4. Nueva partida sin número de rondas", async () => {
+  test("4. New match without number of rounds", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese el numero de rondas");
+    expect(alert).toHaveTextContent("Number of rounds is required.");
   });
 
-  test("5. Nueva partida sin robot asignado", async () => {
+  test("5. New match without robot", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
@@ -127,264 +134,264 @@ describe("Configuracion de partida test", () => {
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un robot");
+    expect(alert).toHaveTextContent("Robot is required.");
   });
 
-  test("6. Nueva partida con minimo de jugadores default (sin seleccionar)", async () => {
+  test("6. New match with default minimum players (without selecting)", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertSuccess");
     expect(inputMinPlayers).toHaveValue("2");
-    expect(alert).toHaveTextContent("La partida se creó exitosamente");
+    expect(alert).toHaveTextContent("The match was created successfully.");
   });
 
-  test("7. Nueva partida con maximo de jugadores default (sin seleccionar)", async () => {
+  test("7. New match with default maximum players (without selecting)", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertSuccess");
     expect(inputMaxPlayers).toHaveValue("2");
-    expect(alert).toHaveTextContent("La partida se creó exitosamente");
+    expect(alert).toHaveTextContent("The match was created successfully.");
   });
 
   // CAMPOS OPCIONALES
-  test("8. Nueva partida sin contraseña", async () => {
+  test("8. New match without password", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertSuccess");
 
-    expect(alert).toHaveTextContent("La partida se creó exitosamente");
+    expect(alert).toHaveTextContent("The match was created successfully.");
   });
 
   // NOMBRE DE PARTIDA
-  test("9. Nueva partida con nombre excedido", async () => {
+  test("9. New match with name exceeded", async () => {
     userEvent.type(inputName, "RocoloGames123456");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
     expect(alert).toHaveTextContent(
-      "El nombre debe tener a lo sumo 16 caracteres"
+      "The name must have at most 16 characters."
     );
   });
 
-  test("10. Nueva partida con nombre muy chiquito", async () => {
+  test("10. New match with a very small name", async () => {
     userEvent.type(inputName, "RO");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
     expect(alert).toHaveTextContent(
-      "El nombre debe tener al menos 3 caracteres"
+      "The name must have at least 3 characters."
     );
   });
 
   // CONTRASEÑA
-  test("11. Nueva partida con contraseña excedida", async () => {
+  test("11. New match with password exceeded", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "AwitaDeCoco123123");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
     expect(alert).toHaveTextContent(
-      "La contraseña debe tener a lo sumo 16 caracteres"
+      "The password must have at most 16 characters."
     );
   });
 
   // MAXIMO DE JUGADORES
-  test("12. Nueva partida con maximo de jugadores menor al minimo", async () => {
+  test("12. New match with maximum players less than minimum", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "3");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
     expect(alert).toHaveTextContent(
-      "El máximo de jugadores debe ser mayor o igual al mínimo establecido"
+      "The maximum number of players must be greater than or equal to the minimum established."
     );
   });
 
   // NUMERO DE JUEGOS
-  test("13. Nueva partida con letras en numero de juegos", async () => {
+  test("13. New match with letters in number of games", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2a");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 200");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
 
-  test("14. Nueva partida con numeros negativos en numero de juegos", async () => {
+  test("14. New match with negative numbers in number of games", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "-2");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 200");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
 
-  test("15. Nueva partida con numero de juegos excesivo", async () => {
+  test("15. New match with excessive number of games", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "201");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 200");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
 
-  test("16. Nueva partida con 0 numero de juegos", async () => {
+  test("16. New match with 0 number of games", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "0");
     userEvent.type(inputNRounds, "5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 200");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
 
   // NUMERO DE RONDAS
-  test("17. Nueva partida con letras en numero de rondas", async () => {
+  test("17. New match with letters in number of rounds", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "4a");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 10000");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
 
-  test("18. Nueva partida con numeros negativos en numero de rondas", async () => {
+  test("18. New match with negative numbers in number of rounds", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "-5");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 10000");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
 
-  test("19. Nueva partida con numero de rondas excesivo", async () => {
+  test("19. New match with excessive number of rounds", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "10001");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 10000");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
 
-  test("20. Nueva partida con 0 numero de rondas", async () => {
+  test("20. New match with 0 number of rounds", async () => {
     userEvent.type(inputName, "RocoloGames");
     userEvent.type(inputPassword, "UWU");
     userEvent.selectOptions(inputMinPlayers, "2");
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "0");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 
     const alert = await screen.findByRole("alertError");
 
-    expect(alert).toHaveTextContent("Ingrese un número entero entre 1 y 10000");
+    expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
 
-  test("21. Error de server", async () => {
+  test("21. Server error", async () => {
     server.use(
       rest.post(
-        "http://localhost:8000/matches/new-match",
+        `${process.env.REACT_APP_API_KEY}matches/new-match`,
         async (req, res, ctx) => {
           return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
         }
@@ -397,7 +404,7 @@ describe("Configuracion de partida test", () => {
     userEvent.selectOptions(inputMaxPlayers, "2");
     userEvent.type(inputNGames, "2");
     userEvent.type(inputNRounds, "2");
-    userEvent.type(inputNameRobot, "Soyunrobot");
+    userEvent.selectOptions(inputNameRobot, "Soyunrobot");
 
     userEvent.click(button);
 

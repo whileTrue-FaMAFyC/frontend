@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 import {
   StyledButton,
   StyledEntryCard,
@@ -8,6 +9,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledSuccess,
 } from "./Login.styled";
 
 const Login = () => {
@@ -18,9 +20,17 @@ const Login = () => {
   } = useForm();
 
   const [success, setSuccess] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [failure_data, setFailure_data] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    await fetch("http://localhost:8000/login", {
+    setFailure_data("");
+    setSent(true);
+    setLoading(false);
+    await fetch(`${process.env.REACT_APP_API_KEY}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,25 +40,29 @@ const Login = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 401) {
-          alert(data.detail);
+          setFailure_data(data.detail);
           setSuccess(false);
         } else if (response.status === 200) {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
             setSuccess(true);
+            navigate("/home");
           } else {
+            setFailure_data("Unknown Error");
             setSuccess(false);
           }
         } else {
-          alert("Unknown error");
+          setFailure_data("Unknown Error");
           setSuccess(false);
         }
       })
       .catch((error) => {
-        alert("Error!");
+        setFailure_data("Network Error");
         setSuccess(false);
+        setLoading(false);
       });
   };
 
@@ -67,6 +81,7 @@ const Login = () => {
               id='inputUsernameOrEmail'
               data-testid='inputUsernameOrEmail'
               type='text'
+              autoComplete='off'
               placeholder='your username or email'
               {...register("username_or_email", {
                 required: true,
@@ -74,7 +89,7 @@ const Login = () => {
             />
             {errors.username_or_email?.type === "required" && (
               <StyledError data-testid='errorUsernameOrEmailEmpty'>
-                Ingrese su username o email
+                Enter your username or email
               </StyledError>
             )}
           </StyledInputGroup>
@@ -94,24 +109,34 @@ const Login = () => {
             />
             {errors.password?.type === "pattern" && (
               <StyledError data-testid='errorPasswordNotValid'>
-                La contraseña debe contener al menos una mayuscula, minuscula y
-                numero
+                Password must contain uppercase lowercase and a number
               </StyledError>
             )}
             {errors.password?.type === "required" && (
               <StyledError data-testid='errorPasswordEmpty'>
-                Ingrese una contraseña
+                Enter your password
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='login' role='button' data-testid='loginButton'>
-            Login
-          </StyledButton>
+          {loading ? (
+            <div>
+              <CircularProgress data-testid='loader' />
+            </div>
+          ) : (
+            <StyledButton type='login' role='button' data-testid='loginButton'>
+              Login
+            </StyledButton>
+          )}
         </form>
         {success && (
-          <div role='alert' data-testid='loginExitoso'>
-            Login exitoso!
-          </div>
+          <StyledSuccess role='alert' data-testid='succesfulLogin'>
+            Successful login
+          </StyledSuccess>
+        )}
+        {sent && failure_data !== "" && (
+          <StyledError role='alert' data-testid='error'>
+            {failure_data}
+          </StyledError>
         )}
         <span>
           <p data-testid='notAMemb'>Not a member?</p>
