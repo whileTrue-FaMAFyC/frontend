@@ -6,7 +6,6 @@ const Welcome = () => {
     <WelcomeImg
       style={{
         backgroundImage: `url("https://imgs.search.brave.com/VeYbVrPVN-lcUrB1ADmGaK2TGhepR0WIA8xKEIUav9E/rs:fit:1200:1200:1/g:ce/aHR0cDovL3dhbGxw/YXBlcmNhdmUuY29t/L3dwL2xXUzlyOGMu/anBn")`,
-        gap: "0",
       }}>
       <div>
         <img

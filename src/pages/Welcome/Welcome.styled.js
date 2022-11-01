@@ -11,7 +11,7 @@ export const WelcomeImg = styled.div`
   align-items: center;
   justify-content: center;
   h2 {
-    color: #e6c568;
+    color: #e1b338;
   }
 `;
 
