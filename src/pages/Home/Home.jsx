@@ -1,5 +1,6 @@
 import {EntryPage, StyledButton, StyledEntryCard} from "./Home.styled";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {logOut} from "../../services";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
         </Link>
         <Link to='/listgames' data-testid='linkToListMatch'>
           <StyledButton>List Matches</StyledButton>
+        </Link>
+        <Link to='/' data-testid='logOut'>
+          <StyledButton onClick={logOut}>Log Out</StyledButton>
         </Link>
       </StyledEntryCard>
     </EntryPage>
