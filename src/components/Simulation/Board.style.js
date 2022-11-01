@@ -18,7 +18,7 @@ export const StyledRobot = styled.div`
   position: absolute;
   left: ${(props) => (props.x > 90 ? "90%" : `${props.x}%`)};
   top: ${(props) => (props.y > 90 ? "90%" : `${props.y}%`)};
-  display: ${(props) => (props.hidden ? `hidden` : `visibility`)};
+  display: ${(props) => (props.hidden ? `hidden` : `flex`)};
   align-items: center;
   flex-direction: column;
   border-radius: inherit;
