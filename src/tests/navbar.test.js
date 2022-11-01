@@ -55,7 +55,6 @@ test("move to home", async () => {
   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
   fireEvent.click(screen.getByTestId("toHome"));
-
   expect.toBeInTheDocument(screen.getByText("PyRobots"));
 });
 
@@ -73,6 +72,5 @@ test("move to login", async () => {
   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
   fireEvent.click(screen.getByTestId("toLogin"));
-
   expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
 });
