@@ -2,7 +2,6 @@ import {EntryPage, StyledButton, StyledEntryCard} from "./Home.styled";
 import {Link, useNavigate} from "react-router-dom";
 
 const Home = () => {
-  //const navigate = useNavigate();
   return (
     <EntryPage>
       <StyledEntryCard>
