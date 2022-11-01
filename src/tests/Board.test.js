@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import Simulation from "../components/Simulation/Simulation";
+import {Board} from "../components/Simulation/Board";
 
 const props = {
   names: ["Wallee", "Eva", "Rocoloco", "Mario"],
+  colors: ["red", "yellow", "turquoise", "pink"],
   simulation: [
     {
       robots: [
@@ -149,22 +150,28 @@ const props = {
   ],
 };
 
-test("render board component successfully", () => {
-  render(<Simulation props={props} />);
+test("render board component successfully", async () => {
+  render(
+    <Board
+      names={props.names}
+      colors={props.colors}
+      robots={props.simulation[0].robots}
+    />
+  );
 
-  const labels = screen.findAllByTestId("label");
-  const bots = screen.findAllByTestId("bot");
-  const bot0 = screen.findByTestId("robot0");
-  const bot1 = screen.findByTestId("robot1");
-  const bot2 = screen.findByTestId("robot2");
-  const bot3 = screen.findByTestId("robot3");
+  //const labels = screen.findAllByTestId("label");
+  const bots = await screen.findAllByTestId("bot");
+  const bot0 = await screen.findByTestId("robot0");
+  const bot1 = await screen.findByTestId("robot1");
+  const bot2 = await screen.findByTestId("robot2");
+  const bot3 = await screen.findByTestId("robot3");
 
-  expect(labels).toBeInTheDocument;
-  expect(bots).toBeInTheDocument;
-  expect(bot0).toBeInTheDocument;
-  expect(bot1).toBeInTheDocument;
-  expect(bot2).toBeInTheDocument;
-  expect(bot3).toBeInTheDocument;
+  //expect.toBeInTheDocument(labels);
+  expect.toBeInTheDocument(bots);
+  expect.toBeInTheDocument(bot0);
+  expect.toBeInTheDocument(bot1);
+  expect.toBeInTheDocument(bot2);
+  expect.toBeInTheDocument(bot3);
 });
 
 // test("render robot component successfully", () => {

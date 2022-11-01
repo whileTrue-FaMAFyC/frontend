@@ -15,6 +15,7 @@ import ListMatches from "../pages/ListMatches/ListMatches";
 
 const props = {
   names: ["Wallee", "Eva", "Rocoloco", "Mario"],
+  colors: ["red", "yellow", "turquoise", "pink"],
   simulation: [
     {
       robots: [

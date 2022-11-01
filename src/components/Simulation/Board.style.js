@@ -16,14 +16,14 @@ export const StyledBoard = styled.div`
 
 export const StyledRobot = styled.div`
   position: absolute;
-  left: ${(props) => (props.x > 90 ? "90%" : `${props.x}%`)};
-  top: ${(props) => (props.y > 90 ? "90%" : `${props.y}%`)};
+  left: ${(props) => (props.x > 96.66 ? "96.66%" : `${props.x}%`)};
+  top: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
+  color: ${(props) => `${props.color}`};
   display: flex;
   align-items: center;
   flex-direction: column;
   border-radius: inherit;
   transition: 1s ease-in-out;
-  ${({died}) => died && `hidden={true};`}
 `;
 
 export const Bot = styled(Robot)`
@@ -40,7 +40,9 @@ export const Harm = styled(Stars)`
 
 export const StyledHarm = styled.div`
   position: absolute;
-  top: 50%;
+  top: 10%;
+  transition-delay: 250ms;
+  transition-property: inherit;
 `;
 
 export const EntryPage = styled.div`
@@ -51,8 +53,8 @@ export const EntryPage = styled.div`
   background-color: #fbfbfb;
 `;
 
-export const StyledLabel = styled.label`
-  font-size: 12px;
-  color: black;
-  gap: 0px;
-`;
+// export const StyledLabel = styled.label`
+//   font-size: 12px;
+//   color: black;
+//   gap: 0px;
+// `;
