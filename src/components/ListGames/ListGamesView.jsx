@@ -14,7 +14,7 @@ const ListGamesView = ({games}) => {
   const navigate = useNavigate();
   return (
     <Container>
-      <Title>Game list</Title>
+      <Title>Match list</Title>
       <Table>
         <Thead>
           <Row>

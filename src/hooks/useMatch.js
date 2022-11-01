@@ -8,7 +8,7 @@ const initialState = {
   max_players: 0,
   num_games: 0,
   users_joined: 0,
-  user_robot: {},
+  user_robot: [],
   started: false,
   im_in: false,
   is_creator: false,
