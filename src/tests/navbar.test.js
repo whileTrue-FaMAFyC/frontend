@@ -35,44 +35,45 @@ test("render navbar component successfully", async () => {
   );
 
   expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
   expect.toBeInTheDocument(screen.getByTestId("toHome"));
+  expect.toBeInTheDocument(screen.getByTestId("toCreateMatch"));
+  expect.toBeInTheDocument(screen.getByTestId("toCreateBot"));
+  expect.toBeInTheDocument(screen.getByTestId("toListGames"));
 });
 
-// Test for rendering movement between components
-test("move to home", async () => {
-  render(
-    <div>
-      <Router>
-        <App />
-      </Router>
-    </div>
-  );
+// // Test for rendering movement between components
+// test("move to home", async () => {
+//   render(
+//     <div>
+//       <Router>
+//         <App />
+//       </Router>
+//     </div>
+//   );
 
-  expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
+//   expect.toBeInTheDocument(screen.getByTestId("navbar"));
+//   expect.toBeInTheDocument(screen.getByTestId("toLogin"));
+//   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
-  fireEvent.click(screen.getByTestId("toHome"));
+//   fireEvent.click(screen.getByTestId("toHome"));
 
-  expect.toBeInTheDocument(screen.getByText("You are home"));
-});
+//   expect.toBeInTheDocument(screen.getByText("You are home"));
+// });
 
-test("move to login", async () => {
-  render(
-    <div>
-      <Router>
-        <App />
-      </Router>
-    </div>
-  );
+// test("move to login", async () => {
+//   render(
+//     <div>
+//       <Router>
+//         <App />
+//       </Router>
+//     </div>
+//   );
 
-  expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
+//   expect.toBeInTheDocument(screen.getByTestId("navbar"));
+//   expect.toBeInTheDocument(screen.getByTestId("toLogin"));
+//   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
-  fireEvent.click(screen.getByTestId("toLogin"));
+//   fireEvent.click(screen.getByTestId("toLogin"));
 
-  expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
-});
+//   expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
+// });

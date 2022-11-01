@@ -1,7 +1,7 @@
 import React from "react";
 import {StyledNavbar, NavItemLink, LinkContainer} from "./Navbar.styled";
 
-function Navbar({children}) {
+function Navbar() {
   return (
     <StyledNavbar data-testid='navbar'>
       <LinkContainer>
@@ -10,12 +10,12 @@ function Navbar({children}) {
         </NavItemLink>
       </LinkContainer>
       <LinkContainer>
-        <NavItemLink to='/gameconfig' data-testid='toLogin'>
+        <NavItemLink to='/gameconfig' data-testid='toCreateMatch'>
           Create Match
         </NavItemLink>
       </LinkContainer>
       <LinkContainer>
-        <NavItemLink to='/botsubmit' data-testid='toReg'>
+        <NavItemLink to='/botsubmit' data-testid='toCreateBot'>
           Create Bot
         </NavItemLink>
       </LinkContainer>
