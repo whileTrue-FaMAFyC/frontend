@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 
 export const WelcomeImg = styled.div`
   background-position: center;
@@ -46,7 +45,7 @@ export const StyledEntryCard = styled.div`
   }
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledButton = styled.button`
   position: relative;
   width: 100%;
   height: 100%;
