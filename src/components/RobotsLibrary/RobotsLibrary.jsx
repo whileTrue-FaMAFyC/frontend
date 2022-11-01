@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
+import {Link, useNavigate} from "react-router-dom";
 import {
   Container,
   Title,
@@ -11,6 +12,7 @@ import {
   Row,
   Feedback,
   StyledEntryCard,
+  StyledButton,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
@@ -24,6 +26,7 @@ const RobotsLibrary = () => {
       console.log(error);
     }
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     callGetRobotsNames();
@@ -31,7 +34,7 @@ const RobotsLibrary = () => {
   }, []);
   return (
     <StyledEntryCard>
-      <Title data-testid='title'>Game list</Title>
+      <h2 data-testid='title'>My robots</h2>
       <Table>
         <Tbody>
           {robotsNames.length < 1 && (
@@ -50,6 +53,11 @@ const RobotsLibrary = () => {
           ))}
         </Tbody>
       </Table>
+      <StyledButton>
+        <Link to='/botsubmit' data-testid='linkToBotSubmit'>
+          Create bot
+        </Link>
+      </StyledButton>
     </StyledEntryCard>
   );
 };
