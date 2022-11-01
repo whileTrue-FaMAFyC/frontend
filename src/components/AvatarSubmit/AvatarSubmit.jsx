@@ -65,7 +65,7 @@ const AvatarSubmit = () => {
     setFailure_data("");
     data.avatar = file == null ? "" : file;
     const username = localStorage.getItem("username");
-    await fetch(`http://localhost:8000/load-avatar/${username}`, {
+    await fetch(`${process.env.REACT_APP_API_KEY}load-avatar/${username}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

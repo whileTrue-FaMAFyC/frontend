@@ -1,65 +1,19 @@
 import {ReactComponent as Bot} from "./robot-line.svg";
-import {
-  Robot,
-  StyledBoard,
-  EntryPage,
-  RedRocket,
-  RedCross,
-} from "./Board.style";
+import {Robot, StyledBoard, EntryPage} from "./Board.style";
 import React, {useEffect, useState} from "react";
 
 const Board = (props) => {
-  const [coordinates1, setCoordinates1] = useState([
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-    },
-  ]);
+  const [coordinates1, setCoordinates1] = useState({
+    x: Math.floor(Math.random() * 100) + 1,
+    y: Math.floor(Math.random() * 100),
+  });
   const [coordinates2, setCoordinates2] = useState({
     x: Math.floor(Math.random() * 100) + 1,
     y: Math.floor(Math.random() * 100),
   });
-  const [coordinatesRocket1, setCoordinatesRocket1] = useState([
-    {
-      x: 100,
-      y: 100,
-      exploded: true,
-    },
-    {
-      x: 50,
-      y: 50,
-      exploded: true,
-    },
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-      exploded: true,
-    },
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-      exploded: false,
-    },
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-      exploded: false,
-    },
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-      exploded: false,
-    },
-    {
-      x: Math.floor(Math.random() * 100) + 1,
-      y: Math.floor(Math.random() * 100),
-      exploded: true,
-    },
-  ]);
-  let i = 0;
+
   useEffect(() => {
     setInterval(() => {
-      console.log(i);
       setCoordinates1({
         x: Math.floor(Math.random() * 100) + 1,
         y: Math.floor(Math.random() * 100),
@@ -68,11 +22,6 @@ const Board = (props) => {
         x: Math.floor(Math.random() * 100) + 1,
         y: Math.floor(Math.random() * 100),
       });
-      setCoordinatesRocket1({
-        x: coordinatesRocket1[i].x,
-        y: coordinatesRocket1[i].y,
-      });
-      i++;
     }, 2000);
   }, []);
 
@@ -85,7 +34,6 @@ const Board = (props) => {
         <Robot coordinates={coordinates2}>
           <Bot />
         </Robot>
-        <RedRocket coordinates={coordinatesRocket1} />
       </StyledBoard>
     </EntryPage>
   );

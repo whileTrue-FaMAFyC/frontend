@@ -30,7 +30,7 @@ const Login = () => {
     setFailure_data("");
     setSent(true);
     setLoading(false);
-    await fetch("http://localhost:8000/login", {
+    await fetch(`${process.env.REACT_APP_API_KEY}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

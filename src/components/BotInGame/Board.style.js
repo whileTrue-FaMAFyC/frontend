@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {Rocket, Cross} from "@styled-icons/entypo";
 
 export const StyledBoard = styled.div`
   position: relative;
@@ -28,36 +27,4 @@ export const EntryPage = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #fbfbfb;
-`;
-
-export const RedRocket = styled.div`
-  height: 10%;
-  position: absolute;
-  height: ${(props) => (props.coordinates.exploded ? `30px` : `10px`)}; //12px;
-  width: ${(props) => (props.coordinates.exploded ? `30px` : `10px`)}; //12px;
-  opacity: ${(props) => (props.coordinates.exploded ? `30%` : `100%`)};
-  background-color: red;
-  border-radius: 50%;
-  display: inline-block;
-  left: ${(props) =>
-    props.coordinates.exploded
-      ? `${props.coordinates.x - 2}%`
-      : `${props.coordinates.x - 0.5}%`};
-  top: ${(props) =>
-    props.coordinates.exploded
-      ? `${props.coordinates.y - 2}%`
-      : `${props.coordinates.y - 0.5}%`};
-  /* border-radius: inherit; */
-  transition: 1s ease-in-out;
-`;
-
-export const RedCross = styled(Cross)`
-  color: Red;
-  height: 10%;
-  position: absolute;
-  left: ${(props) => `${props.coordinates.x}%`};
-  top: ${(props) => `${props.coordinates.y}%`};
-  visibility: ${(props) => `${props.estado}`};
-  border-radius: inherit;
-  transition: 1s ease-in-out;
 `;

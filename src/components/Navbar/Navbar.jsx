@@ -22,8 +22,8 @@ function Navbar({children}) {
       <NavItemLink to='/gameconfig' data-testid='toGameConfig'>
         Create Match
       </NavItemLink>
-      <NavItemLink to='/botInGame' data-testid='botInGame'>
-        Bot In Game
+      <NavItemLink to='/simulation' data-testid='simulation'>
+        Simulation
       </NavItemLink>
     </StyledNavbar>
   );
