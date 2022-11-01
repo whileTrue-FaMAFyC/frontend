@@ -8,7 +8,7 @@ export const joinMatch = async (token, match_id, password, robot) => {
       headers: {
         Authorization: token,
       },
-      password: password,
+      match_password: password,
       joining_robot: robot,
     }
   );

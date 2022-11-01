@@ -110,7 +110,7 @@ const MatchConfig = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledInputGroup>
+          {/* <StyledInputGroup>
             <label className='form-label' htmlFor='inputPassword'>
               Password (optional):
             </label>
@@ -127,7 +127,7 @@ const MatchConfig = () => {
                 The password must have at most 16 characters.
               </StyledError>
             )}
-          </StyledInputGroup>
+          </StyledInputGroup> */}
           <StyledInputGroup>
             <label>Min players:</label>
             <select
@@ -211,7 +211,7 @@ const MatchConfig = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledInputGroup>
+          {/* <StyledInputGroup>
             <label className='form-label' htmlFor='inputRobot'>
               Robot:
             </label>
@@ -231,7 +231,7 @@ const MatchConfig = () => {
             {errors.creator_robot?.type === "required" && (
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
-          </StyledInputGroup>
+          </StyledInputGroup> */}
           <table>
             <tbody>
               <tr>
@@ -240,8 +240,8 @@ const MatchConfig = () => {
                     enabledColor={success}
                     disabled={success}
                     id='inputRaobot'
-                    data-testid='nameRaobot'
-                    {...register("creator_robot", {required: true})}>
+                    data-testid='nameRobot'
+                    {...register("joining_robot", {required: true})}>
                     {robotsNames.map((a) => (
                       <option key={a.name} value={a.name}>
                         {a.name}
@@ -265,8 +265,8 @@ const MatchConfig = () => {
                       type='password'
                       id='inputPassword'
                       data-testid='password'
-                      placeholder='Password'
-                      {...register("password", {
+                      placeholder=' Match password'
+                      {...register(" match_password", {
                         maxLength: 16,
                       })}
                     />
@@ -283,6 +283,7 @@ const MatchConfig = () => {
                   <StyledButton
                     type='submit'
                     onClick={joined && joinMatch}
+                    data-testid='joinButton'
                     enabledColor={success}
                     disabled={success}>
                     Join
@@ -292,6 +293,7 @@ const MatchConfig = () => {
                   <StyledButton
                     type='submit'
                     onClick={notJoined && leaveMatch}
+                    data-testid='leaveButton'
                     enabledColor={!success}
                     disabled={!success}>
                     Leave
