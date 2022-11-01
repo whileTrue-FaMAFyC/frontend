@@ -18,8 +18,8 @@ export const StyledRobot = styled.div`
   position: absolute;
   left: ${(props) => (props.x > 96.66 ? "96.66%" : `${props.x}%`)};
   top: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
+  display: ${(props) => (props.hidden ? `hidden` : `flex`)};
   color: ${(props) => `${props.color}`};
-  display: flex;
   align-items: center;
   flex-direction: column;
   border-radius: inherit;
@@ -33,8 +33,8 @@ export const Bot = styled(Robot)`
 `;
 
 export const Harm = styled(Stars)`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: black;
 `;
 

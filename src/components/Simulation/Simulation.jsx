@@ -19,7 +19,7 @@ const Simulation = ({props}) => {
   });
 
   const drawFrame = (frame) => {
-    if (nframe <= names.length - 1) {
+    if (nframe <= names.length) {
       setRobots(frame.robots);
     }
   };
