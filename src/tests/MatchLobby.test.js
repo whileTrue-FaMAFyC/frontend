@@ -65,7 +65,11 @@ describe("Configuracion de partida test", () => {
     expect(joinB).toHaveTextContent("Join");
   });
 
-  test("1. Click on leave by not joined user", async () => {});
+  test("1. Click on join by not joined user", async () => {});
 
-  test("2. Click on leave by joined user", async () => {});
+  test("2. Click on join by joined user", async () => {});
+
+  test("3. Click on leave by joined user", async () => {});
+
+  test("4. Click on leave by not joined user", async () => {});
 });
