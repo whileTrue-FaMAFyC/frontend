@@ -36,4 +36,7 @@ test("render robots status bar successfully", async () => {
   expect.toBeInTheDocument(screen.getAllByTestId("name-and-bar"));
   expect.toBeInTheDocument(screen.getAllByTestId("name"));
   expect.toBeInTheDocument(screen.getAllByTestId("bar"));
+  expect(screen.getAllByTestId("name-and-bar")).toHaveLength(4);
+  expect(screen.getAllByTestId("name")).toHaveLength(4);
+  expect(screen.getAllByTestId("bar")).toHaveLength(4);
 });
