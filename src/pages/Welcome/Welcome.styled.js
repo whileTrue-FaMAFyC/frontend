@@ -19,9 +19,7 @@ export const StyledEntryCard = styled.div`
   width: 100%;
   max-width: 450px;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  white-space: 0px;
   padding: 50px;
   margin-bottom: 40px;
   background-color: #252c32;
