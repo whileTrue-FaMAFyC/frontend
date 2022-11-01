@@ -15,6 +15,7 @@ import ListMatches from "../pages/ListMatches/ListMatches";
 
 const props = {
   names: ["Wallee", "Eva", "Rocoloco", "Mario"],
+  colors: ["red", "yellow", "turquoise", "pink"],
   simulation: [
     {
       robots: [
@@ -34,13 +35,13 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: 0,
           y: 100,
           harmed: false,
-          died: false,
+          died: true,
         },
       ],
 
@@ -89,13 +90,13 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
       ],
       rockets: [
@@ -143,13 +144,13 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
       ],
       rockets: [
@@ -467,7 +468,7 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
@@ -521,7 +522,7 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
@@ -575,7 +576,7 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
@@ -629,13 +630,13 @@ const props = {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
         {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: false,
+          died: true,
         },
       ],
       rockets: [

@@ -5,10 +5,10 @@ import {
   StyledBoard,
   StyledRobot,
   StyledHarm,
-  RedRocket,
+  Rocket,
 } from "./Board.style";
 
-export const Board = ({names, robots, rockets}) => {
+export const Board = ({names, colors, robots, rockets}) => {
   return (
     <StyledBoard>
       {robots.map((r, idx) => (
@@ -28,12 +28,13 @@ export const Board = ({names, robots, rockets}) => {
         </StyledRobot>
       ))}
       {rockets.map((rk, idx) => (
-        <RedRocket
+        <Rocket
           key={idx}
+          color={colors[idx]}
           x={rk.x}
           y={rk.y}
           exploded={rk.exploded}
-          new={rk.new}></RedRocket>
+          new={rk.new}></Rocket>
       ))}
     </StyledBoard>
   );

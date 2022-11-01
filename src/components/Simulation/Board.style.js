@@ -18,12 +18,11 @@ export const StyledRobot = styled.div`
   position: absolute;
   left: ${(props) => (props.x > 90 ? "90%" : `${props.x}%`)};
   top: ${(props) => (props.y > 90 ? "90%" : `${props.y}%`)};
-  display: flex;
+  display: ${(props) => (props.hidden ? `hidden` : `visibility`)};
   align-items: center;
   flex-direction: column;
   border-radius: inherit;
   transition: 0.25s ease-in-out;
-  ${({died}) => died && `hidden={true};`}
 `;
 
 export const Bot = styled(Robot)`
@@ -57,14 +56,14 @@ export const StyledLabel = styled.label`
   gap: 0px;
 `;
 
-export const RedRocket = styled.div`
+export const Rocket = styled.div`
   height: 10%;
   position: absolute;
   height: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
   width: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
   opacity: ${(props) => (props.exploded ? `30%` : `100%`)};
   /* background-color: ${(props) => (true ? `# + ${props.idr}` : "#9aaa")}; */
-  background-color: red;
+  background-color: ${(props) => `${props.color}`};
   border-radius: 50%;
   display: inline-block;
   left: ${(props) =>

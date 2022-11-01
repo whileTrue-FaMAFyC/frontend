@@ -4,7 +4,7 @@ import {Board} from "./Board";
 import {useRef} from "react";
 
 const Simulation = ({props}) => {
-  const {names, simulation} = props;
+  const {names, colors, simulation} = props;
   const [nframe, setNframe] = useState(0);
   const [robots, setRobots] = useState([]);
   const [rockets, setRockets] = useState([]);
@@ -28,7 +28,7 @@ const Simulation = ({props}) => {
 
   return (
     <EntryPage>
-      <Board names={names} robots={robots} rockets={rockets} />
+      <Board names={names} colors={colors} robots={robots} rockets={rockets} />
     </EntryPage>
   );
 };
