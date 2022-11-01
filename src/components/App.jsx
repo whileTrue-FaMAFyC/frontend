@@ -24,7 +24,7 @@ function App() {
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
           <Route path='/listgames' element={<ListMatches />} />
-          <Route path='/match/:id' element={<Match />} />
+          <Route path='/match/:match_id' element={<Match />} />
         </Routes>
       </div>
     </div>

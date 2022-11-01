@@ -6,7 +6,8 @@ import mockAxios from "axios";
 
 describe("Match test", () => {
   let server;
-  const URL_SOCKET = process.env.REACT_APP_WEB_SOCKET;
+  let id = undefined;
+  const URL_SOCKET = `${process.env.REACT_APP_WEB_SOCKET}matches/ws/join-lobby/${id}`;
 
   beforeEach(() => {
     server = new WS(URL_SOCKET);
