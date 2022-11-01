@@ -41,7 +41,6 @@ const MatchConfig = () => {
   const notJoined = () => {
     setImIn(false);
   };
-  console.log(imIn);
 
   useEffect(() => {
     callGetRobotsNames();
@@ -259,6 +258,28 @@ const MatchConfig = () => {
                   )}
                 </td>
                 <td>
+                  <StyledInputGroup>
+                    <StyledInput
+                      enabledColor={success}
+                      disabled={success}
+                      type='password'
+                      id='inputPassword'
+                      data-testid='password'
+                      placeholder='Password'
+                      {...register("password", {
+                        maxLength: 16,
+                      })}
+                    />
+                    {errors.password?.type === "maxLength" && (
+                      <StyledError role='alertError'>
+                        The password must have at most 16 characters.
+                      </StyledError>
+                    )}
+                  </StyledInputGroup>
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <StyledButton
                     type='submit'
                     onClick={joined && joinMatch}
@@ -273,7 +294,7 @@ const MatchConfig = () => {
                     onClick={notJoined && leaveMatch}
                     enabledColor={!success}
                     disabled={!success}>
-                    leave
+                    Leave
                   </StyledButton>
                 </td>
               </tr>
