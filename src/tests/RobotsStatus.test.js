@@ -25,14 +25,14 @@ test("render robots status bar successfully", async () => {
     />
   );
 
-  expect.toBeInTheDocument(screen.findByText("Wallee"));
-  expect.toBeInTheDocument(screen.findByText("Eva"));
-  expect.toBeInTheDocument(screen.findByText("Roberto"));
-  expect.toBeInTheDocument(screen.findByText("Rocoloco"));
-  expect.toBeInTheDocument(screen.findByText("60"));
-  expect.toBeInTheDocument(screen.findByText("50"));
-  expect.toBeInTheDocument(screen.findByText("30"));
-  expect.toBeInTheDocument(screen.findByText("100"));
+  expect.toBeInTheDocument(await screen.findByText("Wallee"));
+  expect.toBeInTheDocument(await screen.findByText("Eva"));
+  expect.toBeInTheDocument(await screen.findByText("Roberto"));
+  expect.toBeInTheDocument(await screen.findByText("Rocoloco"));
+  expect.toBeInTheDocument(await screen.findByText("60"));
+  expect.toBeInTheDocument(await screen.findByText("50"));
+  expect.toBeInTheDocument(await screen.findByText("30"));
+  expect.toBeInTheDocument(await screen.findByText("100"));
   expect.toBeInTheDocument(screen.getAllByTestId("name-and-bar"));
   expect.toBeInTheDocument(screen.getAllByTestId("name"));
   expect.toBeInTheDocument(screen.getAllByTestId("bar"));
