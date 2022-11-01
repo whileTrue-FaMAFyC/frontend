@@ -4,12 +4,12 @@ export const WelcomeImg = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
   align-items: center;
   justify-content: center;
-  display: flex;
-  //flex-direction: column;
   h2 {
     color: #e6c568;
   }
@@ -33,22 +33,12 @@ export const StyledEntryCard = styled.div`
     font-size: 3em;
     margin-bottom: 50px;
   }
-  span {
-    display: block;
-    margin-top: 40px;
-    color: #888888;
-    font-size: 14px;
-  }
-  a {
-    margin-left: 4px;
-    color: #fff;
-  }
 `;
 
 export const StyledButton = styled.button`
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
   border-radius: 4px;
   padding: 8px 16px;
   margin: 5px;

@@ -6,15 +6,18 @@ const Welcome = () => {
     <WelcomeImg
       style={{
         backgroundImage: `url("https://imgs.search.brave.com/VeYbVrPVN-lcUrB1ADmGaK2TGhepR0WIA8xKEIUav9E/rs:fit:1200:1200:1/g:ce/aHR0cDovL3dhbGxw/YXBlcmNhdmUuY29t/L3dwL2xXUzlyOGMu/anBn")`,
+        gap: "0",
       }}>
-      <img
-        src='https://imgs.search.brave.com/d0N5nVGQrq83hlOQGSUv8eOzavubmuFWncmj3cdPYbk/rs:fit:658:747:1/g:ce/aHR0cHM6Ly9mcmVl/cG5naW1nLmNvbS90/aHVtYi90ZWNobm9s/b2d5LzcyOTY3LXRo/cmVlLWRpbWVuc2lv/bmFsLXNwYWNlLXJv/Ym90aWNzLXJvYm90/LWNvbXB1dGVyLWdy/YXBoaWNzLWJvcmRl/ci5wbmc'
-        width={150}
-        height={150}
-        alt={""}
-        style={{position: "absolute", left: "595px"}}
-        data-testid='img'
-      />
+      <div>
+        <img
+          src='https://imgs.search.brave.com/yqn9FkhmMTk1HLhuO32J-X8vSy-8DzeF_5pqWDhUZ5A/rs:fit:1024:1024:1/g:ce/aHR0cHM6Ly9jZG4z/Lmljb25maW5kZXIu/Y29tL2RhdGEvaWNv/bnMvcm9ib3QtY2Fy/dG9vbi1wYXJ0LTMv/NTEyLzMyLTEwMjQu/cG5n'
+          width={150}
+          height={150}
+          alt={""}
+          data-testid='img'
+        />
+      </div>
+
       <StyledEntryCard>
         <h2>PyRobots</h2>
         {/* <StyledButton type='button'> */}
