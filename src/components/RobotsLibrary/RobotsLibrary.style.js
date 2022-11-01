@@ -57,7 +57,10 @@ export const Thead = styled.thead`
   min-height: 60px;
   display: flex;
   background-color: #000;
-
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  column-span: "3";
   tr {
     &:hover {
       background-color: #000;
@@ -151,7 +154,7 @@ export const StyledButton = styled.button`
   letter-spacing: 0.02857rem;
   cursor: pointer;
   transition: all 0.2s;
-  margin-left: 518px;
+  margin-left: 484px;
   &:hover {
     background-color: #009595;
   }

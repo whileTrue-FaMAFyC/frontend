@@ -14,6 +14,7 @@ import {
   StyledEntryCard,
   StyledButton,
 } from "./RobotsLibrary.style";
+import {EntryPage} from "../GameConfig/MatchConfig.styled";
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
@@ -33,32 +34,34 @@ const RobotsLibrary = () => {
     console.log(robotsNames);
   }, []);
   return (
-    <StyledEntryCard>
-      <h2 data-testid='title'>My robots</h2>
-      <Table>
-        <Tbody>
-          {robotsNames.length < 1 && (
-            <Feedback>
-              <Column>No robots availables</Column>
-            </Feedback>
-          )}
-          {robotsNames.map(({avatar, name}) => (
-            <Row key={name} data-testid='row'>
-              <Column>
-                {" "}
-                <Avatar spacing={2} src={avatar} />
-              </Column>
-              <Column>{name}</Column>
-            </Row>
-          ))}
-        </Tbody>
-      </Table>
-      <StyledButton>
-        <Link to='/botsubmit' data-testid='linkToBotSubmit'>
-          Create bot
-        </Link>
-      </StyledButton>
-    </StyledEntryCard>
+    <EntryPage>
+      <StyledEntryCard>
+        <Table>
+          <h2 data-testid='title'>My robots</h2>
+          <Tbody>
+            {robotsNames.length < 1 && (
+              <Feedback>
+                <Column>No robots availables</Column>
+              </Feedback>
+            )}
+            {robotsNames.map(({avatar, name}) => (
+              <Row key={name} data-testid='row'>
+                <Column>
+                  {" "}
+                  <Avatar spacing={2} src={avatar} />
+                </Column>
+                <Column>{name}</Column>
+              </Row>
+            ))}
+          </Tbody>
+        </Table>
+        <StyledButton>
+          <Link to='/botsubmit' data-testid='linkToBotSubmit'>
+            Create bot
+          </Link>
+        </StyledButton>
+      </StyledEntryCard>
+    </EntryPage>
   );
 };
 export default RobotsLibrary;
