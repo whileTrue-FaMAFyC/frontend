@@ -4,7 +4,7 @@ import {StyledNavbar, NavItemLink} from "./Navbar.styled";
 function Navbar({children}) {
   return (
     <StyledNavbar data-testid='navbar'>
-      <NavItemLink to='/' data-testid='toHome'>
+      <NavItemLink to='/home' data-testid='toHome'>
         Home
       </NavItemLink>
       <NavItemLink to='/login' data-testid='toLogin'>
