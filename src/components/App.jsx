@@ -28,6 +28,8 @@ function App() {
           <Route path='/verify' element={<Verify />} />
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
+          <Route path='/' element={<Home />} />
+          {/* Adding '/' to Home until we have welcome page */}
         </Routes>
       </div>
     </div>
