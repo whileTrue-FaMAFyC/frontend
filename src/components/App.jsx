@@ -1,6 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-
-import Home from "../pages/Home";
 import {
   Login,
   Register,
@@ -10,9 +8,7 @@ import {
   BotInGame,
   AvatarSubmit,
 } from "../components";
-import Verify from "../pages/Verify/Verify";
-import ListMatches from "../pages/ListMatches/ListMatches";
-
+import {ListMatches, Verify, Home, Match} from "../pages";
 function App() {
   return (
     <div className='App'>
@@ -22,12 +18,13 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/listgames' element={<ListMatches />} />
           <Route path='/botsubmit' element={<Botsubmit />} />
           <Route path='/gameconfig' element={<GameConfig />} />
           <Route path='/verify' element={<Verify />} />
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
+          <Route path='/listgames' element={<ListMatches />} />
+          <Route path='/match/:id' element={<Match />} />
         </Routes>
       </div>
     </div>

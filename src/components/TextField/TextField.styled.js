@@ -11,16 +11,18 @@ export const Input = styled.input`
   width: 100%;
   height: 50px;
   padding: 5px;
-  background-color: #0f1519;
+  background-color: #0a0e13;
   outline: none;
-  border: 1px solid rgb(0, 100, 100);
+
+  border: 1px solid #2793c6;
   border-radius: 5px;
   color: #fff;
+
   &::placeholder {
     color: red;
   }
   &:focus {
-    border: 1px solid #00c8c8;
+    border: 1px solid #0fbcde;
   }
   font-size: 16px;
 `;
