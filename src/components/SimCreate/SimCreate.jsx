@@ -8,8 +8,8 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-  StyledSuccess,
 } from "./SimCreate.styled.js";
+import Simulation from "../Simulation/Simulation";
 
 const SimCreate = () => {
   const {
@@ -23,6 +23,7 @@ const SimCreate = () => {
   const [robotsNames, setRobotsNames] = useState([]);
   const [showRobot3, setShowRobot3] = useState(false);
   const [showRobot4, setShowRobot4] = useState(false);
+  const [simulation, setSimulation] = useState({});
 
   const callGetRobotsNames = async () => {
     try {
@@ -39,6 +40,17 @@ const SimCreate = () => {
 
   const onSubmit = async (data) => {
     setFailure_data("");
+    const body = {
+      "num-rounds": data.num_rounds,
+      robots: [data.robot1, data.robot2],
+    };
+    if (data.robot3 !== "") {
+      body.robots = [...body.robots, data.robot3];
+    }
+    if (data.robot4 !== "") {
+      body.robots = [...body.robots, data.robot4];
+    }
+
     const token = localStorage.getItem("user");
     await fetch("https://63446b7ddcae733e8fdef696.mockapi.io/simCreate", {
       method: "POST",
@@ -48,15 +60,15 @@ const SimCreate = () => {
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     })
       .then(async (response) => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
+          setSimulation({props: "Simulacion!"});
           setSuccess(true);
           setFailure_data("");
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
@@ -69,143 +81,149 @@ const SimCreate = () => {
   };
 
   return (
-    <EntryPage>
-      <StyledEntryCard className='form_crear_partida'>
-        <h2>Create simulation</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputRobot1'>
-              Robot 1:
-            </label>
-            <select
-              id='inputRobot1'
-              data-testid='nameRobot1'
-              {...register("robot1", {required: true})}>
-              <option key={""} value=''>
-                * Choose a robot *
-              </option>
-              {robotsNames.map((a) => (
-                <option key={a.name} value={a.name}>
-                  {a.name}
-                </option>
-              ))}
-            </select>
-            {errors.robot1?.type === "required" && (
-              <StyledError data-testid='requiredRobot1'>
-                Robot is required.
-              </StyledError>
-            )}
-          </StyledInputGroup>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputRobot2'>
-              Robot 2:
-            </label>
-            <select
-              id='inputRobot2'
-              data-testid='nameRobot2'
-              {...register("robot2", {
-                required: true,
-                onChange: () => setShowRobot3(true),
-              })}>
-              <option key={""} value=''>
-                * Choose a robot *
-              </option>
-              {robotsNames.map((a) => (
-                <option key={a.name} value={a.name}>
-                  {a.name}
-                </option>
-              ))}
-            </select>
-            {errors.robot2?.type === "required" && (
-              <StyledError data-testid='requiredRobot2'>
-                Robot is required.
-              </StyledError>
-            )}
-          </StyledInputGroup>
-          {showRobot3 ? (
-            <StyledInputGroup>
-              <label className='form-label' htmlFor='inputRobot3'>
-                Robot 3:
-              </label>
-              <select
-                id='inputRobot3'
-                data-testid='nameRobot3'
-                {...register("robot3", {onChange: () => setShowRobot4(true)})}>
-                <option key={""} value=''>
-                  * No robot *
-                </option>
-                {robotsNames.map((a) => (
-                  <option key={a.name} value={a.name}>
-                    {a.name}
+    <div>
+      {!success ? (
+        <EntryPage>
+          <StyledEntryCard className='form_crear_partida'>
+            <h2>Create simulation</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <StyledInputGroup>
+                <label className='form-label' htmlFor='inputRobot1'>
+                  Robot 1:
+                </label>
+                <select
+                  id='inputRobot1'
+                  data-testid='nameRobot1'
+                  {...register("robot1", {required: true})}>
+                  <option key={""} value=''>
+                    * Choose a robot *
                   </option>
-                ))}
-              </select>
-            </StyledInputGroup>
-          ) : null}
-
-          {showRobot4 ? (
-            <StyledInputGroup>
-              <label className='form-label' htmlFor='inputRobot4'>
-                Robot 4:
-              </label>
-              <select
-                id='inputRobot4'
-                data-testid='nameRobot4'
-                {...register("robot4")}>
-                <option key={""} value=''>
-                  * No robot *
-                </option>
-                {robotsNames.map((a) => (
-                  <option key={a.name} value={a.name}>
-                    {a.name}
+                  {robotsNames.map((a) => (
+                    <option key={a.name} value={a.name}>
+                      {a.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.robot1?.type === "required" && (
+                  <StyledError data-testid='requiredRobot1'>
+                    Robot is required.
+                  </StyledError>
+                )}
+              </StyledInputGroup>
+              <StyledInputGroup>
+                <label className='form-label' htmlFor='inputRobot2'>
+                  Robot 2:
+                </label>
+                <select
+                  id='inputRobot2'
+                  data-testid='nameRobot2'
+                  {...register("robot2", {
+                    required: true,
+                    onChange: () => setShowRobot3(true),
+                  })}>
+                  <option key={""} value=''>
+                    * Choose a robot *
                   </option>
-                ))}
-              </select>
-            </StyledInputGroup>
-          ) : null}
+                  {robotsNames.map((a) => (
+                    <option key={a.name} value={a.name}>
+                      {a.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.robot2?.type === "required" && (
+                  <StyledError data-testid='requiredRobot2'>
+                    Robot is required.
+                  </StyledError>
+                )}
+              </StyledInputGroup>
+              {showRobot3 ? (
+                <StyledInputGroup>
+                  <label className='form-label' htmlFor='inputRobot3'>
+                    Robot 3:
+                  </label>
+                  <select
+                    id='inputRobot3'
+                    data-testid='nameRobot3'
+                    {...register("robot3", {
+                      onChange: () => setShowRobot4(true),
+                    })}>
+                    <option key={""} value=''>
+                      * No robot *
+                    </option>
+                    {robotsNames.map((a) => (
+                      <option key={a.name} value={a.name}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </select>
+                </StyledInputGroup>
+              ) : null}
 
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputnum_rounds'>
-              Number of rounds:
-            </label>
-            <StyledInput
-              type='text'
-              id='inputnum_rounds'
-              data-testid='nRounds'
-              {...register("num_rounds", {
-                required: true,
-                validate: (val) => {
-                  return 1 <= val && val <= 10000;
-                },
-              })}
-            />
-            {errors.num_rounds?.type === "required" && (
-              <StyledError data-testid='requiredNRounds'>
-                Number of rounds is required.
-              </StyledError>
-            )}
-            {errors.num_rounds?.type === "validate" && (
-              <StyledError data-testid='valNRounds'>
-                Enter an integer between 1 and 10000.
-              </StyledError>
-            )}
-          </StyledInputGroup>
+              {showRobot4 ? (
+                <StyledInputGroup>
+                  <label className='form-label' htmlFor='inputRobot4'>
+                    Robot 4:
+                  </label>
+                  <select
+                    id='inputRobot4'
+                    data-testid='nameRobot4'
+                    {...register("robot4")}>
+                    <option key={""} value=''>
+                      * No robot *
+                    </option>
+                    {robotsNames.map((a) => (
+                      <option key={a.name} value={a.name}>
+                        {a.name}
+                      </option>
+                    ))}
+                  </select>
+                </StyledInputGroup>
+              ) : null}
 
-          <StyledButton data-testid='button' type='submit'>
-            Create
-          </StyledButton>
-        </form>
+              <StyledInputGroup>
+                <label className='form-label' htmlFor='inputnum_rounds'>
+                  Number of rounds:
+                </label>
+                <StyledInput
+                  type='text'
+                  id='inputnum_rounds'
+                  data-testid='nRounds'
+                  {...register("num_rounds", {
+                    required: true,
+                    validate: (val) => {
+                      return 1 <= val && val <= 10000;
+                    },
+                  })}
+                />
+                {errors.num_rounds?.type === "required" && (
+                  <StyledError data-testid='requiredNRounds'>
+                    Number of rounds is required.
+                  </StyledError>
+                )}
+                {errors.num_rounds?.type === "validate" && (
+                  <StyledError data-testid='valNRounds'>
+                    Enter an integer between 1 and 10000.
+                  </StyledError>
+                )}
+              </StyledInputGroup>
 
-        {success && (
-          <StyledSuccess data-testid='success'>
-            The simulation is about to start!
-          </StyledSuccess>
-        )}
-        {failure_data !== "" ? (
-          <StyledError data-testid='failure'>{failure_data}</StyledError>
-        ) : null}
-      </StyledEntryCard>
-    </EntryPage>
+              <StyledButton data-testid='button' type='submit'>
+                Create
+              </StyledButton>
+            </form>
+
+            {failure_data !== "" ? (
+              <StyledError data-testid='failure'>{failure_data}</StyledError>
+            ) : null}
+          </StyledEntryCard>
+        </EntryPage>
+      ) : (
+        <div>
+          <Simulation props={simulation} />
+        </div>
+      )}
+      ;
+    </div>
   );
 };
 

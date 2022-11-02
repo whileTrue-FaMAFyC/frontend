@@ -10,6 +10,7 @@ import {
   BotInGame,
   AvatarSubmit,
   SimCreate,
+  Simulation,
 } from "../components";
 import Verify from "../pages/Verify/Verify";
 import ListMatches from "../pages/ListMatches/ListMatches";
@@ -30,6 +31,7 @@ function App() {
           <Route path='/botInGame' element={<BotInGame />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
           <Route path='/simCreate' element={<SimCreate />} />
+          {/* <Route path='/simulation' element={<Simulation props={{}} />} /> */}
         </Routes>
       </div>
     </div>

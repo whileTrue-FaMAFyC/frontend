@@ -7,7 +7,6 @@ import {robotsMock} from "../__mocks__/robots";
 import mockAxios from "axios";
 
 describe("Configuracion de simulacion test", () => {
-  beforeEach(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
@@ -19,16 +18,8 @@ describe("Configuracion de simulacion test", () => {
   // DECLARACION DE VARIABLES
   let inputNameRobot1;
   let inputNameRobot2;
-  let inputNameRobot3;
-  let inputNameRobot4;
   let inputNRounds;
   let button;
-  let requiredRobot1;
-  let requiredRobot2;
-  let requiredNRounds;
-  let valNRounds;
-  let successMessage;
-  let failureMessage;
 
   beforeEach(async () => {
     mockAxios.get.mockResolvedValue({data: robotsMock});
@@ -57,22 +48,20 @@ describe("Configuracion de simulacion test", () => {
     userEvent.selectOptions(inputNameRobot1, "Soyunrobot");
     userEvent.selectOptions(inputNameRobot2, "Soyunrobot");
 
-    inputNameRobot3 = await screen.findByTestId("nameRobot3");
+    const inputNameRobot3 = await screen.findByTestId("nameRobot3");
 
     userEvent.selectOptions(inputNameRobot3, "Soyotrorobot");
 
-    inputNameRobot4 = await screen.findByTestId("nameRobot4");
+    const inputNameRobot4 = await screen.findByTestId("nameRobot4");
 
     userEvent.selectOptions(inputNameRobot4, "Soyunrobot");
     userEvent.type(inputNRounds, "5");
 
     userEvent.click(button);
 
-    successMessage = await screen.findByTestId("success");
+    const successMessage = await screen.findByTestId("Simulation");
 
-    expect(successMessage).toHaveTextContent(
-      "The simulation is about to start!"
-    );
+    expect(successMessage).toBeInTheDocument;
   });
 
   // CAMPOS REQUERIDOS
@@ -83,11 +72,12 @@ describe("Configuracion de simulacion test", () => {
       await screen.findByTestId("nameRobot3"),
       "Soyotrorobot"
     );
+
     userEvent.type(inputNRounds, "5");
 
     userEvent.click(button);
 
-    requiredRobot1 = await screen.findByTestId("requiredRobot1");
+    const requiredRobot1 = await screen.findByTestId("requiredRobot1");
 
     expect(requiredRobot1).toHaveTextContent("Robot is required.");
   });
@@ -98,7 +88,7 @@ describe("Configuracion de simulacion test", () => {
 
     userEvent.click(button);
 
-    requiredRobot2 = await screen.findByTestId("requiredRobot2");
+    const requiredRobot2 = await screen.findByTestId("requiredRobot2");
 
     expect(requiredRobot2).toHaveTextContent("Robot is required.");
     // expect(inputRobot3).not.toBeInTheDocument;
@@ -111,23 +101,29 @@ describe("Configuracion de simulacion test", () => {
 
     userEvent.click(button);
 
-    requiredNRounds = await screen.findByTestId("requiredNRounds");
+    const requiredNRounds = await screen.findByTestId("requiredNRounds");
 
     expect(requiredNRounds).toHaveTextContent("Number of rounds is required.");
-    expect(successMessage).not.toBeInTheDocument;
   });
 
   // NUMERO DE RONDAS
   test("5. New sim with letters in number of rounds", async () => {
     userEvent.selectOptions(inputNameRobot1, "Soyunrobot");
     userEvent.selectOptions(inputNameRobot2, "Soyunrobot");
+
+    const inputNameRobot3 = await screen.findByTestId("nameRobot3");
+
     userEvent.selectOptions(inputNameRobot3, "Soyotrorobot");
+
+    const inputNameRobot4 = await screen.findByTestId("nameRobot4");
+
     userEvent.selectOptions(inputNameRobot4, "Soyunrobot");
+
     userEvent.type(inputNRounds, "5a");
 
     userEvent.click(button);
 
-    valNRounds = await screen.findByTestId("valNRounds");
+    const valNRounds = await screen.findByTestId("valNRounds");
 
     expect(valNRounds).toHaveTextContent(
       "Enter an integer between 1 and 10000."
@@ -137,13 +133,19 @@ describe("Configuracion de simulacion test", () => {
   test("6. New sim with negative numbers in number of rounds", async () => {
     userEvent.selectOptions(inputNameRobot1, "Soyunrobot");
     userEvent.selectOptions(inputNameRobot2, "Soyunrobot");
+
+    const inputNameRobot3 = await screen.findByTestId("nameRobot3");
+
     userEvent.selectOptions(inputNameRobot3, "Soyotrorobot");
+
+    const inputNameRobot4 = await screen.findByTestId("nameRobot4");
+
     userEvent.selectOptions(inputNameRobot4, "Soyunrobot");
     userEvent.type(inputNRounds, "-5");
 
     userEvent.click(button);
 
-    valNRounds = await screen.findByTestId("valNRounds");
+    const valNRounds = await screen.findByTestId("valNRounds");
 
     expect(valNRounds).toHaveTextContent(
       "Enter an integer between 1 and 10000."
@@ -157,6 +159,7 @@ describe("Configuracion de simulacion test", () => {
 
     userEvent.click(button);
 
+    const valNRounds = await screen.findByTestId("valNRounds");
     expect(valNRounds).toHaveTextContent(
       "Enter an integer between 1 and 10000."
     );
@@ -169,7 +172,7 @@ describe("Configuracion de simulacion test", () => {
 
     userEvent.click(button);
 
-    valNRounds = await screen.findByTestId("valNRounds");
+    const valNRounds = await screen.findByTestId("valNRounds");
 
     expect(valNRounds).toHaveTextContent(
       "Enter an integer between 1 and 10000."
@@ -188,13 +191,19 @@ describe("Configuracion de simulacion test", () => {
 
     userEvent.selectOptions(inputNameRobot1, "Soyunrobot");
     userEvent.selectOptions(inputNameRobot2, "Soyunrobot");
+
+    const inputNameRobot3 = await screen.findByTestId("nameRobot3");
+
     userEvent.selectOptions(inputNameRobot3, "Soyotrorobot");
+
+    const inputNameRobot4 = await screen.findByTestId("nameRobot4");
+
     userEvent.selectOptions(inputNameRobot4, "Soyunrobot");
     userEvent.type(inputNRounds, "500");
 
     userEvent.click(button);
 
-    failureMessage = await screen.findByTestId("failure");
+    const failureMessage = await screen.findByTestId("failure");
 
     expect(failureMessage).toHaveTextContent("Server error");
   });
