@@ -5,170 +5,192 @@ import {Board} from "../components/Simulation/Board";
 
 const props = {
   names: ["Wallee", "Eva", "Rocoloco", "Mario"],
-  colors: ["red", "yellow", "turquoise", "pink"],
+
   simulation: [
     {
-      robots: [
-        {
+      robots: {
+        Wallee: {
           x: 0,
           y: 0,
           harmed: false,
           died: false,
         },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
+    },
+    {
+      robots: {
+        Wallee: {
           x: 0,
           y: 100,
           harmed: false,
           died: false,
         },
-      ],
+        Eva: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
     },
     {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: true,
-          died: false,
-        },
-        {
+      robots: {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Wallee: {
+          x: 100,
+          y: 100,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: 100,
+          y: 100,
+          harmed: false,
+          died: false,
+        },
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
+      },
     },
     {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
+      robots: {
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Mario: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-      ],
+        Wallee: {
+          x: 100,
+          y: 0,
+          harmed: false,
+          died: false,
+        },
+      },
     },
     {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+      robots: {
+        Wallee: {
+          x: 0,
+          y: 0,
           harmed: false,
-          died: true,
+          died: false,
         },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Mario: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-      ],
+      },
     },
     {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
+      robots: {
+        Wallee: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Mario: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-      ],
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
     },
   ],
 };
 
 test("render board component successfully", async () => {
-  render(
-    <Board
-      names={props.names}
-      colors={props.colors}
-      robots={props.simulation[0].robots}
-    />
-  );
+  render(<Board names={props.names} robots={props.simulation[0].robots} />);
 
   //const labels = screen.findAllByTestId("label");
   const bots = await screen.findAllByTestId("bot");
-  const bot0 = await screen.findByTestId("robot0");
-  const bot1 = await screen.findByTestId("robot1");
-  const bot2 = await screen.findByTestId("robot2");
-  const bot3 = await screen.findByTestId("robot3");
+  const bot0 = await screen.findByTestId("Wallee");
+  const bot1 = await screen.findByTestId("Eva");
+  const bot2 = await screen.findByTestId("Mario");
+  const bot3 = await screen.findByTestId("Rocoloco");
 
   //expect.toBeInTheDocument(labels);
   expect.toBeInTheDocument(bots);
-  expect.toBeInTheDocument(bot0);
+  expect.not.toBeInTheDocument(bot0);
   expect.toBeInTheDocument(bot1);
   expect.toBeInTheDocument(bot2);
   expect.toBeInTheDocument(bot3);
