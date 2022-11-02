@@ -45,7 +45,7 @@ const MatchView = ({match}, {matssch_id}) => {
     callGetRobotsNames();
   }, []);
 
-  const onSubmit = async (data) => {
+  const onJoin = async (data) => {
     const token = await localStorage.getItem("user");
     console.log(data);
     await fetch(
@@ -61,6 +61,34 @@ const MatchView = ({match}, {matssch_id}) => {
           "Access-Control-Allow-Credentials": "true",
         },
         body: JSON.stringify(data),
+      }
+    )
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status === 201 || response.status === 200) {
+        } else {
+          alert(data.detail);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  const onLeave = async () => {
+    const token = await localStorage.getItem("user");
+    await fetch(
+      `${
+        process.env.REACT_APP_API_KEY
+      }matches/leave-match/${localStorage.getItem(`match_id`)}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `${token}`,
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Credentials": "true",
+        },
       }
     )
       .then(async (response) => {
@@ -102,45 +130,45 @@ const MatchView = ({match}, {matssch_id}) => {
             ))}
           </PlayersInfo>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <StyledSelect
-              enabledColor={match.im_in}
-              disabled={match.im_in}
-              id='inputRaobot'
-              data-testid='nameRobot'
-              {...register("joining_robot", {required: true})}>
-              {robotsNames.map((a) => (
-                <option key={a.name} value={a.name}>
-                  {a.name}
-                </option>
-              ))}
-              <option key={""} value=''>
-                * Choose a robot *
-              </option>
-            </StyledSelect>
-            {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Robot is required.</StyledError>
-            )}
-            <StyledInputGroup>
-              <StyledInput
+          {match.is_creator && (
+            <form onSubmit={handleSubmit(onJoin)}>
+              <StyledSelect
                 enabledColor={match.im_in}
                 disabled={match.im_in}
-                type={match.im_in ? "hidden" : "password"}
-                id='inputPassword'
-                data-testid='password'
-                placeholder=' Match password'
-                {...register(" match_password", {
-                  maxLength: 16,
-                })}
-              />
-              {errors.password?.type === "maxLength" && (
-                <StyledError role='alertError'>
-                  The password must have at most 16 characters.
-                </StyledError>
+                id='inputRaobot'
+                data-testid='nameRobot'
+                {...register("joining_robot", {required: true})}>
+                {robotsNames.map((a) => (
+                  <option key={a.name} value={a.name}>
+                    {a.name}
+                  </option>
+                ))}
+                <option key={""} value=''>
+                  * Choose a robot *
+                </option>
+              </StyledSelect>
+              {errors.creator_robot?.type === "required" && (
+                <StyledError role='alertError'>Robot is required.</StyledError>
               )}
-            </StyledInputGroup>
+              <StyledInputGroup>
+                <StyledInput
+                  enabledColor={match.im_in}
+                  disabled={match.im_in}
+                  type={match.im_in ? "hidden" : "password"}
+                  id='inputPassword'
+                  data-testid='password'
+                  placeholder=' Match password'
+                  {...register(" match_password", {
+                    maxLength: 16,
+                  })}
+                />
+                {errors.password?.type === "maxLength" && (
+                  <StyledError role='alertError'>
+                    The password must have at most 16 characters.
+                  </StyledError>
+                )}
+              </StyledInputGroup>
 
-            <Buttons>
               <StyledButton
                 type='submit'
                 data-testid='joinButton'
@@ -150,16 +178,15 @@ const MatchView = ({match}, {matssch_id}) => {
               </StyledButton>
 
               <StyledButton
-                type='submit'
-                onClick={leaveMatch}
+                onClick={onLeave}
                 data-testid='leaveButton'
                 enabledColor={!match.im_in}
                 disabled={!match.im_in}>
                 Leave
               </StyledButton>
               <Button>START</Button>
-            </Buttons>
-          </form>
+            </form>
+          )}
         </Wrapper>
       </SuperWrapper>
 

@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
-import {getRobotsNames, joinMatch, leaveMatch} from "../../services";
+import {getRobotsNames} from "../../services";
 
 import {
   StyledButton,
@@ -9,7 +9,6 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-  StyledSelect,
 } from "./MatchConfig.styled.js";
 
 const MatchConfig = () => {
@@ -23,7 +22,6 @@ const MatchConfig = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [robotsNames, setRobotsNames] = useState([]);
-  const [imIn, setImIn] = useState(false);
 
   const callGetRobotsNames = async () => {
     try {
@@ -34,15 +32,8 @@ const MatchConfig = () => {
     }
   };
 
-  const joined = () => {
-    setImIn(true);
-  };
-
-  const notJoined = () => {
-    setImIn(false);
-  };
-
   useEffect(() => {
+    console.log(10 / 2);
     callGetRobotsNames();
   }, []);
 
@@ -110,7 +101,7 @@ const MatchConfig = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          {/* <StyledInputGroup>
+          <StyledInputGroup>
             <label className='form-label' htmlFor='inputPassword'>
               Password (optional):
             </label>
@@ -127,7 +118,7 @@ const MatchConfig = () => {
                 The password must have at most 16 characters.
               </StyledError>
             )}
-          </StyledInputGroup> */}
+          </StyledInputGroup>
           <StyledInputGroup>
             <label>Min players:</label>
             <select
@@ -211,7 +202,7 @@ const MatchConfig = () => {
               </StyledError>
             )}
           </StyledInputGroup>
-          {/* <StyledInputGroup>
+          <StyledInputGroup>
             <label className='form-label' htmlFor='inputRobot'>
               Robot:
             </label>
@@ -231,77 +222,8 @@ const MatchConfig = () => {
             {errors.creator_robot?.type === "required" && (
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
-          </StyledInputGroup> */}
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <StyledSelect
-                    enabledColor={success}
-                    disabled={success}
-                    id='inputRaobot'
-                    data-testid='nameRobot'
-                    {...register("joining_robot", {required: true})}>
-                    {robotsNames.map((a) => (
-                      <option key={a.name} value={a.name}>
-                        {a.name}
-                      </option>
-                    ))}
-                    <option key={""} value=''>
-                      * Choose a robot *
-                    </option>
-                  </StyledSelect>
-                  {errors.creator_robot?.type === "required" && (
-                    <StyledError role='alertError'>
-                      Robot is required.
-                    </StyledError>
-                  )}
-                </td>
-                <td>
-                  <StyledInputGroup>
-                    <StyledInput
-                      enabledColor={success}
-                      disabled={success}
-                      type='password'
-                      id='inputPassword'
-                      data-testid='password'
-                      placeholder=' Match password'
-                      {...register(" match_password", {
-                        maxLength: 16,
-                      })}
-                    />
-                    {errors.password?.type === "maxLength" && (
-                      <StyledError role='alertError'>
-                        The password must have at most 16 characters.
-                      </StyledError>
-                    )}
-                  </StyledInputGroup>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <StyledButton
-                    type='submit'
-                    onClick={joined && joinMatch}
-                    data-testid='joinButton'
-                    enabledColor={success}
-                    disabled={success}>
-                    Join
-                  </StyledButton>
-                </td>
-                <td>
-                  <StyledButton
-                    type='submit'
-                    onClick={notJoined && leaveMatch}
-                    data-testid='leaveButton'
-                    enabledColor={!success}
-                    disabled={!success}>
-                    Leave
-                  </StyledButton>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          </StyledInputGroup>
+          <StyledButton type='submit'>Create</StyledButton>
         </form>
         {success && (
           <div
