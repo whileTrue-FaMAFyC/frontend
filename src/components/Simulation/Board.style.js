@@ -59,16 +59,15 @@ export const StyledLabel = styled.label`
 export const Missiles = styled.div`
   height: 10%;
   position: absolute;
-  height: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
-  width: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
+  height: ${(props) => (props.exploded ? `60px` : `15px`)}; //12px;
+  width: ${(props) => (props.exploded ? `60px` : `15px`)}; //12px;
   opacity: ${(props) => (props.exploded ? `30%` : `100%`)};
   /* background-color: ${(props) => (true ? `# + ${props.idr}` : "#9aaa")}; */
   background-color: red;
   border-radius: 50%;
   display: inline-block;
-  left: ${(props) =>
-    props.exploded ? `${props.x - 4}%` : `${props.x - 0.5}%`};
-  top: ${(props) => (props.exploded ? `${props.y - 4}%` : `${props.y - 0.5}%`)};
+  left: ${(props) => (props.exploded ? `${props.x - 4}%` : `${props.x}%`)};
+  top: ${(props) => (props.exploded ? `${props.y - 4}%` : `${props.y}%`)};
   /* border-radius: inherit; */
   transition: ${(props) =>
     props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;

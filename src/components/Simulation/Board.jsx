@@ -18,9 +18,9 @@ export const Board = ({names, robots, missiles}) => {
           y={r.y}
           hidden={r.died}
           data-testid={`${robotId}`}>
-          <StyledLabel htmlFor={robotId} data-testid='label'>
+          {/* <StyledLabel htmlFor={robotId} data-testid='label'>
             {robotId}
-          </StyledLabel>
+          </StyledLabel> */}
           <Bot id={robotId} data-testid='bot' />
           <StyledHarm hidden={!r.harmed}>
             <Harm data-testid='harm' />
@@ -30,8 +30,10 @@ export const Board = ({names, robots, missiles}) => {
       {Object.entries(missiles).map(([missilId, missil]) => (
         <Missiles
           key={missilId}
-          x={missil.x}
-          y={missil.y}
+          initial_x={missil.initial_x}
+          initial_y={missil.initial_y}
+          x={missil.x / 10}
+          y={missil.y / 10}
           exploded={missil.exploded}
           new={missil.new}></Missiles>
       ))}

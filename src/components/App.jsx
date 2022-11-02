@@ -46,24 +46,32 @@ const props = {
       },
       missiles: {
         1: {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+          initial_x: 2,
+          initial_y: 5,
+          x: 0,
+          y: 0,
           exploded: false,
           new: true,
         },
         2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: true,
         },
         3: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: true,
         },
         4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -100,24 +108,32 @@ const props = {
       },
       missiles: {
         1: {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+          initial_x: 2,
+          initial_y: 5,
+          x: 100,
+          y: 0,
           exploded: false,
           new: false,
         },
         2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         3: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -127,13 +143,13 @@ const props = {
     },
     {
       robots: {
-        Eva: {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+        Wallee: {
+          x: 60,
+          y: 60,
           harmed: false,
           died: false,
         },
-        Wallee: {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
@@ -153,25 +169,33 @@ const props = {
         },
       },
       missiles: {
-        4: {
+        1: {
+          initial_x: 2,
+          initial_y: 5,
+          x: 100,
+          y: 100,
+          exploded: false,
+          new: false,
+        },
+        2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         3: {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: true,
-          new: false,
-        },
-        2: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
-        1: {
+        4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -208,24 +232,32 @@ const props = {
       },
       missiles: {
         1: {
+          initial_x: 2,
+          initial_y: 5,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         3: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -262,24 +294,32 @@ const props = {
       },
       missiles: {
         1: {
+          initial_x: 2,
+          initial_y: 5,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         3: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -316,24 +356,32 @@ const props = {
       },
       missiles: {
         1: {
+          initial_x: 2,
+          initial_y: 5,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         2: {
+          initial_x: 6,
+          initial_y: 10,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         3: {
+          initial_x: 12,
+          initial_y: 50,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
         4: {
+          initial_x: 21,
+          initial_y: 52,
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
@@ -363,13 +411,13 @@ const props = {
 //           x: Math.floor(Math.random() * 100) + 1,
 //           y: Math.floor(Math.random() * 100) + 1,
 //           harmed: false,
-//           died: true,
+//           died: false,
 //         },
 //         {
 //           x: 0,
 //           y: 100,
 //           harmed: false,
-//           died: true,
+//           died: false,
 //         },
 //       ],
 
