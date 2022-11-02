@@ -1,3 +1,4 @@
+import {Route, Routes} from "react-router-dom";
 import {
   Login,
   Register,
@@ -5,8 +6,9 @@ import {
   GameConfig,
   BotInGame,
   AvatarSubmit,
+  Navbar,
 } from "../components";
-import {ListMatches, Verify, Home, Match} from "../pages";
+import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
 
 function App() {
   return (
@@ -68,6 +70,15 @@ function App() {
               <div>
                 <Navbar />
                 <AvatarSubmit />
+              </div>
+            }
+          />
+          <Route
+            path='/match/:match_id'
+            element={
+              <div>
+                <Navbar />
+                <Match />
               </div>
             }
           />

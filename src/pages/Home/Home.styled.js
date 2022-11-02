@@ -52,7 +52,7 @@ export const StyledEntryCard = styled.div`
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
   flex-direction: column;
   min-height: 100vh;
   background-color: #0f1519;
