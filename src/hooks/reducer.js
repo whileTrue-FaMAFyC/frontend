@@ -9,6 +9,7 @@ export const matchReducer = (state, action) => {
       ...state,
       users_joined: state.users_joined + 1,
       user_robot: [...state.user_robot, payload],
+      im_in: true,
     },
     leave: () => {
       let users = [...state.user_robot];
@@ -18,6 +19,14 @@ export const matchReducer = (state, action) => {
         users_joined: state.users_joined - 1,
         user_robot: users,
       };
+    },
+    results: {
+      ...state,
+      results: payload?.winners,
+    },
+    start: {
+      ...state,
+      started: true,
     },
   };
 

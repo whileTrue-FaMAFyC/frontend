@@ -111,3 +111,37 @@ export const StyledButton = styled.button`
     background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
 `;
+
+export const StyledError = styled.p`
+  font-size: 12px;
+  padding: 3px;
+  color: #be0000;
+`;
+
+export const StyledSelect = styled.select`
+  left: 20px;
+  margin: 10px;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  outline: none;
+  padding: 8px 16px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  font-size: 1rem;
+  max-height: 34px;
+  -webkit-text-fill-color: #dedede;
+  transition: box-shadow 0.2s;
+  background-color: #252c32;
+  &::placeholder {
+    color: blue;
+    -webkit-text-fill-color: #b8b8b8;
+  }
+  &:focus {
+    box-shadow: 0 0 0 2px rgb(0, 200, 200, 0.5);
+    color: #0f1519;
+  }
+`;
