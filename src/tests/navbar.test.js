@@ -41,7 +41,7 @@ test("render navbar component successfully", async () => {
   expect.toBeInTheDocument(screen.getByTestId("toListGames"));
 });
 
-// // Test for rendering movement between components
+// Test for rendering movement between components
 // test("move to home", async () => {
 //   render(
 //     <div>
@@ -56,8 +56,7 @@ test("render navbar component successfully", async () => {
 //   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
 //   fireEvent.click(screen.getByTestId("toHome"));
-
-//   expect.toBeInTheDocument(screen.getByText("You are home"));
+//   expect.toBeInTheDocument(screen.getByText("PyRobots"));
 // });
 
 // test("move to login", async () => {
@@ -74,6 +73,5 @@ test("render navbar component successfully", async () => {
 //   expect.toBeInTheDocument(screen.getByTestId("toReg"));
 
 //   fireEvent.click(screen.getByTestId("toLogin"));
-
 //   expect.toBeInTheDocument(await screen.findByTestId("loginButton"));
 // });

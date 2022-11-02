@@ -1,10 +1,11 @@
 import {Route, Routes} from "react-router-dom";
-
+import Welcome from "../pages/Welcome/Welcome";
 import Home from "../pages/Home/Home";
+import Navbar from "../components/Navbar/Navbar";
+
 import {
   Login,
   Register,
-  Navbar,
   Botsubmit,
   GameConfig,
   BotInGame,
@@ -18,6 +19,7 @@ function App() {
     <div className='App'>
       <div>
         <Routes>
+          <Route path='/' element={<Welcome />} />
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Home />} />
           <Route path='/register' element={<Register />} />
