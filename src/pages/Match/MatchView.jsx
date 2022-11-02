@@ -1,4 +1,5 @@
 import {useForm} from "react-hook-form";
+import {useParams} from "react-router-dom";
 import {Fragment, useState, useEffect} from "react";
 import {
   Container,
@@ -19,13 +20,15 @@ import {joinMatch, leaveMatch, getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
 import {StyledInputGroup} from "../../components/Login/Login.styled";
 
-const MatchView = ({match}) => {
+const MatchView = ({match}, {matssch_id}) => {
   const {
     register,
     handleSubmit,
     formState: {errors},
-    watch,
   } = useForm();
+  const {matcha_id} = useParams();
+  console.log(matcha_id);
+
   const [robotsNames, setRobotsNames] = useState([]);
 
   const callGetRobotsNames = async () => {
@@ -42,7 +45,36 @@ const MatchView = ({match}) => {
     callGetRobotsNames();
   }, []);
 
-  console.log(robotsNames);
+  const onSubmit = async (data) => {
+    const token = await localStorage.getItem("user");
+    console.log(data);
+    await fetch(
+      `${
+        process.env.REACT_APP_API_KEY
+      }matches/join-match/${localStorage.getItem(`match_id`)}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `${token}`,
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Credentials": "true",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status === 201 || response.status === 200) {
+        } else {
+          alert(data.detail);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
   return (
     <Container>
       <SuperWrapper>
@@ -70,7 +102,7 @@ const MatchView = ({match}) => {
             ))}
           </PlayersInfo>
 
-          <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <StyledSelect
               enabledColor={match.im_in}
               disabled={match.im_in}
@@ -107,26 +139,27 @@ const MatchView = ({match}) => {
                 </StyledError>
               )}
             </StyledInputGroup>
-          </div>
-          <Buttons>
-            <StyledButton
-              type='submit'
-              onClick={joinMatch}
-              data-testid='joinButton'
-              enabledColor={match.im_in}
-              disabled={match.im_in}>
-              Join
-            </StyledButton>
-            <StyledButton
-              type='submit'
-              onClick={leaveMatch}
-              data-testid='leaveButton'
-              enabledColor={!match.im_in}
-              disabled={!match.im_in}>
-              Leave
-            </StyledButton>
-            <Button>START</Button>
-          </Buttons>
+
+            <Buttons>
+              <StyledButton
+                type='submit'
+                data-testid='joinButton'
+                enabledColor={match.im_in}
+                disabled={match.im_in}>
+                Join
+              </StyledButton>
+
+              <StyledButton
+                type='submit'
+                onClick={leaveMatch}
+                data-testid='leaveButton'
+                enabledColor={!match.im_in}
+                disabled={!match.im_in}>
+                Leave
+              </StyledButton>
+              <Button>START</Button>
+            </Buttons>
+          </form>
         </Wrapper>
       </SuperWrapper>
 

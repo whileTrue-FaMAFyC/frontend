@@ -21,6 +21,7 @@ const Match = () => {
           localStorage.getItem("user"),
           match_id
         );
+        localStorage.setItem("match_id", match_id);
         console.log(response);
         dispatch({type: "initial_info", payload: response.data});
       } catch (error) {
@@ -68,7 +69,7 @@ const Match = () => {
   // }, []);
   // console.log(robotsNames);
 
-  return <MatchView match={match} />; //robotsNames={robotsNames} />;
+  return <MatchView match={match} match_id={match_id} />; //robotsNames={robotsNames} />;
 };
 export default Match;
 
