@@ -9,6 +9,7 @@ const initialState = {
   num_games: 0,
   users_joined: 0,
   user_robot: [],
+  results: [],
   started: false,
   im_in: false,
   is_creator: false,

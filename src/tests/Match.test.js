@@ -1,13 +1,17 @@
 import WS from "jest-websocket-mock";
 import {render, cleanup, screen, waitFor} from "@testing-library/react";
-import {joinLobby, join, leave, joinLobby2} from "../__mocks__";
+import {joinLobby, join, leave, joinLobby2, results} from "../__mocks__";
 import {Match} from "../pages";
 import mockAxios from "axios";
 
 describe("Match test", () => {
   let server;
-  let id = undefined;
-  const URL_SOCKET = `${process.env.REACT_APP_WEB_SOCKET}matches/ws/join-lobby/${id}`;
+  let match_id = undefined;
+  const URL_SOCKET = `${
+    process.env.REACT_APP_WEB_SOCKET
+  }matches/ws/follow-lobby/${match_id}?authorization=${localStorage.getItem(
+    "user"
+  )}`;
 
   beforeEach(() => {
     server = new WS(URL_SOCKET);
@@ -64,5 +68,39 @@ describe("Match test", () => {
     });
 
     expect(screen.queryByText(leave.data.username)).not.toBeInTheDocument();
+  });
+
+  it("La partida termino y se le muestran los resultados a los jugadores", async () => {
+    mockAxios.get.mockResolvedValue({data: joinLobby2});
+
+    await server.connect;
+
+    render(<Match />);
+
+    await waitFor(() => {
+      expect(screen.getByText("partida")).toBeInTheDocument();
+      server.send(JSON.stringify(results));
+    });
+
+    expect(await screen.findByTestId("user_winner")).toHaveTextContent(
+      results.data.winners[0].username
+    );
+  });
+
+  it("Se inicia la partida", async () => {
+    mockAxios.get.mockResolvedValue({data: joinLobby2});
+
+    await server.connect;
+
+    render(<Match />);
+
+    await waitFor(() => {
+      expect(screen.getByText("partida")).toBeInTheDocument();
+      server.send(JSON.stringify({action: "start"}));
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("start")).toBeInTheDocument();
+    });
   });
 });
