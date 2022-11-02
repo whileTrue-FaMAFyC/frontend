@@ -75,33 +75,33 @@ const MatchView = ({match}, {matssch_id}) => {
       });
   };
 
-  const onLeave = async () => {
-    const token = await localStorage.getItem("user");
-    await fetch(
-      `${
-        process.env.REACT_APP_API_KEY
-      }matches/leave-match/${localStorage.getItem(`match_id`)}`,
-      {
-        method: "DELETE",
-        headers: {
-          authorization: `${token}`,
-          "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Access-Control-Allow-Credentials": "true",
-        },
-      }
-    )
-      .then(async (response) => {
-        const data = await response.json();
-        if (response.status === 201 || response.status === 200) {
-        } else {
-          alert(data.detail);
-        }
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+  // const onLeave = async () => {
+  //   const token = await localStorage.getItem("user");
+  //   await fetch(
+  //     `${
+  //       process.env.REACT_APP_API_KEY
+  //     }matches/leave-match/${localStorage.getItem(`match_id`)}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         authorization: `${token}`,
+  //         "Content-type": "application/json",
+  //         "Access-Control-Allow-Origin": "http://localhost:3000",
+  //         "Access-Control-Allow-Credentials": "true",
+  //       },
+  //     }
+  //   )
+  //     .then(async (response) => {
+  //       const data = await response.json();
+  //       if (response.status === 201 || response.status === 200) {
+  //       } else {
+  //         alert(data.detail);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
+  // };
 
   return (
     <Container>
@@ -178,15 +178,20 @@ const MatchView = ({match}, {matssch_id}) => {
               </StyledButton>
 
               <StyledButton
-                onClick={onLeave}
+                onClick={() =>
+                  leaveMatch(
+                    localStorage.getItem("user"),
+                    localStorage.getItem("match_id")
+                  )
+                }
                 data-testid='leaveButton'
                 enabledColor={!match.im_in}
                 disabled={!match.im_in}>
                 Leave
               </StyledButton>
-              <Button>START</Button>
             </form>
           )}
+          {match.is_creator && <Button>START</Button>}
         </Wrapper>
       </SuperWrapper>
 
