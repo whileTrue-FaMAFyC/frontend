@@ -35,9 +35,10 @@ test("render navbar component successfully", async () => {
   );
 
   expect.toBeInTheDocument(screen.getByTestId("navbar"));
-  expect.toBeInTheDocument(screen.getByTestId("toLogin"));
-  expect.toBeInTheDocument(screen.getByTestId("toReg"));
   expect.toBeInTheDocument(screen.getByTestId("toHome"));
+  expect.toBeInTheDocument(screen.getByTestId("toCreateMatch"));
+  expect.toBeInTheDocument(screen.getByTestId("toCreateBot"));
+  expect.toBeInTheDocument(screen.getByTestId("toListGames"));
 });
 
 // Test for rendering movement between components
