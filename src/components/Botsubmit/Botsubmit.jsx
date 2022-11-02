@@ -151,13 +151,13 @@ const Botsubmit = () => {
                 onChange: (t) => {
                   onUploadFileChange(t, setFile_cod, setFileName_cod);
                 },
-                /*  validate: (e) => {
+                validate: (e) => {
                   return (
                     e.length !== 0 &&
                     new RegExp("python").test(e[0].type) &&
                     e[0].size < 40000
                   );
-                }, */
+                },
               })}
             />
             {errors.source_code?.type === "validate" ? (
@@ -195,12 +195,12 @@ const Botsubmit = () => {
                   });
                   onChangePicture(file);
                 },
-                /*  validate: (e) => {
+                validate: (e) => {
                   return (
                     e.length === 0 ||
                     (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
                   );
-                }, */
+                },
               })}
             />
             {errors.avatar?.type === "validate" ? (

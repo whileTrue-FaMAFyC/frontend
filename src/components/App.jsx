@@ -8,7 +8,7 @@ import {
   AvatarSubmit,
   Navbar,
 } from "../components";
-import {ListMatches, Verify, Home, Welcome} from "../pages";
+import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
 
 function App() {
   return (
@@ -70,6 +70,15 @@ function App() {
               <div>
                 <Navbar />
                 <AvatarSubmit />
+              </div>
+            }
+          />
+          <Route
+            path='/match/:match_id'
+            element={
+              <div>
+                <Navbar />
+                <Match />
               </div>
             }
           />

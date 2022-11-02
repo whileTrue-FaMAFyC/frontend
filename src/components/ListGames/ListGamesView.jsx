@@ -1,3 +1,4 @@
+import {useNavigate} from "react-router-dom";
 import {
   Container,
   Title,
@@ -10,9 +11,10 @@ import {
 } from "./ListGames.styled";
 
 const ListGamesView = ({games}) => {
+  const navigate = useNavigate();
   return (
     <Container>
-      <Title>Game list</Title>
+      <Title>Match list</Title>
       <Table>
         <Thead>
           <Row>
@@ -30,7 +32,12 @@ const ListGamesView = ({games}) => {
           )}
           {games.map(
             ({match_id, creator_user, max_players, name, robots_joined}) => (
-              <Row key={match_id} data-testid='row'>
+              <Row
+                key={match_id}
+                data-testid='row'
+                onClick={() => {
+                  navigate(`/match/${match_id}`);
+                }}>
                 <Column>{name}</Column>
                 <Column>{creator_user.username}</Column>
                 <Column>{max_players}</Column>
