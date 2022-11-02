@@ -1,7 +1,6 @@
 import {EntryPage} from "./Board.style";
 import React, {useEffect, useState} from "react";
 import {Board} from "./Board";
-import {useRef} from "react";
 
 const Simulation = ({props}) => {
   const {names, simulation} = props;
@@ -24,6 +23,7 @@ const Simulation = ({props}) => {
 
   return (
     <EntryPage>
+      <div>Status Bar!</div>
       <Board names={names} robots={robots} />
     </EntryPage>
   );

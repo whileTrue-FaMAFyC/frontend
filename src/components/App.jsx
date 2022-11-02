@@ -82,8 +82,8 @@ const props = {
           died: false,
         },
         Wallee: {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
+          x: 100,
+          y: 100,
           harmed: false,
           died: false,
         },

@@ -4,9 +4,13 @@ import {Stars} from "@styled-icons/bootstrap";
 
 export const StyledBoard = styled.div`
   position: relative;
-  margin-top: 100px;
+  align-items: flex-start;
+  display: center;
+  justify-content: stretch;
+  margin: auto;
   width: 750px;
   height: 750px;
+  padding: 30px;
   color: #bf7636;
   background-color: #f2be5c;
   border: 5px inset #bb7032;
@@ -16,19 +20,19 @@ export const StyledBoard = styled.div`
 
 export const StyledRobot = styled.div`
   position: absolute;
+  /* justify-content: flex-start; */
   left: ${(props) => (props.x > 96.66 ? "96.66%" : `${props.x}%`)};
   top: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
   display: ${(props) => (props.hidden ? `hidden` : `flex`)};
   color: ${(props) => `${props.color}`};
   align-items: center;
   flex-direction: column;
-  border-radius: inherit;
   transition: 1s ease-in-out;
 `;
 
 export const Bot = styled(Robot)`
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   justify-content: center;
 `;
 
@@ -46,11 +50,13 @@ export const StyledHarm = styled.div`
 `;
 
 export const EntryPage = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
 `;
 
 export const StyledLabel = styled.label`
