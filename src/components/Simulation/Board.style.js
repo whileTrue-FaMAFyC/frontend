@@ -53,8 +53,8 @@ export const EntryPage = styled.div`
   background-color: #fbfbfb;
 `;
 
-// export const StyledLabel = styled.label`
-//   font-size: 12px;
-//   color: black;
-//   gap: 0px;
-// `;
+export const StyledLabel = styled.label`
+  font-size: 12px;
+  color: black;
+  gap: 0px;
+`;

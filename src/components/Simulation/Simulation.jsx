@@ -1,32 +1,30 @@
-import {StyledBoard, EntryPage} from "./Board.style";
+import {EntryPage} from "./Board.style";
 import React, {useEffect, useState} from "react";
 import {Board} from "./Board";
 import {useRef} from "react";
 
 const Simulation = ({props}) => {
-  const {names, colors, simulation} = props;
+  const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
-  const [robots, setRobots] = useState([]);
-
-  const interval = useRef(null);
+  const [robots, setRobots] = useState({});
 
   useEffect(() => {
-    interval.current = setInterval(() => {
+    const interval = setInterval(() => {
       drawFrame(simulation[nframe]);
       setNframe(nframe + 1);
     }, 2000);
-    return () => clearInterval(interval.current);
+    return () => clearInterval(interval);
   });
 
   const drawFrame = (frame) => {
-    if (nframe <= names.length) {
+    if (nframe < simulation.length) {
       setRobots(frame.robots);
     }
   };
 
   return (
     <EntryPage>
-      <Board names={names} colors={colors} robots={robots} />
+      <Board names={names} robots={robots} />
     </EntryPage>
   );
 };

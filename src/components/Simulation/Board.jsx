@@ -7,21 +7,21 @@ import {
   StyledHarm,
 } from "./Board.style";
 
-export const Board = ({names, colors, robots}) => {
+export const Board = ({names, robots}) => {
   return (
     <StyledBoard>
-      {robots.map((r, idx) => (
+      {Object.entries(robots).map(([robotId, r]) => (
         <StyledRobot
-          key={idx}
+          key={robotId}
           x={r.x}
           y={r.y}
-          color={colors[idx]}
+          //color={colors[idx]}
           hidden={r.died}
-          data-testid={"robot" + `${idx}`}>
-          {/* <StyledLabel htmlFor={idx} data-testid='label'>
-            {names[idx]}
-          </StyledLabel> */}
-          <Bot id={idx} data-testid='bot' />
+          data-testid={`${robotId}`}>
+          <StyledLabel htmlFor={robotId} data-testid='label'>
+            {robotId}
+          </StyledLabel>
+          <Bot id={robotId} data-testid='bot' />
           <StyledHarm hidden={!r.harmed}>
             <Harm data-testid='harm' />
           </StyledHarm>
