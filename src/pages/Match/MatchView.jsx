@@ -10,8 +10,13 @@ import {
   Button,
   Wrapper,
 } from "./Match.styled";
+import {MatchStartView} from "../../components";
 
-const MatchView = ({match}) => {
+const MatchView = ({match, matchId}) => {
+  console.log(match);
+  const isReadyToStart =
+    match.is_creator && match.min_players <= match.users_joined;
+
   return (
     <Container>
       <SuperWrapper>
@@ -41,7 +46,11 @@ const MatchView = ({match}) => {
           <Buttons>
             <Button>JOIN</Button>
             <Button>EXIT</Button>
-            <Button>START</Button>
+            <MatchStartView
+              isCreator={match.is_creator}
+              isReadyToStart={isReadyToStart}
+              matchId={matchId}
+            />
           </Buttons>
         </Wrapper>
       </SuperWrapper>

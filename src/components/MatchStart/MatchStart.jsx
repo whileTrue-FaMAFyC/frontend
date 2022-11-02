@@ -7,13 +7,12 @@ const MatchStartView = ({isCreator, isReadyToStart, matchId}) => {
     <div>
       {isCreator ? (
         <div>
-          {isReadyToStart ? (
-            <StyledButton onClick={() => start(matchId)}>
-              Start match
-            </StyledButton>
-          ) : (
-            <CircularProgress />
-          )}
+          <StyledButton
+            onClick={() => start(matchId)}
+            enabledColor={!isReadyToStart}
+            disabled={!isReadyToStart}>
+            Start match
+          </StyledButton>
         </div>
       ) : null}
     </div>

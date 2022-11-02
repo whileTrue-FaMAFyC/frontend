@@ -12,9 +12,12 @@ export const StyledButton = styled.button`
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.02857rem;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
+
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: #009595;
+    background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
 `;
