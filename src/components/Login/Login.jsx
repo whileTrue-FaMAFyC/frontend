@@ -54,7 +54,7 @@ const Login = () => {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
             setSuccess(true);
-            navigate("/");
+            navigate("/home");
           } else {
             setFailure_data("Unknown Error");
             setSuccess(false);
