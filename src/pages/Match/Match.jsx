@@ -45,6 +45,10 @@ const Match = () => {
     ws.onclose = (e) => {
       console.log(e.code);
     };
+
+    return () => {
+      ws.close(1000, "Unmount");
+    };
   }, [dispatch]);
 
   return <MatchView match={match} />;
