@@ -47,15 +47,14 @@ describe("Match test", () => {
     render(<Match />);
 
     await waitFor(() => {
-      expect(screen.getByText("partida")).toBeInTheDocument();
+      expect(screen.getByText(joinLobby.name)).toBeInTheDocument();
       server.send(JSON.stringify(join));
     });
 
     expect(screen.queryByText(join.data.username)).toBeInTheDocument();
-    screen.debug();
   });
 
-  it("test leave", async () => {
+  it("Un jugador sale del lobby y se le avisa a los demas jugadores", async () => {
     mockAxios.get.mockResolvedValue({data: joinLobby2});
 
     await server.connect;
@@ -63,7 +62,7 @@ describe("Match test", () => {
     render(<Match />);
 
     await waitFor(() => {
-      expect(screen.getByText("partida")).toBeInTheDocument();
+      expect(screen.getByText(joinLobby2.name)).toBeInTheDocument();
       server.send(JSON.stringify(leave));
     });
 
@@ -78,7 +77,7 @@ describe("Match test", () => {
     render(<Match />);
 
     await waitFor(() => {
-      expect(screen.getByText("partida")).toBeInTheDocument();
+      expect(screen.getByText(joinLobby2.name)).toBeInTheDocument();
       server.send(JSON.stringify(results));
     });
 
@@ -95,7 +94,7 @@ describe("Match test", () => {
     render(<Match />);
 
     await waitFor(() => {
-      expect(screen.getByText("partida")).toBeInTheDocument();
+      expect(screen.getByText(joinLobby2.name)).toBeInTheDocument();
       server.send(JSON.stringify({action: "start"}));
     });
 

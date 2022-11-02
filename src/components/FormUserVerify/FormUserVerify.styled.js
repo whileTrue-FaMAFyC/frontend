@@ -2,17 +2,21 @@ import styled from "styled-components";
 
 export const Form = styled.form`
   width: 300px;
+  padding: 25px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
+  background-color: #252c32;
 `;
 
 export const Title = styled.p`
   color: #fff;
   font-weight: 500;
   font-size: 25px;
+  margin-bottom: 10px;
 `;
 
 export const Button = styled.button`
@@ -20,7 +24,7 @@ export const Button = styled.button`
   height: 30px;
   outline: none;
   border: none;
-  background-color: rgb(0, 100, 100);
+  /*   background-color: rgb(0, 100, 100); */
   border-radius: 5px;
   color: #000;
   cursor: pointer;
@@ -30,13 +34,14 @@ export const Button = styled.button`
     color: #fff;
   }
 
-  background: rgb(39, 147, 198);
+  /*   background: rgb(39, 147, 198);
   background: linear-gradient(
     90deg,
     rgba(39, 147, 198, 1) 25%,
     rgba(24, 172, 212, 1) 76%,
     rgba(15, 188, 222, 1) 100%
-  );
+  ); */
+  background-color: #00c8c8;
 `;
 
 export const FeedBack = styled.p`
