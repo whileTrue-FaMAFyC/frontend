@@ -7,6 +7,8 @@ import {
   GameConfig,
   Simulation,
   AvatarSubmit,
+  SimCreate,
+  Simulation,
 } from "../components";
 import {ListMatches, Verify, Home, Match} from "../pages";
 const props = {

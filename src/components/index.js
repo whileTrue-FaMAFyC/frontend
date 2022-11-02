@@ -9,3 +9,5 @@ export {default as Botsubmit} from "./Botsubmit/Botsubmit";
 export {default as GameConfig} from "./GameConfig/MatchConfig";
 export {default as Simulation} from "./Simulation/Simulation";
 export {default as AvatarSubmit} from "./AvatarSubmit/AvatarSubmit";
+export {default as SimCreate} from "./SimCreate/SimCreate";
+export {default as Simulation} from "./Simulation/Simulation";

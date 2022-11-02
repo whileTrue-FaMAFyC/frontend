@@ -25,6 +25,9 @@ function Navbar({children}) {
       <NavItemLink to='/simulation' data-testid='simulation'>
         Simulation
       </NavItemLink>
+      <NavItemLink to='/simCreate' data-testid='simCreate'>
+        Sim Create
+      </NavItemLink>
     </StyledNavbar>
   );
 }
