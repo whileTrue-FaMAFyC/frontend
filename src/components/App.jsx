@@ -1,30 +1,76 @@
-import {Route, Routes} from "react-router-dom";
 import {
   Login,
   Register,
-  Navbar,
   Botsubmit,
   GameConfig,
   BotInGame,
   AvatarSubmit,
 } from "../components";
 import {ListMatches, Verify, Home, Match} from "../pages";
+
 function App() {
   return (
     <div className='App'>
-      <Navbar />
       <div>
         <Routes>
+          <Route path='/' element={<Welcome />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/botsubmit' element={<Botsubmit />} />
-          <Route path='/gameconfig' element={<GameConfig />} />
-          <Route path='/verify' element={<Verify />} />
-          <Route path='/botInGame' element={<BotInGame />} />
-          <Route path='/avatarSubmit' element={<AvatarSubmit />} />
-          <Route path='/listgames' element={<ListMatches />} />
-          <Route path='/match/:match_id' element={<Match />} />
+          <Route
+            path='/listgames'
+            element={
+              <div>
+                <Navbar />
+                <ListMatches />
+              </div>
+            }
+          />
+          <Route
+            path='/botsubmit'
+            element={
+              <div>
+                <Navbar />
+                <Botsubmit />
+              </div>
+            }
+          />
+          <Route
+            path='/gameconfig'
+            element={
+              <div>
+                <Navbar />
+                <GameConfig />
+              </div>
+            }
+          />
+          <Route
+            path='/verify'
+            element={
+              <div>
+                <Navbar />
+                <Verify />
+              </div>
+            }
+          />
+          <Route
+            path='/botInGame'
+            element={
+              <div>
+                <Navbar />
+                <BotInGame />
+              </div>
+            }
+          />
+          <Route
+            path='/avatarSubmit'
+            element={
+              <div>
+                <Navbar />
+                <AvatarSubmit />
+              </div>
+            }
+          />
         </Routes>
       </div>
     </div>
