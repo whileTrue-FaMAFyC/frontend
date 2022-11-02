@@ -77,3 +77,16 @@ export const Button = styled.button`
   border-radius: 10px;
   background-color: #00c8c8;
 `;
+
+export const Results = styled.div`
+  //display: inline-block;
+  //  color: red;
+  //align-items: center;
+`;
+
+export const ResultsWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  align-self: center;
+  margin: 20px;
+`;
