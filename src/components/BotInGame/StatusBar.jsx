@@ -11,7 +11,7 @@ const StatusBar = (props) => {
   return (
     <div data-testid='name-and-bar'>
       <Name data-testid='name'>{name}</Name>
-      <ContainerStyle data-testid='bar'>
+      <ContainerStyle data-testid='bar' bgcolor={bgcolor}>
         <FillerStyles width={completed} bgcolor={bgcolor}>
           <LabelStyles>{`${completed}`}</LabelStyles>
         </FillerStyles>

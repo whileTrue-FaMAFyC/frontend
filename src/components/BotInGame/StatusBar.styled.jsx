@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ContainerStyle = styled.div`
   height: 1px;
   width: 200px;
-  background-color: #e0e0d0;
+  background-color: ${(props) => props.bgcolor};
   border-radius: 50px;
   margin: 5px;
   display: table;
@@ -12,7 +12,7 @@ export const ContainerStyle = styled.div`
 export const FillerStyles = styled.div`
   //height: 100%;
   width: ${(props) => props.width}%;
-  background-color: ${(props) => props.bgcolor};
+  background-color: red;
   border-radius: inherit;
   text-align: right;
   transition: width 1s ease-in-out;
