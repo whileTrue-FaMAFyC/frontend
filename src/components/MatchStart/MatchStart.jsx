@@ -10,7 +10,8 @@ const MatchStartView = ({isCreator, isReadyToStart, matchId}) => {
           <StyledButton
             onClick={() => start(matchId)}
             enabledColor={!isReadyToStart}
-            disabled={!isReadyToStart}>
+            disabled={!isReadyToStart}
+            data-testid='Start'>
             Start match
           </StyledButton>
         </div>

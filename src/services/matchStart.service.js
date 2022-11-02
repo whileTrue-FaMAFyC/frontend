@@ -1,7 +1,7 @@
 export const start = async (match) => {
   try {
     await fetch(
-      `https://63446b7ddcae733e8fdef696.mockapi.io/matchStart/${match}`,
+      `${process.env.REACT_APP_API_KEY}matches/start-match/${match_id}`,
       {
         method: "PUT",
         headers: {

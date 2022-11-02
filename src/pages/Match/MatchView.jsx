@@ -14,8 +14,6 @@ import {MatchStartView} from "../../components";
 
 const MatchView = ({match, matchId}) => {
   console.log(match);
-  const isReadyToStart =
-    match.is_creator && match.min_players <= match.users_joined;
 
   return (
     <Container>
@@ -48,7 +46,9 @@ const MatchView = ({match, matchId}) => {
             <Button>EXIT</Button>
             <MatchStartView
               isCreator={match.is_creator}
-              isReadyToStart={isReadyToStart}
+              isReadyToStart={
+                match.is_creator && match.min_players <= match.users_joined
+              }
               matchId={matchId}
             />
           </Buttons>
@@ -58,7 +58,7 @@ const MatchView = ({match, matchId}) => {
       {match.results.length > 0 &&
         match.results.map((winner, index) => (
           <div key={index}>
-            <p>RESULTADOS</p>
+            <p data-testid='Results'>RESULTADOS</p>
             <p data-testid='user_winner'>{winner.username}</p>
             <p>{winner.robot_name}</p>
           </div>
