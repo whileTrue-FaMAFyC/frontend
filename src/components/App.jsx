@@ -15,659 +15,987 @@ import ListMatches from "../pages/ListMatches/ListMatches";
 
 const props = {
   names: ["Wallee", "Eva", "Rocoloco", "Mario"],
-  colors: ["red", "yellow", "turquoise", "pink"],
+  // colors: ["red", "yellow", "turquoise", "pink"],
   simulation: [
     {
-      robots: [
-        {
+      robots: {
+        Wallee: {
           x: 0,
           y: 0,
           harmed: false,
           died: false,
         },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
-          died: true,
+          died: false,
         },
-        {
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
+      missiles: {
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        4: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+      },
+    },
+    {
+      robots: {
+        Wallee: {
           x: 0,
           y: 100,
           harmed: false,
-          died: true,
+          died: false,
         },
-      ],
-
-      rockets: [
-        {
+        Eva: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
+      missiles: {
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        4: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+      },
+    },
+    {
+      robots: {
+        Eva: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Wallee: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: 100,
+          y: 100,
+          harmed: false,
+          died: false,
+        },
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
+      missiles: {
+        4: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: true,
+          new: false,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+      },
+    },
+    {
+      robots: {
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Eva: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Wallee: {
+          x: 100,
+          y: 0,
+          harmed: false,
+          died: false,
+        },
+      },
+      missiles: {
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+        4: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+      },
+    },
+    {
+      robots: {
+        Wallee: {
           x: 0,
           y: 0,
-          exploded: false,
-          new: true,
+          harmed: false,
+          died: false,
         },
-        {
+        Eva: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Mario: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+        Rocoloco: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          harmed: false,
+          died: false,
+        },
+      },
+      missiles: {
+        1: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
-          new: true,
+          new: false,
         },
-        {
+        2: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
-          new: true,
+          new: false,
         },
-        {
-          x: 0,
-          y: 100,
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
-          new: true,
+          new: false,
         },
-      ],
+        4: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: false,
+        },
+      },
     },
     {
-      robots: [
-        {
-          x: 40,
-          y: 40,
-          harmed: true,
-          died: false,
-        },
-        {
+      robots: {
+        Wallee: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-      ],
-      rockets: [
-        {
-          x: 40,
-          y: 40,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: 20,
-          y: 30,
-          harmed: false,
-          died: true,
-        },
-        {
+        Eva: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-      ],
-      rockets: [
-        {
-          x: 20,
-          y: 30,
-          exploded: true,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: true,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: 80,
-          y: 80,
-          harmed: false,
-          died: true,
-        },
-        {
+        Mario: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
+        Rocoloco: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: 80,
-          y: 80,
-          exploded: false,
-          new: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: true,
-        },
-        {
+      },
+      missiles: {
+        1: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
-        {
+        2: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
+        3: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: true,
-          new: false,
-        },
-        {
+        4: {
           x: Math.floor(Math.random() * 100) + 1,
           y: Math.floor(Math.random() * 100) + 1,
           exploded: false,
           new: false,
         },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: true,
-          new: false,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: true,
-        },
-      ],
-    },
-    {
-      robots: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          harmed: false,
-          died: true,
-        },
-      ],
-      rockets: [
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-        {
-          x: Math.floor(Math.random() * 100) + 1,
-          y: Math.floor(Math.random() * 100) + 1,
-          exploded: false,
-          new: false,
-        },
-      ],
+      },
     },
   ],
 };
+
+//   simulation: [
+//     {
+//       robots: [
+//         {
+//           x: 0,
+//           y: 0,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: 0,
+//           y: 100,
+//           harmed: false,
+//           died: true,
+//         },
+//       ],
+
+//       rockets: [
+//         {
+//           x: 0,
+//           y: 0,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: 0,
+//           y: 100,
+//           exploded: false,
+//           new: true,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: 40,
+//           y: 40,
+//           harmed: true,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: 40,
+//           y: 40,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+// x: Math.floor(Math.random() * 100) + 1,
+// y: Math.floor(Math.random() * 100) + 1,
+// exploded: false,
+// new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: 20,
+//           y: 30,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: 20,
+//           y: 30,
+//           exploded: true,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: true,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: 80,
+//           y: 80,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: 80,
+//           y: 80,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: true,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: true,
+//           new: false,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: true,
+//         },
+//       ],
+//     },
+//     {
+//       robots: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           harmed: false,
+//           died: true,
+//         },
+//       ],
+//       rockets: [
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//         {
+//           x: Math.floor(Math.random() * 100) + 1,
+//           y: Math.floor(Math.random() * 100) + 1,
+//           exploded: false,
+//           new: false,
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 function App() {
   return (

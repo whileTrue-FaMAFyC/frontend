@@ -56,14 +56,14 @@ export const StyledLabel = styled.label`
   gap: 0px;
 `;
 
-export const Rocket = styled.div`
+export const Missiles = styled.div`
   height: 10%;
   position: absolute;
   height: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
   width: ${(props) => (props.exploded ? `60px` : `10px`)}; //12px;
   opacity: ${(props) => (props.exploded ? `30%` : `100%`)};
   /* background-color: ${(props) => (true ? `# + ${props.idr}` : "#9aaa")}; */
-  background-color: ${(props) => `${props.color}`};
+  background-color: red;
   border-radius: 50%;
   display: inline-block;
   left: ${(props) =>
