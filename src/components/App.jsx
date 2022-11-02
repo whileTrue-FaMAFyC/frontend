@@ -5,7 +5,6 @@ import {
   Navbar,
   Botsubmit,
   GameConfig,
-  Simulation,
   AvatarSubmit,
   SimCreate,
   Simulation,
@@ -198,6 +197,7 @@ function App() {
           <Route path='/botsubmit' element={<Botsubmit />} />
           <Route path='/gameconfig' element={<GameConfig />} />
           <Route path='/verify' element={<Verify />} />
+          <Route path='/simCreate' element={<SimCreate />} />
           <Route path='/simulation' element={<Simulation props={props} />} />
           <Route path='/avatarSubmit' element={<AvatarSubmit />} />
           <Route path='/listgames' element={<ListMatches />} />
