@@ -22,12 +22,12 @@ export const StyledRobot = styled.div`
   position: absolute;
   /* justify-content: flex-start; */
   left: ${(props) => (props.x > 96.66 ? "96.66%" : `${props.x}%`)};
-  top: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
+  bottom: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
   display: ${(props) => (props.hidden ? `hidden` : `flex`)};
   color: ${(props) => `${props.color}`};
   align-items: center;
   flex-direction: column;
-  transition: 1s ease-in-out;
+  transition: 0.1s linear;
 `;
 
 export const Bot = styled(Robot)`

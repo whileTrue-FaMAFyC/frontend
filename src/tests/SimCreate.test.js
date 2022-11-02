@@ -182,7 +182,7 @@ describe("Configuracion de simulacion test", () => {
   test("9. Server error", async () => {
     server.use(
       rest.post(
-        "https://63446b7ddcae733e8fdef696.mockapi.io/simCreate",
+        `${process.env.REACT_APP_API_KEY}new-simulation`,
         async (req, res, ctx) => {
           return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
         }

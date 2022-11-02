@@ -11,7 +11,7 @@ const Simulation = ({props}) => {
     const interval = setInterval(() => {
       drawFrame(simulation[nframe]);
       setNframe(nframe + 1);
-    }, 2000);
+    }, 500);
     return () => clearInterval(interval);
   });
 
@@ -22,9 +22,9 @@ const Simulation = ({props}) => {
   };
 
   return (
-    <EntryPage>
+    <EntryPage data-testid='Simulation'>
       <div>Status Bar!</div>
-      <Board names={names} robots={robots} />
+      <Board robots={robots} />
     </EntryPage>
   );
 };

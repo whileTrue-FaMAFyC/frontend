@@ -41,18 +41,18 @@ const SimCreate = () => {
   const onSubmit = async (data) => {
     setFailure_data("");
     const body = {
-      "num-rounds": data.num_rounds,
+      num_rounds: data.num_rounds,
       robots: [data.robot1, data.robot2],
     };
-    if (data.robot3 !== "") {
+    if (data.robot3 !== undefined && data.robot3 !== "") {
       body.robots = [...body.robots, data.robot3];
     }
-    if (data.robot4 !== "") {
+    if (data.robot4 !== undefined && data.robot4 !== "") {
       body.robots = [...body.robots, data.robot4];
     }
 
     const token = localStorage.getItem("user");
-    await fetch("https://63446b7ddcae733e8fdef696.mockapi.io/simCreate", {
+    await fetch(`${process.env.REACT_APP_API_KEY}new-simulation`, {
       method: "POST",
       headers: {
         authorization: `${token}`,
@@ -65,7 +65,7 @@ const SimCreate = () => {
       .then(async (response) => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
-          setSimulation({props: "Simulacion!"});
+          setSimulation(data);
           setSuccess(true);
           setFailure_data("");
         } else {
