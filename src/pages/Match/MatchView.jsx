@@ -130,7 +130,7 @@ const MatchView = ({match}, {matssch_id}) => {
             ))}
           </PlayersInfo>
 
-          {match.is_creator && (
+          {!match.is_creator && (
             <form onSubmit={handleSubmit(onJoin)}>
               <StyledSelect
                 enabledColor={match.im_in}
@@ -178,6 +178,7 @@ const MatchView = ({match}, {matssch_id}) => {
               </StyledButton>
 
               <StyledButton
+                type='button'
                 onClick={() =>
                   leaveMatch(
                     localStorage.getItem("user"),
