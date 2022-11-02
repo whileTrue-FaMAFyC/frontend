@@ -1,8 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-import Welcome from "../pages/Welcome/Welcome";
-import Home from "../pages/Home/Home";
-import Navbar from "../components/Navbar/Navbar";
-
 import {
   Login,
   Register,
@@ -10,9 +6,9 @@ import {
   GameConfig,
   BotInGame,
   AvatarSubmit,
+  Navbar,
 } from "../components";
-import Verify from "../pages/Verify/Verify";
-import ListMatches from "../pages/ListMatches/ListMatches";
+import {ListMatches, Verify, Home, Welcome} from "../pages";
 
 function App() {
   return (
