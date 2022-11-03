@@ -18,7 +18,7 @@ const MatchView = ({match, matchId}) => {
   console.log(match);
   const isReadyToStart =
     match.is_creator && match.min_players <= match.users_joined;
-
+  match.results = [{username: "seba", robot_name: "wallee"}];
   return (
     <Container>
       <SuperWrapper>
@@ -67,8 +67,8 @@ const MatchView = ({match, matchId}) => {
         <ResultsWrapper>
           {match.results.length > 0 && (
             <div>
-              {match.results.length === 1 && <h3>Winner</h3>}
-              {match.results.length > 1 && <h3>Winners</h3>}
+              {match.results.length === 1 && <h2>Winner</h2>}
+              {match.results.length > 1 && <h2>Winners</h2>}
               {match.results.map((winner, index) => (
                 <Results key={index}>
                   <p data-testid='user_winner'>{winner.username}</p>

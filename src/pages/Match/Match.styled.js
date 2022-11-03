@@ -89,4 +89,7 @@ export const ResultsWrapper = styled.div`
   display: flex;
   align-self: center;
   margin: 20px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  padding: 5px;
 `;
