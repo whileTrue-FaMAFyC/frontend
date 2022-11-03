@@ -1,6 +1,6 @@
 import {Bot, Harm, StyledBoard, StyledRobot, StyledHarm, Missiles,} from "./Board.style";
 
-export const Board = ({colors, robots}) => {
+export const Board = ({colors, robots, missiles}) => {
   return (
     <StyledBoard>
       {Object.entries(robots).map(([robotId, r]) => (
