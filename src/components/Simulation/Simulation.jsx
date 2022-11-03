@@ -33,7 +33,7 @@ const Simulation = ({props}) => {
   return (
     <EntryPage data-testid='Simulation'>
       <div>Status Bar!</div>
-      <RobotsStatus />
+      <RobotsStatus colors={colors} robots={robots} />
       <Board colors={colors} robots={robots} />
     </EntryPage>
   );

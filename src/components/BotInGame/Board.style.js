@@ -1,21 +1,11 @@
 import styled from "styled-components";
 
 export const StyledBoard = styled.div`
-<<<<<<< HEAD
-  align-items: flex-start;
-  display: center;
-  justify-content: stretch;
-  margin: auto;
-  width: 750px;
-  height: 750px;
-  padding: 30px;
-=======
   position: relative;
   margin-top: 50px;
   width: 500px;
   height: 500px;
   //padding: 30px;
->>>>>>> feature_PYR-104_robotMovements
   color: #bf7636;
   background-color: #f2be5c;
   border: 5px inset #bb7032;
