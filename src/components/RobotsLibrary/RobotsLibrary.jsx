@@ -4,14 +4,15 @@ import Avatar from "@mui/material/Avatar";
 import {Link} from "react-router-dom";
 import {
   Table,
+  Title,
   Column,
   Tbody,
   Row,
   Feedback,
   StyledEntryCard,
   StyledButton,
+  EntryPage,
 } from "./RobotsLibrary.style";
-import {EntryPage} from "../GameConfig/MatchConfig.styled";
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
@@ -32,8 +33,8 @@ const RobotsLibrary = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
+        <Title data-testid='title'>My robots</Title>
         <Table>
-          <h2 data-testid='title'>My robots</h2>
           <Tbody>
             {robotsNames.length < 1 && (
               <Feedback>

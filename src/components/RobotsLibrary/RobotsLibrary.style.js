@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 
 export const StyledEntryCard = styled.div`
   width: 100%;
@@ -36,7 +36,6 @@ export const Container = styled.div`
 export const Title = styled.p`
   color: #fff;
   font-size: 30px;
-  font-family: "Colfax";
 `;
 
 export const Table = styled.table`
@@ -75,7 +74,6 @@ export const Column = styled.td`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Colfax";
 `;
 
 export const Tbody = styled.tbody`
@@ -85,7 +83,8 @@ export const Tbody = styled.tbody`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  border: 1px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
   padding: 0 5px;
 
   &::-webkit-scrollbar {
@@ -158,4 +157,30 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: #009595;
   }
+`;
+
+export const GlobalStyle = createGlobalStyle`
+    * {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: #333;
+        -webkit-font-smoothing: antialised;
+        -moz-osx-font-smoothing: grayscale;
+    }
+`;
+
+export const EntryPage = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #0f1519;
 `;
