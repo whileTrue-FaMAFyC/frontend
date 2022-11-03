@@ -228,7 +228,7 @@ const MatchView = ({match, match_id}) => {
           </ResultsWrapper>
         )}
 
-        {match.started && <p>started</p>}
+        {match.started && <p>start</p>}
       </SuperWrapper>
     </Container>
   );
