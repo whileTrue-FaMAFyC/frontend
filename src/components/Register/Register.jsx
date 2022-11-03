@@ -63,6 +63,7 @@ const RegisterForm = () => {
               Username
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputUsername'
               data-testid='Username'
@@ -91,6 +92,7 @@ const RegisterForm = () => {
               Email
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputEmail'
               data-testid='Email'
@@ -113,6 +115,7 @@ const RegisterForm = () => {
               Password
             </label>
             <StyledInput
+              autoComplete='off'
               type='password'
               id='inputPassword'
               data-testid='Password'
@@ -141,6 +144,7 @@ const RegisterForm = () => {
               Confirm password
             </label>
             <StyledInput
+              autoComplete='off'
               type='password'
               id='inputConfirmPassword'
               data-testid='Confirm password'

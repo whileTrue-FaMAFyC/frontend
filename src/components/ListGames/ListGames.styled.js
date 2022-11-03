@@ -18,7 +18,7 @@ export const Table = styled.table`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #0f1519;
+  background-color: #252c32;
 `;
 
 export const Thead = styled.thead`
