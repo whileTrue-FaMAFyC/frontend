@@ -25,8 +25,6 @@ const MatchView = ({match, match_id}) => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-  const {matcha_id} = useParams();
-  console.log(matcha_id);
 
   const [robotsNames, setRobotsNames] = useState([]);
 
@@ -34,7 +32,6 @@ const MatchView = ({match, match_id}) => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
-      console.log(robotsNames);
     } catch (error) {
       console.log(error);
     }
