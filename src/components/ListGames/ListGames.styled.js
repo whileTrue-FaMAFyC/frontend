@@ -12,7 +12,6 @@ export const Container = styled.div`
 export const Title = styled.p`
   color: #fff;
   font-size: 30px;
-  font-family: "Colfax";
 `;
 
 export const Table = styled.table`
@@ -42,7 +41,6 @@ export const Column = styled.td`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Colfax";
 `;
 
 export const Tbody = styled.tbody`
