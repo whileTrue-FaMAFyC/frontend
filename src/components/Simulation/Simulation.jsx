@@ -9,9 +9,14 @@ const Simulation = ({props}) => {
   const colorsRobots = ["red", "black", "orange", "pink"];
 
   const colors = {};
+  const robot_names = {};
 
   for (let i = 0; i < names.length; i++) {
     colors[names[i].id] = colorsRobots[i];
+  }
+
+  for (let i = 0; i < names.length; i++) {
+    robot_names[names[i].id] = names[i];
   }
 
   const [robots, setRobots] = useState({});
@@ -32,8 +37,7 @@ const Simulation = ({props}) => {
 
   return (
     <EntryPage data-testid='Simulation'>
-      <div>Status Bar!</div>
-      <RobotsStatus colors={colors} robots={robots} />
+      <RobotsStatus colors={colors} robots={robots} names={robot_names} />
       <Board colors={colors} robots={robots} />
     </EntryPage>
   );

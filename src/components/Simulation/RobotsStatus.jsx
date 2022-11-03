@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import StatusBar from "../Simulation/StatusBar";
 import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 
-const RobotsStatus = ({colors, robots}) => {
+const RobotsStatus = ({colors, robots, names}) => {
   return (
     <StyledEntryCard>
       <h2>Daño</h2>
@@ -18,7 +18,7 @@ const RobotsStatus = ({colors, robots}) => {
         <StatusBar
           key={robotId}
           bgcolor={colors[robotId]}
-          name={r.name}
+          name={names[robotId]}
           completed={r.status}
           data-testid={`${robotId}`}
         />

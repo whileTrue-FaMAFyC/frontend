@@ -15,7 +15,7 @@ export const FillerStyles = styled.div`
   background-color: ${(props) => props.bgcolor};
   border-radius: inherit;
   text-align: right;
-  transition: width 1s ease-in-out;
+  transition: width 0.1s ease-in-out;
 `;
 
 export const LabelStyles = styled.span`
