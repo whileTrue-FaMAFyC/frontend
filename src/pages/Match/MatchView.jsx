@@ -26,15 +26,13 @@ const MatchView = ({match, match_id}) => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-  const {matcha_id} = useParams();
-  console.log(matcha_id);
+
   const [robotsNames, setRobotsNames] = useState([]);
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
-      console.log(robotsNames);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +44,6 @@ const MatchView = ({match, match_id}) => {
 
   const onJoin = async (data) => {
     const token = await localStorage.getItem("user");
-    console.log(data);
     await fetch(
       `${
         process.env.REACT_APP_API_KEY
@@ -74,34 +71,6 @@ const MatchView = ({match, match_id}) => {
       });
   };
 
-  // const onLeave = async () => {
-  //   const token = await localStorage.getItem("user");
-  //   await fetch(
-  //     `${
-  //       process.env.REACT_APP_API_KEY
-  //     }matches/leave-match/${localStorage.getItem(`match_id`)}`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         authorization: `${token}`,
-  //         "Content-type": "application/json",
-  //         "Access-Control-Allow-Origin": "http://localhost:3000",
-  //         "Access-Control-Allow-Credentials": "true",
-  //       },
-  //     }
-  //   )
-  //     .then(async (response) => {
-  //       const data = await response.json();
-  //       if (response.status === 201 || response.status === 200) {
-  //       } else {
-  //         alert(data.detail);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
-  // };
-
   return (
     <Container>
       <SuperWrapper>
@@ -121,15 +90,14 @@ const MatchView = ({match, match_id}) => {
           <PlayersInfo>
             {match.user_robot.map((user, index) => (
               <Fragment key={index}>
-                <Text>{user.username}</Text>
                 <Avatar
                   width={50}
                   spacing={2}
                   src={user.user_avatar}
-                  alt='user avatar'
+                  alt='robot avatar'
                   style={{margin: 5}}
                 />
-                <Text>{user.robot_name}</Text>
+                <Text>{user.username}</Text>
                 <Avatar
                   width={50}
                   spacing={2}
@@ -137,6 +105,7 @@ const MatchView = ({match, match_id}) => {
                   alt='robot avatar'
                   style={{margin: 5}}
                 />
+                <Text>{user.robot_name}</Text>
               </Fragment>
             ))}
           </PlayersInfo>
@@ -144,8 +113,12 @@ const MatchView = ({match, match_id}) => {
           {!match.is_creator && (
             <form onSubmit={handleSubmit(onJoin)}>
               <StyledSelect
-                enabledColor={match.im_in}
-                disabled={match.im_in}
+                enabledColor={
+                  match.im_in || match.max_players <= match.users_joined
+                }
+                disabled={
+                  match.im_in || match.max_players <= match.users_joined
+                }
                 id='inputRaobot'
                 data-testid='nameRobot'
                 {...register("joining_robot", {required: true})}>
@@ -163,17 +136,21 @@ const MatchView = ({match, match_id}) => {
               )}
               <StyledInputGroup>
                 <StyledInput
-                  enabledColor={match.im_in}
-                  disabled={match.im_in}
+                  enabledColor={
+                    match.im_in || match.max_players <= match.users_joined
+                  }
+                  disabled={
+                    match.im_in || match.max_players <= match.users_joined
+                  }
                   type={match.im_in ? "hidden" : "password"}
                   id='inputPassword'
                   data-testid='password'
                   placeholder=' Match password'
-                  {...register(" match_password", {
+                  {...register("match_password", {
                     maxLength: 16,
                   })}
                 />
-                {errors.password?.type === "maxLength" && (
+                {errors.match_password?.type === "maxLength" && (
                   <StyledError role='alertError'>
                     The password must have at most 16 characters.
                   </StyledError>
@@ -183,19 +160,24 @@ const MatchView = ({match, match_id}) => {
               <StyledButton
                 type='submit'
                 data-testid='joinButton'
-                enabledColor={match.im_in}
-                disabled={match.im_in}>
+                enabledColor={
+                  match.im_in || match.max_players <= match.users_joined
+                }
+                disabled={
+                  match.im_in || match.max_players <= match.users_joined
+                }>
                 Join
               </StyledButton>
 
               <StyledButton
                 type='button'
-                onClick={() =>
+                onClick={() => {
                   leaveMatch(
                     localStorage.getItem("user"),
                     localStorage.getItem("match_id")
-                  )
-                }
+                  );
+                  match.im_in = false;
+                }}
                 data-testid='leaveButton'
                 enabledColor={!match.im_in}
                 disabled={!match.im_in}>
@@ -209,6 +191,7 @@ const MatchView = ({match, match_id}) => {
               isReadyToStart={
                 match.is_creator && match.min_players <= match.users_joined
               }
+              started={match.started}
               matchId={match_id}
             />
           )}

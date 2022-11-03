@@ -91,16 +91,6 @@ export const Button = styled.button`
   background-color: #00c8c8;
 `;
 
-export const ResultsWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  align-self: center;
-  margin: 20px;
-  border: 1px solid #00c8c8;
-  border-radius: 4px;
-  padding: 5px;
-`;
-
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
   min-width: 64px;
@@ -154,4 +144,14 @@ export const StyledInput = styled.input`
     box-shadow: 0 0 0 2px rgb(0, 200, 200, 0.5);
     color: #0f1519;
   }
+`;
+
+export const ResultsWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  align-self: center;
+  margin: 20px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  padding: 5px;
 `;
