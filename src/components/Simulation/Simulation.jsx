@@ -5,6 +5,14 @@ import {Board} from "./Board";
 const Simulation = ({props}) => {
   const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
+  const colorsRobots = ["red", "black", "orange", "pink"];
+
+  const colors = {};
+
+  for (let i = 0; i < names.length; i++) {
+    colors[names[i].id] = colorsRobots[i];
+  }
+
   const [robots, setRobots] = useState({});
 
   useEffect(() => {
@@ -24,7 +32,7 @@ const Simulation = ({props}) => {
   return (
     <EntryPage data-testid='Simulation'>
       <div>Status Bar!</div>
-      <Board robots={robots} />
+      <Board colors={colors} robots={robots} />
     </EntryPage>
   );
 };

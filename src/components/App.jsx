@@ -11,7 +11,12 @@ import {
 } from "../components";
 import {ListMatches, Verify, Home, Match} from "../pages";
 const props = {
-  names: ["Wallee", "Eva", "Rocoloco", "Mario"],
+  names: [
+    {id: "Wallee", name: "Wallee"},
+    {id: "Eva", name: "Eva"},
+    {id: "Mario", name: "Mario"},
+    {id: "Rocoloco", name: "Rocoloco"},
+  ],
 
   simulation: [
     {
