@@ -77,6 +77,7 @@ const MatchConfig = () => {
               Name:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputName'
               data-testid='name'
@@ -105,6 +106,7 @@ const MatchConfig = () => {
               Password (optional):
             </label>
             <StyledInput
+              autoComplete='off'
               type='password'
               id='inputPassword'
               data-testid='password'
@@ -154,6 +156,7 @@ const MatchConfig = () => {
               Number of games:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputnum_games'
               data-testid='nGames'
@@ -180,6 +183,7 @@ const MatchConfig = () => {
               Number of rounds:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputnum_rounds'
               data-testid='nRounds'

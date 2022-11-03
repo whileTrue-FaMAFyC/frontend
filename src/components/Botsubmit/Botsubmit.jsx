@@ -116,6 +116,7 @@ const Botsubmit = () => {
               Name
             </label>
             <StyledInput
+              autoComplete='off'
               id='name'
               type='text'
               {...register("name", {
@@ -144,6 +145,7 @@ const Botsubmit = () => {
               Code
             </label>
             <StyledInput
+              autoComplete='off'
               id='source_code'
               type='file'
               accept='.py'
@@ -185,6 +187,7 @@ const Botsubmit = () => {
               src={imgAvatar}
             />
             <StyledInput
+              autoComplete='off'
               id='avatar'
               type='file'
               accept='image/*'

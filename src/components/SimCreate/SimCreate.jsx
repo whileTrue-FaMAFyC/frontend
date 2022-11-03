@@ -185,6 +185,7 @@ const SimCreate = () => {
                   Number of rounds:
                 </label>
                 <StyledInput
+                  autoComplete='off'
                   type='text'
                   id='inputnum_rounds'
                   data-testid='nRounds'
