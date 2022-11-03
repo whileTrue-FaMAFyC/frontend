@@ -16,7 +16,7 @@ export const Board = ({colors, robots}) => {
           x={r.x / 10}
           y={r.y / 10}
           color={colors[robotId]}
-          hidden={r.died}
+          hidden={!r.harmed && r.died}
           data-testid={`${robotId}`}>
           {/* <StyledLabel htmlFor={robotId} data-testid='label'>
             {robotId}

@@ -6,17 +6,21 @@ import RobotsStatus from "./RobotsStatus";
 const Simulation = ({props}) => {
   const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
-  const colorsRobots = ["red", "black", "orange", "pink"];
+  const colorsRobots = ["red", "turquoise", "orange", "pink"];
 
   const colors = {};
   const robot_names = {};
 
-  for (let i = 0; i < names.length; i++) {
-    colors[names[i].id] = colorsRobots[i];
+  if (names !== undefined) {
+    for (let i = 0; i < names.length; i++) {
+      colors[names[i].id] = colorsRobots[i];
+    }
   }
 
-  for (let i = 0; i < names.length; i++) {
-    robot_names[names[i].id] = names[i];
+  if (names !== undefined) {
+    for (let i = 0; i < names.length; i++) {
+      robot_names[names[i].id] = names[i].name;
+    }
   }
 
   const [robots, setRobots] = useState({});
