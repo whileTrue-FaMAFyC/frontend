@@ -121,10 +121,22 @@ const MatchView = ({match, match_id}) => {
           <PlayersInfo>
             {match.user_robot.map((user, index) => (
               <Fragment key={index}>
+                <Avatar
+                  width={50}
+                  spacing={2}
+                  src={user.user_avatar}
+                  alt='robot avatar'
+                  style={{margin: 5}}
+                />
                 <Text>{user.username}</Text>
-                <Avatar width={50} src={user.user_avatar} alt='user avatar' />
+                <Avatar
+                  width={50}
+                  spacing={2}
+                  src={user.robot_avatar}
+                  alt='robot avatar'
+                  style={{margin: 5}}
+                />
                 <Text>{user.robot_name}</Text>
-                <Avatar width={50} src={user.robot_avatar} alt='robot avatar' />
               </Fragment>
             ))}
           </PlayersInfo>
