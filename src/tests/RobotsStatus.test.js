@@ -7,7 +7,7 @@ import {render, fireEvent, screen} from "@testing-library/react";
 import StatusBar from "../components/Simulation/StatusBar";
 
 test("render robots status bar successfully", async () => {
-  render(<RobotsStatus name='Wallee' completed='60' bgcolor='red' />);
+  render(<StatusBar name='Wallee' completed='60' bgcolor='red' />);
 
   expect.toBeInTheDocument(await screen.findByText("Wallee"));
   expect.toBeInTheDocument(await screen.findByText("60"));
