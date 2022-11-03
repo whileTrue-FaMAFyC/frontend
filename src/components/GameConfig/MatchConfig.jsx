@@ -33,6 +33,7 @@ const MatchConfig = () => {
   };
 
   useEffect(() => {
+    console.log(10 / 2);
     callGetRobotsNames();
   }, []);
 

@@ -7,7 +7,8 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   padding: 8px 16px;
   outline: none;
-  background-color: #00c8c8;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
   //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
@@ -16,8 +17,15 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: #009595;
+    background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
+`;
+
+export const StyledSelect = styled.select`
+  left: 20px;
+  margin: 10px;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
 `;
 
 export const StyledEntryCard = styled.div`
@@ -46,8 +54,11 @@ export const StyledEntryCard = styled.div`
 `;
 
 export const StyledInputGroup = styled.div`
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   text-align: left;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
+
   label {
     display: inline-block;
     margin-bottom: 0.5rem;
@@ -62,6 +73,7 @@ export const StyledInput = styled.input`
   border: 1px solid #00c8c8;
   border-radius: 4px;
   font-size: 1rem;
+  max-height: 34px;
   -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
   background-color: #252c32;
