@@ -8,15 +8,13 @@ import {
   Title,
   MatchInfo,
   PlayersInfo,
-  Buttons,
-  Button,
   Wrapper,
   StyledButton,
   StyledError,
   StyledSelect,
   StyledInput,
 } from "./Match.styled";
-import {joinMatch, leaveMatch, getRobotsNames} from "../../services";
+import {leaveMatch, getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
 import {StyledInputGroup} from "../../components/Login/Login.styled";
 import {MatchStartView} from "../../components";

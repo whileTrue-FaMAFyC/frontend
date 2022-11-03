@@ -1,12 +1,6 @@
-import {useEffect, useState} from "react";
-import {Fragment} from "react";
+import {useEffect} from "react";
 import useMatch from "../../hooks/useMatch";
-import {
-  getMatchInfo,
-  joinMatch,
-  leaveMatch,
-  getRobotsNames,
-} from "../../services";
+import {getMatchInfo} from "../../services";
 import {useParams} from "react-router-dom";
 import MatchView from "./MatchView";
 
