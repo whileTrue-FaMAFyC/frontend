@@ -211,7 +211,7 @@ const MatchView = ({match, match_id}) => {
           </ResultsWrapper>
         )}
 
-        {match.started && <p>start</p>}
+        {match.started && <p style={{color: "#252c32"}}>start</p>}
       </SuperWrapper>
     </Container>
   );
