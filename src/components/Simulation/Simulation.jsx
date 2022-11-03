@@ -22,7 +22,6 @@ const Simulation = ({props}) => {
     const interval = setInterval(() => {
       drawFrame(simulation[nframe]);
       setNframe(nframe + 1);
-      setMissiles(frame.missiles);
     }, 500);
     return () => clearInterval(interval);
   });
@@ -30,6 +29,7 @@ const Simulation = ({props}) => {
   const drawFrame = (frame) => {
     if (nframe < simulation.length) {
       setRobots(frame.robots);
+      setMissiles(frame.missiles);
     }
   };
 
