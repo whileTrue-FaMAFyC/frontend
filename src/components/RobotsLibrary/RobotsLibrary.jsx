@@ -1,12 +1,9 @@
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
-  Container,
-  Title,
   Table,
-  Thead,
   Column,
   Tbody,
   Row,
@@ -27,7 +24,6 @@ const RobotsLibrary = () => {
       console.log(error);
     }
   };
-  const navigate = useNavigate();
 
   useEffect(() => {
     callGetRobotsNames();
