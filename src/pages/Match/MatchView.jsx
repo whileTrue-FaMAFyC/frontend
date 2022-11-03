@@ -26,7 +26,6 @@ const MatchView = ({match, match_id}) => {
     formState: {errors},
   } = useForm();
   const {matcha_id} = useParams();
-  console.log(matcha_id);
 
   const [robotsNames, setRobotsNames] = useState([]);
 
@@ -34,7 +33,6 @@ const MatchView = ({match, match_id}) => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
-      console.log(robotsNames);
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +44,6 @@ const MatchView = ({match, match_id}) => {
 
   const onJoin = async (data) => {
     const token = await localStorage.getItem("user");
-    console.log(data);
     await fetch(
       `${
         process.env.REACT_APP_API_KEY
@@ -73,34 +70,6 @@ const MatchView = ({match, match_id}) => {
         alert(error);
       });
   };
-
-  // const onLeave = async () => {
-  //   const token = await localStorage.getItem("user");
-  //   await fetch(
-  //     `${
-  //       process.env.REACT_APP_API_KEY
-  //     }matches/leave-match/${localStorage.getItem(`match_id`)}`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         authorization: `${token}`,
-  //         "Content-type": "application/json",
-  //         "Access-Control-Allow-Origin": "http://localhost:3000",
-  //         "Access-Control-Allow-Credentials": "true",
-  //       },
-  //     }
-  //   )
-  //     .then(async (response) => {
-  //       const data = await response.json();
-  //       if (response.status === 201 || response.status === 200) {
-  //       } else {
-  //         alert(data.detail);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
-  // };
 
   return (
     <Container>
