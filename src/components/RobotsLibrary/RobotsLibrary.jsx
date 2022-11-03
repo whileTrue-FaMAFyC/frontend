@@ -20,7 +20,9 @@ const RobotsLibrary = () => {
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
-      setRobotsNames(response.data);
+      if (response.data.length) {
+        setRobotsNames(response.data);
+      }
     } catch (error) {
       console.log(error);
     }

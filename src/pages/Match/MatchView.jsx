@@ -132,8 +132,12 @@ const MatchView = ({match, match_id}) => {
           {!match.is_creator && (
             <form onSubmit={handleSubmit(onJoin)}>
               <StyledSelect
-                enabledColor={match.im_in}
-                disabled={match.im_in}
+                enabledColor={
+                  match.im_in || match.max_players <= match.users_joined
+                }
+                disabled={
+                  match.im_in || match.max_players <= match.users_joined
+                }
                 id='inputRaobot'
                 data-testid='nameRobot'
                 {...register("joining_robot", {required: true})}>
@@ -151,17 +155,21 @@ const MatchView = ({match, match_id}) => {
               )}
               <StyledInputGroup>
                 <StyledInput
-                  enabledColor={match.im_in}
-                  disabled={match.im_in}
+                  enabledColor={
+                    match.im_in || match.max_players <= match.users_joined
+                  }
+                  disabled={
+                    match.im_in || match.max_players <= match.users_joined
+                  }
                   type={match.im_in ? "hidden" : "password"}
                   id='inputPassword'
                   data-testid='password'
                   placeholder=' Match password'
-                  {...register(" match_password", {
+                  {...register("match_password", {
                     maxLength: 16,
                   })}
                 />
-                {errors.password?.type === "maxLength" && (
+                {errors.match_password?.type === "maxLength" && (
                   <StyledError role='alertError'>
                     The password must have at most 16 characters.
                   </StyledError>
@@ -171,8 +179,12 @@ const MatchView = ({match, match_id}) => {
               <StyledButton
                 type='submit'
                 data-testid='joinButton'
-                enabledColor={match.im_in}
-                disabled={match.im_in}>
+                enabledColor={
+                  match.im_in || match.max_players <= match.users_joined
+                }
+                disabled={
+                  match.im_in || match.max_players <= match.users_joined
+                }>
                 Join
               </StyledButton>
 
@@ -195,7 +207,9 @@ const MatchView = ({match, match_id}) => {
             <MatchStartView
               isCreator={match.is_creator}
               isReadyToStart={
-                match.is_creator && match.min_players <= match.users_joined && match.results.length == 0
+                match.is_creator &&
+                match.min_players <= match.users_joined &&
+                match.results.length == 0
               }
               matchId={match_id}
             />
