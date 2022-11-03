@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0a0e13;
+  background-color: #0f1519;
 `;
 
 export const SuperWrapper = styled.div`
