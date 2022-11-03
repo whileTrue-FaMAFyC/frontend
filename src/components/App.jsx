@@ -7,154 +7,10 @@ import {
   AvatarSubmit,
   SimCreate,
   Navbar,
-  Simulation,
 } from "../components";
 import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
 
 function App() {
-  const props = {
-    //     name : : str
-    // username : : str
-    // robot_id : :  int
-    names: [
-      {name: "Wallee", robot_id: "0"},
-      {name: "Eva", robot_id: "1"},
-      {name: "Rocoloco", robot_id: "2"},
-      {name: "Mario", robot_id: "3"},
-    ],
-
-    simulation: [
-      {
-        robots: {
-          Wallee: {
-            x: 0,
-            y: 0,
-            harmed: false,
-            died: false,
-            status: 100,
-          },
-          Eva: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 100,
-          },
-          Rocoloco: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 100,
-          },
-          Mario: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 100,
-          },
-        },
-      },
-      {
-        robots: {
-          Wallee: {
-            x: 0,
-            y: 1000,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Eva: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Mario: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Rocoloco: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-        },
-      },
-      {
-        robots: {
-          Eva: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Wallee: {
-            x: 1000,
-            y: 1000,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Mario: {
-            x: 1000,
-            y: 1000,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Rocoloco: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-        },
-      },
-      {
-        robots: {
-          Rocoloco: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Eva: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Mario: {
-            x: Math.floor(Math.random() * 1000) + 1,
-            y: Math.floor(Math.random() * 1000) + 1,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-          Wallee: {
-            x: 1000,
-            y: 0,
-            harmed: false,
-            died: false,
-            status: 50,
-          },
-        },
-      },
-    ],
-  };
-
   return (
     <div className='App'>
       <div>
@@ -223,15 +79,6 @@ function App() {
               <div>
                 <Navbar />
                 <Match />
-              </div>
-            }
-          />
-          <Route
-            path='/simulate'
-            element={
-              <div>
-                <Navbar />
-                <Simulation props={props} />
               </div>
             }
           />
