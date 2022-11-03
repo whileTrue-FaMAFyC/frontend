@@ -1,7 +1,7 @@
 import {start} from "../../services/matchStart.service";
 import {StyledButton} from "./MatchStart.styled";
 
-const MatchStartView = ({isCreator, isReadyToStart, matchId}) => {
+const MatchStartView = ({isCreator, isReadyToStart, started, matchId}) => {
   return (
     <div>
       {isCreator ? (
