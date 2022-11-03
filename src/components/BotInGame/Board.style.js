@@ -22,9 +22,11 @@ export const Robot = styled.div`
 `;
 
 export const EntryPage = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
 `;
