@@ -195,7 +195,7 @@ const MatchView = ({match, match_id}) => {
             <MatchStartView
               isCreator={match.is_creator}
               isReadyToStart={
-                match.is_creator && match.min_players <= match.users_joined match.results.length == 0
+                match.is_creator && match.min_players <= match.users_joined && match.results.length == 0
               }
               matchId={match_id}
             />
