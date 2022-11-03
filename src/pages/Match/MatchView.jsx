@@ -25,8 +25,6 @@ const MatchView = ({match, match_id}) => {
     handleSubmit,
     formState: {errors},
   } = useForm();
-  const {matcha_id} = useParams();
-  console.log(matcha_id);
 
   const [robotsNames, setRobotsNames] = useState([]);
 
@@ -34,7 +32,6 @@ const MatchView = ({match, match_id}) => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
-      console.log(robotsNames);
     } catch (error) {
       console.log(error);
     }
@@ -195,8 +192,9 @@ const MatchView = ({match, match_id}) => {
             <MatchStartView
               isCreator={match.is_creator}
               isReadyToStart={
-                match.is_creator && match.min_players <= match.users_joined && match.results.length == 0
+                match.is_creator && match.min_players <= match.users_joined
               }
+              started={match.started}
               matchId={match_id}
             />
           )}
