@@ -19,8 +19,9 @@ import {
 import {joinMatch, leaveMatch, getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
 import {StyledInputGroup} from "../../components/Login/Login.styled";
+import {MatchStartView} from "../../components";
 
-const MatchView = ({match}, {matssch_id}) => {
+const MatchView = ({match, match_id}) => {
   const {
     register,
     handleSubmit,
@@ -192,7 +193,15 @@ const MatchView = ({match}, {matssch_id}) => {
               </StyledButton>
             </form>
           )}
-          {match.is_creator && <Button>START</Button>}
+          {match.is_creator && (
+            <MatchStartView
+              isCreator={match.is_creator}
+              isReadyToStart={
+                match.is_creator && match.min_players <= match.users_joined
+              }
+              matchId={match_id}
+            />
+          )}
         </Wrapper>
       </SuperWrapper>
 

@@ -59,9 +59,6 @@ const Match = () => {
     };
   }, [dispatch]);
 
-<<<<<<< HEAD
-  return <MatchView match={match} matchId={match_id} />;
-=======
   // useEffect(() => {
   //   const callGetRobotsNames = async () => {
   //     try {
@@ -77,7 +74,6 @@ const Match = () => {
   // console.log(robotsNames);
 
   return <MatchView match={match} match_id={match_id} />; //robotsNames={robotsNames} />;
->>>>>>> feature_PYR-84_join-and-leave-match
 };
 export default Match;
 

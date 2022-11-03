@@ -1,4 +1,4 @@
-export const start = async (match) => {
+export const start = async (match_id) => {
   try {
     await fetch(
       `${process.env.REACT_APP_API_KEY}matches/start-match/${match_id}`,
@@ -13,14 +13,11 @@ export const start = async (match) => {
       }
     ).then(async (response) => {
       const data = await response.json();
-      if (response.status === 200 || response.status === 201) {
-        //setSuccess(true);
-      } else {
-        // setSuccess(false);
-        // setFailure_data(data.detail);
+      if (response.status !== 200 && response.status !== 201) {
+        alert(data);
       }
     });
   } catch (error) {
-    //setFailure_data(error);
+    alert(error);
   }
 };
