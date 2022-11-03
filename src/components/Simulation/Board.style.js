@@ -64,3 +64,21 @@ export const StyledLabel = styled.label`
   color: black;
   gap: 0px;
 `;
+
+export const Missiles = styled.div`
+  height: 10%;
+  position: absolute;
+  height: ${(props) => (props.exploded ? `150px` : `15px`)}; //12px;
+  width: ${(props) => (props.exploded ? `150px` : `15px`)}; //12px;
+  opacity: ${(props) => (props.exploded ? `30%` : `100%`)};
+  /* background-color: ${(props) => (true ? `# + ${props.idr}` : "#9aaa")}; */
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  left: ${(props) => (props.exploded ? `${props.x - 4}%` : `${props.x}%`)};
+  bottom: ${(props) => (props.exploded ? `${props.y - 4}%` : `${props.y}%`)};
+  /* border-radius: inherit; */
+  transition: ${(props) =>
+    props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;
+`;
+
