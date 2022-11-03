@@ -24,6 +24,11 @@ function Navbar() {
           List Matches
         </NavItemLink>
       </LinkContainer>
+      <LinkContainer>
+        <NavItemLink to='/simCreate' data-testid='toSimCreate'>
+          Create Simulation
+        </NavItemLink>
+      </LinkContainer>
     </StyledNavbar>
   );
 }

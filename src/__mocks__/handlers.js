@@ -36,4 +36,10 @@ export const handlers = [
       return res(ctx.json(results));
     }
   ),
+  rest.post(
+    `${process.env.REACT_APP_API_KEY}new-simulation`,
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
+    }
+  ),
 ];
