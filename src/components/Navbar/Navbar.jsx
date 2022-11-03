@@ -29,6 +29,11 @@ function Navbar() {
           Create Simulation
         </NavItemLink>
       </LinkContainer>
+      <LinkContainer>
+        <NavItemLink to='/library' data-testid='robotsLibrary'>
+          Robots Library
+        </NavItemLink>
+      </LinkContainer>
     </StyledNavbar>
   );
 }

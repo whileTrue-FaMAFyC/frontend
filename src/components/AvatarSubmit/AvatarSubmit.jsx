@@ -6,7 +6,6 @@ import {
   StyledButton,
   StyledEntryCard,
   StyledInput,
-  StyledInputGroup,
   EntryPage,
   StyledError,
 } from "./AvatarSubmit.style";
@@ -16,7 +15,6 @@ const AvatarSubmit = () => {
     register,
     handleSubmit,
     formState: {errors},
-    watch,
   } = useForm();
 
   const [success, setSuccess] = useState(false);

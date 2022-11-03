@@ -18,6 +18,9 @@ const Home = () => {
         <Link to='/listgames' data-testid='linkToListMatch'>
           <StyledButton>List Matches</StyledButton>
         </Link>
+        <Link to='/library' data-testid='robotLibrary'>
+          <StyledButton>Robots library</StyledButton>
+        </Link>
       </StyledEntryCard>
     </EntryPage>
   );

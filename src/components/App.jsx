@@ -5,6 +5,7 @@ import {
   Botsubmit,
   GameConfig,
   AvatarSubmit,
+  RobotsLibrary,
   SimCreate,
   Navbar,
 } from "../components";
@@ -79,6 +80,15 @@ function App() {
               <div>
                 <Navbar />
                 <Match />
+              </div>
+            }
+          />
+          <Route
+            path='/library'
+            element={
+              <div>
+                <Navbar />
+                <RobotsLibrary />
               </div>
             }
           />
