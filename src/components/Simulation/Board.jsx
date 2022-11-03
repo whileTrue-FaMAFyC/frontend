@@ -17,6 +17,16 @@ export const Board = ({colors, robots}) => {
           </StyledHarm>
         </StyledRobot>
       ))}
+      {Object.entries(missiles).map(([missilId, missil]) => (
+        <Missiles
+          key={missilId}
+          initial_x={missil.initial_x}
+          initial_y={missil.initial_y}
+          x={missil.x / 10}
+          y={missil.y / 10}
+          exploded={missil.exploded}
+          new={missil.new}></Missiles>
+      ))}
     </StyledBoard>
   );
 };
