@@ -22,6 +22,7 @@ const TextField = ({
   return (
     <InputContainer>
       <Input
+        autoComplete='off'
         placeholder={placeholder}
         data-testid={name}
         name={name}
