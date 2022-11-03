@@ -7,7 +7,7 @@ import {render, fireEvent, screen} from "@testing-library/react";
 import Login from "../components/Login/Login";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import {server} from "../__mocks__/server.js";
-import RobotsStatus from "../components/BotInGame/RobotsStatus";
+import RobotsStatus from "../components/Simulation/RobotsStatus";
 
 // beforeAll(() => server.listen());
 // afterEach(() => {

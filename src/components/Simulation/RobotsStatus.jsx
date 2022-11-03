@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import StatusBar from "./StatusBar";
-import {StyledEntryCard} from "./StatusBar.styled";
+import StatusBar from "../Simulation/StatusBar";
+import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 
 const RobotsStatus = (props) => {
   const [completed, setCompleted] = useState(0);

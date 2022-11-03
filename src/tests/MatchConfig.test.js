@@ -391,7 +391,7 @@ describe("Configuracion de partida test", () => {
   test("21. Server error", async () => {
     server.use(
       rest.post(
-        "http://localhost:8000/matches/new-match",
+        `${process.env.REACT_APP_API_KEY}matches/new-match`,
         async (req, res, ctx) => {
           return res.once(ctx.status(401), ctx.json({detail: "Server error"}));
         }

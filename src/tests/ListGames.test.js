@@ -1,4 +1,5 @@
 import mockAxios from "axios";
+import {BrowserRouter} from "react-router-dom";
 import {render, screen, waitFor} from "@testing-library/react";
 import {gamesMock} from "../__mocks__";
 import {ListGames} from "../components";
@@ -7,7 +8,11 @@ describe("Listar partidas", () => {
   it("Los nombres de partidas estan en el documento", async () => {
     mockAxios.get.mockResolvedValue({data: gamesMock});
 
-    render(<ListGames />);
+    render(
+      <BrowserRouter>
+        <ListGames />
+      </BrowserRouter>
+    );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${process.env.REACT_APP_API_KEY}matches/list-matches`,
@@ -29,7 +34,11 @@ describe("Listar partidas", () => {
 
   it("No hay partidas disponibles", async () => {
     mockAxios.get.mockResolvedValue({data: []});
-    render(<ListGames />);
+    render(
+      <BrowserRouter>
+        <ListGames />
+      </BrowserRouter>
+    );
     expect(await screen.findByText("No games availables")).toBeInTheDocument();
   });
 });

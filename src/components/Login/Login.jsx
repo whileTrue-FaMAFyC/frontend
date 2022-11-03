@@ -30,7 +30,7 @@ const Login = () => {
     setFailure_data("");
     setSent(true);
     setLoading(false);
-    await fetch("http://localhost:8000/login", {
+    await fetch(`${process.env.REACT_APP_API_KEY}login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const Login = () => {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
             setSuccess(true);
-            navigate("/");
+            navigate("/home");
           } else {
             setFailure_data("Unknown Error");
             setSuccess(false);

@@ -90,8 +90,9 @@ export const StyledSuccess = styled.p`
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   background-color: #0f1519;
 `;
 
