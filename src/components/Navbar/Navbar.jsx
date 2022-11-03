@@ -26,7 +26,7 @@ function Navbar() {
       </LinkContainer>
       <LinkContainer>
         <NavItemLink to='/library' data-testid='robotsLibrary'>
-          Robot Library
+          Robots Library
         </NavItemLink>
       </LinkContainer>
     </StyledNavbar>
