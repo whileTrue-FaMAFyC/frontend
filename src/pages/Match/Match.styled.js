@@ -1,3 +1,16 @@
+// import styled from "styled-components";
+
+// export const Container = styled.div`
+//   width: 100%;
+//   height: calc(100vh - 70px);
+//   background-color: #0a0e13;
+// `;
+
+// export const Button = styled.button`
+//   width: 100px;
+//   height: 20px;
+// `;
+
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -6,7 +19,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0a0e13;
+  background-color: #0f1519;
 `;
 
 export const SuperWrapper = styled.div`
@@ -76,4 +89,59 @@ export const Button = styled.button`
   outline: none;
   border-radius: 10px;
   background-color: #00c8c8;
+`;
+
+export const StyledButton = styled.button`
+  width: ${(props) => (props.full ? "100%" : null)};
+  min-width: 64px;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 16px;
+  outline: none;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
+  //color: #252c32;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02857rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
+  }
+`;
+
+export const StyledError = styled.p`
+  font-size: 12px;
+  padding: 3px;
+  color: #be0000;
+`;
+
+export const StyledSelect = styled.select`
+  left: 20px;
+  margin: 10px;
+  background-color: ${(props) =>
+    props.enabledColor ? "gray" : `#00c8c8`}; //#00c8c8;
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  outline: none;
+  padding: 8px 16px;
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  font-size: 1rem;
+  max-height: 34px;
+  -webkit-text-fill-color: #dedede;
+  transition: box-shadow 0.2s;
+  background-color: #252c32;
+  &::placeholder {
+    color: blue;
+    -webkit-text-fill-color: #b8b8b8;
+  }
+  &:focus {
+    box-shadow: 0 0 0 2px rgb(0, 200, 200, 0.5);
+    color: #0f1519;
+  }
 `;

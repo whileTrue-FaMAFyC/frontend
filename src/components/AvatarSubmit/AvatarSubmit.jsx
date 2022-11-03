@@ -111,6 +111,7 @@ const AvatarSubmit = () => {
             src={imgData}
           />
           <StyledInput
+            autoComplete='off'
             type='file'
             id='inputAvatar'
             accept='image/*'

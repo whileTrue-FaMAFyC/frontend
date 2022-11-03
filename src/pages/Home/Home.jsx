@@ -9,7 +9,7 @@ const Home = () => {
         <Link to='/gameconfig' data-testid='linkToCreateMatch'>
           <StyledButton>Create Match</StyledButton>
         </Link>
-        <Link to='/avtarSubmit' data-testid='linkToCreateSim'>
+        <Link to='/simCreate' data-testid='linkToCreateSim'>
           <StyledButton>Create Simulation</StyledButton>
         </Link>
         <Link to='/botsubmit' data-testid='linkToCreateBot'>

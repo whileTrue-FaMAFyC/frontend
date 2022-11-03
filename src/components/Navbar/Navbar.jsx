@@ -25,6 +25,11 @@ function Navbar() {
         </NavItemLink>
       </LinkContainer>
       <LinkContainer>
+        <NavItemLink to='/simCreate' data-testid='toSimCreate'>
+          Create Simulation
+        </NavItemLink>
+      </LinkContainer>
+      <LinkContainer>
         <NavItemLink to='/library' data-testid='robotsLibrary'>
           Robots Library
         </NavItemLink>

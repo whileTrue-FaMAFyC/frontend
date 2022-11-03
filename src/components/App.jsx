@@ -4,9 +4,9 @@ import {
   Register,
   Botsubmit,
   GameConfig,
-  BotInGame,
   AvatarSubmit,
   RobotsLibrary,
+  SimCreate,
   Navbar,
 } from "../components";
 import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
@@ -57,11 +57,11 @@ function App() {
             }
           />
           <Route
-            path='/botInGame'
+            path='/simCreate'
             element={
               <div>
                 <Navbar />
-                <BotInGame />
+                <SimCreate />
               </div>
             }
           />

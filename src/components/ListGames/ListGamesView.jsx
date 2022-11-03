@@ -8,9 +8,10 @@ import {
   Tbody,
   Row,
   Feedback,
+  Button,
 } from "./ListGames.styled";
 
-const ListGamesView = ({games}) => {
+const ListGamesView = ({games, refresh}) => {
   const navigate = useNavigate();
   return (
     <Container>
@@ -22,6 +23,9 @@ const ListGamesView = ({games}) => {
             <Column>Creator</Column>
             <Column>Max Players</Column>
             <Column>Robots Joined</Column>
+            <Column>
+              <Button onClick={refresh}>Refresh</Button>
+            </Column>
           </Row>
         </Thead>
         <Tbody>
@@ -32,16 +36,19 @@ const ListGamesView = ({games}) => {
           )}
           {games.map(
             ({match_id, creator_user, max_players, name, robots_joined}) => (
-              <Row
-                key={match_id}
-                data-testid='row'
-                onClick={() => {
-                  navigate(`/match/${match_id}`);
-                }}>
+              <Row key={match_id} data-testid='row'>
                 <Column>{name}</Column>
                 <Column>{creator_user.username}</Column>
                 <Column>{max_players}</Column>
                 <Column>{robots_joined}</Column>
+                <Column>
+                  <Button
+                    onClick={() => {
+                      navigate(`/match/${match_id}`);
+                    }}>
+                    More info
+                  </Button>
+                </Column>
               </Row>
             )
           )}
