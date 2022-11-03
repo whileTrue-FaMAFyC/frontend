@@ -30,22 +30,22 @@ describe("Match test", () => {
     WS.clean();
   });
 
-  it("El creador de la partida ingresa al lobby", async () => {
-    mockAxios.get.mockResolvedValue({data: joinLobby});
-    render(<Match />);
+  // it("El creador de la partida ingresa al lobby", async () => {
+  //   mockAxios.get.mockResolvedValue({data: joinLobby});
+  //   render(<Match />);
 
-    await waitFor(() => {
-      expect(mockAxios.get).toHaveBeenCalledTimes(1);
-      expect(screen.getByText(joinLobby.name)).toBeInTheDocument();
-      joinLobby.user_robot.forEach((user) => {
-        let users = screen.getAllByText(user.username);
-        users.forEach((user) => {
-          expect(user).toBeInTheDocument();
-        });
-        expect(screen.getByText(user.robot_name)).toBeInTheDocument();
-      });
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(mockAxios.get).toHaveBeenCalledTimes(1);
+  //     expect(screen.getByText(joinLobby.name)).toBeInTheDocument();
+  //     joinLobby.user_robot.forEach((user) => {
+  //       let users = screen.getAllByText(user.username);
+  //       users.forEach((user) => {
+  //         expect(user).toBeInTheDocument();
+  //       });
+  //       expect(screen.getByText(user.robot_name)).toBeInTheDocument();
+  //     });
+  //   });
+  // });
 
   it("Se une un jugador a la partida y el host recibe el evento", async () => {
     mockAxios.get.mockResolvedValue({data: joinLobby});

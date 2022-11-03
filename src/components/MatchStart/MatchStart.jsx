@@ -1,5 +1,4 @@
 import {start} from "../../services/matchStart.service";
-import {CircularProgress} from "@mui/material";
 import {StyledButton} from "./MatchStart.styled";
 
 const MatchStartView = ({isCreator, isReadyToStart, matchId}) => {
