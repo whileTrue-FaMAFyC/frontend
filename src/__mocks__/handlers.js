@@ -1,5 +1,6 @@
 // src/mocks/handlers.js
 import {rest} from "msw";
+import {results} from "./match";
 
 export const fakeUserResponse = {Authorization: "fake_user_token"};
 const username = "ElMasGrande";
@@ -24,6 +25,19 @@ export const handlers = [
     `${process.env.REACT_APP_API_KEY}load-avatar/${localStorage.getItem(
       "username"
     )}`,
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
+    }
+  ),
+
+  rest.put(
+    `${process.env.REACT_APP_API_KEY}matches/start-match/:match_id`,
+    (req, res, ctx) => {
+      return res(ctx.json(results));
+    }
+  ),
+  rest.post(
+    `${process.env.REACT_APP_API_KEY}new-simulation`,
     (req, res, ctx) => {
       return res(ctx.json({status: 200, success: true}));
     }

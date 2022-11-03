@@ -18,7 +18,7 @@ export const Table = styled.table`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #0f1519;
+  background-color: #252c32;
 `;
 
 export const Thead = styled.thead`
@@ -82,7 +82,6 @@ export const Row = styled.tr`
     background-color: #ff4655;
     background-color: #0a0e13;
   }
-  cursor: pointer;
 `;
 
 export const Feedback = styled.tr`
@@ -99,7 +98,15 @@ export const Ellipsis = styled.p`
   text-overflow: ellipsis;
 `;
 
-export const Refresh = styled.button`
-  width: 300px;
-  height: 25px;
+export const Button = styled.button`
+  padding: 6px 10px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: #00c8c8;
+  cursor: pointer;
+  color: #111;
+  &:hover {
+    color: #fff;
+  }
 `;
