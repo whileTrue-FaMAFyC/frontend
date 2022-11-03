@@ -5,12 +5,13 @@ import {Board} from "./Board";
 const Simulation = ({props}) => {
   const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
-  const colorsRobots = ["red", "black", "orange", "pink"];
+  const colorsRobots = ["red", "turquoise", "orange", "pink"];
 
   const colors = {};
-
-  for (let i = 0; i < names.length; i++) {
-    colors[names[i].id] = colorsRobots[i];
+  if (names !== undefined) {
+    for (let i = 0; i < names.length; i++) {
+      colors[names[i].id] = colorsRobots[i];
+    }
   }
 
   const [robots, setRobots] = useState({});
