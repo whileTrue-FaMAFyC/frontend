@@ -24,6 +24,7 @@ const Simulation = ({props}) => {
   }
 
   const [robots, setRobots] = useState({});
+  const [missiles, setMissiles] = useState({});
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,13 +37,14 @@ const Simulation = ({props}) => {
   const drawFrame = (frame) => {
     if (nframe < simulation.length) {
       setRobots(frame.robots);
+      setMissiles(frame.missiles);
     }
   };
 
   return (
     <EntryPage data-testid='Simulation'>
       <RobotsStatus colors={colors} robots={robots} names={robot_names} />
-      <Board colors={colors} robots={robots} />
+      <Board colors={colors} robots={robots} missiles={missiles} />
     </EntryPage>
   );
 };

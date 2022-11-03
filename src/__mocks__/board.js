@@ -34,6 +34,32 @@ export const props = {
           died: false,
         },
       },
+      missile: {
+        0: {
+          x: 0,
+          y: 0,
+          exploded: false,
+          new: true,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+      },
     },
     {
       robots: {
@@ -62,6 +88,32 @@ export const props = {
           died: false,
         },
       },
+      missile: {
+        0: {
+          x: 0,
+          y: 0,
+          exploded: false,
+          new: true,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+      },
     },
     {
       robots: {
@@ -88,6 +140,32 @@ export const props = {
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
+        },
+      },
+      missile: {
+        0: {
+          x: 0,
+          y: 0,
+          exploded: false,
+          new: true,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
         },
       },
     },
@@ -118,6 +196,32 @@ export const props = {
           died: false,
         },
       },
+      missile: {
+        0: {
+          x: 0,
+          y: 0,
+          exploded: false,
+          new: true,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+      },
     },
     {
       robots: {
@@ -172,6 +276,32 @@ export const props = {
           y: Math.floor(Math.random() * 100) + 1,
           harmed: false,
           died: false,
+        },
+      },
+      missile: {
+        0: {
+          x: 0,
+          y: 0,
+          exploded: false,
+          new: true,
+        },
+        1: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        2: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
+        },
+        3: {
+          x: Math.floor(Math.random() * 100) + 1,
+          y: Math.floor(Math.random() * 100) + 1,
+          exploded: false,
+          new: true,
         },
       },
     },

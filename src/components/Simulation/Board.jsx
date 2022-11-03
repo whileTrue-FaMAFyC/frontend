@@ -1,6 +1,6 @@
-import {Bot, Harm, StyledBoard, StyledRobot, StyledHarm} from "./Board.style";
+import {Bot, Harm, StyledBoard, StyledRobot, StyledHarm, Missiles,} from "./Board.style";
 
-export const Board = ({colors, robots}) => {
+export const Board = ({colors, robots, missiles}) => {
   return (
     <StyledBoard>
       {Object.entries(robots).map(([robotId, r]) => (
@@ -16,6 +16,16 @@ export const Board = ({colors, robots}) => {
             <Harm data-testid='harm' />
           </StyledHarm>
         </StyledRobot>
+      ))}
+      {Object.entries(missiles).map(([missilId, missil]) => (
+        <Missiles
+          key={missilId}
+          initial_x={missil.initial_x}
+          initial_y={missil.initial_y}
+          x={missil.x / 10}
+          y={missil.y / 10}
+          exploded={missil.exploded}
+          new={missil.new}></Missiles>
       ))}
     </StyledBoard>
   );
