@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 50%;
+  width: min(90%, 1000px);
   display: flex;
+  overflow-x: auto;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
@@ -16,9 +17,12 @@ export const Title = styled.p`
 
 export const Table = styled.table`
   width: 100%;
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   background-color: #252c32;
+  overflow-x: auto;
+  background-color: #0f1519;
 `;
 
 export const Thead = styled.thead`
@@ -109,4 +113,11 @@ export const Button = styled.button`
   &:hover {
     color: #fff;
   }
+
+  /*   background: linear-gradient(
+    90deg,
+    rgba(39, 147, 198, 1) 25%,
+    rgba(24, 172, 212, 1) 76%,
+    rgba(15, 188, 222, 1) 100%
+  ); */
 `;
