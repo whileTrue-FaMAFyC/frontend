@@ -51,7 +51,6 @@ function App() {
             path='/verify'
             element={
               <div>
-                <Navbar />
                 <Verify />
               </div>
             }
