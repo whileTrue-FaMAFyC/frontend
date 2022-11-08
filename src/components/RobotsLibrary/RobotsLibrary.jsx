@@ -16,13 +16,12 @@ import {
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
+  const [query, setQuery] = useState("");
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
-      if (response.data.length) {
-        setRobotsNames(response.data);
-      }
+      setRobotsNames(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -30,28 +29,37 @@ const RobotsLibrary = () => {
 
   useEffect(() => {
     callGetRobotsNames();
-    console.log(robotsNames);
   }, []);
+
   return (
     <EntryPage>
       <StyledEntryCard>
         <Title data-testid='title'>My robots</Title>
         <Table>
+          <input
+            type='text'
+            placeholder='Find your robot...'
+            onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          />
           <Tbody>
             {robotsNames.length < 1 && (
               <Feedback>
                 <Column>No robots availables</Column>
               </Feedback>
             )}
-            {robotsNames.map(({avatar, name}) => (
-              <Row key={name} data-testid='row'>
-                <Column>
-                  {" "}
-                  <Avatar spacing={2} src={avatar} />
-                </Column>
-                <Column>{name}</Column>
-              </Row>
-            ))}
+            {robotsNames
+              .filter((robotName) =>
+                robotName.name.toLowerCase().includes(query)
+              )
+              .map(({avatar, name}) => (
+                <Row key={name} data-testid='row'>
+                  <Column>
+                    {" "}
+                    <Avatar spacing={2} src={avatar} />
+                  </Column>
+                  <Column>{name}</Column>
+                </Row>
+              ))}
           </Tbody>
         </Table>
         <StyledButton>
