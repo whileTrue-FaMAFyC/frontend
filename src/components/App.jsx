@@ -25,7 +25,7 @@ function App() {
           <Route
             path='/listgames'
             element={
-              localStorage.getItem("user") === "" ? (
+              !localStorage.getItem("user") ? (
                 <Navigate to='/' />
               ) : (
                 <ListMatches />
