@@ -1,5 +1,6 @@
 export * from "./configPartida.service";
 export * from "./games.service";
+export * from "./logOut.service";
 export * from "./matchStart.service";
 export * from "./joinMatch.service";
 export * from "./leaveMatch.service";

@@ -1,5 +1,6 @@
 import {EntryPage, StyledButton, StyledEntryCard} from "./Home.styled";
 import {Link} from "react-router-dom";
+import {logOut} from "../../services";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
         </Link>
         <Link to='/library' data-testid='robotLibrary'>
           <StyledButton>Robots library</StyledButton>
+        </Link>
+        <Link to='/' data-testid='logOut'>
+          <StyledButton onClick={logOut}>Log Out</StyledButton>
         </Link>
       </StyledEntryCard>
     </EntryPage>
