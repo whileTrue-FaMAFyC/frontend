@@ -2,6 +2,7 @@ import {
   EntryPage,
   StyledButton,
   StyledEntryCard,
+  StyledInput,
   StyledInputGroup,
 } from "../Login/Login.styled";
 
@@ -12,6 +13,7 @@ const EnterEmail = ({handleSubmit, submit}) => {
         <form onSubmit={handleSubmit(submit)}>
           <StyledInputGroup>
             <label>Email</label>
+            <StyledInput></StyledInput>
           </StyledInputGroup>
           <StyledButton type='login' role='button'>
             Enviar
