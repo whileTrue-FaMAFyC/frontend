@@ -30,11 +30,10 @@ export const StyledEntryCard = styled.div`
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   display: grid;
-  flex-direction: column;
+  /* flex-direction: column; */
 
   align-items: center;
-  flex-direction: column;
-  grid-template-columns: 1fr 2fr;
+  /* grid-template-columns: 1fr 2fr; */
   grid-gap: 20px;
 
   h2 {
@@ -54,7 +53,8 @@ export const StyledEntryCard = styled.div`
 `;
 
 export const StyledInputGroup = styled.div`
-  margin-bottom: 24px;
+  /* margin-bottom: 15px; */
+  margin: 10px;
   text-align: left;
   label {
     display: inline-block;
