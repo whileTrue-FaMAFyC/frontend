@@ -5,7 +5,13 @@ import {
   StyledInputGroup,
 } from "../Login/Login.styled";
 
-const EnterPassword = ({handleSubmit, submit}) => {
+const EnterPassword = ({
+  register,
+  handleSubmit,
+  submit,
+  failureData,
+  loading,
+}) => {
   return (
     <EntryPage>
       <StyledEntryCard>
@@ -13,7 +19,12 @@ const EnterPassword = ({handleSubmit, submit}) => {
           <StyledInputGroup>
             <label>Password</label>
           </StyledInputGroup>
-          <StyledButton type='login' role='button'>
+          <StyledButton
+            type='login'
+            role='button'
+            {...register("username_or_email", {
+              required: true,
+            })}>
             Enviar
           </StyledButton>
         </form>
