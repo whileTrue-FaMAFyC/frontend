@@ -31,6 +31,8 @@ const Botsubmit = () => {
 
   const [loading, setLoading] = useState(false); //processing post to server state
 
+  const navigate = useNavigate();
+
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -70,8 +72,6 @@ const Botsubmit = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
-  const navigate = useNavigate();
 
   const submitForm = async (data) => {
     setFailure_data("");
@@ -157,13 +157,13 @@ const Botsubmit = () => {
                 onChange: (t) => {
                   onUploadFileChange(t, setFile_cod, setFileName_cod);
                 },
-                /*  validate: (e) => {
+                validate: (e) => {
                   return (
                     e.length !== 0 &&
-                    new RegExp("python").test(e[0].type) &&
+                    new RegExp(".*.py$").test(e[0].name) &&
                     e[0].size < 40000
                   );
-                }, */
+                },
               })}
             />
             {errors.source_code?.type === "validate" ? (
@@ -202,12 +202,13 @@ const Botsubmit = () => {
                   });
                   onChangePicture(file);
                 },
-                /*  validate: (e) => {
+                validate: (e) => {
                   return (
                     e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
+                    (new RegExp(".*.(jpe?g|png)$").test(e[0].name) &&
+                      e[0].size < 40000)
                   );
-                }, */
+                },
               })}
             />
             {errors.avatar?.type === "validate" ? (
@@ -218,7 +219,9 @@ const Botsubmit = () => {
           </StyledInputGroup>
 
           {!loading ? (
-            <StyledButton type='submit'>Submit</StyledButton>
+            <StyledButton type='submit' data-testid='submit'>
+              Submit
+            </StyledButton>
           ) : (
             <Div>
               <CircularProgress data-testid='loader' />

@@ -77,7 +77,7 @@ const AvatarSubmit = () => {
         const data = await response.json();
         if (response.status === 200) {
           setSuccess(true);
-          navigate(`/`);
+          navigate(`/login`);
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
