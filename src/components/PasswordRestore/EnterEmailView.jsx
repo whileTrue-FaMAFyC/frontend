@@ -21,13 +21,7 @@ const EnterEmail = ({register, handleSubmit, submit, failureData, loading}) => {
               <CircularProgress data-testid='loader' />
             </div>
           ) : (
-            <StyledButton
-              type='sendEmail'
-              role='button'
-              data-testid='loginButton'
-              {...register("username_or_email", {
-                required: true,
-              })}>
+            <StyledButton role='button' data-testid='loginButton' type='submit'>
               Send Email
             </StyledButton>
           )}
