@@ -4,20 +4,25 @@ import {verifyUser} from "../../services";
 import TextField from "../TextField/TextField";
 import {useNavigate} from "react-router-dom";
 import {Form, FeedBack, Title, Button} from "./FormUserVerify.styled";
+import {CircularProgress} from "@mui/material";
 
 const FormUserVerify = () => {
   const navigate = useNavigate();
   const methods = useForm({mode: "all"});
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       await verifyUser(data.code, localStorage.getItem("username"));
       setSuccess("Account verified successfully");
       navigate("/avatarSubmit");
     } catch (error) {
       setError(error.response.data.detail.normalize());
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,7 +50,8 @@ const FormUserVerify = () => {
           required
           requiredMessage='Enter the code'
         />
-        <Button type='submit'>Send</Button>
+        {!loading && <Button type='submit'>Send</Button>}
+        {loading && <CircularProgress />}
       </Form>
     </FormProvider>
   );

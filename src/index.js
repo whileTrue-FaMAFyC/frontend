@@ -8,9 +8,9 @@ import {GlobalStyle} from "./index.style";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <React.StrictMode>
-      <GlobalStyle />
-      <App />
-    </React.StrictMode>
+    {/* <React.StrictMode> */}
+    <GlobalStyle />
+    <App />
+    {/* </React.StrictMode> */}
   </Router>
 );

@@ -116,6 +116,7 @@ const Botsubmit = () => {
               Name
             </label>
             <StyledInput
+              autoComplete='off'
               id='name'
               type='text'
               {...register("name", {
@@ -144,6 +145,7 @@ const Botsubmit = () => {
               Code
             </label>
             <StyledInput
+              autoComplete='off'
               id='source_code'
               type='file'
               accept='.py'
@@ -151,13 +153,13 @@ const Botsubmit = () => {
                 onChange: (t) => {
                   onUploadFileChange(t, setFile_cod, setFileName_cod);
                 },
-                validate: (e) => {
+                /*  validate: (e) => {
                   return (
                     e.length !== 0 &&
                     new RegExp("python").test(e[0].type) &&
                     e[0].size < 40000
                   );
-                },
+                }, */
               })}
             />
             {errors.source_code?.type === "validate" ? (
@@ -185,6 +187,7 @@ const Botsubmit = () => {
               src={imgAvatar}
             />
             <StyledInput
+              autoComplete='off'
               id='avatar'
               type='file'
               accept='image/*'
@@ -195,12 +198,12 @@ const Botsubmit = () => {
                   });
                   onChangePicture(file);
                 },
-                validate: (e) => {
+                /*  validate: (e) => {
                   return (
                     e.length === 0 ||
                     (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
                   );
-                },
+                }, */
               })}
             />
             {errors.avatar?.type === "validate" ? (

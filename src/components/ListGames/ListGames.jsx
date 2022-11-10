@@ -4,6 +4,9 @@ import ListGamesView from "./ListGamesView";
 
 const ListGames = () => {
   const [games, setGames] = useState([]);
+  const [refresh, setRefresh] = useState(true);
+
+  const handleRefresh = () => setRefresh(true);
 
   const callGetGames = async () => {
     try {
@@ -13,13 +16,17 @@ const ListGames = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setRefresh(false);
     }
   };
 
   useEffect(() => {
     callGetGames();
-  }, [setGames]);
+  }, [refresh]);
 
-  return <ListGamesView games={games} />;
+  return (
+    <ListGamesView games={games} refresh={handleRefresh} loading={refresh} />
+  );
 };
 export default ListGames;

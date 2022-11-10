@@ -8,6 +8,8 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.11",
     "@mui/styled-engine-sc": "^5.10.6",
+    "@styled-icons/bootstrap": "^10.46.0",
+    "@styled-icons/remix-fill": "^10.46.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,11 +22,14 @@
     "querystring": "^0.2.1",
     "querystring-es3": "^0.2.1",
     "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-emotion": "^10.0.0",
     "react-hook-form": "^7.37.0",
+    "react-icons": "^4.6.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.0",
+    "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4",
     "zlib": "^1.0.5"
@@ -54,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "jest-websocket-mock": "^2.4.0",
     "msw": "^0.47.4"
   }
 }

@@ -10,7 +10,7 @@ const Home = () => {
         <Link to='/gameconfig' data-testid='linkToCreateMatch'>
           <StyledButton>Create Match</StyledButton>
         </Link>
-        <Link to='/avtarSubmit' data-testid='linkToCreateSim'>
+        <Link to='/simCreate' data-testid='linkToCreateSim'>
           <StyledButton>Create Simulation</StyledButton>
         </Link>
         <Link to='/botsubmit' data-testid='linkToCreateBot'>
@@ -18,6 +18,9 @@ const Home = () => {
         </Link>
         <Link to='/listgames' data-testid='linkToListMatch'>
           <StyledButton>List Matches</StyledButton>
+        </Link>
+        <Link to='/library' data-testid='robotLibrary'>
+          <StyledButton>Robots library</StyledButton>
         </Link>
         <Link to='/' data-testid='logOut'>
           <StyledButton onClick={logOut}>Log Out</StyledButton>

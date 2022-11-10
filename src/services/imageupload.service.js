@@ -1,4 +1,4 @@
-export const imageUpload = () => {
+/* export const imageUpload = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
 
@@ -33,3 +33,4 @@ export const imageUpload = () => {
     </div>
   );
 };
+ */
