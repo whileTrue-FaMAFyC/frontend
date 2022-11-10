@@ -1,4 +1,4 @@
 export function logOut() {
-  localStorage.setItem("user", "");
-  localStorage.setItem("username", "");
+  localStorage.deleteItem("user");
+  localStorage.deleteItem("username");
 }
