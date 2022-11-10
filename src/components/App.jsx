@@ -35,7 +35,7 @@ function App() {
           <Route
             path='/botsubmit'
             element={
-              localStorage.getItem("user") === "" ? (
+              !localStorage.getItem("user") ? (
                 <Navigate to='/' />
               ) : (
                 <Botsubmit />
@@ -45,7 +45,7 @@ function App() {
           <Route
             path='/gameconfig'
             element={
-              localStorage.getItem("user") === "" ? (
+              !localStorage.getItem("user") ? (
                 <Navigate to='/' />
               ) : (
                 <GameConfig />
@@ -56,7 +56,7 @@ function App() {
           <Route
             path='/botInGame'
             element={
-              localStorage.getItem("user") === "" ? (
+              !localStorage.getItem("user") ? (
                 <Navigate to='/' />
               ) : (
                 <BotInGame />
