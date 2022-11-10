@@ -12,6 +12,7 @@ import {
 } from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import {Link, useNavigate} from "react-router-dom";
 
 const Botsubmit = () => {
   const {
@@ -70,6 +71,8 @@ const Botsubmit = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   const submitForm = async (data) => {
     setFailure_data("");
     setLoading(true);
@@ -92,6 +95,7 @@ const Botsubmit = () => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
+          navigate("/library");
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
@@ -227,6 +231,14 @@ const Botsubmit = () => {
         {failure_data !== "" ? (
           <StyledError role='alert'>{failure_data}</StyledError>
         ) : null}
+        <Div>
+          Want to see your robots?
+          <StyledButton>
+            <Link to='/library' data-testid='linkToLibrary'>
+              Robots library
+            </Link>
+          </StyledButton>
+        </Div>
       </StyledEntryCard>
     </EntryPage>
   );
