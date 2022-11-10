@@ -232,7 +232,9 @@ const MatchConfig = () => {
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Create</StyledButton>
+          <StyledButton type='submit' data-testid='submit'>
+            Create
+          </StyledButton>
         </form>
         {success && (
           <div
