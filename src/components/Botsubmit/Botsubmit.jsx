@@ -73,20 +73,30 @@ const Botsubmit = () => {
   const submitForm = async (data) => {
     setFailure_data("");
     setLoading(true);
-    data.source_code = file_cod;
-    data.avatar = file_av;
-    data.bot_filename = fileName_cod;
+    const dataFrom = new FormData();
+    dataFrom.append("bot_name", data.name);
+    dataFrom.append(
+      "bot_source_code",
+      data.source_code[0],
+      data.source_code[0].name
+    );
+    dataFrom.append("bot_avatar", data.avatar[0], data.avatar[0].name);
+    // data.source_code = file_cod;
+    // data.avatar = file_av;
+    // data.bot_filename = fileName_cod;
+    console.log(data.source_code);
+    console.log(data.avatar);
     const token = localStorage.getItem("user");
     try {
       await fetch(`${process.env.REACT_APP_API_KEY}create-bot`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          //"Content-Type": "Multipart/form-data",
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Credentials": "true",
           Authorization: `${token}`,
         },
-        body: JSON.stringify(data),
+        body: dataFrom,
       }).then(async (response) => {
         setLoading(false);
         const data = await response.json();
@@ -150,16 +160,16 @@ const Botsubmit = () => {
               type='file'
               accept='.py'
               {...register("source_code", {
-                onChange: (t) => {
-                  onUploadFileChange(t, setFile_cod, setFileName_cod);
-                },
-                /*  validate: (e) => {
+                // onChange: (t) => {
+                //   onUploadFileChange(t, setFile_cod, setFileName_cod);
+                // },
+                validate: (e) => {
                   return (
                     e.length !== 0 &&
                     new RegExp("python").test(e[0].type) &&
                     e[0].size < 40000
                   );
-                }, */
+                },
               })}
             />
             {errors.source_code?.type === "validate" ? (
@@ -192,18 +202,18 @@ const Botsubmit = () => {
               type='file'
               accept='image/*'
               {...register("avatar", {
-                onChange: (file) => {
-                  onUploadFileChange(file, setFile_av, (e) => {
-                    return e;
-                  });
-                  onChangePicture(file);
-                },
-                /*  validate: (e) => {
+                // onChange: (file) => {
+                //   onUploadFileChange(file, setFile_av, (e) => {
+                //     return e;
+                //   });
+                //   onChangePicture(file);
+                // },
+                validate: (e) => {
                   return (
                     e.length === 0 ||
                     (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
                   );
-                }, */
+                },
               })}
             />
             {errors.avatar?.type === "validate" ? (
