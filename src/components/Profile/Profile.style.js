@@ -15,6 +15,7 @@ export const StyledButton = styled.button`
   letter-spacing: 0.02857rem;
   cursor: pointer;
   transition: all 0.2s;
+  margin: 4px;
   &:hover {
     background-color: #009595;
   }
