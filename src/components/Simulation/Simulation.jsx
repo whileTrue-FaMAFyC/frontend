@@ -1,11 +1,14 @@
 import {EntryPage} from "./Board.style";
-import React, {useEffect, useState} from "react";
-import {Board} from "./Board";
+import React, {useEffect, useState, useRef} from "react";
+import Board from "./Board";
 import RobotsStatus from "./RobotsStatus";
+import SimControl from "./SimControl";
 
 const Simulation = ({props}) => {
   const {names, simulation} = props;
   const [nframe, setNframe] = useState(0);
+  const [activeInterval, setActiveInterval] = useState(true);
+
   const colorsRobots = ["red", "turquoise", "orange", "pink"];
 
   const colors = {};
@@ -28,10 +31,15 @@ const Simulation = ({props}) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      drawFrame(simulation[nframe]);
-      setNframe(nframe + 1);
+      if (activeInterval) {
+        drawFrame(simulation[nframe]);
+        setNframe(nframe + 1);
+      }
     }, 500);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearInterval(interval);
+    };
   });
 
   const drawFrame = (frame) => {
@@ -41,10 +49,42 @@ const Simulation = ({props}) => {
     }
   };
 
+  const playSimulation = () => {
+    setActiveInterval(true);
+  };
+
+  const stopSimulation = () => {
+    setActiveInterval(false);
+  };
+
+  const followingRound = () => {
+    drawFrame(simulation[nframe]);
+    setNframe(nframe + 1);
+  };
+
+  const previousRound = () => {
+    setNframe(nframe - 1);
+    drawFrame(simulation[nframe]);
+  };
+
+  const resetSimulation = () => {
+    setNframe(0);
+    drawFrame(simulation[nframe]);
+  };
+
+  const handlers = {
+    play: playSimulation,
+    stop: stopSimulation,
+    forward: followingRound,
+    backward: previousRound,
+    reset: resetSimulation,
+  };
+
   return (
     <EntryPage data-testid='Simulation'>
       <RobotsStatus colors={colors} robots={robots} names={robot_names} />
       <Board colors={colors} robots={robots} missiles={missiles} />
+      <SimControl handlers={handlers} />
     </EntryPage>
   );
 };
