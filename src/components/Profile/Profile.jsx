@@ -10,6 +10,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  StyledProbando,
 } from "./Profile.style";
 
 const Profile = () => {
@@ -38,13 +39,15 @@ const Profile = () => {
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      cb(null, reader.result);
-    };
-    reader.onerror = function (error) {
-      cb(error, null);
-    };
+    try {
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        cb(null, reader.result);
+      };
+      reader.onerror = function (error) {
+        cb(error, null);
+      };
+    } catch {}
   };
 
   const onUploadFileChange = ({target}) => {
@@ -73,44 +76,43 @@ const Profile = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        <div>
-          {/* <form onSubmit={handleSubmit(changeAvatar)}> */}
-          <Button variant='string' type='submit'>
-            <Avatar
-              style={{
-                height: 150,
-                width: 150,
-                verticalAlign: "middle",
-                position: "relative",
-                justifyContent: "center",
-              }}
-              spacing={2}
-              src={imgData}
-            />
-            <input
-              type='file'
-              hidden
-              accept='image/*'
-              multiple
-              onChange={(avatar) => {
-                onChangePicture(avatar);
-                onUploadFileChange(avatar);
-              }}
-            />
-            {/* <input avatar={avatar} type='file' readOnly /> */}
-            {/* <input
+        {/* <form onSubmit={handleSubmit(changeAvatar)}> */}
+        <Button variant='string' type='submit' component='label'>
+          <Avatar
+            style={{
+              height: 150,
+              width: 150,
+              verticalAlign: "middle",
+              position: "relative",
+              justifyContent: "center",
+            }}
+            spacing={2}
+            src={imgData}
+          />
+          <input
+            type='file'
+            hidden
+            accept='image/*'
+            multiple
+            onChange={(avatar) => {
+              onChangePicture(avatar);
+              onUploadFileChange(avatar);
+            }}
+          />
+          {/* <input avatar={avatar} type='file' readOnly /> */}
+          {/* <input
                 hidden
                 accept='image/*'
                 multiple
                 type='file'
                 {...register("match_password")}
               /> */}
-          </Button>
-          {/* </form> */}
+        </Button>
+        {/* </form> */}
 
-          <div>Username</div>
-          <div>aestusemburgo@gmail.com</div>
-        </div>
+        <div>Username</div>
+        <div>aestusemburgo@gmail.com</div>
+
         {changePasswordOn && (
           <div>
             <form onSubmit={handleSubmit()}>
