@@ -81,11 +81,6 @@ const Botsubmit = () => {
       data.source_code[0].name
     );
     dataFrom.append("bot_avatar", data.avatar[0], data.avatar[0].name);
-    // data.source_code = file_cod;
-    // data.avatar = file_av;
-    // data.bot_filename = fileName_cod;
-    console.log(data.source_code);
-    console.log(data.avatar);
     const token = localStorage.getItem("user");
     try {
       await fetch(`${process.env.REACT_APP_API_KEY}create-bot`, {
@@ -202,12 +197,12 @@ const Botsubmit = () => {
               type='file'
               accept='image/*'
               {...register("avatar", {
-                // onChange: (file) => {
+                onChange: (file) => {
                 //   onUploadFileChange(file, setFile_av, (e) => {
                 //     return e;
                 //   });
-                //   onChangePicture(file);
-                // },
+                  onChangePicture(file);
+                },
                 validate: (e) => {
                   return (
                     e.length === 0 ||

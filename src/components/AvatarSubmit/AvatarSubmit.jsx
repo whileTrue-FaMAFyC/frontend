@@ -61,17 +61,23 @@ const AvatarSubmit = () => {
 
   const onSubmit = async (data) => {
     setFailure_data("");
+    const dataFrom = new FormData()
+    dataFrom.append(
+      "avatar",
+      data.avatar[0],
+      data.avatar[0].name
+    )
     data.avatar = file == null ? "" : file;
     const username = localStorage.getItem("username");
     await fetch(`${process.env.REACT_APP_API_KEY}load-avatar/${username}`, {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
+        // "Content-type": "application/json",
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Credentials": "true",
         Authorization: `${username}`,
       },
-      body: JSON.stringify(data),
+      body: dataFrom,
     })
       .then(async (response) => {
         const data = await response.json();
@@ -119,7 +125,7 @@ const AvatarSubmit = () => {
             {...register("avatar", {
               onChange: (avatar) => {
                 onChangePicture(avatar);
-                onUploadFileChange(avatar);
+              //   onUploadFileChange(avatar);
               },
               validate: (file) => {
                 return (
