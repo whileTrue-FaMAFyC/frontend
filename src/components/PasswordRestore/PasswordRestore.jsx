@@ -4,15 +4,6 @@ import EnterPassword from "./EnterPasswordView";
 import EnterEmail from "./EnterEmailView";
 import {useNavigate} from "react-router-dom";
 
-import {
-  EntryPage,
-  StyledButton,
-  StyledEntryCard,
-  StyledInput,
-  StyledInputGroup,
-} from "../Login/Login.styled";
-import {CircularProgress} from "@mui/material";
-
 const PasswordRestore = () => {
   const {
     register,
@@ -28,7 +19,7 @@ const PasswordRestore = () => {
 
   const submitEmail = async (data) => {
     console.log("Submiteando");
-    setSentCode(true);
+    setLoading(true);
     console.log(JSON.stringify(data));
     console.log(data);
     await fetch(`${process.env.REACT_APP_API_KEY}create-bot`, {
@@ -40,7 +31,23 @@ const PasswordRestore = () => {
         Authorization: `${token}`,
       },
       body: JSON.stringify(data),
-    });
+    })
+      .then(async (response) => {
+        setLoading(false);
+        const data = await response.json();
+        if (response.status === 401) {
+          setFailureData(data.detail);
+        } else if (response.status === 200) {
+          setSentCode(true);
+        } else {
+          setFailureData("Unknown Error");
+        }
+      })
+      .catch((error) => {
+        setFailureData("Network Error");
+        setSentCode(true);
+        setLoading(false);
+      });
   };
 
   const submitPassword = async (data) => {
@@ -57,39 +64,17 @@ const PasswordRestore = () => {
       submit={submitPassword}
       failureData={failureData}
       loading={loading}
+      errors={errors}
     />
   ) : (
-    // <EnterEmail
-    //   register={register}
-    //   handleSubmit={handleSubmit}
-    //   submit={submitEmail}
-    //   failureData={failureData}
-    //   loading={loading}
-    // />
-    <EntryPage>
-      <StyledEntryCard>
-        <form onSubmit={handleSubmit(submitEmail)} id='form'>
-          <StyledInputGroup>
-            <label>Email</label>
-            <StyledInput
-              type='text'
-              id='inputEmail'
-              {...register("email", {
-                required: true,
-              })}></StyledInput>
-          </StyledInputGroup>
-          {loading ? (
-            <div>
-              <CircularProgress data-testid='loader' />
-            </div>
-          ) : (
-            <StyledButton role='button' data-testid='loginButton' type='submit'>
-              Send Email
-            </StyledButton>
-          )}
-        </form>
-      </StyledEntryCard>
-    </EntryPage>
+    <EnterEmail
+      register={register}
+      handleSubmit={handleSubmit}
+      submit={submitEmail}
+      failureData={failureData}
+      loading={loading}
+      errors={errors}
+    />
   );
 };
 

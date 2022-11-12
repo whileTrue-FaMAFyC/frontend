@@ -18,14 +18,33 @@ const EnterPassword = ({
       <StyledEntryCard>
         <form onSubmit={handleSubmit(submit)}>
           <StyledInputGroup>
-            <label>Password</label>
+            <label>Code</label>
             <StyledInput
-              type='test'
+              type='text'
               {...register("password", {
                 required: true,
-              })}></StyledInput>
+              })}
+            />
           </StyledInputGroup>
-          <StyledButton role='button'> Enviar</StyledButton>
+          <StyledInputGroup>
+            <label>New password</label>
+            <StyledInput
+              type='password'
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </StyledInputGroup>
+          <StyledInputGroup>
+            <label>Confirm new password</label>
+            <StyledInput
+              type='password'
+              {...register("password", {
+                required: true,
+              })}
+            />
+          </StyledInputGroup>
+          <StyledButton role='button'>Send</StyledButton>
         </form>
       </StyledEntryCard>
     </EntryPage>
