@@ -18,6 +18,7 @@ const Profile = () => {
     register,
     handleSubmit,
     formState: {errors},
+    watch,
   } = useForm();
 
   const [changePasswordOn, setChangePasswordOn] = useState(false);
@@ -30,6 +31,10 @@ const Profile = () => {
   const [imgData, setImgData] = useState(localStorage.getItem("avatar"));
 
   const changeAvatar = async (data) => {
+    console.log(data);
+  };
+
+  const changePassword = async (data) => {
     console.log(data);
   };
 
@@ -73,9 +78,7 @@ const Profile = () => {
     <EntryPage>
       <StyledEntryCard>
         <div>
-          {/* <form onSubmit={handleSubmit(changeAvatar)}> */}
-
-          <Button variant='string' type='submit' component='label'>
+          <Button variant='string' component='label'>
             <Avatar
               style={{
                 height: 150,
@@ -98,14 +101,6 @@ const Profile = () => {
                 setChangeAvatarOn(true);
               }}
             />
-            {/* <input avatar={avatar} type='file' readOnly /> */}
-            {/* <input
-                hidden
-                accept='image/*'
-                multiple
-                type='file'
-                {...register("match_password")}
-              /> */}
           </Button>
           {changeAvatarOn && (
             <a>
@@ -129,10 +124,10 @@ const Profile = () => {
         </div>
         {changePasswordOn && (
           <div>
-            <form onSubmit={handleSubmit()}>
+            <form onSubmit={handleSubmit(changePassword)}>
               <StyledInputGroup>
                 <StyledInput
-                  type='text'
+                  type='password'
                   placeholder='Current password'
                   {...register("current_password", {
                     required: true,
@@ -158,11 +153,17 @@ const Profile = () => {
               </StyledInputGroup>
               <StyledInputGroup>
                 <StyledInput
-                  type='text'
+                  type='password'
                   placeholder='New password'
                   {...register("new_password", {
                     required: true,
                     pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/,
+                    validate: (val) => {
+                      return (
+                        watch("current_password") === "" ||
+                        watch("current_password") === val
+                      );
+                    },
                   })}
                 />
                 {errors.new_password?.type === "pattern" && (
@@ -179,6 +180,11 @@ const Profile = () => {
                 {errors.new_password?.type === "required" && (
                   <StyledError role='alertError'>
                     New password is required
+                  </StyledError>
+                )}
+                {errors.new_password?.type === "validate" && (
+                  <StyledError role='alertError'>
+                    Passwords do not match
                   </StyledError>
                 )}
               </StyledInputGroup>
