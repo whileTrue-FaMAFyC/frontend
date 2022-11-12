@@ -23,19 +23,69 @@ const Profile = () => {
 
   const [changePasswordOn, setChangePasswordOn] = useState(false);
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
-  const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
+  const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [imgData, setImgData] = useState(localStorage.getItem("avatar"));
+  const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
 
   const changeAvatar = async (data) => {
     console.log(data);
+    const token = localStorage.getItem("user");
+    await fetch(
+      `${process.env.REACT_APP_API_KEY}change-avatar`, // Probablemente haya que poner el usuario o algo en la url
+      {
+        method: "PUT",
+        headers: {
+          authorization: `${token}`,
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status === 201 || response.status === 200) {
+          // localStorage.setItem()
+          console.log(data); // Ver como sacar de la respuesta el avatar que envie asi lo guardo en la localstorage
+          setChangeAvatarOn(false);
+        } else {
+          alert(data.detail);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const changePassword = async (data) => {
     console.log(data);
+    const token = localStorage.getItem("user");
+    await fetch(
+      `${process.env.REACT_APP_API_KEY}change-password`, // Probablemente haya que poner el usuario o algo en la url
+      {
+        method: "PUT",
+        headers: {
+          authorization: `${token}`,
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      }
+    )
+      .then(async (response) => {
+        const data = await response.json();
+        if (response.status === 201 || response.status === 200) {
+          setChangePasswordOn(false);
+        } else {
+          alert(data.detail);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const fileToBase64 = (file, cb) => {
@@ -68,7 +118,7 @@ const Profile = () => {
       setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        setImgData(reader.result);
+        setNewAvatar(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -88,7 +138,7 @@ const Profile = () => {
                 justifyContent: "center",
               }}
               spacing={2}
-              src={imgData}
+              src={newAvatar}
             />
             <input
               type='file'
@@ -104,13 +154,13 @@ const Profile = () => {
           </Button>
           {changeAvatarOn && (
             <a>
-              <StyledButton onClick={() => changeAvatar(imgData)}>
+              <StyledButton onClick={() => changeAvatar(newAvatar)}>
                 Apply
               </StyledButton>
               <StyledButton
                 style={{backgroundColor: "red"}}
                 onClick={() => {
-                  setImgData(avatar);
+                  setNewAvatar(prevAvatar);
                   setChangeAvatarOn(false);
                 }}>
                 Undo
@@ -161,7 +211,7 @@ const Profile = () => {
                     validate: (val) => {
                       return (
                         watch("current_password") === "" ||
-                        watch("current_password") === val
+                        watch("current_password") !== val
                       );
                     },
                   })}
@@ -184,7 +234,7 @@ const Profile = () => {
                 )}
                 {errors.new_password?.type === "validate" && (
                   <StyledError role='alertError'>
-                    Passwords do not match
+                    Passwords are the same
                   </StyledError>
                 )}
               </StyledInputGroup>
