@@ -21,6 +21,7 @@ const Profile = () => {
   } = useForm();
 
   const [changePasswordOn, setChangePasswordOn] = useState(false);
+  const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
 
   const [file, setFile] = useState(null);
@@ -29,13 +30,8 @@ const Profile = () => {
   const [imgData, setImgData] = useState(localStorage.getItem("avatar"));
 
   const changeAvatar = async (data) => {
-    console.log("kasdlkasdlk");
+    console.log(data);
   };
-
-  function onChange(event) {
-    setAvatar(event.target.value); //update your value here
-    console.log("Cambieee");
-  }
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -76,43 +72,61 @@ const Profile = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        {/* <form onSubmit={handleSubmit(changeAvatar)}> */}
-        <Button variant='string' type='submit' component='label'>
-          <Avatar
-            style={{
-              height: 150,
-              width: 150,
-              verticalAlign: "middle",
-              position: "relative",
-              justifyContent: "center",
-            }}
-            spacing={2}
-            src={imgData}
-          />
-          <input
-            type='file'
-            hidden
-            accept='image/*'
-            multiple
-            onChange={(avatar) => {
-              onChangePicture(avatar);
-              onUploadFileChange(avatar);
-            }}
-          />
-          {/* <input avatar={avatar} type='file' readOnly /> */}
-          {/* <input
+        <div>
+          {/* <form onSubmit={handleSubmit(changeAvatar)}> */}
+
+          <Button variant='string' type='submit' component='label'>
+            <Avatar
+              style={{
+                height: 150,
+                width: 150,
+                verticalAlign: "middle",
+                position: "relative",
+                justifyContent: "center",
+              }}
+              spacing={2}
+              src={imgData}
+            />
+            <input
+              type='file'
+              hidden
+              accept='image/*'
+              multiple
+              onChange={(newAvatar) => {
+                onChangePicture(newAvatar);
+                onUploadFileChange(newAvatar);
+                setChangeAvatarOn(true);
+              }}
+            />
+            {/* <input avatar={avatar} type='file' readOnly /> */}
+            {/* <input
                 hidden
                 accept='image/*'
                 multiple
                 type='file'
                 {...register("match_password")}
               /> */}
-        </Button>
-        {/* </form> */}
+          </Button>
+          {changeAvatarOn && (
+            <a>
+              <StyledButton onClick={() => changeAvatar(imgData)}>
+                Apply
+              </StyledButton>
+              <StyledButton
+                style={{backgroundColor: "red"}}
+                onClick={() => {
+                  setImgData(avatar);
+                  setChangeAvatarOn(false);
+                }}>
+                Undo
+              </StyledButton>
+            </a>
+          )}
+          {/* </form> */}
 
-        <div>Username</div>
-        <div>aestusemburgo@gmail.com</div>
-
+          <div>Username</div>
+          <div>aestusemburgo@gmail.com</div>
+        </div>
         {changePasswordOn && (
           <div>
             <form onSubmit={handleSubmit()}>
