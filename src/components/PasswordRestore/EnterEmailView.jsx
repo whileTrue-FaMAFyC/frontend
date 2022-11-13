@@ -21,6 +21,35 @@ const EnterEmail = ({
       <StyledEntryCard>
         <form onSubmit={handleSubmit(submit)}>
           <StyledInputGroup>
+            <label className='form-label' htmlFor='inputUsername'>
+              Username
+            </label>
+            <StyledInput
+              autoComplete='off'
+              type='text'
+              id='inputUsername'
+              data-testid='Username'
+              {...register("username", {
+                required: true,
+                maxLength: 16,
+                minLength: 3,
+              })}
+            />
+            {errors.username?.type === "required" && (
+              <StyledError role='alertError'>Username is required</StyledError>
+            )}
+            {errors.username?.type === "maxLength" && (
+              <StyledError role='alertError'>
+                Username must be at most 16 characters long.
+              </StyledError>
+            )}
+            {errors.username?.type === "minLength" && (
+              <StyledError role='alertError'>
+                Username must be at least 3 characters long.
+              </StyledError>
+            )}
+          </StyledInputGroup>
+          <StyledInputGroup>
             <label>Email</label>
             <StyledInput
               type='text'

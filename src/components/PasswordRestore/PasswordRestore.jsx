@@ -9,6 +9,7 @@ const PasswordRestore = () => {
     register,
     handleSubmit,
     formState: {errors},
+    watch,
   } = useForm();
 
   const [failureData, setFailureData] = useState("");
@@ -18,17 +19,14 @@ const PasswordRestore = () => {
   const token = localStorage.getItem("user");
 
   const submitEmail = async (data) => {
-    console.log("Submiteando");
     setLoading(true);
-    console.log(JSON.stringify(data));
-    console.log(data);
-    await fetch(`${process.env.REACT_APP_API_KEY}create-bot`, {
+    localStorage.setItem("email", data.email);
+    await fetch(`${process.env.REACT_APP_API_KEY}password-restore-request`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "http//localhost:3000",
         "Access-Control-Allow-Credentials": "true",
-        Authorization: `${token}`,
       },
       body: JSON.stringify(data),
     })
@@ -51,10 +49,37 @@ const PasswordRestore = () => {
   };
 
   const submitPassword = async (data) => {
-    console.log("Submiteando");
-    setSentCode(true);
+    const email = localStorage.getItem(`email`);
+    await fetch(`${process.env.REACT_APP_API_KEY}password-restore`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "http//localhost:3000",
+        "Access-Control-Allow-Credentials": "true",
+      },
+      body: JSON.stringify({
+        email: email,
+        restore_password_code: data.code,
+        new_password: data.password,
+      }),
+    })
+      .then(async (response) => {
+        setLoading(false);
+        const data = await response.json();
+        if (response.status === 401) {
+          setFailureData(data.detail);
+        } else if (response.status === 200) {
+          setSentCode(true);
+        } else {
+          setFailureData("Unknown Error");
+        }
+      })
+      .catch((error) => {
+        setFailureData("Network Error");
+        setSentCode(true);
+        setLoading(false);
+      });
     navigate("/");
-    console.log(data);
   };
 
   return sentCode ? (
@@ -65,6 +90,7 @@ const PasswordRestore = () => {
       failureData={failureData}
       loading={loading}
       errors={errors}
+      watch={watch}
     />
   ) : (
     <EnterEmail
