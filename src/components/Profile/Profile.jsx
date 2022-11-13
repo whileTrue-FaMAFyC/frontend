@@ -43,6 +43,7 @@ const Profile = () => {
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Credentials": "true",
         },
+        body: JSON.stringify(data),
       }
     )
       .then(async (response) => {
@@ -60,18 +61,18 @@ const Profile = () => {
   };
 
   const changePassword = async (data) => {
-    console.log(data);
     const token = localStorage.getItem("user");
     await fetch(
       `${process.env.REACT_APP_API_KEY}change-password`, // Probablemente haya que poner el usuario o algo en la url
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           authorization: `${token}`,
           "Content-type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:3000",
           "Access-Control-Allow-Credentials": "true",
         },
+        body: JSON.stringify(data),
       }
     )
       .then(async (response) => {
@@ -241,7 +242,7 @@ const Profile = () => {
                 <StyledInput
                   type='password'
                   placeholder='Confirm new password'
-                  {...register("confirm_new_password", {
+                  {...register("new_password_confirmation", {
                     required: true,
                     pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/,
                     validate: (val) => {
@@ -252,23 +253,23 @@ const Profile = () => {
                     },
                   })}
                 />
-                {errors.confirm_new_password?.type === "pattern" && (
+                {errors.new_password_confirmation?.type === "pattern" && (
                   <StyledError role='alertError'>
                     The password must contain at least 8 characters, one
                     uppercase, lowercase and number
                   </StyledError>
                 )}
-                {errors.confirm_new_password?.type === "minLength" && (
+                {errors.new_password_confirmation?.type === "minLength" && (
                   <StyledError role='alertError'>
                     The password must contain at least 8 characters
                   </StyledError>
                 )}
-                {errors.confirm_new_password?.type === "required" && (
+                {errors.new_password_confirmation?.type === "required" && (
                   <StyledError role='alertError'>
                     New password is required
                   </StyledError>
                 )}
-                {errors.confirm_new_password?.type === "validate" && (
+                {errors.new_password_confirmation?.type === "validate" && (
                   <StyledError role='alertError'>
                     Passwords do not match
                   </StyledError>
