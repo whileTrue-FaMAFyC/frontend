@@ -5,7 +5,7 @@ import {robotsMock} from "../__mocks__/robots";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
 describe("Robot library test", () => {
-  test("Los nombres de partidas estan en el documento", async () => {
+  test("Los nombres de robots estan en el documento", async () => {
     mockAxios.get.mockResolvedValue({data: robotsMock});
 
     render(
@@ -28,8 +28,12 @@ describe("Robot library test", () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
-      robotsMock.forEach(({name}) => {
+      robotsMock.forEach(({name, stats}) => {
         expect(screen.getByText(name)).toBeInTheDocument();
+        expect(screen.getByText(stats.matches_played)).toBeInTheDocument();
+        expect(screen.getByText(stats.matches_lost)).toBeInTheDocument();
+        expect(screen.getByText(stats.matches_tied)).toBeInTheDocument();
+        expect(screen.getByText(stats.matches_won)).toBeInTheDocument();
       });
     });
   });
