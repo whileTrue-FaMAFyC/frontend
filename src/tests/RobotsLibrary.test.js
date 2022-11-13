@@ -5,16 +5,6 @@ import {robotsMock} from "../__mocks__/robots";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 
 describe("Robot library test", () => {
-  //   beforeEach(async () => {
-  //     mockAxios.get.mockResolvedValue({data: robotsMock});
-  //     render(<FormPartidaConfig />);
-
-  //     await waitFor(() => {
-  //       robotsMock.forEach(({name}) => {
-  //         expect(screen.getByText(name)).toBeInTheDocument();
-  //       });
-  //     });
-  //   });
   test("Los nombres de partidas estan en el documento", async () => {
     mockAxios.get.mockResolvedValue({data: robotsMock});
 

@@ -5,7 +5,7 @@ export const StyledEntryCard = styled.div`
   height: 100%;
   padding: 74px;
   margin-bottom: 40px;
-  background-color: #252c32;
+  background-color: #0f1519;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   h2 {
@@ -39,7 +39,7 @@ export const Title = styled.p`
 `;
 
 export const Table = styled.table`
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,6 +74,7 @@ export const Column = styled.td`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 30px;
 `;
 
 export const Tbody = styled.tbody`
