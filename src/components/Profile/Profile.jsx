@@ -48,9 +48,8 @@ const Profile = () => {
       .then(async (response) => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
-          // localStorage.setItem()
-          console.log(data); // Ver como sacar de la respuesta el avatar que envie asi lo guardo en la localstorage
           setChangeAvatarOn(false);
+          localStorage.setItem("avatar", newAvatar);
         } else {
           alert(data.detail);
         }
@@ -145,9 +144,9 @@ const Profile = () => {
               hidden
               accept='image/*'
               multiple
-              onChange={(newAvatar) => {
-                onChangePicture(newAvatar);
-                onUploadFileChange(newAvatar);
+              onChange={(newPic) => {
+                onChangePicture(newPic);
+                onUploadFileChange(newPic);
                 setChangeAvatarOn(true);
               }}
             />
@@ -234,7 +233,44 @@ const Profile = () => {
                 )}
                 {errors.new_password?.type === "validate" && (
                   <StyledError role='alertError'>
-                    Passwords are the same
+                    Current and new password are the same
+                  </StyledError>
+                )}
+              </StyledInputGroup>
+              <StyledInputGroup>
+                <StyledInput
+                  type='password'
+                  placeholder='Confirm new password'
+                  {...register("confirm_new_password", {
+                    required: true,
+                    pattern: /^(?:(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})$/,
+                    validate: (val) => {
+                      return (
+                        watch("new_password") === "" ||
+                        watch("new_password") === val
+                      );
+                    },
+                  })}
+                />
+                {errors.confirm_new_password?.type === "pattern" && (
+                  <StyledError role='alertError'>
+                    The password must contain at least 8 characters, one
+                    uppercase, lowercase and number
+                  </StyledError>
+                )}
+                {errors.confirm_new_password?.type === "minLength" && (
+                  <StyledError role='alertError'>
+                    The password must contain at least 8 characters
+                  </StyledError>
+                )}
+                {errors.confirm_new_password?.type === "required" && (
+                  <StyledError role='alertError'>
+                    New password is required
+                  </StyledError>
+                )}
+                {errors.confirm_new_password?.type === "validate" && (
+                  <StyledError role='alertError'>
+                    Passwords do not match
                   </StyledError>
                 )}
               </StyledInputGroup>
