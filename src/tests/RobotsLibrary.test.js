@@ -34,7 +34,7 @@ describe("Robot library test", () => {
     });
   });
 
-  it("No hay partidas disponibles", async () => {
+  it("No hay robots disponibles", async () => {
     mockAxios.get.mockResolvedValue({data: []});
     render(
       <div>

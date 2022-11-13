@@ -83,7 +83,7 @@ const RobotsLibrary = () => {
                   <Column>{stats.matches_won}</Column>
                   <Column>{stats.matches_tied}</Column>
                   <Column>{stats.matches_lost}</Column>
-                  <Column>{stats.games_win_rate}</Column>
+                  <Column>{stats.games_win_rate * 100}%</Column>
                 </Row>
               ))}
           </Tbody>
