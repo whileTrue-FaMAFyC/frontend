@@ -3,16 +3,17 @@ import {getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
 import {Link} from "react-router-dom";
 import {
-  Table,
+  PadreContainer,
+  Container,
   Title,
-  Column,
+  Table,
   Thead,
+  Column,
   Tbody,
   Row,
   Feedback,
-  StyledEntryCard,
+  Button,
   StyledButton,
-  EntryPage,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
@@ -33,8 +34,8 @@ const RobotsLibrary = () => {
   }, []);
 
   return (
-    <EntryPage>
-      <StyledEntryCard>
+    <PadreContainer>
+      <Container>
         <Title data-testid='title'>My robots</Title>
         {/* <input
           type='text'
@@ -78,11 +79,11 @@ const RobotsLibrary = () => {
                     <Avatar spacing={2} src={avatar} />
                   </Column>
                   <Column>{name}</Column>
-                  <Column>{stats.games_win_rate}</Column>
-                  <Column>{stats.matches_lost}</Column>
                   <Column>{stats.matches_played}</Column>
-                  <Column>{stats.matches_tied}</Column>
                   <Column>{stats.matches_won}</Column>
+                  <Column>{stats.matches_tied}</Column>
+                  <Column>{stats.matches_lost}</Column>
+                  <Column>{stats.games_win_rate}</Column>
                 </Row>
               ))}
           </Tbody>
@@ -92,8 +93,8 @@ const RobotsLibrary = () => {
             Create bot
           </Link>
         </StyledButton>
-      </StyledEntryCard>
-    </EntryPage>
+      </Container>
+    </PadreContainer>
   );
 };
 export default RobotsLibrary;
