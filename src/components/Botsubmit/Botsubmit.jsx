@@ -64,7 +64,7 @@ const Botsubmit = () => {
   };
 
   const onChangePicture = (e) => {
-    if (e.target.files[0]) {
+    if (e?.target.files[0]) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgAvatar(reader.result);

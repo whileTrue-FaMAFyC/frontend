@@ -37,20 +37,26 @@ const AvatarSubmit = () => {
   };
 
   const onUploadFileChange = ({target}) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
-        setFileName(target.files[0]);
+    if (target !== null) {
+      if (target.files < 1 || !target.validity.valid) {
+        return;
       }
-    });
+      if (target.files[0] !== undefined) {
+        fileToBase64(target.files[0], (err, result) => {
+          if (result) {
+            setFile(result);
+            setFileName(target.files[0]);
+          }
+        });
+      } else {
+        setFileName("");
+        setFile("");
+      }
+    }
   };
 
   const onChangePicture = (e) => {
-    if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
+    if (e?.target.files[0]) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
@@ -117,9 +123,17 @@ const AvatarSubmit = () => {
             accept='image/*'
             data-testid='Avatar'
             {...register("avatar", {
-              onChange: (avatar) => {
-                onChangePicture(avatar);
-                onUploadFileChange(avatar);
+              onChange: (file) => {
+                onUploadFileChange(file);
+                if (
+                  file?.target.files[0] !== undefined &&
+                  file?.target.files[0] !== null
+                ) {
+                  console.log(file);
+                  onChangePicture(file);
+                } else {
+                  setImgData(null);
+                }
               },
               validate: (file) => {
                 return (
