@@ -266,7 +266,7 @@ const Profile = () => {
                 )}
                 {errors.new_password_confirmation?.type === "required" && (
                   <StyledError role='alertError'>
-                    New password is required
+                    Confirm your new password
                   </StyledError>
                 )}
                 {errors.new_password_confirmation?.type === "validate" && (
