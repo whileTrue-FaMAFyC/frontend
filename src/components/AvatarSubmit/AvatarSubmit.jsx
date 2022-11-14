@@ -129,7 +129,6 @@ const AvatarSubmit = () => {
                   file?.target.files[0] !== undefined &&
                   file?.target.files[0] !== null
                 ) {
-                  console.log(file);
                   onChangePicture(file);
                 } else {
                   setImgData(null);
