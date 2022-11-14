@@ -200,7 +200,12 @@ const Botsubmit = () => {
                   onUploadFileChange(file, setFile_av, (e) => {
                     return e;
                   });
-                  onChangePicture(file);
+                  if (file?.target.files[0] !== undefined) {
+                    console.log(file);
+                    onChangePicture(file);
+                  } else {
+                    setImgAvatar(null);
+                  }
                 },
                 validate: (e) => {
                   return (
