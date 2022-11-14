@@ -137,7 +137,7 @@ const AvatarSubmit = () => {
               validate: (file) => {
                 return (
                   file.length === 0 ||
-                  (new RegExp("image/*").test(file[0].type) &&
+                  (new RegExp(".*.(jpe?g|png)$").test(file[0].name) &&
                     file[0].size < 40000)
                 );
               },
