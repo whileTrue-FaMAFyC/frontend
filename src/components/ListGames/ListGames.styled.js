@@ -22,7 +22,7 @@ export const Table = styled.table`
   flex-direction: column;
   background-color: #252c32;
   overflow-x: auto;
-  background-color: #0f1519;
+  background-color: #252c32;
 `;
 
 export const Thead = styled.thead`

@@ -7,6 +7,7 @@ import MatchView from "./MatchView";
 const Match = () => {
   const {match_id} = useParams();
   const {match, dispatch} = useMatch();
+
   useEffect(() => {
     const callGetMatchInfo = async () => {
       try {
@@ -14,7 +15,6 @@ const Match = () => {
           localStorage.getItem("user"),
           match_id
         );
-        localStorage.setItem("match_id", match_id);
         dispatch({type: "initial_info", payload: response.data});
       } catch (error) {
         console.log(error);
@@ -51,6 +51,6 @@ const Match = () => {
     };
   }, [dispatch]);
 
-  return <MatchView match={match} match_id={match_id} />; //robotsNames={robotsNames} />;
+  return <MatchView match={match} match_id={match_id} />;
 };
 export default Match;
