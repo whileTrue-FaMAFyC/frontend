@@ -38,20 +38,24 @@ test("render full enter-email component successfully", async () => {
   expect.toBeInTheDocument(screen.getByTestId("submitButton"));
   expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
-  act(() => fireEvent.click(screen.getByTestId("submitButton")));
+  //act(() => fireEvent.click(screen.getByTestId("submitButton")));
 
-  waitFor(() => {
-    expect.toBeInTheDocument(screen.getByTestId("probando"));
-    expect.toBeInTheDocument(screen.getByTestId("formPassword"));
-    expect.toBeInTheDocument(screen.getByTestId("codeInputGroup"));
-    expect.toBeInTheDocument(screen.getByTestId("codeLabel"));
-    expect.toBeInTheDocument(screen.getByTestId("codeInput"));
-    expect.toBeInTheDocument(screen.getByTestId("PasswordGroup"));
-    expect.toBeInTheDocument(screen.getByTestId("labelPassword"));
-    expect.toBeInTheDocument(screen.getByTestId("inputPassword"));
-    expect.toBeInTheDocument(screen.getByTestId("confirmPasswordGroup"));
-    expect.toBeInTheDocument(screen.getByTestId("labelConfirmPassword"));
-    expect.toBeInTheDocument(screen.getByTestId("inputConfirmPassword"));
-    expect.toBeInTheDocument(screen.getByTestId("submitPassword"));
-  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => screen.getByTestId("formPassword"));
+
+  //waitFor(() => {
+  //expect.toBeInTheDocument(screen.getByTestId("probando"));
+  expect.toBeInTheDocument(screen.getByTestId("formPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("codeInputGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("codeLabel"));
+  expect.toBeInTheDocument(screen.getByTestId("codeInput"));
+  expect.toBeInTheDocument(screen.getByTestId("PasswordGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("labelPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("inputPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("confirmPasswordGroup"));
+  expect.toBeInTheDocument(screen.getByTestId("labelConfirmPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("inputConfirmPassword"));
+  expect.toBeInTheDocument(screen.getByTestId("submitPassword"));
+  //});
 });

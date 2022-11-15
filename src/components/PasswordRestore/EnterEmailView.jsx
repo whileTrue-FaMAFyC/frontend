@@ -67,8 +67,13 @@ const EnterEmail = ({
               <StyledError role='alertError'>Email is required</StyledError>
             )}
           </StyledInputGroup>
+          {failureData !== "" && (
+            <StyledError role='alert' data-testid='error'>
+              {failureData}
+            </StyledError>
+          )}
           {loading ? (
-            <div>
+            <div width='100%'>
               <CircularProgress data-testid='loader' />
             </div>
           ) : (

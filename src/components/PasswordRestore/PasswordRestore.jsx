@@ -20,6 +20,7 @@ const PasswordRestore = () => {
 
   const submitEmail = async (data) => {
     setLoading(true);
+    setFailureData("");
     localStorage.setItem("email", data.email);
     await fetch(`${process.env.REACT_APP_API_KEY}password-restore-request`, {
       method: "POST",
@@ -33,12 +34,12 @@ const PasswordRestore = () => {
       .then(async (response) => {
         setLoading(false);
         const data = await response.json();
-        if (response.status === 401) {
+        if (response.status === 409) {
           setFailureData(data.detail);
         } else if (response.status === 200) {
           setSentCode(true);
         } else {
-          setFailureData("Unknown Error");
+          setFailureData(data.detail);
         }
       })
       .catch((error) => {
@@ -50,6 +51,8 @@ const PasswordRestore = () => {
 
   const submitPassword = async (data) => {
     const email = localStorage.getItem(`email`);
+    setLoading(true);
+    setFailureData("");
     await fetch(`${process.env.REACT_APP_API_KEY}password-restore`, {
       method: "PUT",
       headers: {
@@ -66,12 +69,13 @@ const PasswordRestore = () => {
       .then(async (response) => {
         setLoading(false);
         const data = await response.json();
-        if (response.status === 401) {
+        if (response.status === 400) {
           setFailureData(data.detail);
         } else if (response.status === 200) {
           setSentCode(true);
+          navigate("/");
         } else {
-          setFailureData("Unknown Error");
+          setFailureData(data.detail);
         }
       })
       .catch((error) => {
@@ -79,7 +83,6 @@ const PasswordRestore = () => {
         setSentCode(true);
         setLoading(false);
       });
-    navigate("/");
   };
 
   return sentCode ? (

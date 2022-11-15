@@ -82,6 +82,11 @@ const EnterPassword = ({
                 </StyledError>
               )}
           </StyledInputGroup>
+          {failureData !== "" && (
+            <StyledError role='alert' data-testid='error'>
+              {failureData}
+            </StyledError>
+          )}
           <StyledButton role='button' data-testid='submitPassword'>
             Send
           </StyledButton>
