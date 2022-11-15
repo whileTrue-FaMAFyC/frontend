@@ -18,7 +18,7 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-test("render full enter-email component successfully", async () => {
+test("render full password restore component successfully", async () => {
   render(
     <div>
       <Router>
@@ -27,35 +27,126 @@ test("render full enter-email component successfully", async () => {
     </div>
   );
 
+  // Render EnterEmailView
   expect.toBeInTheDocument(screen.getByTestId("formEmail"));
   expect.toBeInTheDocument(screen.getByTestId("inputUsernameGroup"));
   expect.toBeInTheDocument(screen.getByTestId("inputUsernameLabel"));
   expect.toBeInTheDocument(screen.getByTestId("inputUsername"));
-
   expect.toBeInTheDocument(screen.getByTestId("inputEmailGroup"));
   expect.toBeInTheDocument(screen.getByTestId("inputEmailLabel"));
   expect.toBeInTheDocument(screen.getByTestId("inputEmail"));
   expect.toBeInTheDocument(screen.getByTestId("submitButton"));
-  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
-  //act(() => fireEvent.click(screen.getByTestId("submitButton")));
-
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
   fireEvent.click(screen.getByTestId("submitButton"));
 
-  await waitFor(() => screen.getByTestId("formPassword"));
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
-  //waitFor(() => {
-  //expect.toBeInTheDocument(screen.getByTestId("probando"));
-  expect.toBeInTheDocument(screen.getByTestId("formPassword"));
-  expect.toBeInTheDocument(screen.getByTestId("codeInputGroup"));
-  expect.toBeInTheDocument(screen.getByTestId("codeLabel"));
-  expect.toBeInTheDocument(screen.getByTestId("codeInput"));
-  expect.toBeInTheDocument(screen.getByTestId("PasswordGroup"));
-  expect.toBeInTheDocument(screen.getByTestId("labelPassword"));
-  expect.toBeInTheDocument(screen.getByTestId("inputPassword"));
-  expect.toBeInTheDocument(screen.getByTestId("confirmPasswordGroup"));
-  expect.toBeInTheDocument(screen.getByTestId("labelConfirmPassword"));
-  expect.toBeInTheDocument(screen.getByTestId("inputConfirmPassword"));
-  expect.toBeInTheDocument(screen.getByTestId("submitPassword"));
-  //});
+  // Render PasswordRestoreView
+  await waitFor(() => {
+    screen.getByTestId("formPassword");
+    screen.getByTestId("codeInputGroup");
+    screen.getByTestId("codeLabel");
+    screen.getByTestId("codeInput");
+    screen.getByTestId("PasswordGroup");
+    screen.getByTestId("labelPassword");
+    screen.getByTestId("inputPassword");
+    screen.getByTestId("confirmPasswordGroup");
+    screen.getByTestId("labelConfirmPassword");
+    screen.getByTestId("inputConfirmPassword");
+    screen.getByTestId("submitPassword");
+  });
+});
+
+test("error when not valid email", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "sebagmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+});
+
+test("enter email and enter code with new password", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "asdASD123"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "asdASD123"},
+    });
+  });
+});
+
+test("enter data for email and passwords that do not match", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "asdASD123"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "asdA123"},
+    });
+    expect.toBeInTheDocument(screen.getByRole("alertError"));
+  });
 });
