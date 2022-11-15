@@ -7,7 +7,13 @@ import Simulation from "../components/Simulation/Simulation";
 describe("Simulation control test", () => {
   test("Buttons render correctly", async () => {
     render(
-      <Simulation props={{names: props.names, simulation: props.simulation}} />
+      <Simulation
+        props={{
+          names: props.names,
+          simulation: props.simulation,
+          winner: props.winner,
+        }}
+      />
     );
 
     const playButton = await screen.findByTestId("play");

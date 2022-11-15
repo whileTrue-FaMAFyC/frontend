@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import {Board} from "../components/Simulation/Board";
+import Board from "../components/Simulation/Board";
 import {props} from "../__mocks__/board";
 
 test("render board component successfully", async () => {

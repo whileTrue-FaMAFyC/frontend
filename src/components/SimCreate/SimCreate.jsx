@@ -10,6 +10,7 @@ import {
   StyledError,
 } from "./SimCreate.styled.js";
 import Simulation from "../Simulation/Simulation";
+import {props} from "../../__mocks__/simulation"; // SOLO PARA VER EN NAVEGADOR
 
 const SimCreate = () => {
   const {
@@ -220,7 +221,7 @@ const SimCreate = () => {
         </EntryPage>
       ) : (
         <div>
-          <Simulation props={simulation} />
+          <Simulation props={props} />
         </div>
       )}
       ;

@@ -5,9 +5,11 @@ import RobotsStatus from "./RobotsStatus";
 import SimControl from "./SimControl";
 
 const Simulation = ({props}) => {
-  const {names, simulation} = props;
+  const {names, simulation, winner} = props;
   const [nframe, setNframe] = useState(0);
   const [activeInterval, setActiveInterval] = useState(true);
+  const [showWinner, setShowWinner] = useState("");
+  const interval = useRef(null);
 
   const colorsRobots = ["red", "turquoise", "orange", "pink"];
 
@@ -30,7 +32,7 @@ const Simulation = ({props}) => {
   const [missiles, setMissiles] = useState({});
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       if (activeInterval) {
         drawFrame(simulation[nframe]);
         setNframe(nframe + 1);
@@ -38,7 +40,7 @@ const Simulation = ({props}) => {
     }, 500);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
   });
 
@@ -46,25 +48,35 @@ const Simulation = ({props}) => {
     if (nframe < simulation.length) {
       setRobots(frame.robots);
       setMissiles(frame.missiles);
+    } else {
+      setShowWinner(winner);
+      stopSimulation();
     }
   };
 
   const playSimulation = () => {
-    setActiveInterval(true);
+    if (nframe < simulation.length) {
+      setActiveInterval(true);
+    }
   };
 
   const stopSimulation = () => {
     setActiveInterval(false);
+    clearInterval(interval.current);
   };
 
   const followingRound = () => {
-    drawFrame(simulation[nframe]);
-    setNframe(nframe + 1);
+    if (nframe < simulation.length) {
+      drawFrame(simulation[nframe]);
+      setNframe(nframe + 1);
+    }
   };
 
   const previousRound = () => {
-    setNframe(nframe - 1);
-    drawFrame(simulation[nframe]);
+    if (nframe > 0) {
+      setNframe(nframe - 1);
+      drawFrame(simulation[nframe]);
+    }
   };
 
   const resetSimulation = () => {
@@ -82,7 +94,12 @@ const Simulation = ({props}) => {
 
   return (
     <EntryPage data-testid='Simulation'>
-      <RobotsStatus colors={colors} robots={robots} names={robot_names} />
+      <RobotsStatus
+        colors={colors}
+        robots={robots}
+        names={robot_names}
+        winner={showWinner}
+      />
       <Board colors={colors} robots={robots} missiles={missiles} />
       <SimControl handlers={handlers} />
     </EntryPage>
