@@ -13,7 +13,7 @@ const StatusBar = (props) => {
       <Name data-testid='name'>{name}</Name>
       <ContainerStyle data-testid='bar' bgcolor={bgcolor}>
         <FillerStyles
-          width={100 - completed < 0 ? 0 : 100 - completed}
+          width={100 - completed < 0 ? "0" : `${100 - completed}`}
           bgcolor={bgcolor}>
           <LabelStyles>{`${completed > 100 ? 100 : completed}`}</LabelStyles>
         </FillerStyles>
