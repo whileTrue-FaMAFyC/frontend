@@ -22,7 +22,7 @@ const EnterPassword = ({
         <form onSubmit={handleSubmit(submit)} data-testid='formPassword'>
           <StyledInputGroup data-testid='codeInputGroup'>
             <label data-testid='codeLabel'>
-              We've sent you a code to your email
+              Please insert the code we sent to your email
             </label>
             <StyledInput
               data-testid='codeInput'

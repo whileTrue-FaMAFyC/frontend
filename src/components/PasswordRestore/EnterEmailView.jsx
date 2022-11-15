@@ -75,6 +75,9 @@ const EnterEmail = ({
               {failureData}
             </StyledError>
           )}
+          <StyledInputGroup>
+            <label>We will send a code to your email</label>
+          </StyledInputGroup>
           {loading ? (
             <div style={{display: "flex", justifyContent: "center"}}>
               <CircularProgress data-testid='loader' />
