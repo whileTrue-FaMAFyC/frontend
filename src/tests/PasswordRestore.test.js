@@ -149,7 +149,7 @@ test("enter data for email and passwords that do not match", async () => {
   });
 });
 
-test("enter email and enter code with new password", async () => {
+test("enter email", async () => {
   render(
     <div>
       <Router>
