@@ -19,16 +19,15 @@ const EnterEmail = ({
   return (
     <EntryPage>
       <StyledEntryCard>
-        <form onSubmit={handleSubmit(submit)}>
-          <StyledInputGroup>
-            <label className='form-label' htmlFor='inputUsername'>
+        <form onSubmit={handleSubmit(submit)} data-testid='formEmail'>
+          <StyledInputGroup data-testid='inputUsernameGroup'>
+            <label className='form-label' data-testid='inputUsernameLabel'>
               Username
             </label>
             <StyledInput
               autoComplete='off'
               type='text'
-              id='inputUsername'
-              data-testid='Username'
+              data-testid='inputUsername'
               {...register("username", {
                 required: true,
                 maxLength: 16,
@@ -49,9 +48,10 @@ const EnterEmail = ({
               </StyledError>
             )}
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label>Email</label>
+          <StyledInputGroup data-testid='inputEmailGroup'>
+            <label data-testid='inputEmailLabel'>Email</label>
             <StyledInput
+              data-testid='inputEmail'
               type='text'
               {...register("email", {
                 required: true,
@@ -72,7 +72,10 @@ const EnterEmail = ({
               <CircularProgress data-testid='loader' />
             </div>
           ) : (
-            <StyledButton role='button' data-testid='loginButton' type='submit'>
+            <StyledButton
+              role='button'
+              data-testid='submitButton'
+              type='submit'>
               Send Email
             </StyledButton>
           )}

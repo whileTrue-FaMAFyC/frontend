@@ -42,4 +42,17 @@ export const handlers = [
       return res(ctx.json({status: 200, success: true}));
     }
   ),
+
+  rest.post(
+    `${process.env.REACT_APP_API_KEY}password-restore-request`,
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
+    }
+  ),
+  rest.put(
+    `${process.env.REACT_APP_API_KEY}password-restore`,
+    (req, res, ctx) => {
+      return res(ctx.json({status: 200, success: true}));
+    }
+  ),
 ];

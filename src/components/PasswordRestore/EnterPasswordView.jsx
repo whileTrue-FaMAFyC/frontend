@@ -19,19 +19,21 @@ const EnterPassword = ({
   return (
     <EntryPage>
       <StyledEntryCard>
-        <form onSubmit={handleSubmit(submit)}>
-          <StyledInputGroup>
-            <label>Code</label>
+        <form onSubmit={handleSubmit(submit)} data-testid='formPassword'>
+          <StyledInputGroup data-testid='codeInputGroup'>
+            <label data-testid='codeLabel'>Code</label>
             <StyledInput
+              data-testid='codeInput'
               type='text'
               {...register("code", {
                 required: true,
               })}
             />
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label>New password</label>
+          <StyledInputGroup data-testid='PasswordGroup'>
+            <label data-testid='labelPassword'>New password</label>
             <StyledInput
+              data-testid='inputPassword'
               type='password'
               {...register("password", {
                 required: true,
@@ -53,13 +55,14 @@ const EnterPassword = ({
               <StyledError role='alertError'>Password is required</StyledError>
             )}
           </StyledInputGroup>
-          <StyledInputGroup>
-            <label>Confirm new password</label>
+          <StyledInputGroup data-testid='confirmPasswordGroup'>
+            <label data-testid='labelConfirmPassword'>
+              Confirm new password
+            </label>
             <StyledInput
+              data-testid='inputConfirmPassword'
               autoComplete='off'
               type='password'
-              id='inputConfirmPassword'
-              data-testid='Confirm password'
               {...register("confirmPassword", {
                 required: true,
                 validate: (val) => {
@@ -79,7 +82,9 @@ const EnterPassword = ({
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledButton role='button'>Send</StyledButton>
+          <StyledButton role='button' data-testid='submitPassword'>
+            Send
+          </StyledButton>
         </form>
       </StyledEntryCard>
     </EntryPage>
