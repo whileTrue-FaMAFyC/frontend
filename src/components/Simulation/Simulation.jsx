@@ -32,16 +32,19 @@ const Simulation = ({props}) => {
   const [missiles, setMissiles] = useState({});
 
   useEffect(() => {
-    interval.current = setInterval(() => {
-      if (activeInterval) {
+    if (activeInterval) {
+      interval.current = setInterval(() => {
+        console.log(nframe);
         drawFrame(simulation[nframe]);
         setNframe(nframe + 1);
-      }
-    }, 500);
+      }, 500);
 
-    return () => {
-      clearInterval(interval.current);
-    };
+      return () => {
+        clearInterval(interval.current);
+      };
+    } else {
+      return;
+    }
   });
 
   const drawFrame = (frame) => {
@@ -62,26 +65,32 @@ const Simulation = ({props}) => {
 
   const stopSimulation = () => {
     setActiveInterval(false);
-    clearInterval(interval.current);
   };
 
   const followingRound = () => {
     if (nframe < simulation.length) {
+      stopSimulation();
       drawFrame(simulation[nframe]);
       setNframe(nframe + 1);
+      console.log(nframe);
     }
   };
 
   const previousRound = () => {
-    if (nframe > 0) {
+    if (nframe > 1) {
+      stopSimulation();
       setNframe(nframe - 1);
       drawFrame(simulation[nframe]);
+      console.log(nframe);
     }
   };
 
   const resetSimulation = () => {
-    setNframe(0);
-    drawFrame(simulation[nframe]);
+    if (nframe > 0) {
+      stopSimulation();
+      setNframe(0);
+      drawFrame(simulation[nframe]);
+    }
   };
 
   const handlers = {
