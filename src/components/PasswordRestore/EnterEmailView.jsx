@@ -27,6 +27,7 @@ const EnterEmail = ({
             <StyledInput
               autoComplete='off'
               type='text'
+              placeholder='your username'
               data-testid='inputUsername'
               {...register("username", {
                 required: true,
@@ -53,6 +54,8 @@ const EnterEmail = ({
             <StyledInput
               data-testid='inputEmail'
               type='text'
+              autoComplete='off'
+              placeholder='your email'
               {...register("email", {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
@@ -73,7 +76,7 @@ const EnterEmail = ({
             </StyledError>
           )}
           {loading ? (
-            <div width='100%'>
+            <div style={{display: "flex", justifyContent: "center"}}>
               <CircularProgress data-testid='loader' />
             </div>
           ) : (

@@ -7,6 +7,7 @@ import {render, fireEvent, screen, waitFor} from "@testing-library/react";
 import PasswordRestore from "../components/PasswordRestore/PasswordRestore";
 import {BrowserRouter as Router} from "react-router-dom";
 import {server} from "../__mocks__/server.js";
+import {act} from "react-dom/test-utils";
 
 beforeAll(() => server.listen());
 afterEach(() => {
@@ -80,6 +81,86 @@ test("error when not valid email", async () => {
   await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
 });
 
+test("error when empty email", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+});
+
+test("error when empty username", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+});
+
+test("error when username too long", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "aaaaaaaaaaaaaaaaaaaa"},
+  });
+
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+});
+
+test("error when username too short", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "a"},
+  });
+
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+});
+
 test("enter email and enter code with new password", async () => {
   render(
     <div>
@@ -108,44 +189,9 @@ test("enter email and enter code with new password", async () => {
       target: {value: "asdASD123"},
     });
     fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
-      target: {value: "asdASD123"},
+      target: {value: "asdSD123"},
     });
     fireEvent.click(screen.getByTestId("submitPassword"));
-  });
-});
-
-test("enter data for email and passwords that do not match", async () => {
-  render(
-    <div>
-      <Router>
-        <PasswordRestore />
-      </Router>
-    </div>
-  );
-
-  // Enter and submit data
-  fireEvent.change(screen.getByTestId("inputUsername"), {
-    target: {value: "seba.giraudo"},
-  });
-  fireEvent.change(screen.getByTestId("inputEmail"), {
-    target: {value: "seba@gmail.com"},
-  });
-  fireEvent.click(screen.getByTestId("submitButton"));
-
-  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
-
-  await waitFor(() => {
-    fireEvent.change(screen.getByTestId("codeInput"), {
-      target: {value: "232323"},
-    });
-    fireEvent.change(screen.getByTestId("inputPassword"), {
-      target: {value: "asdASD123"},
-    });
-    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
-      target: {value: "asdA123"},
-    });
-    fireEvent.click(screen.getByTestId("submitPassword"));
-    expect.toBeInTheDocument(screen.getByRole("alertError"));
   });
 });
 
@@ -161,43 +207,13 @@ test("enter email", async () => {
     rest.post(
       `${process.env.REACT_APP_API_KEY}password-restore-request`,
       (req, res, ctx) => {
-        return res(ctx.json({status: 409, success: true}));
-      }
-    )
-  );
-  // Enter and submit data
-  fireEvent.change(screen.getByTestId("inputUsername"), {
-    target: {value: "seba.giraudo"},
-  });
-  fireEvent.change(screen.getByTestId("inputEmail"), {
-    target: {value: "seba@gmail.com"},
-  });
-  fireEvent.click(screen.getByTestId("submitButton"));
-
-  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
-});
-
-test("enter email and enter code with new password", async () => {
-  render(
-    <div>
-      <Router>
-        <PasswordRestore />
-      </Router>
-    </div>
-  );
-
-  server.use(
-    rest.put(
-      `${process.env.REACT_APP_API_KEY}password-restore`,
-      (req, res, ctx) => {
         return res(
-          ctx.status(500),
-          ctx.json({message: "Internal server error"})
+          ctx.status(409),
+          ctx.json({message: "There is no user with that email and username."})
         );
       }
     )
   );
-
   // Enter and submit data
   fireEvent.change(screen.getByTestId("inputUsername"), {
     target: {value: "seba.giraudo"},
@@ -205,21 +221,11 @@ test("enter email and enter code with new password", async () => {
   fireEvent.change(screen.getByTestId("inputEmail"), {
     target: {value: "seba@gmail.com"},
   });
-  fireEvent.click(screen.getByTestId("submitButton"));
+  act(() => fireEvent.click(screen.getByTestId("submitButton")));
 
-  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
-
-  await waitFor(() => {
-    fireEvent.change(screen.getByTestId("codeInput"), {
-      target: {value: "232323"},
-    });
-    fireEvent.change(screen.getByTestId("inputPassword"), {
-      target: {value: "asdASD123"},
-    });
-    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
-      target: {value: "asdASD123"},
-    });
-    fireEvent.click(screen.getByTestId("submitPassword"));
-    expect.toBeInTheDocument(screen.findByRole("alertError"));
+  waitFor(() => {
+    expect.toBeInTheDocument(
+      screen.getByText("There is no user with that email and username.")
+    );
   });
 });

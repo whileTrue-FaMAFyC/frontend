@@ -21,9 +21,12 @@ const EnterPassword = ({
       <StyledEntryCard>
         <form onSubmit={handleSubmit(submit)} data-testid='formPassword'>
           <StyledInputGroup data-testid='codeInputGroup'>
-            <label data-testid='codeLabel'>Code</label>
+            <label data-testid='codeLabel'>
+              We've sent you a code to your email
+            </label>
             <StyledInput
               data-testid='codeInput'
+              autoComplete='off'
               type='text'
               {...register("code", {
                 required: true,

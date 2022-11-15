@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 import EnterPassword from "./EnterPasswordView";
 import EnterEmail from "./EnterEmailView";
@@ -16,7 +16,6 @@ const PasswordRestore = () => {
   const [sentCode, setSentCode] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const token = localStorage.getItem("user");
 
   const submitEmail = async (data) => {
     setLoading(true);
