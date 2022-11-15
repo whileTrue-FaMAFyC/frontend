@@ -1,16 +1,11 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 // import API mocking utilities from Mock Service Worker.
-import {rest} from "msw";
 // import testing utilitiess
 import {render, fireEvent, screen, waitFor} from "@testing-library/react";
 import PasswordRestore from "../components/PasswordRestore/PasswordRestore";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 import {server} from "../__mocks__/server.js";
-import {fakeUserResponse} from "../__mocks__/handlers.js";
-import {act} from "react-dom/test-utils";
-
-//const fakeUserResponse = {Authorization: "fake_user_token"};
 
 beforeAll(() => server.listen());
 afterEach(() => {
