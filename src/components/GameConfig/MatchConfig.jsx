@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {
   StyledButton,
@@ -247,14 +247,6 @@ const MatchConfig = () => {
         {failure_data !== "" ? (
           <div role='alertServer'>{failure_data}</div>
         ) : null}
-        <Div>
-          Want to see matches?
-          <StyledButton>
-            <Link to='/listgames' data-testid='linkToListGames'>
-              Matches
-            </Link>
-          </StyledButton>
-        </Div>
       </StyledEntryCard>
     </EntryPage>
   );

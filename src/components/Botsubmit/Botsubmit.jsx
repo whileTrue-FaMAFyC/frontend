@@ -12,7 +12,7 @@ import {
 } from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const Botsubmit = () => {
   const {
@@ -217,7 +217,8 @@ const Botsubmit = () => {
             />
             {errors.avatar?.type === "validate" ? (
               <StyledError role='invalid_avatar'>
-                Insert image under 40 KB
+                The file must be an image of extension .png, .jpg or .jpeg from
+                at most 40KB.
               </StyledError>
             ) : null}
           </StyledInputGroup>
@@ -238,14 +239,6 @@ const Botsubmit = () => {
         {failure_data !== "" ? (
           <StyledError role='alert'>{failure_data}</StyledError>
         ) : null}
-        <Div>
-          Want to see your robots?
-          <StyledButton>
-            <Link to='/library' data-testid='linkToLibrary'>
-              Robots library
-            </Link>
-          </StyledButton>
-        </Div>
       </StyledEntryCard>
     </EntryPage>
   );

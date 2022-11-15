@@ -22,7 +22,6 @@ const AvatarSubmit = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const navigate = useNavigate();
-  const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
   const fileToBase64 = (file, cb) => {
@@ -145,7 +144,8 @@ const AvatarSubmit = () => {
           />
           {errors.avatar?.type === "validate" && (
             <StyledError role='alertError'>
-              The file must be an image of at most 40KB
+              The file must be an image of extension .png, .jpg or .jpeg from at
+              most 40KB.
             </StyledError>
           )}
           <StyledButton type='submit'>Submit</StyledButton>
