@@ -47,7 +47,7 @@ const Login = () => {
           setSuccess(false);
         } else if (response.status === 200) {
           if (data.Authorization) {
-            localStorage.setItem("user", data.Authorization);
+            localStorage.setItem("user", data.authorization);
             localStorage.setItem("avatar", data.avatar);
             setSuccess(true);
             navigate("/home");
