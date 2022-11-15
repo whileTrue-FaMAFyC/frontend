@@ -20,7 +20,9 @@ export const Results = styled.div`
   background-color: #252c32;
 `;
 
-export const Text = styled.p``;
+export const Text = styled.p`
+  font-size: 13px;
+`;
 
 export const Title = styled.h2`
   font-size: 40px;
@@ -33,7 +35,7 @@ export const Title = styled.h2`
   align-self: flex-start;
 `;
 
-export const Wrapper = styled.div`
+export const Aside = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -44,22 +46,27 @@ export const Wrapper = styled.div`
 `;
 
 export const MatchInfo = styled.div`
+  font-size: 13px;
   width: 100%;
   padding: 20px;
-  border-radius: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  align-items: center;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  justify-content: space-evenly;
   background-color: #252c32;
+`;
+
+export const Span = styled.span`
+  font-weight: 400;
+  font-size: 13px;
 `;
 
 export const PlayersInfo = styled.div`
   width: 100%;
-  min-height: 300px;
+  min-height: 340px;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -75,7 +82,7 @@ export const Button = styled.button`
   width: 100%;
   border: none;
   outline: none;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #00c8c8;
   cursor: pointer;
 `;
@@ -84,7 +91,7 @@ export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
   min-width: 64px;
   border: 0;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 8px 16px;
   outline: none;
   background-color: ${(props) =>
@@ -107,6 +114,6 @@ export const ResultsWrapper = styled.div`
   align-self: center;
   margin: 20px;
   border: 1px solid #00c8c8;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 5px;
 `;

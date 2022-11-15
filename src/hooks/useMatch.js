@@ -10,6 +10,7 @@ const initialState = {
   users_joined: 0,
   user_robot: [],
   results: [],
+  has_password: false,
   started: false,
   im_in: false,
   is_creator: false,

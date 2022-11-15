@@ -12,8 +12,9 @@ import {
   Button,
 } from "./FormJoinMatch.styled";
 
-const FormJoinMatch = ({match_id}) => {
+const FormJoinMatch = ({match_id, has_password}) => {
   const [robots, setRobots] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -62,21 +63,23 @@ const FormJoinMatch = ({match_id}) => {
         </Select>
         <Error>{errors["select"]?.message}</Error>
       </InputContainer>
-      <InputContainer>
-        <Label>Enter password:</Label>
-        <Input
-          name='password'
-          type='password'
-          data-testid='password'
-          {...register("password", {
-            maxLength: {
-              value: 16,
-              message: "The password must have at most 16 characters.",
-            },
-          })}
-        />
-        <Error>{errors["password"]?.message}</Error>
-      </InputContainer>
+      {has_password && (
+        <InputContainer>
+          <Label>Enter password:</Label>
+          <Input
+            name='password'
+            type='password'
+            data-testid='password'
+            {...register("password", {
+              maxLength: {
+                value: 16,
+                message: "The password must have at most 16 characters.",
+              },
+            })}
+          />
+          <Error>{errors["password"]?.message}</Error>
+        </InputContainer>
+      )}
 
       <Button type='submit' data-testid='joinButton'>
         Join

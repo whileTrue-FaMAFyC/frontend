@@ -3,14 +3,17 @@ import styled from "styled-components";
 export const Form = styled.form`
   width: 100%;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background-color: #252c32;
 `;
 
-export const Select = styled.select``;
+export const Select = styled.select`
+  border: none;
+  outline: none;
+`;
 
 export const Option = styled.option``;
 
@@ -30,7 +33,7 @@ export const Input = styled.input`
   padding: 8px 16px;
   outline: none;
   border: 1px solid #00c8c8;
-  border-radius: 4px;
+  border-radius: 5px;
   color: #fff;
   &:focus {
     border: 1px solid #00c8c8;
@@ -48,7 +51,7 @@ export const Button = styled.button`
   font-size: 0.875rem;
   font-weight: 500;
   margin-top: 10px;
-  border-radius: 4px;
+  border-radius: 5px;
   padding: 8px 16px;
   border: none;
   outline: none;

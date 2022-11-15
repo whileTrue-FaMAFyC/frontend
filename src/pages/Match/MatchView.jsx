@@ -1,37 +1,48 @@
-import {leaveMatch} from "../../services";
 import {MatchStartView, FormJoinMatch} from "../../components";
+import {CircularProgress} from "@mui/material";
 import Player from "../../components/Player/Player";
+import MatchLoader from "./components/MatchLoader";
 import {
   Container,
   Results,
   Text,
+  Span,
   Title,
   MatchInfo,
   PlayersInfo,
-  Wrapper,
+  Aside,
   ResultsWrapper,
-  StyledButton,
   Button,
 } from "./Match.styled";
 
-const MatchView = ({match, match_id}) => {
-  const handleLeave = async () => {
-    const user = localStorage.getItem("user");
-    await leaveMatch(user, match_id);
-  };
+const MatchView = ({match, match_id, handleLeave, loading}) => {
+  if (loading) {
+    return <MatchLoader />;
+  }
 
   return (
     <Container>
       <Results>
         <Title>{match.name}</Title>
       </Results>
-
-      <Wrapper>
+      <Aside>
         <MatchInfo>
-          <Text>Games: {match.num_games}</Text>
-          <Text>Rounds: {match.num_rounds}</Text>
-          <Text>Min players: {match.min_players}</Text>
-          <Text>Max players: {match.max_players}</Text>
+          <Text>
+            <Span>Games: </Span>
+            {match.num_games}
+          </Text>
+          <Text>
+            <Span>Max players: </Span>
+            {match.max_players}
+          </Text>
+          <Text>
+            <Span>Rounds: </Span>
+            {match.num_rounds}
+          </Text>
+          <Text>
+            <Span>Min players: </Span>
+            {match.min_players}
+          </Text>
         </MatchInfo>
 
         <PlayersInfo>
@@ -48,7 +59,10 @@ const MatchView = ({match, match_id}) => {
         </PlayersInfo>
 
         {!match.is_creator && !match.im_in && (
-          <FormJoinMatch match_id={match_id} />
+          <FormJoinMatch
+            match_id={match_id}
+            has_password={match.has_password}
+          />
         )}
 
         {match.is_creator && (
@@ -63,11 +77,11 @@ const MatchView = ({match, match_id}) => {
         )}
 
         {!match.is_creator && match.im_in && (
-          <Button type='button' onClick={handleLeave} data-testid='leaveButton'>
+          <Button onClick={handleLeave} data-testid='leaveButton'>
             Leave
           </Button>
         )}
-      </Wrapper>
+      </Aside>
 
       {match.results.length > 0 && (
         <ResultsWrapper>

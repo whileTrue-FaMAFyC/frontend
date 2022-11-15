@@ -4,13 +4,12 @@ import Avatar from "@mui/material/Avatar";
 const Container = styled.div`
   width: 100%;
   height: 60px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
-
+  gap: 20px;
   background-color: #0a0e13;
 `;
 

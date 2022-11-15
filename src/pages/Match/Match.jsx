@@ -1,23 +1,31 @@
-import {useEffect} from "react";
-import useMatch from "../../hooks/useMatch";
-import {getMatchInfo} from "../../services";
+import {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
+import useMatch from "../../hooks/useMatch";
+import {getMatchInfo, leaveMatch} from "../../services";
+
 import MatchView from "./MatchView";
 
 const Match = () => {
+  const [loading, setLoading] = useState(true);
+  const ws = useRef(null);
   const {match_id} = useParams();
   const {match, dispatch} = useMatch();
+
+  const handleLeave = async () => {
+    const user = localStorage.getItem("user");
+    await leaveMatch(user, match_id);
+  };
 
   useEffect(() => {
     const callGetMatchInfo = async () => {
       try {
-        const response = await getMatchInfo(
-          localStorage.getItem("user"),
-          match_id
-        );
+        const user = localStorage.getItem("user");
+        const response = await getMatchInfo(user, match_id);
         dispatch({type: "initial_info", payload: response.data});
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -25,7 +33,9 @@ const Match = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const ws = new WebSocket(
+    if (match.results.length > 0) return;
+
+    ws.current = new WebSocket(
       `${
         process.env.REACT_APP_WEB_SOCKET
       }matches/ws/follow-lobby/${match_id}?authorization=${localStorage.getItem(
@@ -33,24 +43,27 @@ const Match = () => {
       )}`
     );
 
-    ws.onopen = () => {
-      console.log("connected");
-    };
-
-    ws.onmessage = (e) => {
+    ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
       dispatch({type: data.action, payload: data.data});
     };
 
-    ws.onclose = (e) => {
+    ws.current.onclose = (e) => {
       console.log(e.code);
     };
 
     return () => {
-      ws.close(1000, "Unmount");
+      ws.current.close(1000, "Unmount");
     };
   }, [dispatch]);
 
-  return <MatchView match={match} match_id={match_id} />;
+  return (
+    <MatchView
+      match={match}
+      match_id={match_id}
+      handleLeave={handleLeave}
+      loading={loading}
+    />
+  );
 };
 export default Match;
