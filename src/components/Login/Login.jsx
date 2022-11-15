@@ -48,6 +48,7 @@ const Login = () => {
         } else if (response.status === 200) {
           if (data.Authorization) {
             localStorage.setItem("user", data.Authorization);
+            localStorage.setItem("avatar", data.avatar);
             setSuccess(true);
             navigate("/home");
           } else {
