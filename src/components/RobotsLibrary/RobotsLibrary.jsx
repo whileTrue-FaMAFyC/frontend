@@ -100,7 +100,10 @@ const RobotsLibrary = () => {
           </Tbody>
         </Table>
         <StyledButton>
-          <Link to='/botsubmit' data-testid='linkToBotSubmit'>
+          <Link
+            to='/botsubmit'
+            data-testid='linkToBotSubmit'
+            style={{color: "black", fontWeight: 500}}>
             Create bot
           </Link>
         </StyledButton>
