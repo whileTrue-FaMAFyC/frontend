@@ -43,6 +43,7 @@ const RobotsLibrary = () => {
         </Title>
         <StyledInput
           type='text'
+          data-testid='filter'
           placeholder='Find your robot...'
           style={{
             height: 30,
