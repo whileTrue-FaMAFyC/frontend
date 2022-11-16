@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
 import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
 import {Link} from "react-router-dom";
 import {
   PadreContainer,
@@ -14,6 +15,7 @@ import {
   Feedback,
   Button,
   StyledButton,
+  StyledInput,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
@@ -36,21 +38,30 @@ const RobotsLibrary = () => {
   return (
     <PadreContainer>
       <Container>
-        <Title data-testid='title'>My robots</Title>
-        <input
+        <Title style={{marginBottom: -25}} data-testid='title'>
+          My robots
+        </Title>
+        <StyledInput
           type='text'
           placeholder='Find your robot...'
           style={{
             height: 30,
-            width: 100,
             verticalAlign: "middle",
             position: "relative",
-            // left: "124px",
             justifyContent: "center",
             top: "20px",
           }}
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
+        {/* <TextField
+          fullWidth
+          label='Search'
+          id='fullWidth'
+          placeholder='Find your robot...'
+          size='small'
+          onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          sx={{backgroundColor: "#00c8c8"}}
+        /> */}
         <Table>
           <Thead>
             <Row>
