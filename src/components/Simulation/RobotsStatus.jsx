@@ -15,7 +15,7 @@ const RobotsStatus = ({colors, robots, names, winners}) => {
           data-testid={`${robotId}`}
         />
       ))}
-      {winners !== [] ? (
+      {winners !== null ? (
         <div>
           <p data-testid='winner'>The winners are: </p>
           {winners.map((winner) => (

@@ -6,9 +6,10 @@ import SimControl from "./SimControl";
 
 const Simulation = ({props}) => {
   const {names, simulation, winners} = props;
+
   const [nframe, setNframe] = useState(0);
   const [activeInterval, setActiveInterval] = useState(true);
-  const [showWinners, setShowWinners] = useState([]);
+  const [showWinners, setShowWinners] = useState(null);
   const interval = useRef(null);
 
   const colorsRobots = ["red", "turquoise", "orange", "pink"];
@@ -53,6 +54,7 @@ const Simulation = ({props}) => {
       setMissiles(frame.missiles);
     } else {
       setShowWinners(winners);
+      console.log(showWinners);
       stopSimulation();
     }
   };

@@ -685,5 +685,5 @@ export const props = {
     },
   ],
 
-  winner: ["Mario", "Rocoloco"],
+  winners: ["Mario", "Rocoloco"],
 };
