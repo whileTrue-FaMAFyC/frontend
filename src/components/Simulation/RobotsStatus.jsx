@@ -5,7 +5,7 @@ import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 const RobotsStatus = ({colors, robots, names, winners}) => {
   return (
     <StyledEntryCard>
-      <h2>Daño</h2>
+      <h2 data-testid='winners'>Daño</h2>
       {Object.entries(robots).map(([robotId, r]) => (
         <StatusBar
           key={robotId}
@@ -16,8 +16,8 @@ const RobotsStatus = ({colors, robots, names, winners}) => {
         />
       ))}
       {winners !== null ? (
-        <div>
-          <p data-testid='winner'>The winners are: </p>
+        <div data-testid='winners'>
+          <p>The winners are: </p>
           {winners.map((winner) => (
             <li>{winner}</li>
           ))}
