@@ -30,7 +30,6 @@ const RobotsLibrary = () => {
 
   useEffect(() => {
     callGetRobotsNames();
-    console.log(robotsNames);
   }, []);
   return (
     <EntryPage>
