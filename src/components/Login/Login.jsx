@@ -46,7 +46,7 @@ const Login = () => {
           setFailure_data(data.detail);
           setSuccess(false);
         } else if (response.status === 200) {
-          if (data.Authorization) {
+          if (data.authorization) {
             localStorage.setItem("user", data.authorization);
             localStorage.setItem("avatar", data.avatar);
             setSuccess(true);
