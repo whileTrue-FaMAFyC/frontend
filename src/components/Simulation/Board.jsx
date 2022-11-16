@@ -1,4 +1,11 @@
-import {Bot, Harm, StyledBoard, StyledRobot, StyledHarm, Missiles,} from "./Board.style";
+import {
+  Bot,
+  Harm,
+  StyledBoard,
+  StyledRobot,
+  StyledHarm,
+  Missiles,
+} from "./Board.style";
 
 export const Board = ({colors, robots, missiles}) => {
   return (
