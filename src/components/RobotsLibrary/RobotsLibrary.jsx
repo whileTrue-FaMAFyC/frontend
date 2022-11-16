@@ -19,7 +19,6 @@ import {
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
-  const [query, setQuery] = useState("");
 
   const callGetRobotsNames = async () => {
     try {
@@ -42,28 +41,7 @@ const RobotsLibrary = () => {
         <Title style={{marginBottom: -25}} data-testid='title'>
           My robots
         </Title>
-        <StyledInput
-          type='text'
-          data-testid='filter'
-          placeholder='Find your robot...'
-          style={{
-            height: 30,
-            verticalAlign: "middle",
-            position: "relative",
-            justifyContent: "center",
-            top: "20px",
-          }}
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        />
-        {/* <TextField
-          fullWidth
-          label='Search'
-          id='fullWidth'
-          placeholder='Find your robot...'
-          size='small'
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-          sx={{backgroundColor: "#00c8c8"}}
-        /> */}
+
         <Table>
           <Thead>
             <Row>
@@ -82,23 +60,19 @@ const RobotsLibrary = () => {
                 <Column>No robots availables</Column>
               </Feedback>
             )}
-            {robotsNames
-              .filter((robotName) =>
-                robotName.name.toLowerCase().includes(query)
-              )
-              .map(({avatar, name, stats}) => (
-                <Row key={name} data-testid='row'>
-                  <Column>
-                    <Avatar spacing={2} src={avatar} />
-                  </Column>
-                  <Column name={1}>{name}</Column>
-                  <Column>{stats.matches_played}</Column>
-                  <Column>{stats.matches_won}</Column>
-                  <Column>{stats.matches_tied}</Column>
-                  <Column>{stats.matches_lost}</Column>
-                  <Column>{stats.games_win_rate * 100}%</Column>
-                </Row>
-              ))}
+            {robotsNames.map(({avatar, name, stats}) => (
+              <Row key={name} data-testid='row'>
+                <Column>
+                  <Avatar spacing={2} src={avatar} />
+                </Column>
+                <Column name={1}>{name}</Column>
+                <Column>{stats.matches_played}</Column>
+                <Column>{stats.matches_won}</Column>
+                <Column>{stats.matches_tied}</Column>
+                <Column>{stats.matches_lost}</Column>
+                <Column>{stats.games_win_rate * 100}%</Column>
+              </Row>
+            ))}
           </Tbody>
         </Table>
         <StyledButton>
