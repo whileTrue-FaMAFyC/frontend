@@ -19,6 +19,35 @@ const ListGamesView = ({games, refresh, loading}) => {
     <Container>
       <Title>Match list</Title>
       <Table>
+        <label>filters</label>
+        <Row>
+          <Column>
+            <label>Is mine: </label>
+            <select>
+              <option value='2'>-</option>
+              <option value='3'>True</option>
+              <option value='4'>False</option>
+            </select>
+          </Column>
+          <Column>
+            <label>I'm in: </label>
+            <select>
+              <option value='2'>-</option>
+              <option value='3'>True</option>
+              <option value='4'>False</option>
+            </select>
+          </Column>
+          <Column>
+            <label>Started: </label>
+            <select>
+              <option value='2'>-</option>
+              <option value='3'>True</option>
+              <option value='4'>False</option>
+            </select>
+          </Column>
+        </Row>
+      </Table>
+      <Table>
         <Thead>
           <Row>
             <Column>Name</Column>
