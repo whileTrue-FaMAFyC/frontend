@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import StatusBar from "../Simulation/StatusBar";
 import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 
@@ -18,8 +17,8 @@ const RobotsStatus = ({colors, robots, names, winners}) => {
       {winners !== null ? (
         <div data-testid='winners'>
           <p>The winners are: </p>
-          {winners.map((winner) => (
-            <li>{winner}</li>
+          {winners.map((winner, idx) => (
+            <li key={`${idx}`}>{winner}</li>
           ))}
         </div>
       ) : null}

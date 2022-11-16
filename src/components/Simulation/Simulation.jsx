@@ -35,7 +35,6 @@ const Simulation = ({props}) => {
   useEffect(() => {
     if (activeInterval) {
       interval.current = setInterval(() => {
-        console.log(nframe);
         drawFrame(simulation[nframe]);
         setNframe(nframe + 1);
       }, 500);
@@ -52,9 +51,10 @@ const Simulation = ({props}) => {
     if (nframe < simulation.length) {
       setRobots(frame.robots);
       setMissiles(frame.missiles);
-    } else {
+    }
+
+    if (nframe >= simulation.length - 2) {
       setShowWinners(winners);
-      console.log(showWinners);
       stopSimulation();
     }
   };
@@ -70,20 +70,18 @@ const Simulation = ({props}) => {
   };
 
   const followingRound = () => {
-    if (nframe < simulation.length) {
+    if (nframe < simulation.length - 1) {
       stopSimulation();
       drawFrame(simulation[nframe + 1]);
       setNframe(nframe + 1);
-      console.log(nframe);
     }
   };
 
   const previousRound = () => {
-    if (nframe > 0) {
+    if (nframe > 1) {
       stopSimulation();
       setNframe(nframe - 1);
       drawFrame(simulation[nframe - 1]);
-      console.log(nframe);
     }
   };
 
