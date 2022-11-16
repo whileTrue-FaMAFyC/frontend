@@ -49,11 +49,6 @@ const EnterPassword = ({
                 lowercase and number
               </StyledError>
             )}
-            {errors.password?.type === "minLength" && (
-              <StyledError role='alertError'>
-                The password must contain at least 8 characters
-              </StyledError>
-            )}
             {errors.password?.type === "required" && (
               <StyledError role='alertError'>Password is required</StyledError>
             )}

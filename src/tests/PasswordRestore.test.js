@@ -23,7 +23,6 @@ test("render full password restore component successfully", async () => {
       </Router>
     </div>
   );
-
   // Render EnterEmailView
   expect.toBeInTheDocument(screen.getByTestId("formEmail"));
   expect.toBeInTheDocument(screen.getByTestId("inputUsernameGroup"));
@@ -58,6 +57,40 @@ test("render full password restore component successfully", async () => {
     screen.getByTestId("labelConfirmPassword");
     screen.getByTestId("inputConfirmPassword");
     screen.getByTestId("submitPassword");
+  });
+});
+
+test("enter email and enter code with new password", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "asdASD123"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "asdASD123"},
+    });
+    fireEvent.click(screen.getByTestId("submitPassword"));
   });
 });
 
@@ -136,7 +169,11 @@ test("error when username too long", async () => {
 
   fireEvent.click(screen.getByTestId("submitButton"));
 
-  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+  await waitFor(() =>
+    expect.toBeInTheDocument(
+      screen.getByText("Username must be at most 16 characters long.")
+    )
+  );
 });
 
 test("error when username too short", async () => {
@@ -158,10 +195,14 @@ test("error when username too short", async () => {
 
   fireEvent.click(screen.getByTestId("submitButton"));
 
-  await waitFor(() => expect.toBeInTheDocument(screen.getByRole("alertError")));
+  await waitFor(() =>
+    expect.toBeInTheDocument(
+      screen.getByText("Username must be at least 3 characters long.")
+    )
+  );
 });
 
-test("enter email and enter code with new password", async () => {
+test("enter email and enter code with passwords that do not match", async () => {
   render(
     <div>
       <Router>
@@ -189,9 +230,158 @@ test("enter email and enter code with new password", async () => {
       target: {value: "asdASD123"},
     });
     fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
-      target: {value: "asdSD123"},
+      target: {value: "notequal"},
     });
     fireEvent.click(screen.getByTestId("submitPassword"));
+    expect.toBeInTheDocument(screen.getByText("Passwords do not match"));
+  });
+});
+
+test("enter email and enter code with new passwords with no numbers", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "uglypassword"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "uglypassword"},
+    });
+    fireEvent.click(screen.getByTestId("submitPassword"));
+    expect.toBeInTheDocument(
+      screen.getByText(
+        "The password must contain at least 8 characters, one uppercase, lowercase and number"
+      )
+    );
+  });
+});
+
+test("enter email and enter code with empty password", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: ""},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "thiswontwork"},
+    });
+    fireEvent.click(screen.getByTestId("submitPassword"));
+    expect.toBeInTheDocument(screen.getByText("Password is required"));
+  });
+});
+
+test("enter email and enter code with new passwords with no numbers", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "uglypassword"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: "uglypassword"},
+    });
+    fireEvent.click(screen.getByTestId("submitPassword"));
+    expect.toBeInTheDocument(
+      screen.getByText(
+        "The password must contain at least 8 characters, one uppercase, lowercase and number"
+      )
+    );
+  });
+});
+
+test("enter email and enter code with empty password confirmation", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
+  await waitFor(() => {
+    fireEvent.change(screen.getByTestId("codeInput"), {
+      target: {value: "232323"},
+    });
+    fireEvent.change(screen.getByTestId("inputPassword"), {
+      target: {value: "Nic3Passw0rd"},
+    });
+    fireEvent.change(screen.getByTestId("inputConfirmPassword"), {
+      target: {value: ""},
+    });
+    fireEvent.click(screen.getByTestId("submitPassword"));
+    expect.toBeInTheDocument(screen.getByText("Enter your password again"));
   });
 });
 
@@ -227,5 +417,74 @@ test("enter email", async () => {
     expect.toBeInTheDocument(
       screen.getByText("There is no user with that email and username.")
     );
+  });
+});
+
+test("enter email and 409 error", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  server.use(
+    rest.post(
+      `${process.env.REACT_APP_API_KEY}password-restore-request`,
+      (req, res, ctx) => {
+        return res(
+          ctx.status(409),
+          ctx.json({detail: "There is no user with that email and username."})
+        );
+      }
+    )
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => {
+    expect.toBeInTheDocument(
+      screen.getByText("There is no user with that email and username.")
+    );
+  });
+});
+
+test("enter email and random error", async () => {
+  render(
+    <div>
+      <Router>
+        <PasswordRestore />
+      </Router>
+    </div>
+  );
+
+  server.use(
+    rest.post(
+      `${process.env.REACT_APP_API_KEY}password-restore-request`,
+      (req, res, ctx) => {
+        return res(ctx.status(418), ctx.json({detail: "Unkown error"}));
+      }
+    )
+  );
+
+  // Enter and submit data
+  fireEvent.change(screen.getByTestId("inputUsername"), {
+    target: {value: "seba.giraudo"},
+  });
+  fireEvent.change(screen.getByTestId("inputEmail"), {
+    target: {value: "seba@gmail.com"},
+  });
+  fireEvent.click(screen.getByTestId("submitButton"));
+
+  await waitFor(() => {
+    expect.toBeInTheDocument(screen.getByText("Unkown error"));
   });
 });
