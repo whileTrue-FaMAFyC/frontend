@@ -31,9 +31,9 @@ const FormJoinMatch = ({match_id, has_password}) => {
   };
 
   const handleJoin = async (data) => {
-    const token = localStorage.getItem("user");
     try {
-      await joinMatch(token, match_id, data);
+      const user = localStorage.getItem("user");
+      await joinMatch(user, match_id, data);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +48,6 @@ const FormJoinMatch = ({match_id, has_password}) => {
       <InputContainer>
         <Label>Select avatar:</Label>
         <Select
-          name='select'
           id='inputRaobot'
           data-testid='nameRobot'
           {...register("joining_robot", {
@@ -61,23 +60,22 @@ const FormJoinMatch = ({match_id, has_password}) => {
           ))}
           <Option value=''>* Choose a robot *</Option>
         </Select>
-        <Error>{errors["select"]?.message}</Error>
+        <Error>{errors["joining_robot"]?.message}</Error>
       </InputContainer>
       {has_password && (
         <InputContainer>
           <Label>Enter password:</Label>
           <Input
-            name='password'
             type='password'
             data-testid='password'
-            {...register("password", {
+            {...register("match_password", {
               maxLength: {
                 value: 16,
                 message: "The password must have at most 16 characters.",
               },
             })}
           />
-          <Error>{errors["password"]?.message}</Error>
+          <Error>{errors["match_password"]?.message}</Error>
         </InputContainer>
       )}
 
