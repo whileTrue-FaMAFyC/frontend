@@ -2,7 +2,7 @@
 import {rest} from "msw";
 import {results} from "./match";
 
-export const fakeUserResponse = {Authorization: "fake_user_token"};
+export const fakeUserResponse = {authorization: "fake_user_token"};
 const username = "ElMasGrande";
 
 export const handlers = [
