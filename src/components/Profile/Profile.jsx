@@ -1,8 +1,9 @@
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import axios from "axios";
 import {
   StyledButton,
   StyledEntryCard,
@@ -24,11 +25,35 @@ const Profile = () => {
   const [changePasswordOn, setChangePasswordOn] = useState(false);
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
+  const [userInfo, setUserInfo] = useState("");
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [picture, setPicture] = useState(null);
   const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
+
+  const getUserInfo = async (token) => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_KEY}user-profile`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return response;
+  };
+
+  const callGetUserInfo = async () => {
+    try {
+      const response = await getUserInfo(localStorage.getItem(`user`));
+      if (response.data != "") {
+        setUserInfo(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const changeAvatar = async (data) => {
     console.log(data);
@@ -124,6 +149,11 @@ const Profile = () => {
     }
   };
 
+  useEffect(() => {
+    callGetUserInfo();
+    console.log(userInfo);
+  }, []);
+
   return (
     <EntryPage>
       <StyledEntryCard>
@@ -168,9 +198,15 @@ const Profile = () => {
             </a>
           )}
           {/* </form> */}
-
-          <div>Username</div>
-          <div>aestusemburgo@gmail.com</div>
+          {/* {userInfo.map({username, email}) => ( */}
+          <div>{userInfo.username}</div>
+          <div>{userInfo.email}</div>
+          {/* {userInfo.map(({avatar, name}) => (
+            <div>
+              <div></div>
+              <div>{name}</div>
+            </div>
+          ))} */}
         </div>
         {changePasswordOn && (
           <div>
