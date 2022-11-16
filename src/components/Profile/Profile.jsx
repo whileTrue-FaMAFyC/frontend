@@ -55,7 +55,8 @@ const Profile = () => {
     }
   };
 
-  const changeAvatar = async (data) => {
+  const changeAvatar = async (avatar) => {
+    const data = {avatar: avatar};
     console.log(data);
     const token = localStorage.getItem("user");
     await fetch(
