@@ -5,10 +5,10 @@ import RobotsStatus from "./RobotsStatus";
 import SimControl from "./SimControl";
 
 const Simulation = ({props}) => {
-  const {names, simulation, winner} = props;
+  const {names, simulation, winners} = props;
   const [nframe, setNframe] = useState(0);
   const [activeInterval, setActiveInterval] = useState(true);
-  const [showWinner, setShowWinner] = useState("");
+  const [showWinners, setShowWinners] = useState([]);
   const interval = useRef(null);
 
   const colorsRobots = ["red", "turquoise", "orange", "pink"];
@@ -52,7 +52,7 @@ const Simulation = ({props}) => {
       setRobots(frame.robots);
       setMissiles(frame.missiles);
     } else {
-      setShowWinner(winner);
+      setShowWinners(winners);
       stopSimulation();
     }
   };
@@ -70,17 +70,17 @@ const Simulation = ({props}) => {
   const followingRound = () => {
     if (nframe < simulation.length) {
       stopSimulation();
-      drawFrame(simulation[nframe]);
+      drawFrame(simulation[nframe + 1]);
       setNframe(nframe + 1);
       console.log(nframe);
     }
   };
 
   const previousRound = () => {
-    if (nframe > 1) {
+    if (nframe > 0) {
       stopSimulation();
       setNframe(nframe - 1);
-      drawFrame(simulation[nframe]);
+      drawFrame(simulation[nframe - 1]);
       console.log(nframe);
     }
   };
@@ -89,7 +89,7 @@ const Simulation = ({props}) => {
     if (nframe > 0) {
       stopSimulation();
       setNframe(0);
-      drawFrame(simulation[nframe]);
+      drawFrame(simulation[0]);
     }
   };
 
@@ -107,7 +107,7 @@ const Simulation = ({props}) => {
         colors={colors}
         robots={robots}
         names={robot_names}
-        winner={showWinner}
+        winners={showWinners}
       />
       <Board colors={colors} robots={robots} missiles={missiles} />
       <SimControl handlers={handlers} />

@@ -104,7 +104,6 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledEntryCard = styled.div`
-  //display: inline-block;
   align-items: flex-start;
   display: inline-block;
   width: 100%;
@@ -114,5 +113,17 @@ export const StyledEntryCard = styled.div`
   margin: auto;
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
-  //text-align: center;
+`;
+
+export const StyledControlButtons = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  padding: 50px;
+  margin: auto;
+  background-color: #252c32;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
 `;

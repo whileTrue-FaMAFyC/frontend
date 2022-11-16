@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import StatusBar from "../Simulation/StatusBar";
 import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 
-const RobotsStatus = ({colors, robots, names, winner}) => {
+const RobotsStatus = ({colors, robots, names, winners}) => {
   return (
     <StyledEntryCard>
       <h2>Daño</h2>
@@ -15,8 +15,13 @@ const RobotsStatus = ({colors, robots, names, winner}) => {
           data-testid={`${robotId}`}
         />
       ))}
-      {winner !== "" ? (
-        <h2 data-testid='winner'>The winner is: {winner}</h2>
+      {winners !== [] ? (
+        <div>
+          <p data-testid='winner'>The winners are: </p>
+          {winners.map((winner) => (
+            <li>{winner}</li>
+          ))}
+        </div>
       ) : null}
     </StyledEntryCard>
   );

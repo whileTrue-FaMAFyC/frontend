@@ -1,9 +1,9 @@
 import React from "react";
-import {StyledButton, StyledEntryCard} from "./Board.style";
+import {StyledButton, StyledControlButtons} from "./Board.style";
 
 const SimControl = ({handlers}) => {
   return (
-    <StyledEntryCard>
+    <StyledControlButtons>
       <StyledButton onClick={handlers.play} data-testid='play'>
         Play
       </StyledButton>
@@ -19,7 +19,7 @@ const SimControl = ({handlers}) => {
       <StyledButton onClick={handlers.reset} data-testid='reset'>
         Reset
       </StyledButton>
-    </StyledEntryCard>
+    </StyledControlButtons>
   );
 };
 
