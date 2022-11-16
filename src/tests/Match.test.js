@@ -133,7 +133,7 @@ describe("Match test", () => {
     render(<Match />);
 
     await waitFor(() => {
-      console.log(screen.getByTestId("Start"));
+      // console.log(screen.getByTestId("Start"));
       expect(screen.getByTestId("Start")).toBeInTheDocument();
     });
   });
