@@ -2,32 +2,18 @@ import {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import useMatch from "../../hooks/useMatch";
 import {getMatchInfo, leaveMatch} from "../../services";
-
 import MatchView from "./MatchView";
 
 const Match = () => {
-  const {match, dispatch} = useMatch();
   const [loading, setLoading] = useState(true);
+  const ws = useRef(null);
+  const {match, dispatch} = useMatch();
   const {match_id} = useParams();
-
-  const [ws, setWs] = useState(
-    new WebSocket(
-      `${
-        process.env.REACT_APP_WEB_SOCKET
-      }matches/ws/follow-lobby/${match_id}?authorization=${localStorage.getItem(
-        "user"
-      )}`
-    )
-  );
 
   const handleLeave = async () => {
     const user = localStorage.getItem("user");
     await leaveMatch(user, match_id);
   };
-
-  console.log("HOLAAAAAAAAAA");
-  console.log("MATCH ID:", match_id);
-  console.log("USER:", localStorage.getItem("user"));
 
   useEffect(() => {
     const callGetMatchInfo = async () => {
@@ -46,22 +32,29 @@ const Match = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    ws.onopen = () => {
+    ws.current = new WebSocket(
+      `${
+        process.env.REACT_APP_WEB_SOCKET
+      }matches/ws/follow-lobby/${match_id}?authorization=${localStorage.getItem(
+        "user"
+      )}`
+    );
+
+    ws.current.onopen = () => {
       console.log("connected");
     };
 
-    ws.onmessage = (e) => {
+    ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log("MESSAGE:", e.data);
       dispatch({type: data.action, payload: data.data});
     };
 
-    ws.onclose = (e) => {
+    ws.current.onclose = (e) => {
       console.log(e.code);
     };
 
     return () => {
-      ws.close(1000, "Unmount");
+      ws.current.close(1000, "Unmount");
     };
   }, [dispatch]);
 

@@ -14,10 +14,26 @@ export const Results = styled.div`
   width: 50%;
   height: 700px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
   border-radius: 10px;
   background-color: #252c32;
+  position: relative;
+  overflow: hidden;
+`;
+
+export const ResultsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  border-radius: 5px;
+  padding: 5px;
+  margin: auto;
+`;
+
+export const Winner = styled.h2`
+  font-weight: 600;
+  font-size: 30px;
 `;
 
 export const Text = styled.p`
@@ -28,21 +44,19 @@ export const Title = styled.h2`
   font-size: 40px;
   font-weight: 700;
   width: 100%;
-  height: 100px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-self: flex-start;
+  padding-top: 20px;
 `;
 
 export const Aside = styled.div`
+  height: 700px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   align-self: center;
   gap: 30px;
-  height: 700px;
-  width: 250px;
 `;
 
 export const MatchInfo = styled.div`
@@ -106,14 +120,4 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
-`;
-
-export const ResultsWrapper = styled.div`
-  align-items: center;
-  display: flex;
-  align-self: center;
-  margin: 20px;
-  border: 1px solid #00c8c8;
-  border-radius: 5px;
-  padding: 5px;
 `;

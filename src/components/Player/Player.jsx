@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
+import {Crown} from "@styled-icons/boxicons-regular/";
 
 const Container = styled.div`
   width: 100%;
@@ -19,7 +20,12 @@ export const Names = styled.div`
   font-size: 13px;
 `;
 
-const Player = ({username, robot_avatar, robot_name}) => {
+export const CrownStyled = styled(Crown)`
+  width: 30px;
+  fill: #f7b103;
+`;
+
+const Player = ({username, robot_avatar, robot_name, is_creator}) => {
   return (
     <Container>
       <Avatar src={robot_avatar} alt='Avatar robot' />
@@ -27,6 +33,7 @@ const Player = ({username, robot_avatar, robot_name}) => {
         <p>{username}</p>
         <p>{robot_name}</p>
       </Names>
+      {is_creator && <CrownStyled />}
     </Container>
   );
 };

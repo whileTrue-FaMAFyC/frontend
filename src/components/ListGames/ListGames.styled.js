@@ -13,6 +13,7 @@ export const Container = styled.div`
 export const Title = styled.p`
   color: #fff;
   font-size: 30px;
+  font-weight: 600;
 `;
 
 export const Table = styled.table`
@@ -20,9 +21,7 @@ export const Table = styled.table`
   min-width: 700px;
   display: flex;
   flex-direction: column;
-  background-color: #252c32;
   overflow-x: auto;
-  background-color: #252c32;
 `;
 
 export const Thead = styled.thead`
@@ -30,13 +29,6 @@ export const Thead = styled.thead`
   min-height: 60px;
   display: flex;
   background-color: #000;
-
-  tr {
-    &:hover {
-      background-color: #000;
-      cursor: auto;
-    }
-  }
 `;
 
 export const Column = styled.td`
@@ -81,11 +73,21 @@ export const Row = styled.tr`
   min-height: 60px;
   display: flex;
   border-bottom: 1px solid #252c32;
+  background-color: #0f1519;
   color: #fff;
   &:hover {
     background-color: #ff4655;
     background-color: #0a0e13;
   }
+`;
+
+export const RowHead = styled.tr`
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  background-color: #0a0e13;
+  color: #fff;
+  background-color: #000;
 `;
 
 export const Feedback = styled.tr`

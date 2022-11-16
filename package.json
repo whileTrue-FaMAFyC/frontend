@@ -9,6 +9,7 @@
     "@mui/material": "^5.10.11",
     "@mui/styled-engine-sc": "^5.10.6",
     "@styled-icons/bootstrap": "^10.46.0",
+    "@styled-icons/boxicons-regular": "^10.46.0",
     "@styled-icons/remix-fill": "^10.46.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

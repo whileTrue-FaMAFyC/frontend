@@ -1,10 +1,11 @@
 import {MatchStartView, FormJoinMatch} from "../../components";
-import {CircularProgress} from "@mui/material";
 import Player from "../../components/Player/Player";
+import {CircularProgress} from "@mui/material";
 import MatchLoader from "./components/MatchLoader";
 import {
   Container,
   Results,
+  Winner,
   Text,
   Span,
   Title,
@@ -14,6 +15,7 @@ import {
   ResultsWrapper,
   Button,
 } from "./Match.styled";
+import Confetti from "react-confetti";
 
 const MatchView = ({match, match_id, handleLeave, loading}) => {
   if (loading) {
@@ -24,6 +26,37 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
     <Container>
       <Results>
         <Title>{match.name}</Title>
+        {match.results.length > 0 && (
+          <>
+            <ResultsWrapper>
+              {match.results.length === 1 && <Winner>Winner</Winner>}
+              {match.results.length > 1 && <Winner>Winners</Winner>}
+              {match.results.map((winner, index) => (
+                <p key={index} data-testid='user_winner'>
+                  {winner.username}
+                </p>
+              ))}
+            </ResultsWrapper>
+            <Confetti
+              width='900px'
+              height='700px'
+              style={{position: "absolute"}}
+            />
+          </>
+        )}
+
+        {match.results.length === 0 && match.started && (
+          <CircularProgress
+            style={{
+              position: "absolute",
+              left: "0",
+              top: "0",
+              right: "0",
+              bottom: "0",
+              margin: "auto",
+            }}
+          />
+        )}
       </Results>
       <Aside>
         <MatchInfo>
@@ -53,6 +86,7 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
                 username={username}
                 robot_avatar={robot_avatar}
                 robot_name={robot_name}
+                is_creator={match.creator_username === username}
               />
             )
           )}
@@ -65,7 +99,7 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
           />
         )}
 
-        {match.is_creator && (
+        {match.is_creator && !match.started && (
           <MatchStartView
             isCreator={match.is_creator}
             isReadyToStart={
@@ -76,28 +110,12 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
           />
         )}
 
-        {!match.is_creator && match.im_in && (
+        {!match.is_creator && match.im_in && !match.started && (
           <Button onClick={handleLeave} data-testid='leaveButton'>
             Leave
           </Button>
         )}
       </Aside>
-
-      {match.results.length > 0 && (
-        <ResultsWrapper>
-          <div>
-            {match.results.length === 1 && <h2>Winner</h2>}
-            {match.results.length > 1 && <h2>Winners</h2>}
-            {match.results.map((winner, index) => (
-              <div key={index}>
-                <p data-testid='user_winner'>{winner.username}</p>
-              </div>
-            ))}
-          </div>
-        </ResultsWrapper>
-      )}
-
-      {match.started && <p style={{color: "#252c32"}}>start</p>}
     </Container>
   );
 };

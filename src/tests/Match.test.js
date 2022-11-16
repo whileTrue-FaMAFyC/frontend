@@ -94,7 +94,7 @@ describe("Match test", () => {
     );
   });
 
-  it("Se inicia la partida", async () => {
+  /*it("Se inicia la partida", async () => {
     mockAxios.get.mockResolvedValue({data: joinLobby2});
 
     await server.connect;
@@ -110,6 +110,7 @@ describe("Match test", () => {
       expect(screen.getByText("start")).toBeInTheDocument();
     });
   });
+  */
 
   it("Creador puede iniciar partida", async () => {
     mockAxios.get.mockResolvedValue({data: joinLobby3});
@@ -120,8 +121,8 @@ describe("Match test", () => {
 
     await waitFor(() => {
       expect(screen.getByTestId("Start")).toBeInTheDocument();
-      // expect(screen.)
     });
+    screen.debug();
   });
 
   it("Creador puede iniciar partida", async () => {

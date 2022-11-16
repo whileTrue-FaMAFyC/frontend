@@ -10,6 +10,7 @@ import {
   Row,
   Feedback,
   Button,
+  RowHead,
 } from "./ListGames.styled";
 
 const ListGamesView = ({games, refresh, loading}) => {
@@ -20,7 +21,7 @@ const ListGamesView = ({games, refresh, loading}) => {
       <Title>Match list</Title>
       <Table>
         <Thead>
-          <Row>
+          <RowHead>
             <Column>Name</Column>
             <Column>Creator</Column>
             <Column>Max Players</Column>
@@ -28,7 +29,7 @@ const ListGamesView = ({games, refresh, loading}) => {
             <Column>
               <Button onClick={refresh}>Refresh</Button>
             </Column>
-          </Row>
+          </RowHead>
         </Thead>
         <Tbody>
           {loading && (
