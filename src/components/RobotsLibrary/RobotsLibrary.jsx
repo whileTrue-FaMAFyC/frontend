@@ -13,13 +13,13 @@ import {
   Tbody,
   Row,
   Feedback,
-  Button,
   StyledButton,
   StyledInput,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
+  const [filterRobotsNames, setFilterRobotsNames] = useState([]);
   const [query, setQuery] = useState("");
 
   const callGetRobotsNames = async () => {
@@ -112,66 +112,3 @@ const RobotsLibrary = () => {
   );
 };
 export default RobotsLibrary;
-
-// import * as React from "react";
-// import {useState, useEffect} from "react";
-// import {getRobotsNames} from "../../services";
-// import {DataGrid} from "@mui/x-data-grid";
-
-// const RobotsLibrary = () => {
-//   const [robotsNames, setRobotsNames] = useState([]);
-//   const [query, setQuery] = useState("");
-
-//   const callGetRobotsNames = async () => {
-//     try {
-//       const response = await getRobotsNames(localStorage.getItem(`user`));
-//       setRobotsNames(response.data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   const columns = [
-//     {field: "avatar", headerName: "Avatar", width: 70},
-//     {field: "robotName", headerName: "Name", width: 130},
-//     {
-//       field: "stats.matches_played",
-//       headerName: "Stats",
-//       width: 130,
-//       minWidth: 10,
-//       flex: 1,
-//     },
-//   ];
-
-//   const rows = [
-//     robotsNames.map((value) => {
-//       console.log(value);
-//       return {
-//         internalId: value[1],
-//         avatar: value[0],
-//         name: value[1],
-//       };
-//     }),
-//   ];
-
-//   useEffect(() => {
-//     callGetRobotsNames();
-//   }, []);
-
-//   robotsNames.map((robot) => (robot.id = 1));
-//   return (
-//     <div style={{height: 400, width: "100%"}}>
-//       {console.log(robotsNames)}
-//       <DataGrid
-//         rows={rows}
-//         // getRowId={(row) => row.internalId}
-//         columns={columns}
-//         pageSize={5}
-//         rowsPerPageOptions={[5]}
-//         checkboxSelection
-//       />
-//       {console.log(rows)}
-//     </div>
-//   );
-// };
-// export default RobotsLibrary;
