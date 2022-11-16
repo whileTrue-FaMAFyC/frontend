@@ -1,6 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useState, useEffect} from "react";
 import {getRobotsNames} from "../../services";
+import {useNavigate} from "react-router-dom";
 
 import {
   StyledButton,
@@ -9,6 +10,7 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  Div,
 } from "./MatchConfig.styled.js";
 
 const MatchConfig = () => {
@@ -31,6 +33,8 @@ const MatchConfig = () => {
       console.log(error);
     }
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(10 / 2);
@@ -55,6 +59,7 @@ const MatchConfig = () => {
         if (response.status === 201 || response.status === 200) {
           setSuccess(true);
           setFailure_data("");
+          navigate("/listgames");
         } else {
           alert(data.detail);
           setSuccess(false);
@@ -227,7 +232,9 @@ const MatchConfig = () => {
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Create</StyledButton>
+          <StyledButton type='submit' data-testid='submit'>
+            Create
+          </StyledButton>
         </form>
         {success && (
           <div

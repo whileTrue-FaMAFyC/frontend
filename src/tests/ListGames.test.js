@@ -65,6 +65,6 @@ describe("Listar partidas", () => {
       });
     });
 
-    screen.debug();
+    // screen.debug();
   });
 });
