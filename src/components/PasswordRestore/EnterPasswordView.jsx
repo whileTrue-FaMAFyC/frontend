@@ -32,6 +32,9 @@ const EnterPassword = ({
                 required: true,
               })}
             />
+            {errors.code?.type === "required" && (
+              <StyledError role='alertError'>Code is required</StyledError>
+            )}
           </StyledInputGroup>
           <StyledInputGroup data-testid='PasswordGroup'>
             <label data-testid='labelPassword'>New password</label>
