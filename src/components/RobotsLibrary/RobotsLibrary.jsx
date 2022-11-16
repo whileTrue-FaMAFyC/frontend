@@ -37,7 +37,7 @@ const RobotsLibrary = () => {
     <PadreContainer>
       <Container>
         <Title data-testid='title'>My robots</Title>
-        {/* <input
+        <input
           type='text'
           placeholder='Find your robot...'
           style={{
@@ -50,7 +50,7 @@ const RobotsLibrary = () => {
             top: "20px",
           }}
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        /> */}
+        />
         <Table>
           <Thead>
             <Row>
@@ -78,7 +78,7 @@ const RobotsLibrary = () => {
                   <Column>
                     <Avatar spacing={2} src={avatar} />
                   </Column>
-                  <Column>{name}</Column>
+                  <Column name={true}>{name}</Column>
                   <Column>{stats.matches_played}</Column>
                   <Column>{stats.matches_won}</Column>
                   <Column>{stats.matches_tied}</Column>
@@ -104,24 +104,6 @@ export default RobotsLibrary;
 // import {getRobotsNames} from "../../services";
 // import {DataGrid} from "@mui/x-data-grid";
 
-// const columns = [
-//   {field: "avatar", headerName: "Avatar", width: 70},
-//   {field: "robotName", headerName: "Name", width: 130},
-//   {field: "stats.matches_played", headerName: "Stats", width: 130},
-// ];
-
-// const rows = [
-//   {id: 1, lastName: "Snow", firstName: "Jon", age: 35},
-//   {id: 2, lastName: "Lannister", firstName: "Cersei", age: 42},
-//   {id: 3, lastName: "Lannister", firstName: "Jaime", age: 45},
-//   {id: 4, lastName: "Stark", firstName: "Arya", age: 16},
-//   {id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null},
-//   {id: 6, lastName: "Melisandre", firstName: null, age: 150},
-//   {id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44},
-//   {id: 8, lastName: "Frances", firstName: "Rossini", age: 36},
-//   {id: 9, lastName: "Roxie", firstName: "Harvey", age: 65},
-// ];
-
 // const RobotsLibrary = () => {
 //   const [robotsNames, setRobotsNames] = useState([]);
 //   const [query, setQuery] = useState("");
@@ -135,6 +117,29 @@ export default RobotsLibrary;
 //     }
 //   };
 
+//   const columns = [
+//     {field: "avatar", headerName: "Avatar", width: 70},
+//     {field: "robotName", headerName: "Name", width: 130},
+//     {
+//       field: "stats.matches_played",
+//       headerName: "Stats",
+//       width: 130,
+//       minWidth: 10,
+//       flex: 1,
+//     },
+//   ];
+
+//   const rows = [
+//     robotsNames.map((value) => {
+//       console.log(value);
+//       return {
+//         internalId: value[1],
+//         avatar: value[0],
+//         name: value[1],
+//       };
+//     }),
+//   ];
+
 //   useEffect(() => {
 //     callGetRobotsNames();
 //   }, []);
@@ -142,13 +147,16 @@ export default RobotsLibrary;
 //   robotsNames.map((robot) => (robot.id = 1));
 //   return (
 //     <div style={{height: 400, width: "100%"}}>
+//       {console.log(robotsNames)}
 //       <DataGrid
-//         rows={robotsNames}
+//         rows={rows}
+//         // getRowId={(row) => row.internalId}
 //         columns={columns}
 //         pageSize={5}
 //         rowsPerPageOptions={[5]}
 //         checkboxSelection
 //       />
+//       {console.log(rows)}
 //     </div>
 //   );
 // };

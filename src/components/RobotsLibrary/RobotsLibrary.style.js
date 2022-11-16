@@ -237,8 +237,11 @@ export const Column = styled.td`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: ${(props) => (props.name ? `start` : `center`)};
   align-items: center;
+  overflow: hidden;
+  /* min-width: auto;
+  max-width: auto; */
 `;
 
 export const Tbody = styled.tbody`
