@@ -131,7 +131,7 @@ const MatchView = ({match, match_id}) => {
                   * Choose a robot *
                 </option>
               </StyledSelect>
-              {errors.joining_robot?.type === "required" && (
+              {errors.creator_robot?.type === "required" && (
                 <StyledError role='alertError'>Robot is required.</StyledError>
               )}
               <StyledInputGroup>

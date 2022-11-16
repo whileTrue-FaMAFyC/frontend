@@ -3,10 +3,6 @@ import {Robot} from "@styled-icons/remix-fill";
 import {Stars} from "@styled-icons/bootstrap";
 
 export const StyledBoard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(100, auto);
-  grid-template-rows: repeat(100, auto);
-  justify-content: center;
   position: relative;
   align-items: flex-start;
   display: center;
@@ -84,9 +80,4 @@ export const Missiles = styled.div`
   /* border-radius: inherit; */
   transition: ${(props) =>
     props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;
-`;
-
-export const StyledLabel = styled.label`
-  font-size: 12px;
-  color: black;
 `;
