@@ -12,6 +12,7 @@ import {
 } from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import {useNavigate} from "react-router-dom";
 
 const Botsubmit = () => {
   const {
@@ -29,6 +30,8 @@ const Botsubmit = () => {
   const [imgAvatar, setImgAvatar] = useState(null); //image to show on form
 
   const [loading, setLoading] = useState(false); //processing post to server state
+
+  const navigate = useNavigate();
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -61,7 +64,7 @@ const Botsubmit = () => {
   };
 
   const onChangePicture = (e) => {
-    if (e.target.files[0]) {
+    if (e?.target.files[0]) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgAvatar(reader.result);
@@ -92,6 +95,7 @@ const Botsubmit = () => {
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
+          navigate("/library");
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
@@ -156,7 +160,7 @@ const Botsubmit = () => {
                 validate: (e) => {
                   return (
                     e.length !== 0 &&
-                    new RegExp("python").test(e[0].type) &&
+                    new RegExp(".*.py$").test(e[0].name) &&
                     e[0].size < 40000
                   );
                 },
@@ -196,25 +200,33 @@ const Botsubmit = () => {
                   onUploadFileChange(file, setFile_av, (e) => {
                     return e;
                   });
-                  onChangePicture(file);
+                  if (file?.target.files[0] !== undefined) {
+                    onChangePicture(file);
+                  } else {
+                    setImgAvatar(null);
+                  }
                 },
                 validate: (e) => {
                   return (
                     e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
+                    (new RegExp(".*.(jpe?g|png)$").test(e[0].name) &&
+                      e[0].size < 40000)
                   );
                 },
               })}
             />
             {errors.avatar?.type === "validate" ? (
               <StyledError role='invalid_avatar'>
-                Insert image under 40 KB
+                The file must be an image of extension .png, .jpg or .jpeg from
+                at most 40KB.
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
           {!loading ? (
-            <StyledButton type='submit'>Submit</StyledButton>
+            <StyledButton type='submit' data-testid='submit'>
+              Submit
+            </StyledButton>
           ) : (
             <Div>
               <CircularProgress data-testid='loader' />

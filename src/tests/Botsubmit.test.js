@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import Botsubmit from "../components/Botsubmit/Botsubmit";
 import {server} from "../__mocks__/server";
 import {rest} from "msw";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 const jsdomAlert = window.alert; // remember the jsdom alert
 window.alert = (e) => {
@@ -11,9 +12,11 @@ window.alert = (e) => {
 
 describe("Botsubmit test", () => {
   test("Form completo", async () => {
-    const submitFormSpy = jest.fn();
-
-    render(<Botsubmit onSubmit={submitFormSpy} />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -26,7 +29,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -39,11 +42,14 @@ describe("Botsubmit test", () => {
     expect(screen.queryByRole("invalid_name")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_code")).not.toBeInTheDocument;
     expect(screen.queryByRole("invalid_avatar")).not.toBeInTheDocument;
-    expect(submitFormSpy).toHaveBeenCalledTimes(0);
   });
 
   test("form sin avatar", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputCodigo = screen.getByLabelText(/Code/i);
@@ -53,7 +59,7 @@ describe("Botsubmit test", () => {
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button", {name: /Submit/i});
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -65,9 +71,13 @@ describe("Botsubmit test", () => {
   });
 
   test("Alerts campos obligatorios", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
-    const button = screen.getByRole("button", {name: /Submit/i});
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -81,7 +91,11 @@ describe("Botsubmit test", () => {
   });
 
   test("name invalido", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -94,7 +108,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -105,20 +119,24 @@ describe("Botsubmit test", () => {
   });
 
   test("Codigo invalido", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
     const inputCodigo = screen.getByLabelText(/Code/i);
 
     var av = new File(["avatar"], "avatar.png", {type: "image/png"});
-    var cod = new File(["codigooo"], "codigo.py", {type: "text/plain"});
+    var cod = new File(["codigooo"], "codigo.pdf", {type: "text/plain"});
 
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -129,20 +147,24 @@ describe("Botsubmit test", () => {
   });
 
   test("Avatar invalido", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
     const inputCodigo = screen.getByLabelText(/Code/i);
 
-    var av = new File(["avatar"], "avatar.png", {type: "application/pdf"});
+    var av = new File(["avatar"], "avatar.pdf", {type: "application/pdf"});
     var cod = new File(["codigooo"], "codigo.py", {type: "text/x-python"});
 
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -153,7 +175,11 @@ describe("Botsubmit test", () => {
   });
 
   test("Falta codigo", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -164,7 +190,7 @@ describe("Botsubmit test", () => {
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputAvatar, av);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -175,7 +201,11 @@ describe("Botsubmit test", () => {
   });
 
   test("Falta name", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -187,7 +217,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -198,7 +228,11 @@ describe("Botsubmit test", () => {
   });
 
   test("name muy largo", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -214,7 +248,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -226,7 +260,11 @@ describe("Botsubmit test", () => {
   });
 
   test("Avatar muy largo", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputAvatar = screen.getByLabelText(/Avatar/i);
@@ -241,7 +279,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -252,7 +290,11 @@ describe("Botsubmit test", () => {
   });
 
   test("Codigo muy largo", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     const inputName = screen.getByLabelText(/Name/i);
     const inputCodigo = screen.getByLabelText(/Code/i);
@@ -264,7 +306,7 @@ describe("Botsubmit test", () => {
     userEvent.type(inputName, "Marcelo");
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
 
@@ -276,7 +318,11 @@ describe("Botsubmit test", () => {
   });
 
   test("Servidor caido", async () => {
-    render(<Botsubmit />);
+    render(
+      <Router>
+        <Botsubmit />
+      </Router>
+    );
 
     server.use(
       rest.post(
@@ -300,7 +346,7 @@ describe("Botsubmit test", () => {
     userEvent.upload(inputAvatar, av);
     userEvent.upload(inputCodigo, cod);
 
-    const button = screen.getByRole("button");
+    const button = screen.getByTestId("submit");
 
     userEvent.click(button);
     expect(await screen.findByRole("alert")).toHaveTextContent(
