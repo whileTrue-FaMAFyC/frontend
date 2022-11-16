@@ -19,7 +19,6 @@ import {
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
-  const [query, setQuery] = useState("");
 
   const callGetRobotsNames = async () => {
     try {
@@ -55,15 +54,6 @@ const RobotsLibrary = () => {
           }}
           onChange={(e) => setQuery(e.target.value.toLowerCase())}
         />
-        {/* <TextField
-          fullWidth
-          label='Search'
-          id='fullWidth'
-          placeholder='Find your robot...'
-          size='small'
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-          sx={{backgroundColor: "#00c8c8"}}
-        /> */}
         <Table>
           <Thead>
             <Row>

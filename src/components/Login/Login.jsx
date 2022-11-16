@@ -46,8 +46,8 @@ const Login = () => {
           setFailure_data(data.detail);
           setSuccess(false);
         } else if (response.status === 200) {
-          if (data.Authorization) {
-            localStorage.setItem("user", data.Authorization);
+          if (data.authorization) {
+            localStorage.setItem("user", data.authorization);
             setSuccess(true);
             navigate("/home");
           } else {
@@ -142,6 +142,12 @@ const Login = () => {
           <p data-testid='notAMemb'>Not a member?</p>
           <Link to='/register' data-testid='linkToReg'>
             Register
+          </Link>
+        </span>
+        <span>
+          <p data-testid='notAMemb'>Forgot your password?</p>
+          <Link to='/restore' data-testid='linkToReg'>
+            Restore it
           </Link>
         </span>
       </StyledEntryCard>

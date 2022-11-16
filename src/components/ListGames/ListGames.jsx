@@ -4,9 +4,9 @@ import ListGamesView from "./ListGamesView";
 
 const ListGames = () => {
   const [games, setGames] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(true);
 
-  const handleRefresh = () => setRefresh(!refresh);
+  const handleRefresh = () => setRefresh(true);
 
   const callGetGames = async () => {
     try {
@@ -16,6 +16,8 @@ const ListGames = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setRefresh(false);
     }
   };
 
@@ -23,6 +25,8 @@ const ListGames = () => {
     callGetGames();
   }, [refresh]);
 
-  return <ListGamesView games={games} refresh={handleRefresh} />;
+  return (
+    <ListGamesView games={games} refresh={handleRefresh} loading={refresh} />
+  );
 };
 export default ListGames;
