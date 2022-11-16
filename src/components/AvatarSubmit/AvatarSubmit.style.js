@@ -26,7 +26,7 @@ export const StyledEntryCard = styled.div`
   border-radius: 5px;
   padding: 50px;
   margin-bottom: 40px;
-  background-color: #ffffff;
+  background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   h2 {
@@ -82,7 +82,7 @@ export const EntryPage = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
   padding: 20px;
 `;
 
