@@ -19,13 +19,14 @@ import {
 
 const RobotsLibrary = () => {
   const [robotsNames, setRobotsNames] = useState([]);
-  const [filterRobotsNames, setFilterRobotsNames] = useState([]);
   const [query, setQuery] = useState("");
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
-      setRobotsNames(response.data);
+      if (response.data.length) {
+        setRobotsNames(response.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +91,7 @@ const RobotsLibrary = () => {
                   <Column>
                     <Avatar spacing={2} src={avatar} />
                   </Column>
-                  <Column name={true}>{name}</Column>
+                  <Column name={1}>{name}</Column>
                   <Column>{stats.matches_played}</Column>
                   <Column>{stats.matches_won}</Column>
                   <Column>{stats.matches_tied}</Column>
