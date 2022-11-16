@@ -12,7 +12,7 @@ import {
   Button,
 } from "./ListGames.styled";
 
-const ListGamesView = ({games, refresh, loading}) => {
+const ListGamesView = ({games, refresh, loading, register, handleSubmit}) => {
   const navigate = useNavigate();
 
   return (
@@ -21,30 +21,32 @@ const ListGamesView = ({games, refresh, loading}) => {
       <Table>
         <label>filters</label>
         <Row>
-          <Column>
+          <form onSubmit={handleSubmit(refresh)}>
             <label>Is mine: </label>
-            <select>
-              <option value='2'>-</option>
-              <option value='3'>True</option>
-              <option value='4'>False</option>
+            <select
+              data-testid='is_mine'
+              {...register("is_mine", {required: true})}>
+              <option value='None'>-</option>
+              <option value='True'>True</option>
+              <option value='False'>False</option>
             </select>
-          </Column>
-          <Column>
             <label>I'm in: </label>
-            <select>
-              <option value='2'>-</option>
-              <option value='3'>True</option>
-              <option value='4'>False</option>
+            <select
+              data-testid='im_in'
+              {...register("im_in", {required: true})}>
+              <option value='None'>-</option>
+              <option value='True'>True</option>
+              <option value='False'>False</option>
             </select>
-          </Column>
-          <Column>
             <label>Started: </label>
-            <select>
-              <option value='2'>-</option>
-              <option value='3'>True</option>
-              <option value='4'>False</option>
+            <select
+              data-testid='started'
+              {...register("started", {required: true})}>
+              <option value='None'>-</option>
+              <option value='True'>True</option>
+              <option value='False'>False</option>
             </select>
-          </Column>
+          </form>
         </Row>
       </Table>
       <Table>

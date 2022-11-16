@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
 import {getGames} from "../../services";
 import ListGamesView from "./ListGamesView";
+import {useForm} from "react-hook-form";
 
 const ListGames = () => {
+  const {register, handleSubmit} = useForm();
   const [games, setGames] = useState([]);
   const [refresh, setRefresh] = useState(true);
 
@@ -26,7 +28,13 @@ const ListGames = () => {
   }, [refresh]);
 
   return (
-    <ListGamesView games={games} refresh={handleRefresh} loading={refresh} />
+    <ListGamesView
+      games={games}
+      register={register}
+      handleSubmit={handleSubmit}
+      refresh={handleRefresh}
+      loading={refresh}
+    />
   );
 };
 export default ListGames;
