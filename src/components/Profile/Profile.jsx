@@ -172,6 +172,7 @@ const Profile = () => {
               src={newAvatar}
             />
             <input
+              data-testid='avatarImage'
               type='file'
               hidden
               accept='image/*'
@@ -185,10 +186,13 @@ const Profile = () => {
           </Button>
           {changeAvatarOn && (
             <a>
-              <StyledButton onClick={() => changeAvatar(newAvatar)}>
+              <StyledButton
+                role='apply'
+                onClick={() => changeAvatar(newAvatar)}>
                 Apply
               </StyledButton>
               <StyledButton
+                role='undo'
                 style={{backgroundColor: "red"}}
                 onClick={() => {
                   setNewAvatar(prevAvatar);
@@ -198,22 +202,15 @@ const Profile = () => {
               </StyledButton>
             </a>
           )}
-          {/* </form> */}
-          {/* {userInfo.map({username, email}) => ( */}
-          <div>{userInfo.username}</div>
-          <div>{userInfo.email}</div>
-          {/* {userInfo.map(({avatar, name}) => (
-            <div>
-              <div></div>
-              <div>{name}</div>
-            </div>
-          ))} */}
+          <div data-testid='username'>{userInfo.username}</div>
+          <div data-testid='email'>{userInfo.email}</div>
         </div>
         {changePasswordOn && (
           <div>
             <form onSubmit={handleSubmit(changePassword)}>
               <StyledInputGroup>
                 <StyledInput
+                  data-testid='currentPassword'
                   type='password'
                   placeholder='Current password'
                   {...register("current_password", {
@@ -240,6 +237,7 @@ const Profile = () => {
               </StyledInputGroup>
               <StyledInputGroup>
                 <StyledInput
+                  data-testid='newPassword'
                   type='password'
                   placeholder='New password'
                   {...register("new_password", {
@@ -277,6 +275,7 @@ const Profile = () => {
               </StyledInputGroup>
               <StyledInputGroup>
                 <StyledInput
+                  data-testid='newPasswordConfirmation'
                   type='password'
                   placeholder='Confirm new password'
                   {...register("new_password_confirmation", {
@@ -312,15 +311,21 @@ const Profile = () => {
                   </StyledError>
                 )}
               </StyledInputGroup>
-              <StyledButton type='submit'>Submit</StyledButton>
-              <StyledButton onClick={() => setChangePasswordOn(false)}>
+              <StyledButton role='submit' type='submit'>
+                Submit
+              </StyledButton>
+              <StyledButton
+                role='cancel'
+                onClick={() => setChangePasswordOn(false)}>
                 Cancel
               </StyledButton>
             </form>
           </div>
         )}
         {!changePasswordOn && (
-          <StyledButton onClick={() => setChangePasswordOn(true)}>
+          <StyledButton
+            role='changePassword'
+            onClick={() => setChangePasswordOn(true)}>
             Change password
           </StyledButton>
         )}
