@@ -4,8 +4,13 @@ import userEvent from "@testing-library/user-event";
 import {Profile} from "../components";
 import {userInfo} from "../__mocks__/userInfo";
 import {BrowserRouter as Router, Link} from "react-router-dom";
+import {server} from "../__mocks__/server.js";
+import {rest} from "msw";
 
 describe("Profile tests", () => {
+  beforeEach(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
   //   beforeEach(async () => {
   //     mockAxios.get.mockResolvedValue({data: robotsMock});
   //     render(<FormPartidaConfig />);
@@ -30,6 +35,8 @@ describe("Profile tests", () => {
   let changePasswordButton;
 
   beforeEach(() => {
+    mockAxios.get.mockResolvedValue({data: []});
+
     render(
       <div>
         <Router>
@@ -49,6 +56,16 @@ describe("Profile tests", () => {
     // undoButton = screen.getByRole("undo");
     // submitButton = screen.getByRole("submit");
     changePasswordButton = screen.getByRole("changePassword");
+    expect(mockAxios.get).toHaveBeenCalledWith(
+      `${process.env.REACT_APP_API_KEY}user-profile`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("user"),
+        },
+      }
+    );
+
+    expect(mockAxios.get).toHaveBeenCalledTimes(1);
   });
 
   test("Los elementos de la pantalla inicial están renderizados", async () => {
@@ -123,6 +140,14 @@ describe("Profile tests", () => {
   });
 
   it("Cambiar contraseña con exito", async () => {
+    // server.use(
+    //   rest.patch(
+    //     `${process.env.REACT_APP_API_KEY}change-password`,
+    //     async (req, res, ctx) => {
+    //       return res.once(ctx.status(200), ctx.json({status: 200}));
+    //     }
+    //   )
+    // );
     // userEvent.click(changePasswordButton);
     // inputCurrentPassword = screen.getByTestId("currentPassword");
     // inputNewPassword = screen.getByTestId("newPassword");
@@ -134,8 +159,8 @@ describe("Profile tests", () => {
     // userEvent.type(inputNewPassword, "asdasdB1");
     // userEvent.type(inputNewPasswordConfirmation, "asdasdB1");
     // userEvent.click(submitButton);
-    // const alert = await screen.findByRole("alertError");
-    // expect(alert).toHaveTextContent("Passwords do not match");
+    // const alert = await screen.findByRole("alertSuccess");
+    // expect(alert).toHaveTextContent("Password was changed successfully");
   });
 
   it("Contraseña actual con pocos caracteres", async () => {

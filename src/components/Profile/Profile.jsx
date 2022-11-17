@@ -25,9 +25,10 @@ const Profile = () => {
   const [changePasswordOn, setChangePasswordOn] = useState(false);
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState({});
   const [avatarError, setAvatarError] = useState("");
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [userInfoError, setUserInfoError] = useState("");
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -53,7 +54,7 @@ const Profile = () => {
         setUserInfo(response.data);
       }
     } catch (error) {
-      console.log(error);
+      setUserInfoError(error);
     }
   };
 
@@ -83,7 +84,7 @@ const Profile = () => {
         }
       })
       .catch((error) => {
-        alert(error);
+        setAvatarError(error);
       });
   };
 
@@ -112,7 +113,7 @@ const Profile = () => {
         }
       })
       .catch((error) => {
-        alert(error);
+        setPasswordMessage(error);
       });
   };
 
@@ -346,7 +347,7 @@ const Profile = () => {
                 }}>
                 Cancel
               </StyledButton>
-              <StyledError>{passwordMessage}</StyledError>
+              <StyledError role='alertSuccess'>{passwordMessage}</StyledError>
             </form>
           </div>
         )}
