@@ -12,3 +12,4 @@ export {default as AvatarSubmit} from "./AvatarSubmit/AvatarSubmit";
 export {default as RobotsLibrary} from "./RobotsLibrary/RobotsLibrary";
 export {default as MatchStartView} from "./MatchStart/MatchStart";
 export {default as SimCreate} from "./SimCreate/SimCreate";
+export {default as FormJoinMatch} from "./FormJoinMatch/FormJoinMatch";
