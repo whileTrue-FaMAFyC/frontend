@@ -46,6 +46,7 @@ const Match = () => {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
+      console.log("ONMESSAGE:", JSON.parse(e.data));
       dispatch({type: data.action, payload: data.data});
     };
 

@@ -27,35 +27,15 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
       <Results>
         <Title>{match.name}</Title>
         {match.results.length > 0 && (
-          <>
-            <ResultsWrapper>
-              {match.results.length === 1 && <Winner>Winner</Winner>}
-              {match.results.length > 1 && <Winner>Winners</Winner>}
-              {match.results.map((winner, index) => (
-                <p key={index} data-testid='user_winner'>
-                  {winner.username}
-                </p>
-              ))}
-            </ResultsWrapper>
-            <Confetti
-              width='900px'
-              height='700px'
-              style={{position: "absolute"}}
-            />
-          </>
-        )}
-
-        {match.results.length === 0 && match.started && (
-          <CircularProgress
-            style={{
-              position: "absolute",
-              left: "0",
-              top: "0",
-              right: "0",
-              bottom: "0",
-              margin: "auto",
-            }}
-          />
+          <ResultsWrapper>
+            {match.results.length === 1 && <Winner>Winner</Winner>}
+            {match.results.length > 1 && <Winner>Winners</Winner>}
+            {match.results.map((winner, index) => (
+              <p key={index} data-testid='user_winner'>
+                {winner.username}
+              </p>
+            ))}
+          </ResultsWrapper>
         )}
       </Results>
       <Aside>
