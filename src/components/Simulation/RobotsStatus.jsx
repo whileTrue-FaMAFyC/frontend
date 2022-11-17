@@ -4,7 +4,7 @@ import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 const RobotsStatus = ({colors, robots, names, winners}) => {
   return (
     <StyledEntryCard>
-      <h2 data-testid='winners'>Daño</h2>
+      <h2>Remaining life</h2>
       {Object.entries(robots).map(([robotId, r]) => (
         <StatusBar
           key={robotId}
