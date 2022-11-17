@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event";
 import {Profile} from "../components";
 import {userInfo} from "../__mocks__/userInfo";
 import {BrowserRouter as Router, Link} from "react-router-dom";
-import {act} from "react-dom/test-utils";
 
 describe("Profile tests", () => {
   //   beforeEach(async () => {
@@ -120,13 +119,157 @@ describe("Profile tests", () => {
 
   it("Cambiar contraseña", async () => {});
 
-  it("Contraseña actual con pocos caracteres", async () => {});
+  it("Contraseña actual con pocos caracteres", async () => {
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "sdasdA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternCurrent");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
 
-  it("Contraseña actual sin número", async () => {});
+  it("Contraseña actual sin número", async () => {
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "asdasdaA");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternCurrent");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
 
-  it("Contraseña actual sin mayuscula", async () => {});
+  it("Contraseña actual sin mayuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "asdasda1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternCurrent");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
 
-  it("Contraseña actual sin minuscula", async () => {});
+  it("Contraseña actual sin minuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "ASDASDA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternCurrent");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Nueva contraseña con pocos caracteres", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPassword = screen.getByTestId("newPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPassword, "sdasdA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternNew");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Nueva contraseña sin número", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPassword = screen.getByTestId("newPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPassword, "asdasdaA");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternNew");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Nueva contraseña sin mayuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPassword = screen.getByTestId("newPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPassword, "asdasda1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternNew");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Nueva contraseña sin minuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPassword = screen.getByTestId("newPassword");
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPassword, "ASDASDA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternNew");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Confirmación de nueva contraseña con pocos caracteres", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPasswordConfirmation, "sdasdA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternConfirmation");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Confirmación de nueva contraseña sin número", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPasswordConfirmation, "aasdasdA");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternConfirmation");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Confirmación de nueva contraseña sin mayuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPasswordConfirmation, "aasdasd1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternConfirmation");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
+
+  it("Confirmación de nueva contraseña sin minuscula", async () => {
+    userEvent.click(changePasswordButton);
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputNewPasswordConfirmation, "ASDASDA1");
+    userEvent.click(submitButton);
+    const alert = await screen.findByTestId("invalidPatternConfirmation");
+    expect(alert).toHaveTextContent(
+      "The password must contain at least 8 characters, one uppercase, lowercase and number"
+    );
+  });
 
   it("Contraseña actual distinta a la cargada en el sistema", async () => {});
 
@@ -163,12 +306,10 @@ describe("Profile tests", () => {
   });
 
   it("Cancelar cambio de contraseña", async () => {
-    // act(() => userEvent.click(changePasswordButton));
-    // cancelButton = screen.getByRole("cancel");
-    // expect.toBeInTheDocument(cancelButton);
-    // waitFor(() => {
-    //   userEvent.click(cancelButton);
-    //   expect.toBeInTheDocument(screen.getByRole("changePassword"));
-    // });
+    userEvent.click(changePasswordButton);
+    cancelButton = screen.getByRole("cancel");
+    expect.toBeInTheDocument(cancelButton);
+    userEvent.click(cancelButton);
+    expect.toBeInTheDocument(screen.getByRole("changePassword"));
   });
 });

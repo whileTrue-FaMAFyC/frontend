@@ -219,7 +219,9 @@ const Profile = () => {
                   })}
                 />
                 {errors.current_password?.type === "pattern" && (
-                  <StyledError role='alertError'>
+                  <StyledError
+                    role='alertError'
+                    data-testid='invalidPatternCurrent'>
                     The password must contain at least 8 characters, one
                     uppercase, lowercase and number
                   </StyledError>
@@ -252,7 +254,9 @@ const Profile = () => {
                   })}
                 />
                 {errors.new_password?.type === "pattern" && (
-                  <StyledError role='alertError'>
+                  <StyledError
+                    role='alertError'
+                    data-testid='invalidPatternNew'>
                     The password must contain at least 8 characters, one
                     uppercase, lowercase and number
                   </StyledError>
@@ -290,7 +294,9 @@ const Profile = () => {
                   })}
                 />
                 {errors.new_password_confirmation?.type === "pattern" && (
-                  <StyledError role='alertError'>
+                  <StyledError
+                    role='alertError'
+                    data-testid='invalidPatternConfirmation'>
                     The password must contain at least 8 characters, one
                     uppercase, lowercase and number
                   </StyledError>
@@ -316,6 +322,7 @@ const Profile = () => {
               </StyledButton>
               <StyledButton
                 role='cancel'
+                type='button'
                 onClick={() => setChangePasswordOn(false)}>
                 Cancel
               </StyledButton>
