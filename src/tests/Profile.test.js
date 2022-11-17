@@ -115,9 +115,14 @@ describe("Profile tests", () => {
 
   it("Cambiar avatar", async () => {});
 
-  it("Deshacer cambio de avatar", async () => {});
+  it("Deshacer cambio de avatar", async () => {
+    const av = new File(["holis"], "aaavatar.png", {type: "image/png"});
+    userEvent.upload(inputAvatarImage, av);
+    undoButton = screen.getByRole("undo");
+    userEvent.click(undoButton);
+  });
 
-  it("Cambiar contraseña", async () => {});
+  it("Cambiar contraseña con exito", async () => {});
 
   it("Contraseña actual con pocos caracteres", async () => {
     userEvent.click(changePasswordButton);

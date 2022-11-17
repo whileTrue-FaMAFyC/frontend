@@ -26,6 +26,7 @@ const Profile = () => {
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
   const [userInfo, setUserInfo] = useState("");
+  const [avatarError, setAvatarError] = useState("");
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -57,7 +58,6 @@ const Profile = () => {
 
   const changeAvatar = async (avatar) => {
     const data = {avatar: avatar};
-    console.log(data);
     const token = localStorage.getItem("user");
     await fetch(
       `${process.env.REACT_APP_API_KEY}change-avatar`, // Probablemente haya que poner el usuario o algo en la url
@@ -152,7 +152,6 @@ const Profile = () => {
 
   useEffect(() => {
     callGetUserInfo();
-    console.log(userInfo);
   }, []);
 
   return (
@@ -178,9 +177,14 @@ const Profile = () => {
               accept='image/*'
               multiple
               onChange={(newPic) => {
-                onChangePicture(newPic);
-                onUploadFileChange(newPic);
-                setChangeAvatarOn(true);
+                if (newPic.target.files[0].size <= 40000) {
+                  setChangeAvatarOn(true);
+                  onChangePicture(newPic);
+                  onUploadFileChange(newPic);
+                } else {
+                  setChangeAvatarOn(false);
+                  setAvatarError("Insert image under 40 KB");
+                }
               }}
             />
           </Button>
@@ -205,6 +209,9 @@ const Profile = () => {
           <div data-testid='username'>{userInfo.username}</div>
           <div data-testid='email'>{userInfo.email}</div>
         </div>
+        {!changeAvatarOn && (
+          <StyledError style={{fontSize: 15}}>{avatarError}</StyledError>
+        )}
         {changePasswordOn && (
           <div>
             <form onSubmit={handleSubmit(changePassword)}>
