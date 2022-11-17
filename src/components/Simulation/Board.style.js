@@ -79,7 +79,7 @@ export const Missiles = styled.div`
   bottom: ${(props) => (props.exploded ? `${props.y - 8}%` : `${props.y}%`)};
   /* border-radius: inherit; */
   transition: ${(props) =>
-    props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;
+    props.new ? `0.25s ease-in` : `0.25s ease-in`}; //0.5s ease-in;
 `;
 
 export const StyledButton = styled.button`

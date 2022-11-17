@@ -37,7 +37,7 @@ const Simulation = ({props}) => {
       interval.current = setInterval(() => {
         drawFrame(simulation[nframe]);
         setNframe(nframe + 1);
-      }, 500);
+      }, 100);
 
       return () => {
         clearInterval(interval.current);
