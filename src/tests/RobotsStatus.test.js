@@ -10,7 +10,7 @@ test("render robots status bar successfully", async () => {
   render(<StatusBar name='Wallee' completed='60' bgcolor='red' />);
 
   expect.toBeInTheDocument(await screen.findByText("Wallee"));
-  expect.toBeInTheDocument(await screen.findByText("60"));
+  expect.toBeInTheDocument(await screen.findByText("40"));
   expect.toBeInTheDocument(screen.getAllByTestId("name-and-bar"));
   expect.toBeInTheDocument(screen.getAllByTestId("name"));
   expect.toBeInTheDocument(screen.getAllByTestId("bar"));
