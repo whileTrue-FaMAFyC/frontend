@@ -70,7 +70,6 @@ function App() {
             path='/avatarSubmit'
             element={
               <div>
-                <Navbar />
                 <AvatarSubmit />
               </div>
             }
