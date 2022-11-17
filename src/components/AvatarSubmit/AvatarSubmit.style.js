@@ -51,6 +51,8 @@ export const StyledInput = styled.input`
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: #888888;
   transition: box-shadow 0.2s;
   &::placeholder {
