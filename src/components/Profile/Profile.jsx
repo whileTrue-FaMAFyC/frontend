@@ -27,6 +27,7 @@ const Profile = () => {
   const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
   const [userInfo, setUserInfo] = useState({});
   const [avatarError, setAvatarError] = useState("");
+  const [avatarSuccess, setAvatarSuccess] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
   const [userInfoError, setUserInfoError] = useState("");
 
@@ -79,6 +80,8 @@ const Profile = () => {
         if (response.status === 201 || response.status === 200) {
           setChangeAvatarOn(false);
           localStorage.setItem("avatar", newAvatar);
+          setAvatarError("Avatar was changed successfully");
+          setAvatarSuccess(true);
         } else {
           setAvatarError(data.detail);
         }
@@ -198,7 +201,6 @@ const Profile = () => {
                 role='apply'
                 onClick={() => {
                   changeAvatar(newAvatar);
-                  setAvatarError("Avatar was changed successfully");
                 }}>
                 Apply
               </StyledButton>
@@ -220,7 +222,12 @@ const Profile = () => {
           <div data-testid='username'>{userInfo.username}</div>
           <div data-testid='email'>{userInfo.email}</div>
         </div>
-        {!changeAvatarOn && (
+        {!changeAvatarOn && avatarSuccess && (
+          <StyledError style={{fontSize: 15, color: "green"}}>
+            {avatarError}
+          </StyledError>
+        )}
+        {!changeAvatarOn && !avatarSuccess && (
           <StyledError style={{fontSize: 15}}>{avatarError}</StyledError>
         )}
         {changePasswordOn && (
