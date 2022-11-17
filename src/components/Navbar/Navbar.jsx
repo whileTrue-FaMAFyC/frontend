@@ -1,5 +1,6 @@
 import React from "react";
 import {StyledNavbar, NavItemLink, LinkContainer} from "./Navbar.styled";
+import Avatar from "@mui/material/Avatar";
 
 function Navbar() {
   return (
@@ -32,6 +33,11 @@ function Navbar() {
       <LinkContainer>
         <NavItemLink to='/library' data-testid='robotsLibrary'>
           Robots Library
+        </NavItemLink>
+      </LinkContainer>
+      <LinkContainer>
+        <NavItemLink to='/profile' data-testid='profile'>
+          <Avatar spacing={0} src={localStorage.getItem("avatar")} />
         </NavItemLink>
       </LinkContainer>
     </StyledNavbar>

@@ -30,14 +30,13 @@ const MatchConfig = () => {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
     } catch (error) {
-      console.log(error);
+      setFailure_data(error);
     }
   };
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(10 / 2);
     callGetRobotsNames();
   }, []);
 
