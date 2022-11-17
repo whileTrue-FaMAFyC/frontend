@@ -13,10 +13,10 @@ describe("Configuracion de partida test", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  const jsdomAlert = window.alert;
-  window.alert = (e) => {
-    console.log(e);
-  };
+  // const jsdomAlert = window.alert;
+  // window.alert = (e) => {
+  //   console.log(e);
+  // };
 
   // DECLARACION DE VARIABLES
   let inputName;

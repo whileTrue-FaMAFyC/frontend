@@ -41,9 +41,21 @@ export const joinLobby2 = {
     },
   ],
   results: [],
-  started: false,
+  started: true,
   im_in: true,
   is_creator: true,
+};
+
+export const results = {
+  action: "results",
+  data: {
+    winners: [
+      {
+        username: "Jorgito",
+        robot_name: "RobotName",
+      },
+    ],
+  },
 };
 
 export const joinLobby3 = {
@@ -117,18 +129,6 @@ export const leave = {
     user_avatar: "Avatar2",
     robot_avatar: "RobotAvatar2",
     robot_name: "RobotName2",
-  },
-};
-
-export const results = {
-  action: "results",
-  data: {
-    winners: [
-      {
-        username: "israel",
-        robot_name: "RobotName",
-      },
-    ],
   },
 };
 

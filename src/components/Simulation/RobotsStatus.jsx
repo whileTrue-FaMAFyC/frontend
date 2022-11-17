@@ -1,19 +1,10 @@
-import {useEffect, useState} from "react";
 import StatusBar from "../Simulation/StatusBar";
 import {StyledEntryCard} from "../Simulation/StatusBar.styled";
 
-const RobotsStatus = ({colors, robots, names}) => {
+const RobotsStatus = ({colors, robots, names, winners}) => {
   return (
     <StyledEntryCard>
-      <h2>Daño</h2>
-      {/* {health.map((health, idx) => (
-        <StatusBar
-          key={idx}
-          bgcolor={colors[idx]}
-          name={names[idx]}
-          completed={health}
-        />
-      ))} */}
+      <h2>Remaining life</h2>
       {Object.entries(robots).map(([robotId, r]) => (
         <StatusBar
           key={robotId}
@@ -23,6 +14,14 @@ const RobotsStatus = ({colors, robots, names}) => {
           data-testid={`${robotId}`}
         />
       ))}
+      {winners !== null ? (
+        <div data-testid='winners'>
+          <p>The winners are: </p>
+          {winners.map((winner, idx) => (
+            <li key={`${idx}`}>{winner}</li>
+          ))}
+        </div>
+      ) : null}
     </StyledEntryCard>
   );
 };

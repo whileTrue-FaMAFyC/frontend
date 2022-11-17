@@ -51,7 +51,7 @@ export const StyledHarm = styled.div`
 
 export const EntryPage = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
   grid-gap: 20px;
   align-items: center;
   flex-direction: column;
@@ -80,4 +80,50 @@ export const Missiles = styled.div`
   /* border-radius: inherit; */
   transition: ${(props) =>
     props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;
+`;
+
+export const StyledButton = styled.button`
+  width: ${(props) => (props.full ? "100%" : null)};
+  min-width: 64px;
+  border: 0;
+  margin: 50px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  outline: none;
+  background-color: #00c8c8;
+  //color: #252c32;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02857rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background-color: #009595;
+  }
+`;
+
+export const StyledEntryCard = styled.div`
+  align-items: flex-start;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  padding: 50px;
+  margin: auto;
+  background-color: #252c32;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
+`;
+
+export const StyledControlButtons = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  padding: 50px;
+  margin: auto;
+  background-color: #252c32;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
 `;

@@ -10,6 +10,7 @@ const initialState = {
   users_joined: 0,
   user_robot: [],
   results: [],
+  has_password: false,
   started: false,
   im_in: false,
   is_creator: false,
@@ -17,7 +18,6 @@ const initialState = {
 
 const useMatch = () => {
   const [match, dispatch] = useReducer(matchReducer, initialState);
-
   return {match, dispatch};
 };
 export default useMatch;

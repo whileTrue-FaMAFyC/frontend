@@ -8,6 +8,7 @@ import {
   RobotsLibrary,
   SimCreate,
   Navbar,
+  Profile,
 } from "../components";
 import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
 import PasswordRestore from "./PasswordRestore/PasswordRestore";
@@ -89,6 +90,15 @@ function App() {
               <div>
                 <Navbar />
                 <RobotsLibrary />
+              </div>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <div>
+                <Navbar />
+                <Profile />
               </div>
             }
           />
