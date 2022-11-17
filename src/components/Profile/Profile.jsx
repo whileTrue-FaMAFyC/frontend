@@ -206,7 +206,7 @@ const Profile = () => {
                 role='undo'
                 style={{backgroundColor: "red"}}
                 onClick={() => {
-                  setNewAvatar(prevAvatar);
+                  setNewAvatar(localStorage.getItem("avatar"));
                   setChangeAvatarOn(false);
                   setAvatarError("");
                 }}>
