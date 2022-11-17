@@ -11,6 +11,7 @@ import {
   Profile,
 } from "../components";
 import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
+import PasswordRestore from "./PasswordRestore/PasswordRestore";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Home />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/restore' element={<PasswordRestore />} />
           <Route
             path='/listgames'
             element={

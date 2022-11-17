@@ -145,6 +145,12 @@ const Login = () => {
             Register
           </Link>
         </span>
+        <span>
+          <p data-testid='notAMemb'>Forgot your password?</p>
+          <Link to='/restore' data-testid='linkToReg'>
+            Restore it
+          </Link>
+        </span>
       </StyledEntryCard>
     </EntryPage>
   );

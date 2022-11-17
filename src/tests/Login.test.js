@@ -65,7 +65,7 @@ test("allows the user to login successfully with email", async () => {
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
-  expect(token).toEqual(fakeUserResponse.Authorization);
+  expect(token).toEqual(fakeUserResponse.authorization);
 });
 
 test("allows the user to login successfully with username", async () => {
@@ -91,7 +91,7 @@ test("allows the user to login successfully with username", async () => {
   expect(alert).toBeInTheDocument(alert);
 
   let token = localStorage.getItem("user");
-  expect(token).toEqual(fakeUserResponse.Authorization);
+  expect(token).toEqual(fakeUserResponse.authorization);
 });
 
 test("error when username or email empty", async () => {

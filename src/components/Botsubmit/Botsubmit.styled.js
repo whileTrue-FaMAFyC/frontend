@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
@@ -99,5 +100,6 @@ export const Div = styled.div`
   display: flex;
   align-items: center;
   background-color: #252c32;
+  margin: 15px;
   flex-direction: column;
 `;

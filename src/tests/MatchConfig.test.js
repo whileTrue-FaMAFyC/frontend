@@ -6,6 +6,7 @@ import {rest} from "msw";
 import {setupServer} from "msw/node";
 import {robotsMock} from "../__mocks__/robots";
 import mockAxios from "axios";
+import {BrowserRouter as Router} from "react-router-dom";
 
 describe("Configuracion de partida test", () => {
   beforeEach(() => server.listen());
@@ -29,7 +30,11 @@ describe("Configuracion de partida test", () => {
 
   beforeEach(async () => {
     mockAxios.get.mockResolvedValue({data: robotsMock});
-    render(<FormPartidaConfig />);
+    render(
+      <Router>
+        <FormPartidaConfig />
+      </Router>
+    );
 
     await waitFor(() => {
       robotsMock.forEach(({name}) => {
@@ -44,7 +49,7 @@ describe("Configuracion de partida test", () => {
     inputNGames = screen.getByTestId("nGames");
     inputNRounds = screen.getByTestId("nRounds");
     inputNameRobot = screen.getByTestId("nameRobot");
-    button = screen.getByRole("button");
+    button = screen.getByTestId("submit");
   });
 
   test("0. Render components successfully", async () => {
@@ -55,7 +60,7 @@ describe("Configuracion de partida test", () => {
     expect.toBeInTheDocument(screen.getByTestId("nGames"));
     expect.toBeInTheDocument(screen.getByTestId("nRounds"));
     expect.toBeInTheDocument(screen.getByTestId("nameRobot"));
-    expect.toBeInTheDocument(screen.getByRole("button"));
+    expect.toBeInTheDocument(screen.getByTestId("submit"));
 
     expect(alert);
   });
