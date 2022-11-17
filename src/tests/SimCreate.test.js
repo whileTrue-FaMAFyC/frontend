@@ -6,7 +6,7 @@ import {rest} from "msw";
 import {robotsMock} from "../__mocks__/robots";
 import mockAxios from "axios";
 
-describe("Configuracion de simulacion test", () => {
+describe("Sim Creation test", () => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
