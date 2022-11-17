@@ -122,7 +122,21 @@ describe("Profile tests", () => {
     userEvent.click(undoButton);
   });
 
-  it("Cambiar contraseña con exito", async () => {});
+  it("Cambiar contraseña con exito", async () => {
+    // userEvent.click(changePasswordButton);
+    // inputCurrentPassword = screen.getByTestId("currentPassword");
+    // inputNewPassword = screen.getByTestId("newPassword");
+    // inputNewPasswordConfirmation = screen.getByTestId(
+    //   "newPasswordConfirmation"
+    // );
+    // submitButton = screen.getByRole("submit");
+    // userEvent.type(inputCurrentPassword, "asdasdA1");
+    // userEvent.type(inputNewPassword, "asdasdB1");
+    // userEvent.type(inputNewPasswordConfirmation, "asdasdB1");
+    // userEvent.click(submitButton);
+    // const alert = await screen.findByRole("alertError");
+    // expect(alert).toHaveTextContent("Passwords do not match");
+  });
 
   it("Contraseña actual con pocos caracteres", async () => {
     userEvent.click(changePasswordButton);

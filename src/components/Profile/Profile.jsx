@@ -27,6 +27,7 @@ const Profile = () => {
   const [prevAvatar, setPrevAvatar] = useState(localStorage.getItem("avatar"));
   const [userInfo, setUserInfo] = useState("");
   const [avatarError, setAvatarError] = useState("");
+  const [passwordMessage, setPasswordMessage] = useState("");
 
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -78,7 +79,7 @@ const Profile = () => {
           setChangeAvatarOn(false);
           localStorage.setItem("avatar", newAvatar);
         } else {
-          alert(data.detail);
+          setAvatarError(data.detail);
         }
       })
       .catch((error) => {
@@ -91,7 +92,7 @@ const Profile = () => {
     await fetch(
       `${process.env.REACT_APP_API_KEY}change-password`, // Probablemente haya que poner el usuario o algo en la url
       {
-        method: "POST",
+        method: "PATCH",
         headers: {
           authorization: `${token}`,
           "Content-type": "application/json",
@@ -105,8 +106,9 @@ const Profile = () => {
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setChangePasswordOn(false);
+          setPasswordMessage("Password was changed successfully");
         } else {
-          alert(data.detail);
+          setPasswordMessage(data.detail);
         }
       })
       .catch((error) => {
@@ -181,6 +183,7 @@ const Profile = () => {
                   setChangeAvatarOn(true);
                   onChangePicture(newPic);
                   onUploadFileChange(newPic);
+                  setAvatarError("");
                 } else {
                   setChangeAvatarOn(false);
                   setAvatarError("Insert image under 40 KB");
@@ -192,7 +195,10 @@ const Profile = () => {
             <a>
               <StyledButton
                 role='apply'
-                onClick={() => changeAvatar(newAvatar)}>
+                onClick={() => {
+                  changeAvatar(newAvatar);
+                  setAvatarError("Avatar was changed successfully");
+                }}>
                 Apply
               </StyledButton>
               <StyledButton
@@ -201,9 +207,13 @@ const Profile = () => {
                 onClick={() => {
                   setNewAvatar(prevAvatar);
                   setChangeAvatarOn(false);
+                  setAvatarError("");
                 }}>
                 Undo
               </StyledButton>
+              <StyledError style={{marginLeft: `50%`}}>
+                {avatarError}
+              </StyledError>
             </a>
           )}
           <div data-testid='username'>{userInfo.username}</div>
@@ -330,18 +340,30 @@ const Profile = () => {
               <StyledButton
                 role='cancel'
                 type='button'
-                onClick={() => setChangePasswordOn(false)}>
+                onClick={() => {
+                  setChangePasswordOn(false);
+                  setPasswordMessage("");
+                }}>
                 Cancel
               </StyledButton>
+              <StyledError>{passwordMessage}</StyledError>
             </form>
           </div>
         )}
         {!changePasswordOn && (
-          <StyledButton
-            role='changePassword'
-            onClick={() => setChangePasswordOn(true)}>
-            Change password
-          </StyledButton>
+          <div>
+            <StyledButton
+              role='changePassword'
+              onClick={() => {
+                setChangePasswordOn(true);
+                setPasswordMessage("");
+              }}>
+              Change password
+            </StyledButton>
+            <StyledError style={{color: "green"}}>
+              {passwordMessage}
+            </StyledError>
+          </div>
         )}
       </StyledEntryCard>
     </EntryPage>
