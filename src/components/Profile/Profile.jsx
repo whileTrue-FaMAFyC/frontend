@@ -183,13 +183,15 @@ const Profile = () => {
               accept='image/*'
               multiple
               onChange={(newPic) => {
-                if (newPic.target.files[0].size <= 40000) {
+                if (
+                  newPic.target.files[0].size <= 40000 &&
+                  newPic.target.length != 0
+                ) {
                   setChangeAvatarOn(true);
                   onChangePicture(newPic);
                   onUploadFileChange(newPic);
                   setAvatarError("");
                 } else {
-                  setChangeAvatarOn(false);
                   setAvatarError("Insert image under 40 KB");
                 }
               }}
