@@ -14,3 +14,4 @@ export {default as MatchStartView} from "./MatchStart/MatchStart";
 export {default as SimCreate} from "./SimCreate/SimCreate";
 export {default as Profile} from "./Profile/Profile";
 export {default as FormJoinMatch} from "./FormJoinMatch/FormJoinMatch";
+export {default as MatchStart} from "./MatchStart/MatchStart";

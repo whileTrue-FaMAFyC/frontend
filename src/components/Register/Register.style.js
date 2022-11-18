@@ -8,7 +8,6 @@ export const StyledButton = styled.button`
   padding: 8px 16px;
   outline: none;
   background-color: #00c8c8;
-  //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -111,4 +110,12 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialised;
         -moz-osx-font-smoothing: grayscale;
     }
+`;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #252c32;
+  margin: 15px;
+  flex-direction: column;
 `;

@@ -21,3 +21,17 @@ export const StyledButton = styled.button`
     background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
 `;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  margin: 15px;
+  flex-direction: column;
+`;
+
+export const StyledError = styled.p`
+  font-size: 12px;
+  padding: 5px;
+  color: red;
+`;

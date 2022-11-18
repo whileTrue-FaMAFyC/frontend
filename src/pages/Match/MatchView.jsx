@@ -1,6 +1,5 @@
-import {MatchStartView, FormJoinMatch} from "../../components";
+import {MatchStart, FormJoinMatch} from "../../components";
 import Player from "../../components/Player/Player";
-import {CircularProgress} from "@mui/material";
 import MatchLoader from "./components/MatchLoader";
 import {
   Container,
@@ -80,7 +79,7 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
         )}
 
         {match.is_creator && !match.started && (
-          <MatchStartView
+          <MatchStart
             isCreator={match.is_creator}
             isReadyToStart={
               match.is_creator && match.min_players <= match.users_joined
