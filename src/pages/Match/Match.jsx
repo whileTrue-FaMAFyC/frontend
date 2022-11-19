@@ -5,6 +5,7 @@ import {getMatchInfo, leaveMatch} from "../../services";
 import MatchView from "./MatchView";
 
 const Match = () => {
+  const [wait, setWait] = useState(null);
   const [loading, setLoading] = useState(true);
   const ws = useRef(null);
   const {match, dispatch} = useMatch();
@@ -20,6 +21,9 @@ const Match = () => {
       try {
         const user = localStorage.getItem("user");
         const response = await getMatchInfo(user, match_id);
+        if (response.data.results.length === 0) {
+          setWait(true);
+        }
         dispatch({type: "initial_info", payload: response.data});
       } catch (error) {
         console.log(error);
@@ -32,6 +36,7 @@ const Match = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!wait) return;
     ws.current = new WebSocket(
       `${
         process.env.REACT_APP_WEB_SOCKET
@@ -46,7 +51,6 @@ const Match = () => {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log("ONMESSAGE:", JSON.parse(e.data));
       dispatch({type: data.action, payload: data.data});
     };
 
@@ -57,7 +61,7 @@ const Match = () => {
     return () => {
       ws.current.close(1000, "Unmount");
     };
-  }, [dispatch]);
+  }, [dispatch, wait]);
 
   return (
     <MatchView

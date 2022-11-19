@@ -15,7 +15,6 @@ import {
   ResultsWrapper,
   Button,
 } from "./Match.styled";
-import Confetti from "react-confetti";
 
 const MatchView = ({match, match_id, handleLeave, loading}) => {
   if (loading) {
@@ -36,6 +35,9 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
               </p>
             ))}
           </ResultsWrapper>
+        )}
+        {match.started && !match.results.length && (
+          <CircularProgress style={{margin: "auto"}} />
         )}
       </Results>
       <Aside>

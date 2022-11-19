@@ -46,15 +46,15 @@ export const Tbody = styled.tbody`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  border: 1px;
   padding: 0 5px;
+  background-color: #252c32;
 
   &::-webkit-scrollbar {
     appearance: none;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #252c32;
+    background-color: #000;
     border-radius: 10px;
   }
 
@@ -72,8 +72,8 @@ export const Row = styled.tr`
   width: 100%;
   min-height: 60px;
   display: flex;
-  border-bottom: 1px solid #252c32;
-  background-color: #0f1519;
+  border-bottom: 1px solid #0f1519;
+  //background-color: #0f1519;
   color: #fff;
   &:hover {
     background-color: #ff4655;
