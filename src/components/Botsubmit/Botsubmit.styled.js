@@ -36,6 +36,7 @@ export const StyledEntryCard = styled.div`
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
+  /* margin-right: 30%; */
   h2 {
     font-weight: 500;
     margin-bottom: 50px;
@@ -97,7 +98,6 @@ export const StyledInputGroup = styled.div`
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 70px);
   background-color: #0f1519;
@@ -109,4 +109,23 @@ export const Div = styled.div`
   background-color: #252c32;
   margin: 15px;
   flex-direction: column;
+`;
+
+export const StyledExtraCard = styled.div`
+  width: 100%;
+  max-width: 450px;
+  border-radius: 5px;
+  /* padding: 50px; */
+  margin-bottom: 20px;
+  background-color: #252c39;
+  opacity: 0.8;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
+  /* margin-right: 30%; */
+  pre {
+    font-size: 14px;
+  }
+  display: flex;
+  margin-left: -3.3%;
+  position: absolute;
+  z-index: 10;
 `;

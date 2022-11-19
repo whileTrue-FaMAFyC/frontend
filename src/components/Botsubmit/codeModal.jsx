@@ -51,7 +51,8 @@ export default function BasicModal() {
   return (
     <a>
       <Button onClick={handleOpen}>
-        <Info />
+        {/* <Info /> */}
+        Example
       </Button>
       <Modal
         open={open}
