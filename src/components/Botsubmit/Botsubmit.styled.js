@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {InfoCircle} from "@styled-icons/boxicons-solid";
+
+export const Info = styled(InfoCircle)`
+  width: 22px;
+  margin-left: 4px;
+  color: #00c8c8;
+`;
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};

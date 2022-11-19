@@ -9,10 +9,12 @@ import {
   StyledSuccess,
   StyledError,
   Div,
+  Info,
 } from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {useNavigate} from "react-router-dom";
+import BasicModal from "./codeModal";
 
 const Botsubmit = () => {
   const {
@@ -147,6 +149,7 @@ const Botsubmit = () => {
           <StyledInputGroup className='hide-if-value'>
             <label className='form-content' htmlFor='source_code'>
               Code
+              <BasicModal />
             </label>
             <StyledInput
               autoComplete='off'
