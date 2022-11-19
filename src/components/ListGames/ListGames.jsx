@@ -10,7 +10,8 @@ const ListGames = () => {
 
   const handleRefresh = () => setRefresh(true);
 
-  const callGetGames = async () => {
+  const callGetGames = async (data) => {
+    console.log(JSON.stringify(data));
     try {
       const response = await getGames(localStorage.getItem("user"));
       if (response.data.length) {
@@ -32,6 +33,7 @@ const ListGames = () => {
       games={games}
       register={register}
       handleSubmit={handleSubmit}
+      submit={callGetGames}
       refresh={handleRefresh}
       loading={refresh}
     />

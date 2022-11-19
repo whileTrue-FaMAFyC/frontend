@@ -12,43 +12,46 @@ import {
   Button,
 } from "./ListGames.styled";
 
-const ListGamesView = ({games, refresh, loading, register, handleSubmit}) => {
+const ListGamesView = ({
+  games,
+  refresh,
+  loading,
+  register,
+  handleSubmit,
+  submit,
+}) => {
   const navigate = useNavigate();
 
   return (
     <Container>
       <Title>Match list</Title>
-      <Table>
-        <label>filters</label>
-        <Row>
-          <form onSubmit={handleSubmit(refresh)}>
-            <label>Is mine: </label>
-            <select
-              data-testid='is_mine'
-              {...register("is_mine", {required: true})}>
-              <option value='None'>-</option>
-              <option value='True'>True</option>
-              <option value='False'>False</option>
-            </select>
-            <label>I'm in: </label>
-            <select
-              data-testid='im_in'
-              {...register("im_in", {required: true})}>
-              <option value='None'>-</option>
-              <option value='True'>True</option>
-              <option value='False'>False</option>
-            </select>
-            <label>Started: </label>
-            <select
-              data-testid='started'
-              {...register("started", {required: true})}>
-              <option value='None'>-</option>
-              <option value='True'>True</option>
-              <option value='False'>False</option>
-            </select>
-          </form>
-        </Row>
-      </Table>
+      <label>filters</label>
+
+      <form onSubmit={handleSubmit(submit)}>
+        <label>Is mine: </label>
+        <select
+          data-testid='is_mine'
+          {...register("is_mine", {required: true})}>
+          <option value='None'>-</option>
+          <option value='True'>True</option>
+          <option value='False'>False</option>
+        </select>
+        <label>I'm in: </label>
+        <select data-testid='im_in' {...register("im_in", {required: true})}>
+          <option value='None'>-</option>
+          <option value='True'>True</option>
+          <option value='False'>False</option>
+        </select>
+        <label>Started: </label>
+        <select
+          data-testid='started'
+          {...register("started", {required: true})}>
+          <option value='None'>-</option>
+          <option value='True'>True</option>
+          <option value='False'>False</option>
+        </select>
+        <Button role='button'>Apply filters</Button>
+      </form>
       <Table>
         <Thead>
           <Row>
