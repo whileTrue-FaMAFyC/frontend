@@ -43,6 +43,7 @@ const MatchConfig = () => {
 
   const onSubmit = async (data) => {
     setFailure_data("");
+    console.log(JSON.stringify(data));
     const token = await localStorage.getItem("user");
     await fetch(`${process.env.REACT_APP_API_KEY}matches/new-match`, {
       method: "POST",

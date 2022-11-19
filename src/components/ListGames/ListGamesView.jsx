@@ -31,13 +31,15 @@ const ListGamesView = ({
         <label>Is mine: </label>
         <select
           data-testid='is_mine'
-          {...register("is_mine", {required: true})}>
+          {...register("is_owner", {required: true})}>
           <option value='None'>-</option>
           <option value='True'>True</option>
           <option value='False'>False</option>
         </select>
         <label>I'm in: </label>
-        <select data-testid='im_in' {...register("im_in", {required: true})}>
+        <select
+          data-testid='im_in'
+          {...register("is_joined", {required: true})}>
           <option value='None'>-</option>
           <option value='True'>True</option>
           <option value='False'>False</option>
@@ -60,7 +62,7 @@ const ListGamesView = ({
             <Column>Max Players</Column>
             <Column>Robots Joined</Column>
             <Column>
-              <Button onClick={refresh}>Refresh</Button>
+              <Button onClick={submit}>Refresh</Button>
             </Column>
           </Row>
         </Thead>
