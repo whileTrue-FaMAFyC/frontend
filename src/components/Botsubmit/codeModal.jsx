@@ -15,6 +15,8 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  maxHeight: 500,
+  overflow: "scroll",
 };
 
 const head = {
@@ -43,13 +45,38 @@ class RandomRobot(Robot):
         self.cannon(self.rand_shoot_direction, self.rand_shoot_direction)
                   `;
 
+const info = `
+Requirements:
+- The file name must be the same as the class name with the
+  .py extension.
+
+PyRobots methods:
+- initialize(): Executed when the robot is created
+- respond(): Contains the robot's methods and is executed
+  in each round.
+
+Robot methods:
+- is_cannon_ready(): Checks if the cannon is reloaded.
+- cannon(degree,distance): Fires the cannon.
+- point_scanner(direction, resolution_in_degrees):
+Points the scanner at the given position.
+- scanned(): Returns the distance to the nearest robot
+  in the direction scanned last round.
+- drive(direction, velocity): Sets a new direction and
+  velocity for the robot.
+- get_direction()
+- get_velocity()
+- get_position()
+- get_damage()
+`;
+
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <a>
+    <a scroll-y='auto'>
       <Button onClick={handleOpen}>
         {/* <Info /> */}
         Example
@@ -61,6 +88,16 @@ export default function BasicModal() {
         aria-describedby='modal-modal-description'>
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Instruction set
+          </Typography>
+          <Typography id='modal-modal-description' sx={{mt: 1}}>
+            <pre>{info}</pre>
+          </Typography>
+          <Typography
+            id='modal-modal-title'
+            variant='h6'
+            component='h2'
+            sx={{mt: 3}}>
             Robot code example - Random robot
           </Typography>
           <Typography id='modal-modal-description' sx={{mt: 1}}>

@@ -112,20 +112,19 @@ export const Div = styled.div`
 `;
 
 export const StyledExtraCard = styled.div`
-  width: 100%;
+  width: 110%;
+  position: absolute;
   max-width: 450px;
   border-radius: 5px;
-  /* padding: 50px; */
-  margin-bottom: 20px;
-  background-color: #252c39;
-  opacity: 0.8;
+  margin-top: -14%;
+  background-color: #252c32;
+  opacity: 0.7;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   /* margin-right: 30%; */
   pre {
     font-size: 14px;
   }
   display: flex;
-  margin-left: -3.3%;
-  position: absolute;
-  z-index: 10;
+  /* margin-left: 101.8%; */
+  /* z-index: 1; */
 `;

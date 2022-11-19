@@ -162,7 +162,6 @@ const Botsubmit = () => {
               <Info onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
               <BasicModal />
             </label>
-            {isHovering ? <MoreInfoCode /> : null}
 
             <StyledInput
               autoComplete='off'
@@ -256,6 +255,7 @@ const Botsubmit = () => {
           <StyledError role='alert'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
+      {isHovering ? <MoreInfoCode /> : null}
     </EntryPage>
   );
 };
