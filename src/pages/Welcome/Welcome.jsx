@@ -19,16 +19,12 @@ const Welcome = () => {
 
       <StyledEntryCard>
         <h2>PyRobots</h2>
-        {/* <StyledButton type='button'> */}
         <Link to='/login' data-testid='linkToLogin'>
           <StyledButton>Login</StyledButton>
         </Link>
-        {/* </StyledButton> */}
-        {/* <StyledButton type='button'> */}
         <Link to='/register' data-testid='linkToReg'>
           <StyledButton>Register</StyledButton>
         </Link>
-        {/* </StyledButton> */}
       </StyledEntryCard>
     </WelcomeImg>
   );

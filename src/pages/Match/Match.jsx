@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import useMatch from "../../hooks/useMatch";
 import {getMatchInfo, leaveMatch} from "../../services";
 import MatchView from "./MatchView";
+import Layout from "../../components/Layout/Layout";
 
 const Match = () => {
   const [wait, setWait] = useState(null);
@@ -64,12 +65,14 @@ const Match = () => {
   }, [dispatch, wait]);
 
   return (
-    <MatchView
-      match={match}
-      match_id={match_id}
-      handleLeave={handleLeave}
-      loading={loading}
-    />
+    <Layout>
+      <MatchView
+        match={match}
+        match_id={match_id}
+        handleLeave={handleLeave}
+        loading={loading}
+      />
+    </Layout>
   );
 };
 export default Match;

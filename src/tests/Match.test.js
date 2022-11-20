@@ -1,5 +1,6 @@
 import WS from "jest-websocket-mock";
 import {render, cleanup, screen, waitFor} from "@testing-library/react";
+import {BrowserRouter} from "react-router-dom";
 import {
   joinLobby,
   join,
@@ -33,7 +34,11 @@ describe("Match test", () => {
 
   it("El creador de la partida ingresa al lobby", async () => {
     mockAxios.get.mockResolvedValue({data: joinLobby});
-    render(<Match />);
+    render(
+      <BrowserRouter>
+        <Match />
+      </BrowserRouter>
+    );
 
     await waitFor(() => {
       expect(mockAxios.get).toHaveBeenCalledTimes(1);
