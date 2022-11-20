@@ -74,7 +74,7 @@ const MatchView = ({match, match_id, handleLeave, loading}) => {
           )}
         </PlayersInfo>
 
-        {!match.is_creator && !match.im_in && (
+        {!match.is_creator && !match.im_in && !match.started && (
           <FormJoinMatch
             match_id={match_id}
             has_password={match.has_password}
