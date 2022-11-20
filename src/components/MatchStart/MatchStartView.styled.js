@@ -22,14 +22,6 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const Div = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: inherit;
-  margin: 15px;
-  flex-direction: column;
-`;
-
 export const StyledError = styled.p`
   font-size: 12px;
   padding: 5px;
