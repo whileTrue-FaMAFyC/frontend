@@ -7,6 +7,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-h1,h2,h3,h4, p {
-  color: #FFF;
+h1,
+h2,
+h3,
+h4,
+p,
+li {
+  color: #fff;
 }
