@@ -57,4 +57,8 @@ export const Button = styled.button`
   outline: none;
   background-color: #00c8c8;
   cursor: pointer;
+
+  &:hover {
+    background-color: #009595;
+  }
 `;

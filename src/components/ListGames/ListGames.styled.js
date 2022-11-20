@@ -113,7 +113,7 @@ export const Button = styled.button`
   cursor: pointer;
   color: #111;
   &:hover {
-    color: #fff;
+    background-color: #009595;
   }
 
   /*   background: linear-gradient(
