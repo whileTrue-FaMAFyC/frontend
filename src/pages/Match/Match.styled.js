@@ -8,7 +8,6 @@ export const Container = styled.div`
   gap: 40px;
   justify-content: center;
   align-items: center;
-  background-color: #0f1519;
 `;
 
 export const Results = styled.div`

@@ -1,111 +1,31 @@
 import {Route, Routes} from "react-router-dom";
-import {
-  Login,
-  Register,
-  Botsubmit,
-  GameConfig,
-  AvatarSubmit,
-  RobotsLibrary,
-  SimCreate,
-  Navbar,
-  Profile,
-} from "../components";
+import {Login, Register, AvatarSubmit} from "../components";
 import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
+import Library from "../pages/Library/Library";
+import ProfilePage from "../pages/Profile/Profile";
+import BotSubmitPage from "../pages/BotSubmit/BotSubmitPage";
+import CreateSimulation from "../pages/CreateSumulation/CreateSimulation";
+import MatchConfigPage from "../pages/MatchConfig/MatchConfig";
 import PasswordRestore from "./PasswordRestore/PasswordRestore";
 
-function App() {
+const App = () => {
   return (
-    <div className='App'>
-      <div>
-        <Routes>
-          <Route path='/' element={<Welcome />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/restore' element={<PasswordRestore />} />
-          <Route
-            path='/listgames'
-            element={
-              <div>
-                <Navbar />
-                <ListMatches />
-              </div>
-            }
-          />
-          <Route
-            path='/botsubmit'
-            element={
-              <div>
-                <Navbar />
-                <Botsubmit />
-              </div>
-            }
-          />
-          <Route
-            path='/gameconfig'
-            element={
-              <div>
-                <Navbar />
-                <GameConfig />
-              </div>
-            }
-          />
-          <Route
-            path='/verify'
-            element={
-              <div>
-                <Verify />
-              </div>
-            }
-          />
-          <Route
-            path='/simCreate'
-            element={
-              <div>
-                <Navbar />
-                <SimCreate />
-              </div>
-            }
-          />
-          <Route
-            path='/avatarSubmit'
-            element={
-              <div>
-                <AvatarSubmit />
-              </div>
-            }
-          />
-          <Route
-            path='/match/:match_id'
-            element={
-              <div>
-                <Navbar />
-                <Match />
-              </div>
-            }
-          />
-          <Route
-            path='/library'
-            element={
-              <div>
-                <Navbar />
-                <RobotsLibrary />
-              </div>
-            }
-          />
-          <Route
-            path='/profile'
-            element={
-              <div>
-                <Navbar />
-                <Profile />
-              </div>
-            }
-          />
-        </Routes>
-      </div>
-    </div>
+    <Routes>
+      <Route path='/' element={<Welcome />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/home' element={<Home />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/restore' element={<PasswordRestore />} />
+      <Route path='/listgames' element={<ListMatches />} />
+      <Route path='/botsubmit' element={<BotSubmitPage />} />
+      <Route path='/gameconfig' element={<MatchConfigPage />} />
+      <Route path='/verify' element={<Verify />} />
+      <Route path='/simCreate' element={<CreateSimulation />} />
+      <Route path='/avatarSubmit' element={<AvatarSubmit />} />
+      <Route path='/match/:match_id' element={<Match />} />
+      <Route path='/library' element={<Library />} />
+      <Route path='/profile' element={<ProfilePage />} />
+    </Routes>
   );
-}
-
+};
 export default App;
