@@ -1,10 +1,10 @@
-import BotSubmit from "../../components/Botsubmit/Botsubmit";
+import Botsubmit from "../../components/Botsubmit/Botsubmit";
 import Layout from "../../components/Layout/Layout";
 
 const BotSubmitPage = () => {
   return (
     <Layout>
-      <BotSubmit />
+      <Botsubmit />
     </Layout>
   );
 };
