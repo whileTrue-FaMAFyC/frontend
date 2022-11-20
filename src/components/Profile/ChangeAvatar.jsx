@@ -147,7 +147,9 @@ const ChangeAvatar = () => {
         <UserInfo />
       </div>
       {!changeAvatarOn && avatarSuccess && (
-        <StyledError style={{fontSize: 15, color: "green"}}>
+        <StyledError
+          style={{fontSize: 15, color: "green"}}
+          data-testid='alertSuccess'>
           {avatarError}
         </StyledError>
       )}

@@ -15,6 +15,7 @@ const ChangePassword = () => {
     handleSubmit,
     formState: {errors},
     watch,
+    reset,
   } = useForm();
 
   const [changePasswordOn, setChangePasswordOn] = useState(false);
@@ -22,7 +23,6 @@ const ChangePassword = () => {
   const [loading, setLoading] = useState(false);
 
   const changePassword = async (data) => {
-    setPasswordMessage("");
     setLoading(true);
     const token = localStorage.getItem("user");
     await fetch(
@@ -42,6 +42,7 @@ const ChangePassword = () => {
         setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
+          resetFields();
           setChangePasswordOn(false);
           setPasswordMessage("Password was changed successfully");
         } else {
@@ -52,6 +53,14 @@ const ChangePassword = () => {
         setPasswordMessage(error);
         setLoading(false);
       });
+  };
+
+  const resetFields = () => {
+    reset({
+      current_password: "",
+      new_password: "",
+      new_password_confirmation: "",
+    });
   };
 
   return (
@@ -182,12 +191,13 @@ const ChangePassword = () => {
                   onClick={() => {
                     setChangePasswordOn(false);
                     setPasswordMessage("");
+                    resetFields();
                   }}>
                   Cancel
                 </StyledButton>
               </div>
             )}
-            <StyledError role='alertSuccess'>{passwordMessage}</StyledError>
+            <StyledError data-testid='alert'>{passwordMessage}</StyledError>
           </form>
         </div>
       ) : null}
@@ -201,7 +211,9 @@ const ChangePassword = () => {
             }}>
             Change password
           </StyledButton>
-          <StyledError style={{color: "green"}}>{passwordMessage}</StyledError>
+          <StyledError style={{color: "green"}} data-testid='alertSuccess'>
+            {passwordMessage}
+          </StyledError>
         </div>
       )}
     </div>

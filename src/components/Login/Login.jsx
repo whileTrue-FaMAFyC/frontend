@@ -10,6 +10,7 @@ import {
   EntryPage,
   StyledError,
   StyledSuccess,
+  Div,
 } from "./Login.styled";
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     setFailure_data("");
     setSent(true);
-    setLoading(false);
+    setLoading(true);
     await fetch(`${process.env.REACT_APP_API_KEY}login`, {
       method: "POST",
       headers: {
@@ -120,9 +121,9 @@ const Login = () => {
             )}
           </StyledInputGroup>
           {loading ? (
-            <div>
+            <Div>
               <CircularProgress data-testid='loader' />
-            </div>
+            </Div>
           ) : (
             <StyledButton type='login' role='button' data-testid='loginButton'>
               Login
