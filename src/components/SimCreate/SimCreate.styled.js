@@ -4,9 +4,9 @@ export const EntryPage = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 50px;
+  padding-top: 50px;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 120px);
 `;
 
 export const StyledButton = styled.button`

@@ -53,43 +53,48 @@ describe("Match test", () => {
     });
   });
 
-  // it("Un jugador entra al lobby y se une", async () => {
-  //   await server.connect;
-  //   mockAxios.get.mockResolvedValue({
-  //     data: {
-  //       creator_username: "isra",
-  //       has_password: false,
-  //       im_in: false,
-  //       is_creator: false,
-  //       max_players: 2,
-  //       min_players: 2,
-  //       name: "Match pro",
-  //       num_games: 200,
-  //       num_rounds: 10000,
-  //       requester_username: "isra2",
-  //       results: [],
-  //       started: false,
-  //       user_robot: [
-  //         {
-  //           username: "isra",
-  //           user_avatar: "",
-  //           robot_name: "Shooter",
-  //           robot_avatar:
-  //             "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…E\nREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAf//Z",
-  //         },
-  //       ],
-  //       users_joined: 1,
-  //     },
-  //   });
+  it("Un jugador entra al lobby y ve el formulario para unirse", async () => {
+    await server.connect;
+    mockAxios.get.mockResolvedValue({
+      data: {
+        creator_username: "isra",
+        has_password: false,
+        im_in: false,
+        is_creator: false,
+        max_players: 2,
+        min_players: 2,
+        name: "Match pro",
+        num_games: 200,
+        num_rounds: 10000,
+        requester_username: "isra2",
+        results: [],
+        started: false,
+        user_robot: [
+          {
+            username: "isra",
+            user_avatar: "",
+            robot_name: "Shooter",
+            robot_avatar:
+              "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…E\nREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAf//Z",
+          },
+        ],
+        users_joined: 1,
+      },
+    });
 
-  //   render(<Match />);
+    render(
+      <BrowserRouter>
+        <Match />
+      </BrowserRouter>
+    );
 
-  //   await waitFor(() => {
-  //     mockAxios.get.mockResolvedValue({data: robotsMock});
+    await waitFor(() => {
+      mockAxios.get.mockResolvedValue({data: robotsMock});
 
-  //     expect(screen.getByText("Match pro")).toBeInTheDocument();
-  //     expect(screen.getByRole("button", {name: "Join"})).toBeInTheDocument();
-  //   });
+      expect(screen.getByText("Match pro")).toBeInTheDocument();
+      expect(screen.getByRole("button", {name: "Join"})).toBeInTheDocument();
+    });
+  });
 
   //   mockAxios.post.mockResolvedValue({data: {}});
   //   const btn = screen.getByRole("button", {name: "Join"});
