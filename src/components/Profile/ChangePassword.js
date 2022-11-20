@@ -4,21 +4,26 @@ import {
   StyledInput,
   StyledInputGroup,
   StyledError,
+  Div,
 } from "./Profile.style";
+import {useForm} from "react-hook-form";
+import {CircularProgress} from "@mui/material";
 
-const ChangePassword = ({
-  register,
-  handleSubmit,
-  submit,
-  failureData,
-  loading,
-  errors,
-  watch,
-}) => {
+const ChangePassword = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    watch,
+  } = useForm();
+
   const [changePasswordOn, setChangePasswordOn] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const changePassword = async (data) => {
+    setPasswordMessage("");
+    setLoading(true);
     const token = localStorage.getItem("user");
     await fetch(
       `${process.env.REACT_APP_API_KEY}change-password`, // Probablemente haya que poner el usuario o algo en la url
@@ -34,6 +39,7 @@ const ChangePassword = ({
       }
     )
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setChangePasswordOn(false);
@@ -44,6 +50,7 @@ const ChangePassword = ({
       })
       .catch((error) => {
         setPasswordMessage(error);
+        setLoading(false);
       });
   };
 
@@ -159,18 +166,27 @@ const ChangePassword = ({
                 </StyledError>
               )}
             </StyledInputGroup>
-            <StyledButton role='submit' type='submit'>
-              Submit
-            </StyledButton>
-            <StyledButton
-              role='cancel'
-              type='button'
-              onClick={() => {
-                setChangePasswordOn(false);
-                setPasswordMessage("");
-              }}>
-              Cancel
-            </StyledButton>
+            {loading ? (
+              <Div>
+                <CircularProgress size={40} data-testid='loader' />
+              </Div>
+            ) : (
+              <div>
+                <StyledButton role='submit' type='submit'>
+                  Submit
+                </StyledButton>
+
+                <StyledButton
+                  role='cancel'
+                  type='button'
+                  onClick={() => {
+                    setChangePasswordOn(false);
+                    setPasswordMessage("");
+                  }}>
+                  Cancel
+                </StyledButton>
+              </div>
+            )}
             <StyledError role='alertSuccess'>{passwordMessage}</StyledError>
           </form>
         </div>

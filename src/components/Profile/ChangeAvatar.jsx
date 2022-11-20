@@ -14,6 +14,7 @@ const ChangeAvatar = () => {
   const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
   const [avatarError, setAvatarError] = useState("");
   const [avatarSuccess, setAvatarSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [picture, setPicture] = useState(null);
@@ -27,6 +28,7 @@ const ChangeAvatar = () => {
   };
 
   const changeAvatar = async (avatar) => {
+    setAvatarError("");
     const data = {avatar: avatar};
     const token = localStorage.getItem("user");
     await fetch(

@@ -60,7 +60,6 @@ const MatchConfig = () => {
           setFailure_data("");
           navigate("/listgames");
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
