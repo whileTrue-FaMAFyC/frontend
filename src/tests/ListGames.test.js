@@ -16,7 +16,7 @@ describe("Listar partidas", () => {
     );
 
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${process.env.REACT_APP_API_KEY}matches/list-matches`,
+      `${process.env.REACT_APP_API_KEY}matches/list-matches?is_owner=None&is_joined=None&started=None`,
       {
         headers: {
           Authorization: localStorage.getItem("user"),

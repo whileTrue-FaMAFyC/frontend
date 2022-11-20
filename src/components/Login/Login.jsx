@@ -51,7 +51,6 @@ const Login = () => {
             setSuccess(true);
             navigate("/home");
           } else {
-            console.log("Hola");
             setFailure_data("Unknown Error");
             setSuccess(false);
           }
