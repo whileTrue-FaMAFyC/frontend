@@ -1,23 +1,31 @@
 import React from "react";
-import {StyledButton, StyledControlButtons} from "./Board.style";
+import {
+  StyledButton,
+  StyledControlButtons,
+  StyledPlay,
+  StyledStop,
+  StyledFwdStep,
+  StyledBwdStep,
+  StyledReset,
+} from "./SimControl.styled";
 
 const SimControl = ({handlers}) => {
   return (
     <StyledControlButtons>
       <StyledButton onClick={handlers.play} data-testid='play'>
-        Play
+        <StyledPlay />
       </StyledButton>
       <StyledButton onClick={handlers.stop} data-testid='stop'>
-        Stop
+        <StyledStop />
       </StyledButton>
       <StyledButton onClick={handlers.forward} data-testid='forward'>
-        Forward
+        <StyledFwdStep />
       </StyledButton>
       <StyledButton onClick={handlers.backward} data-testid='backward'>
-        Backward
+        <StyledBwdStep />
       </StyledButton>
       <StyledButton onClick={handlers.reset} data-testid='reset'>
-        Reset
+        <StyledReset />
       </StyledButton>
     </StyledControlButtons>
   );

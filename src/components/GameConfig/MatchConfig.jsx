@@ -10,7 +10,6 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-  Div,
 } from "./MatchConfig.styled.js";
 
 const MatchConfig = () => {

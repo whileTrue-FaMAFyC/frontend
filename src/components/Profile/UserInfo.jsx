@@ -40,8 +40,12 @@ const UserInfo = () => {
 
   return (
     <div>
-      <div data-testid='username'>{userInfo.username}</div>
-      <div data-testid='email'>{userInfo.email}</div>
+      <div>
+        <a data-testid='username'>{userInfo.username}</a>
+      </div>
+      <div>
+        <a data-testid='email'>{userInfo.email}</a>
+      </div>
     </div>
   );
 };

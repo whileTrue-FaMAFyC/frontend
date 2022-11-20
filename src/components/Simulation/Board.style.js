@@ -20,7 +20,6 @@ export const StyledBoard = styled.div`
 
 export const StyledRobot = styled.div`
   position: absolute;
-  /* justify-content: flex-start; */
   left: ${(props) => (props.x > 96.66 ? "96.66%" : `${props.x}%`)};
   bottom: ${(props) => (props.y > 96.66 ? "96.66%" : `${props.y}%`)};
   display: ${(props) => (props.hidden ? `hidden` : `flex`)};
@@ -79,7 +78,7 @@ export const Missiles = styled.div`
   bottom: ${(props) => (props.exploded ? `${props.y - 8}%` : `${props.y}%`)};
   /* border-radius: inherit; */
   transition: ${(props) =>
-    props.new ? `null` : `0.25s ease-in`}; //0.5s ease-in;
+    props.new ? `0.25s ease-in` : `0.25s ease-in`}; //0.5s ease-in;
 `;
 
 export const StyledButton = styled.button`
@@ -91,7 +90,6 @@ export const StyledButton = styled.button`
   padding: 8px 16px;
   outline: none;
   background-color: #00c8c8;
-  //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -106,19 +104,6 @@ export const StyledButton = styled.button`
 export const StyledEntryCard = styled.div`
   align-items: flex-start;
   display: inline-block;
-  width: 100%;
-  max-width: 300px;
-  border-radius: 5px;
-  padding: 50px;
-  margin: auto;
-  background-color: #252c32;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
-`;
-
-export const StyledControlButtons = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   width: 100%;
   max-width: 300px;
   border-radius: 5px;

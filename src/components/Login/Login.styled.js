@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
@@ -93,24 +93,6 @@ export const EntryPage = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #0f1519;
-`;
-
-export const GlobalStyle = createGlobalStyle`
-    * {
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        text-decoration: none;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: #333;
-        -webkit-font-smoothing: antialised;
-        -moz-osx-font-smoothing: grayscale;
-    }
 `;
 
 export const Div = styled.div`

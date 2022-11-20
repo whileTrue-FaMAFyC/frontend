@@ -60,4 +60,18 @@ describe("Robot library test", () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(await screen.findByText("No robots availables")).toBeInTheDocument();
   });
+
+  it("Se encuentra el robot filtrado", async () => {
+    mockAxios.get.mockResolvedValue({data: robotsMock});
+    render(
+      <div>
+        <Router>
+          <RobotsLibrary />
+        </Router>
+      </div>
+    );
+    let inputFilter = screen.getByTestId("filter");
+    userEvent.type(inputFilter, "Soyunrobot");
+    expect(await screen.findByText("Soyunrobot")).toBeInTheDocument();
+  });
 });
