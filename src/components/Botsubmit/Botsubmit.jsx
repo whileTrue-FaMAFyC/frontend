@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
-import {BotsubmitView} from "./BotsubmitView";
+import BotsubmitView from "./BotsubmitView";
 
 const Botsubmit = () => {
   const {
@@ -101,6 +101,7 @@ const Botsubmit = () => {
       register={register}
       handleSubmit={handleSubmit}
       submitForm={submitForm}
+      errors={errors}
       onUploadFileChange={onUploadFileChange}
       onChangePicture={onChangePicture}
       success={success}
@@ -111,6 +112,7 @@ const Botsubmit = () => {
       imgAvatar={imgAvatar}
       setFile_cod={setFile_cod}
       setFileName_cod={setFileName_cod}
+      setImgAvatar={setImgAvatar}
       setFile_av={setFile_av}
       loading={loading}
     />

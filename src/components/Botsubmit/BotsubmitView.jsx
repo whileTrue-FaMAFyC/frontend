@@ -14,12 +14,17 @@ import Avatar from "@mui/material/Avatar";
 const BotsubmitView = ({
   register,
   handleSubmit,
+  submitForm,
+  errors,
+  onUploadFileChange,
+  onChangePicture,
   success,
   failure_data,
   imgAvatar,
   setFile_cod,
   setFileName_cod,
   setFile_av,
+  setImgAvatar,
   loading,
 }) => {
   return (
