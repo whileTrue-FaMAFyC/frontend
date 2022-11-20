@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const ContainerStyle = styled.div`
   height: 1px;
   width: 200px;
-  background-color: #e0e0d0;
+  background-color: #afafaf;
   border-radius: 50px;
   margin: 5px;
   display: table;
 `;
 
 export const FillerStyles = styled.div`
-  //height: 100%;
   width: ${(props) => props.width}%;
   background-color: ${(props) => props.bgcolor};
   border-radius: inherit;
@@ -20,7 +19,6 @@ export const FillerStyles = styled.div`
 
 export const LabelStyles = styled.span`
   padding: 3px;
-  color: white;
   font-weight: bold;
   font-size: 10px;
   text-align: right;
