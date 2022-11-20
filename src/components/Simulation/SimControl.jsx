@@ -1,8 +1,12 @@
 import React from "react";
 import {StyledButton, StyledControlButtons} from "./Board.style";
-import {Play, Backward, Forward} from "@styled-icons/fa-solid";
-import {ControllerPaus} from "@styled-icons/entypo";
-import {Reset} from "@styled-icons/boxicons-regular";
+import {
+  Play,
+  BackwardStep,
+  ForwardStep,
+  Pause,
+  Stop,
+} from "@styled-icons/fa-solid";
 
 const SimControl = ({handlers}) => {
   return (
@@ -11,16 +15,16 @@ const SimControl = ({handlers}) => {
         <Play />
       </StyledButton>
       <StyledButton onClick={handlers.stop} data-testid='stop'>
-        <ControllerPaus />
+        <Pause />
       </StyledButton>
       <StyledButton onClick={handlers.forward} data-testid='forward'>
-        <Forward />
+        <ForwardStep />
       </StyledButton>
       <StyledButton onClick={handlers.backward} data-testid='backward'>
-        <Backward />
+        <BackwardStep />
       </StyledButton>
       <StyledButton onClick={handlers.reset} data-testid='reset'>
-        <Reset />
+        <Stop />
       </StyledButton>
     </StyledControlButtons>
   );
