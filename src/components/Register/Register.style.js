@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};

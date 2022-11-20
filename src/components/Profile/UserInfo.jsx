@@ -1,11 +1,5 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-import {
-  StyledButton,
-  StyledInput,
-  StyledInputGroup,
-  StyledError,
-} from "./Profile.style";
 
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -26,7 +20,7 @@ const UserInfo = () => {
   const callGetUserInfo = async () => {
     try {
       const response = await getUserInfo(localStorage.getItem(`user`));
-      if (response.data != "") {
+      if (response.data !== "") {
         setUserInfo(response.data);
       }
     } catch (error) {
@@ -36,7 +30,7 @@ const UserInfo = () => {
 
   useEffect(() => {
     callGetUserInfo();
-  }, []);
+  });
 
   return (
     <div>

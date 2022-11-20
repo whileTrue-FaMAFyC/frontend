@@ -1,20 +1,14 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import UserInfo from "./UserInfo";
-import {
-  StyledButton,
-  StyledInput,
-  StyledInputGroup,
-  StyledError,
-} from "./Profile.style";
+import {StyledButton, StyledError} from "./Profile.style";
 
 const ChangeAvatar = () => {
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
   const [avatarError, setAvatarError] = useState("");
   const [avatarSuccess, setAvatarSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
   const [picture, setPicture] = useState(null);
@@ -110,7 +104,7 @@ const ChangeAvatar = () => {
             onChange={(newPic) => {
               if (
                 newPic.target.files[0].size <= 40000 &&
-                newPic.target.length != 0
+                newPic.target.length !== 0
               ) {
                 setChangeAvatarOn(true);
                 onChangePicture(newPic);
