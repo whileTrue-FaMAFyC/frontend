@@ -10,6 +10,8 @@ import {
   Row,
   Feedback,
   Button,
+  StyledEntryCard,
+  SelectorGroup,
 } from "./ListGames.styled";
 
 const ListGamesView = ({
@@ -23,35 +25,40 @@ const ListGamesView = ({
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <Title>Match list</Title>
-      <label>filters</label>
-
+    <StyledEntryCard>
+      {/* <Container> */}
+      <h2>Match list</h2>
       <form onSubmit={handleSubmit(submit)}>
-        <label>Is mine: </label>
-        <select
-          data-testid='is_mine'
-          {...register("is_owner", {required: true})}>
-          <option value='None'>-</option>
-          <option value='True'>True</option>
-          <option value='False'>False</option>
-        </select>
-        <label>I'm in: </label>
-        <select
-          data-testid='im_in'
-          {...register("is_joined", {required: true})}>
-          <option value='None'>-</option>
-          <option value='True'>True</option>
-          <option value='False'>False</option>
-        </select>
-        <label>Started: </label>
-        <select
-          data-testid='started'
-          {...register("started", {required: true})}>
-          <option value='None'>-</option>
-          <option value='True'>True</option>
-          <option value='False'>False</option>
-        </select>
+        <SelectorGroup>
+          <label>Is mine: </label>
+          <select
+            data-testid='is_mine'
+            {...register("is_owner", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
+        <SelectorGroup>
+          <label> I'm in: </label>
+          <select
+            data-testid='im_in'
+            {...register("is_joined", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
+        <SelectorGroup>
+          <label> Started: </label>
+          <select
+            data-testid='started'
+            {...register("started", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
         <Button role='button'>Apply filters</Button>
       </form>
       <Table>
@@ -61,9 +68,7 @@ const ListGamesView = ({
             <Column>Creator</Column>
             <Column>Max Players</Column>
             <Column>Robots Joined</Column>
-            <Column>
-              <Button onClick={submit}>Refresh</Button>
-            </Column>
+            <Column>{/* <Button onClick={submit}>Refresh</Button> */}</Column>
           </Row>
         </Thead>
         <Tbody>
@@ -99,7 +104,8 @@ const ListGamesView = ({
           )}
         </Tbody>
       </Table>
-    </Container>
+      {/* </Container> */}
+    </StyledEntryCard>
   );
 };
 export default ListGamesView;

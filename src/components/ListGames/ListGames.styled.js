@@ -16,6 +16,9 @@ export const Title = styled.p`
 `;
 
 export const Table = styled.table`
+  border: 1px solid #00c8c8;
+  border-radius: 4px;
+  margin: 5px;
   width: 100%;
   min-width: 700px;
   display: flex;
@@ -104,6 +107,7 @@ export const Ellipsis = styled.p`
 
 export const Button = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
+  margin: 5px;
   min-width: 64px;
   border: 0;
   border-radius: 4px;
@@ -127,4 +131,34 @@ export const Button = styled.button`
     rgba(24, 172, 212, 1) 76%,
     rgba(15, 188, 222, 1) 100%
   ); */
+`;
+
+export const StyledEntryCard = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 5px;
+  padding: 50px;
+  margin-bottom: 40px;
+  background-color: #252c32;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
+  text-align: center;
+  h2 {
+    font-weight: 500;
+    margin-bottom: 50px;
+  }
+  span {
+    display: block;
+    margin-top: 40px;
+    color: #888888;
+    font-size: 14px;
+  }
+  a {
+    margin-left: 4px;
+    color: #fff;
+  }
+`;
+
+export const SelectorGroup = styled.div`
+  margin: 8px;
+  display: inline;
 `;
