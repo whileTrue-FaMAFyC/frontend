@@ -2,9 +2,18 @@ import {useState} from "react";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import UserInfo from "./UserInfo";
+import {useForm} from "react-hook-form";
 import {StyledButton, StyledError} from "./Profile.style";
 
 const ChangeAvatar = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+    watch,
+    reset,
+  } = useForm();
+
   const [changeAvatarOn, setChangeAvatarOn] = useState(false);
   const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
   const [avatarError, setAvatarError] = useState("");
@@ -16,6 +25,12 @@ const ChangeAvatar = () => {
     verticalAlign: "middle",
     position: "relative",
     justifyContent: "center",
+  };
+
+  const resetAvatar = () => {
+    reset({
+      avatar: "",
+    });
   };
 
   const changeAvatar = async (avatar) => {
@@ -42,6 +57,7 @@ const ChangeAvatar = () => {
           localStorage.setItem("avatar", newAvatar);
           setAvatarError("Avatar was changed successfully");
           setAvatarSuccess(true);
+          resetAvatar();
         } else {
           setAvatarError(data.detail);
           setAvatarSuccess(false);
@@ -74,19 +90,21 @@ const ChangeAvatar = () => {
             hidden
             accept='image/*'
             multiple
-            onChange={(newPic) => {
-              if (
-                newPic.target.length !== 0 &&
-                newPic.target.files[0].size <= 40000
-              ) {
-                setChangeAvatarOn(true);
-                onChangePicture(newPic);
-                setAvatarError("");
-              } else {
-                setAvatarSuccess(false);
-                setAvatarError("Insert image under 40 KB");
-              }
-            }}
+            {...register("avatar", {
+              onChange: (newPic) => {
+                if (
+                  newPic.target.length !== 0 &&
+                  newPic.target.files[0].size <= 40000
+                ) {
+                  setChangeAvatarOn(true);
+                  onChangePicture(newPic);
+                  setAvatarError("");
+                } else {
+                  setAvatarSuccess(false);
+                  setAvatarError("Insert image under 40 KB");
+                }
+              },
+            })}
           />
         </Button>
         {changeAvatarOn && (
@@ -105,6 +123,7 @@ const ChangeAvatar = () => {
                 setNewAvatar(localStorage.getItem("avatar"));
                 setChangeAvatarOn(false);
                 setAvatarError("");
+                resetAvatar();
               }}>
               Undo
             </StyledButton>
