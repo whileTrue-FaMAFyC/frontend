@@ -8,7 +8,9 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  Div,
 } from "./SimCreate.styled.js";
+import {CircularProgress} from "@mui/material";
 import Simulation from "../Simulation/Simulation";
 
 const SimCreate = () => {
@@ -23,6 +25,7 @@ const SimCreate = () => {
   const [robotsNames, setRobotsNames] = useState([]);
   const [showRobot3, setShowRobot3] = useState(false);
   const [showRobot4, setShowRobot4] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [simulation, setSimulation] = useState({});
 
   const callGetRobotsNames = async () => {
@@ -39,6 +42,7 @@ const SimCreate = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    setLoading(true);
     setFailure_data("");
     const body = {
       num_rounds: data.num_rounds,
@@ -63,6 +67,7 @@ const SimCreate = () => {
       body: JSON.stringify(body),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSimulation(data);
@@ -74,6 +79,7 @@ const SimCreate = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
         setFailure_data("Network error");
@@ -208,9 +214,16 @@ const SimCreate = () => {
                 )}
               </StyledInputGroup>
 
-              <StyledButton data-testid='button' type='submit'>
-                Create
-              </StyledButton>
+              {!loading ? (
+                <StyledButton type='submit' data-testid='submit'>
+                  Start simulation
+                </StyledButton>
+              ) : (
+                <Div>
+                  <CircularProgress data-testid='loader' />
+                  <p>The simulation is about to start!</p>
+                </Div>
+              )}
             </form>
 
             {failure_data !== "" ? (

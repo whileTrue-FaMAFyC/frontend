@@ -1,6 +1,5 @@
 import {MatchStartView, FormJoinMatch} from "../../components";
 import Player from "../../components/Player/Player";
-import {CircularProgress} from "@mui/material";
 import MatchLoader from "./components/MatchLoader";
 import {
   Container,
@@ -15,6 +14,7 @@ import {
   ResultsWrapper,
   Button,
 } from "./Match.styled";
+import {CircularProgress} from "@mui/material";
 
 const MatchView = ({match, match_id, handleLeave, loading}) => {
   if (loading) {

@@ -21,3 +21,9 @@ export const StyledButton = styled.button`
     background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
 `;
+
+export const StyledError = styled.p`
+  font-size: 12px;
+  padding: 5px;
+  color: red;
+`;

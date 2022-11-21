@@ -9,7 +9,9 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
+  Div,
 } from "./Register.style";
+import {CircularProgress} from "@mui/material";
 
 const RegisterForm = () => {
   const {
@@ -21,10 +23,12 @@ const RegisterForm = () => {
 
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
+  const [loading, setLoading] = useState(false); //processing post to server state
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     setFailure_data("");
     const username = data.username;
     await fetch(`${process.env.REACT_APP_API_KEY}signup`, {
@@ -37,6 +41,7 @@ const RegisterForm = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
@@ -48,6 +53,7 @@ const RegisterForm = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
       });
@@ -167,7 +173,13 @@ const RegisterForm = () => {
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Submit</StyledButton>
+          {!loading ? (
+            <StyledButton type='submit'>Submit</StyledButton>
+          ) : (
+            <Div>
+              <CircularProgress data-testid='loader' />
+            </Div>
+          )}
         </form>
         {success && (
           <div className='alert alert-success mt-4' role='alertSuccess'>
