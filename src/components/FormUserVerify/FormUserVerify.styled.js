@@ -24,6 +24,7 @@ export const Title = styled.p`
 export const Button = styled.button`
   width: 100%;
   height: 30px;
+  font-weight: 500;
   margin-top: 10px;
   outline: none;
   border: none;
