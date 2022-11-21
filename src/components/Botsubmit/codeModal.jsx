@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import {Info} from "./Botsubmit.styled";
-import {NoEncryption} from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -17,34 +16,51 @@ const style = {
   boxShadow: 24,
   p: 4,
   maxHeight: 500,
+  maxWidth: "50%",
   overflowY: "scroll",
 };
 
-const head = {
-  textIndent: 10,
-};
-
-const body = {
-  textIndent: 20,
-};
-
-const robotCode = `
-class RandomRobot(Robot):
+const runnerRobot = `
+class RunnerRobot(Robot):
 
     def initialize(self):
-        pass
+        self.reached_wall = False
+        self.degrees = 90
+        self.velocity = 50
 
     def respond(self):
-        import random
-        self.rand_direction = random.randint(0, 359)
-        self.rand_velocity = random.randint(0,100)
-        self.rand_shoot_distance = random.randint(1,700)
-        self.rand_shoot_direction = random.randint(0, 359)
+        if not self.reached_wall:
+            self.drive(0, self.velocity)
+            if self.get_position()[0] == 983:
+                self.velocity = 50
+                self.reached_wall = True
+        else:
+            if self.near_corner():
+                self.degrees += 90
+                if self.degrees == 360:
+                    self.degrees = 0
+                self.velocity = 50
+            self.drive(self.degrees, self.velocity)
 
-        self.drive(self.rand_direction, self.rand_velocity)
+    def near_corner(self):
+        x, y = self.get_position()
+        return (((x + 35 >= 983) and (y + 35 >= 983))
+             or ((x + 35 >= 983) and (y - 35 <= 16))
+             or ((x - 35 <= 16) and (y + 35 >= 983))
+             or ((x - 35 <= 16) and (y - 35 <= 16)))`;
 
-        self.cannon(self.rand_shoot_direction, self.rand_shoot_direction)
-                  `;
+const shooterRobot = `
+class ShooterRobot(Robot):
+
+    def initialize(self):
+        self.degrees = 0
+
+    def respond(self):
+        self.point_scanner(self.degrees, 10)
+        if self.scanned() != None:
+            self.cannon(self.degrees, self.scanned())
+        else:
+            self.degrees = (self.degrees + 10) % 360`;
 
 const info = `
 Requirements:
@@ -52,7 +68,7 @@ Requirements:
   .py extension.
 
 PyRobots methods:
-- initialize(): Executed when the robot is created
+- initialize(): Executed when the robot is created.
 - respond(): Contains the robot's methods and is executed
   in each round.
 
@@ -65,10 +81,10 @@ Points the scanner at the given position.
   in the direction scanned last round.
 - drive(direction, velocity): Sets a new direction and
   velocity for the robot.
-- get_direction()
-- get_velocity()
-- get_position()
-- get_damage()
+- get_direction(): Get your current direction.
+- get_velocity(): Get your current velocity.
+- get_position(): Get your current position.
+- get_damage(): Get your current damage.
 `;
 
 export default function BasicModal() {
@@ -79,8 +95,7 @@ export default function BasicModal() {
   return (
     <a scroll-y='auto'>
       <Button onClick={handleOpen}>
-        {/* <Info /> */}
-        Example
+        <Info />
       </Button>
       <Modal
         open={open}
@@ -88,21 +103,38 @@ export default function BasicModal() {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
         <Box sx={style}>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography id='modal-modal-title' variant='h3' component='h2'>
             Instruction set
           </Typography>
-          <Typography id='modal-modal-description' sx={{mt: 1}}>
+          <Typography id='modal-modal-description' sx={{mt: 1}} variant='body1'>
             <pre>{info}</pre>
           </Typography>
           <Typography
             id='modal-modal-title'
-            variant='h6'
+            variant='h3'
             component='h2'
             sx={{mt: 3}}>
-            Robot code example - Random robot
+            Robot code examples
+          </Typography>
+          <Typography
+            id='modal-modal-title'
+            variant='h5'
+            component='h2'
+            sx={{mt: 3}}>
+            Example 1: RunnerRobot.py
           </Typography>
           <Typography id='modal-modal-description' sx={{mt: 1}}>
-            <pre>{robotCode}</pre>
+            <pre>{runnerRobot}</pre>
+          </Typography>
+          <Typography
+            id='modal-modal-title'
+            variant='h5'
+            component='h2'
+            sx={{mt: 3}}>
+            Example 2: ShooterRobot.py
+          </Typography>
+          <Typography id='modal-modal-description' sx={{mt: 1}}>
+            <pre>{shooterRobot}</pre>
           </Typography>
         </Box>
       </Modal>

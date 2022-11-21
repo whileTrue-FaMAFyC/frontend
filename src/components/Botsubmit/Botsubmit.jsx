@@ -9,13 +9,11 @@ import {
   StyledSuccess,
   StyledError,
   Div,
-  Info,
 } from "./Botsubmit.styled";
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {useNavigate} from "react-router-dom";
 import BasicModal from "./codeModal";
-import MoreInfoCode from "./MoreInfoCode";
 
 const Botsubmit = () => {
   const {
@@ -159,9 +157,8 @@ const Botsubmit = () => {
           <StyledInputGroup className='hide-if-value'>
             <label className='form-content' htmlFor='source_code'>
               Code
-              <Info onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
-              <BasicModal />
             </label>
+            <BasicModal />
 
             <StyledInput
               autoComplete='off'
@@ -255,7 +252,6 @@ const Botsubmit = () => {
           <StyledError role='alert'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
-      {isHovering ? <MoreInfoCode /> : null}
     </EntryPage>
   );
 };
