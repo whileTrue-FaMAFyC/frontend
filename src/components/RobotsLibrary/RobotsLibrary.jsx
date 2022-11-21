@@ -15,6 +15,8 @@ import {
   Feedback,
   StyledButton,
   StyledInput,
+  StyledEntryCard,
+  StyledInputGroup,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
@@ -38,23 +40,25 @@ const RobotsLibrary = () => {
 
   return (
     <PadreContainer>
-      <Container>
+      <StyledEntryCard>
         <Title style={{marginBottom: -25}} data-testid='title'>
           My robots
         </Title>
-        <StyledInput
-          type='text'
-          data-testid='filter'
-          placeholder='Find your robot...'
-          style={{
-            height: 30,
-            verticalAlign: "middle",
-            position: "relative",
-            justifyContent: "center",
-            top: "20px",
-          }}
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        />
+        <StyledInputGroup>
+          <StyledInput
+            type='text'
+            data-testid='filter'
+            placeholder='Find your robot...'
+            style={{
+              height: 30,
+              verticalAlign: "middle",
+              position: "relative",
+              justifyContent: "center",
+              top: "20px",
+            }}
+            onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          />
+        </StyledInputGroup>
         {/* <TextField
           fullWidth
           label='Search'
@@ -109,7 +113,7 @@ const RobotsLibrary = () => {
             Create bot
           </Link>
         </StyledButton>
-      </Container>
+      </StyledEntryCard>
     </PadreContainer>
   );
 };
