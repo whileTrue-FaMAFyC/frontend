@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import {InfoCircle} from "@styled-icons/boxicons-solid";
 
 export const Info = styled(InfoCircle)`
@@ -127,4 +126,13 @@ export const StyledExtraCard = styled.div`
   display: flex;
   /* margin-left: 101.8%; */
   /* z-index: 1; */
+`;
+
+export const Code = styled.pre`
+  font-family: monospace;
+`;
+
+export const Negrita = styled.strong`
+  font-style: italic;
+  color: #00c8c8;
 `;

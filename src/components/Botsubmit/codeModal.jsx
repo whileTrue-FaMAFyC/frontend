@@ -1,9 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import {Info} from "./Botsubmit.styled";
+import {Info, Code, Negrita} from "./Botsubmit.styled";
+import Typography from "@mui/material/Typography";
+import GameInfo from "./GameInfo";
 
 const style = {
   position: "absolute",
@@ -20,8 +21,7 @@ const style = {
   overflowY: "scroll",
 };
 
-const runnerRobot = `
-class RunnerRobot(Robot):
+const runnerRobot = `class RunnerRobot(Robot):
 
     def initialize(self):
         self.reached_wall = False
@@ -49,8 +49,7 @@ class RunnerRobot(Robot):
              or ((x - 35 <= 16) and (y + 35 >= 983))
              or ((x - 35 <= 16) and (y - 35 <= 16)))`;
 
-const shooterRobot = `
-class ShooterRobot(Robot):
+const shooterRobot = `class ShooterRobot(Robot):
 
     def initialize(self):
         self.degrees = 0
@@ -61,31 +60,6 @@ class ShooterRobot(Robot):
             self.cannon(self.degrees, self.scanned())
         else:
             self.degrees = (self.degrees + 10) % 360`;
-
-const info = `
-Requirements:
-- The file name must be the same as the class name with the
-  .py extension.
-
-PyRobots methods:
-- initialize(): Executed when the robot is created.
-- respond(): Contains the robot's methods and is executed
-  in each round.
-
-Robot methods:
-- is_cannon_ready(): Checks if the cannon is reloaded.
-- cannon(degree,distance): Fires the cannon.
-- point_scanner(direction, resolution_in_degrees):
-Points the scanner at the given position.
-- scanned(): Returns the distance to the nearest robot
-  in the direction scanned last round.
-- drive(direction, velocity): Sets a new direction and
-  velocity for the robot.
-- get_direction(): Get your current direction.
-- get_velocity(): Get your current velocity.
-- get_position(): Get your current position.
-- get_damage(): Get your current damage.
-`;
 
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
@@ -103,38 +77,42 @@ export default function BasicModal() {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
         <Box sx={style}>
-          <Typography id='modal-modal-title' variant='h3' component='h2'>
+          <Typography
+            id='modal-modal-title'
+            variant='h4'
+            component='h2'
+            style={{fontFamily: "Times new roman"}}>
             Instruction set
           </Typography>
           <Typography id='modal-modal-description' sx={{mt: 1}} variant='body1'>
-            <pre>{info}</pre>
+            <GameInfo />
           </Typography>
           <Typography
             id='modal-modal-title'
-            variant='h3'
+            variant='h4'
             component='h2'
-            sx={{mt: 3}}>
+            sx={{mt: 1.5, fontFamily: "Times new roman"}}>
             Robot code examples
           </Typography>
           <Typography
             id='modal-modal-title'
-            variant='h5'
+            variant='h6'
             component='h2'
             sx={{mt: 3}}>
-            Example 1: RunnerRobot.py
+            Example 1: runner_robot.py
           </Typography>
           <Typography id='modal-modal-description' sx={{mt: 1}}>
-            <pre>{runnerRobot}</pre>
+            <Code>{runnerRobot}</Code>
           </Typography>
           <Typography
             id='modal-modal-title'
             variant='h5'
             component='h2'
             sx={{mt: 3}}>
-            Example 2: ShooterRobot.py
+            Example 2: shooter_robot.py
           </Typography>
           <Typography id='modal-modal-description' sx={{mt: 1}}>
-            <pre>{shooterRobot}</pre>
+            <Code>{shooterRobot}</Code>
           </Typography>
         </Box>
       </Modal>
