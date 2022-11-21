@@ -35,11 +35,11 @@ const App = () => {
             <Route path='/library' element={<Library />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/home' element={<Home />} />
-            <Route path='/avatarSubmit' element={<AvatarSubmit />} />
             <Route path='/*' element={<NotFound />} />
           </Route>
           <Route element={<Public />}>
             <Route path='/' element={<Welcome />} />
+            <Route path='/avatarSubmit' element={<AvatarSubmit />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/verify' element={<Verify />} />
