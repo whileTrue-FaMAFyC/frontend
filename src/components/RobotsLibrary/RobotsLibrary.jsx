@@ -55,6 +55,7 @@ const RobotsLibrary = () => {
               position: "relative",
               justifyContent: "center",
               top: "20px",
+              caretColor: "white",
             }}
             onChange={(e) => setQuery(e.target.value.toLowerCase())}
           />
@@ -110,7 +111,7 @@ const RobotsLibrary = () => {
             to='/botsubmit'
             data-testid='linkToBotSubmit'
             style={{color: "black", fontWeight: 500}}>
-            Create bot
+            Create robot
           </Link>
         </StyledButton>
       </StyledEntryCard>

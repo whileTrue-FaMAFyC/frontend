@@ -141,8 +141,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
-  margin-left: 87%;
-  margin-top: -3%;
+  margin-left: 85.4%;
   &:hover {
     background-color: #009595;
   }
@@ -153,6 +152,8 @@ export const StyledInput = styled.input`
   outline: none;
   padding: 8px 16px;
   border: 1px solid #00c8c8;
+  margin-top: 2%;
+  margin-bottom: 2%;
   border-radius: 4px;
   font-size: 1rem;
   -webkit-text-fill-color: #dedede;
