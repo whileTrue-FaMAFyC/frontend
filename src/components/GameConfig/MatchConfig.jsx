@@ -91,15 +91,17 @@ const MatchConfig = () => {
               })}
             />
             {errors.name?.type === "required" && (
-              <StyledError role='alertError'>Name is required.</StyledError>
+              <StyledError data-testid='alertError'>
+                Name is required.
+              </StyledError>
             )}
             {errors.name?.type === "maxLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The name must have at most 16 characters.
               </StyledError>
             )}
             {errors.name?.type === "minLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The name must have at least 3 characters.
               </StyledError>
             )}
@@ -118,7 +120,7 @@ const MatchConfig = () => {
               })}
             />
             {errors.password?.type === "maxLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The password must have at most 16 characters.
               </StyledError>
             )}
@@ -148,7 +150,7 @@ const MatchConfig = () => {
               <option value='4'>4</option>
             </select>
             {errors.max_players?.type === "validate" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The maximum number of players must be greater than or equal to
                 the minimum established.
               </StyledError>
@@ -171,12 +173,12 @@ const MatchConfig = () => {
               })}
             />
             {errors.num_games?.type === "required" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Number of games is required.
               </StyledError>
             )}
             {errors.num_games?.type === "validate" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Enter an integer between 1 and 200.
               </StyledError>
             )}
@@ -198,12 +200,12 @@ const MatchConfig = () => {
               })}
             />
             {errors.num_rounds?.type === "required" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Number of rounds is required.
               </StyledError>
             )}
             {errors.num_rounds?.type === "validate" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Enter an integer between 1 and 10000.
               </StyledError>
             )}
@@ -226,7 +228,9 @@ const MatchConfig = () => {
               </option>
             </select>
             {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Robot is required.</StyledError>
+              <StyledError data-testid='alertError'>
+                Robot is required.
+              </StyledError>
             )}
           </StyledInputGroup>
           <StyledButton type='submit' data-testid='submit'>
@@ -234,15 +238,12 @@ const MatchConfig = () => {
           </StyledButton>
         </form>
         {success && (
-          <div
-            className='alert alert-success mt-4'
-            role='alertSuccess'
-            data-testid='exito'>
+          <div className='alert alert-success mt-4' data-testid='alertSuccess'>
             The match was created successfully.
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <div data-testid='alertError'>{failure_data}</div>
         ) : null}
       </StyledEntryCard>
     </EntryPage>

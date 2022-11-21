@@ -9,9 +9,6 @@ const ChangeAvatar = () => {
   const [newAvatar, setNewAvatar] = useState(localStorage.getItem("avatar"));
   const [avatarError, setAvatarError] = useState("");
   const [avatarSuccess, setAvatarSuccess] = useState(false);
-  const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState(null);
-  const [picture, setPicture] = useState(null);
 
   const avatarStyle = {
     height: 150,
@@ -56,34 +53,8 @@ const ChangeAvatar = () => {
       });
   };
 
-  const fileToBase64 = (file, cb) => {
-    const reader = new FileReader();
-    try {
-      reader.readAsDataURL(file);
-      reader.onload = function () {
-        cb(null, reader.result);
-      };
-      reader.onerror = function (error) {
-        cb(error, null);
-      };
-    } catch {}
-  };
-
-  const onUploadFileChange = ({target}) => {
-    if (target.files < 1 || !target.validity.valid) {
-      return;
-    }
-    fileToBase64(target.files[0], (err, result) => {
-      if (result) {
-        setFile(result);
-        setFileName(target.files[0]);
-      }
-    });
-  };
-
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setNewAvatar(reader.result);
@@ -110,7 +81,6 @@ const ChangeAvatar = () => {
               ) {
                 setChangeAvatarOn(true);
                 onChangePicture(newPic);
-                onUploadFileChange(newPic);
                 setAvatarError("");
               } else {
                 setAvatarSuccess(false);

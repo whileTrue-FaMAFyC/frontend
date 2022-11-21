@@ -74,15 +74,17 @@ const RegisterForm = () => {
               })}
             />
             {errors.username?.type === "required" && (
-              <StyledError role='alertError'>Username is required</StyledError>
+              <StyledError data-testid='alertError'>
+                Username is required
+              </StyledError>
             )}
             {errors.username?.type === "maxLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Username must be at most 16 characters long.
               </StyledError>
             )}
             {errors.username?.type === "minLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Username must be at least 3 characters long.
               </StyledError>
             )}
@@ -102,12 +104,14 @@ const RegisterForm = () => {
               })}
             />
             {errors.email?.type === "pattern" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The email format is incorrect
               </StyledError>
             )}
             {errors.email?.type === "required" && (
-              <StyledError role='alertError'>Email is required</StyledError>
+              <StyledError data-testid='alertError'>
+                Email is required
+              </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -125,18 +129,20 @@ const RegisterForm = () => {
               })}
             />
             {errors.password?.type === "pattern" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The password must contain at least 8 characters, one uppercase,
                 lowercase and number
               </StyledError>
             )}
             {errors.password?.type === "minLength" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 The password must contain at least 8 characters
               </StyledError>
             )}
             {errors.password?.type === "required" && (
-              <StyledError role='alertError'>Password is required</StyledError>
+              <StyledError data-testid='alertError'>
+                Password is required
+              </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
@@ -156,26 +162,28 @@ const RegisterForm = () => {
               })}
             />
             {errors.confirmPassword?.type === "validate" && (
-              <StyledError role='alertError'>
+              <StyledError data-testid='alertError'>
                 Passwords do not match
               </StyledError>
             )}
             {errors.confirmPassword?.type === "required" &&
               watch("password") && (
-                <StyledError role='alertError'>
+                <StyledError data-testid='alertError'>
                   Enter your password again
                 </StyledError>
               )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Submit</StyledButton>
+          <StyledButton type='submit' data-testid='button'>
+            Submit
+          </StyledButton>
         </form>
         {success && (
-          <div className='alert alert-success mt-4' role='alertSuccess'>
+          <div className='alert alert-success mt-4' data-testid='alertSuccess'>
             A verification email was sent
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <div data-testid='alertServer'>{failure_data}</div>
         ) : null}
         <span>
           <p data-testid='notAMemb'>Already have an account?</p>

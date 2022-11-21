@@ -1,10 +1,11 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-import {color} from "@mui/system";
+import {StyledError} from "../GameConfig/MatchConfig.styled";
 
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({});
   const [userInfoError, setUserInfoError] = useState("");
+  const [success, setSuccess] = useState(true);
   const getUserInfo = async (token) => {
     const response = await axios.get(
       `${process.env.REACT_APP_API_KEY}user-profile`,
@@ -23,13 +24,14 @@ const UserInfo = () => {
         setUserInfo(response.data);
       }
     } catch (error) {
+      setSuccess(false);
       setUserInfoError(error);
     }
   };
   useEffect(() => {
     callGetUserInfo();
   }, []);
-  return (
+  return success ? (
     <div style={{marginTop: 10, color: "#00c8c8"}}>
       <div>
         Username:
@@ -40,6 +42,8 @@ const UserInfo = () => {
         <a data-testid='email'>{userInfo.email}</a>
       </div>
     </div>
+  ) : (
+    <StyledError style={{color: "red"}}>{userInfoError}</StyledError>
   );
 };
 
