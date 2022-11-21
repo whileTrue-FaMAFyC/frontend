@@ -6,7 +6,6 @@ export const PadreContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0f1519;
 `;
 
 export const Container = styled.div`

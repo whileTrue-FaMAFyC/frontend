@@ -37,6 +37,7 @@ test("render full login component successfully", async () => {
   expect.toBeInTheDocument(screen.findByTestId("inputPassword"));
   expect.toBeInTheDocument(screen.findByTestId("loginButton"));
   expect.toBeInTheDocument(screen.findByTestId("notAMemb"));
+  expect.toBeInTheDocument(screen.findByTestId("restore"));
   expect.toBeInTheDocument(screen.findByTestId("linkToReg"));
 
   expect.not.toBeInTheDocument(screen.queryByTestId("succesfulLogin"));

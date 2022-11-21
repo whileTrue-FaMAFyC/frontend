@@ -2,18 +2,20 @@ import {useReducer} from "react";
 import {matchReducer} from "./reducer";
 
 const initialState = {
-  name: "",
   creator_username: "",
-  min_players: 0,
-  max_players: 0,
-  num_games: 0,
-  users_joined: 0,
-  user_robot: [],
-  results: [],
   has_password: false,
-  started: false,
   im_in: false,
   is_creator: false,
+  max_players: 0,
+  min_players: 0,
+  name: "",
+  num_games: 0,
+  num_rounds: 0,
+  requester_username: "",
+  results: [],
+  started: false,
+  user_robot: [],
+  users_joined: 0,
 };
 
 const useMatch = () => {

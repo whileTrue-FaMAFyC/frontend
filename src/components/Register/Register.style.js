@@ -8,7 +8,6 @@ export const StyledButton = styled.button`
   padding: 8px 16px;
   outline: none;
   background-color: #00c8c8;
-  //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -95,20 +94,10 @@ export const EntryPage = styled.div`
   background-color: #0f1519;
 `;
 
-export const GlobalStyle = createGlobalStyle`
-    * {
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        text-decoration: none;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: #333;
-        -webkit-font-smoothing: antialised;
-        -moz-osx-font-smoothing: grayscale;
-    }
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #252c32;
+  margin: 15px;
+  flex-direction: column;
 `;

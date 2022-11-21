@@ -12,7 +12,10 @@ export const matchReducer = (state, action) => {
       ...state,
       users_joined: state.users_joined + 1,
       user_robot: [...state.user_robot, payload],
-      im_in: true,
+      im_in:
+        state.user_robot.some(
+          (user) => user.username === state.requester_username
+        ) || state.requester_username === payload.username,
     };
   }
 
@@ -23,7 +26,7 @@ export const matchReducer = (state, action) => {
       ...state,
       users_joined: state.users_joined - 1,
       user_robot: users,
-      im_in: false,
+      im_in: users.some((user) => user.username === state.requester_username),
     };
   }
 

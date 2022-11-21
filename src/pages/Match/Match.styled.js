@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 70px);
+  padding: 50px;
+  min-height: calc(100vh - 70px);
   display: flex;
   gap: 40px;
   justify-content: center;
   align-items: center;
-  background-color: #0f1519;
+  color: #fff;
 `;
 
 export const Results = styled.div`
@@ -16,6 +17,7 @@ export const Results = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   border-radius: 10px;
   background-color: #252c32;
   position: relative;
