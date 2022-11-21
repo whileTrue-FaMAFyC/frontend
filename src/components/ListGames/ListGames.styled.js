@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: min(90%, 1000px);
-  display: flex;
-  overflow-x: auto;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 export const Title = styled.p`
   color: #fff;
   font-size: 30px;
@@ -84,27 +74,11 @@ export const Row = styled.tr`
   }
 `;
 
-export const RowHead = styled.tr`
-  width: 100%;
-  min-height: 60px;
-  display: flex;
-  background-color: #0a0e13;
-  color: #fff;
-  background-color: #000;
-`;
-
 export const Feedback = styled.tr`
   width: 100%;
   min-height: 100%;
   display: flex;
   color: #fff;
-`;
-
-export const Ellipsis = styled.p`
-  max-width: 120px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 export const Button = styled.button`
@@ -126,13 +100,6 @@ export const Button = styled.button`
   &:hover {
     background-color: #009595;
   }
-
-  /*   background: linear-gradient(
-    90deg,
-    rgba(39, 147, 198, 1) 25%,
-    rgba(24, 172, 212, 1) 76%,
-    rgba(15, 188, 222, 1) 100%
-  ); */
 `;
 
 export const StyledEntryCard = styled.div`

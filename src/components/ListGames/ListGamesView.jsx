@@ -1,8 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 import {
-  Container,
-  Title,
   Table,
   Thead,
   Column,
@@ -12,17 +10,9 @@ import {
   Button,
   StyledEntryCard,
   SelectorGroup,
-  RowHead,
 } from "./ListGames.styled";
 
-const ListGamesView = ({
-  games,
-  refresh,
-  loading,
-  register,
-  handleSubmit,
-  submit,
-}) => {
+const ListGamesView = ({games, loading, register, handleSubmit, submit}) => {
   const navigate = useNavigate();
 
   return (
@@ -60,7 +50,7 @@ const ListGamesView = ({
             <option value='False'>False</option>
           </select>
         </SelectorGroup>
-        <Button role='button'>Apply filters</Button>
+        <Button role='button'>Reload</Button>
       </form>
       <Table>
         <Thead>
@@ -69,7 +59,7 @@ const ListGamesView = ({
             <Column>Creator</Column>
             <Column>Max Players</Column>
             <Column>Robots Joined</Column>
-            <Column>{/* <Button onClick={submit}>Refresh</Button> */}</Column>
+            <Column />
           </Row>
         </Thead>
         <Tbody>
