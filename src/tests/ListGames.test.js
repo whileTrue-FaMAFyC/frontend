@@ -50,8 +50,6 @@ describe("Listar partidas", () => {
       expect(screen.getByText("Match list")).toBeInTheDocument();
       expect(screen.getByText("No games availables")).toBeInTheDocument();
     });
-
-    screen.debug();
   });
 
   it("El usuario refresca la lista de partidas", async () => {
@@ -75,7 +73,5 @@ describe("Listar partidas", () => {
         expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
-
-    screen.debug();
   });
 });

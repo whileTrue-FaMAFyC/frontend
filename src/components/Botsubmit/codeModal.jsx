@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import {Info} from "./Botsubmit.styled";
+import {NoEncryption} from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -16,7 +17,7 @@ const style = {
   boxShadow: 24,
   p: 4,
   maxHeight: 500,
-  overflow: "scroll",
+  overflowY: "scroll",
 };
 
 const head = {
