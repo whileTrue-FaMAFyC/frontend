@@ -34,7 +34,7 @@ describe("Sim Creation test", () => {
     inputNameRobot1 = await screen.findByTestId("nameRobot1");
     inputNameRobot2 = await screen.findByTestId("nameRobot2");
     inputNRounds = await screen.findByTestId("nRounds");
-    button = await screen.findByTestId("button");
+    button = await screen.findByTestId("submit");
   });
 
   test("0. Render components successfully", async () => {

@@ -1,8 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 import {
-  Container,
-  Title,
   Table,
   Thead,
   Column,
@@ -10,26 +8,59 @@ import {
   Row,
   Feedback,
   Button,
-  RowHead,
+  StyledEntryCard,
+  SelectorGroup,
 } from "./ListGames.styled";
 
-const ListGamesView = ({games, refresh, loading}) => {
+const ListGamesView = ({games, loading, register, handleSubmit, submit}) => {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <Title>Match list</Title>
+    <StyledEntryCard>
+      {/* <Container> */}
+      <h2>Match list</h2>
+      <form onSubmit={handleSubmit(submit)}>
+        <SelectorGroup>
+          <label>Is mine: </label>
+          <select
+            data-testid='is_mine'
+            {...register("is_owner", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
+        <SelectorGroup>
+          <label> I'm in: </label>
+          <select
+            data-testid='im_in'
+            {...register("is_joined", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
+        <SelectorGroup>
+          <label> Started: </label>
+          <select
+            data-testid='started'
+            {...register("started", {required: true})}>
+            <option value='None'>-</option>
+            <option value='True'>True</option>
+            <option value='False'>False</option>
+          </select>
+        </SelectorGroup>
+        <Button role='button'>Reload</Button>
+      </form>
       <Table>
         <Thead>
-          <RowHead>
+          <Row>
             <Column>Name</Column>
             <Column>Creator</Column>
             <Column>Max Players</Column>
             <Column>Robots Joined</Column>
-            <Column>
-              <Button onClick={refresh}>Refresh</Button>
-            </Column>
-          </RowHead>
+            <Column />
+          </Row>
         </Thead>
         <Tbody>
           {loading && (
@@ -64,7 +95,8 @@ const ListGamesView = ({games, refresh, loading}) => {
           )}
         </Tbody>
       </Table>
-    </Container>
+      {/* </Container> */}
+    </StyledEntryCard>
   );
 };
 export default ListGamesView;

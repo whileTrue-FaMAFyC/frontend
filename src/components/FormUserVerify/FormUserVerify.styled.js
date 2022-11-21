@@ -24,6 +24,7 @@ export const Title = styled.p`
 export const Button = styled.button`
   width: 100%;
   height: 30px;
+  font-weight: 500;
   margin-top: 10px;
   outline: none;
   border: none;
@@ -33,8 +34,7 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #00c8c8;
-    color: #fff;
+    background-color: #009595;
   }
 
   /*   background: rgb(39, 147, 198);

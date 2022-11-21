@@ -4,9 +4,9 @@ export const EntryPage = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 50px;
+  padding-top: 50px;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 120px);
 `;
 
 export const StyledButton = styled.button`
@@ -94,4 +94,12 @@ export const StyledSuccess = styled.p`
   font-size: 12px;
   padding: 3px;
   color: turquoise;
+`;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #252c32;
+  margin: 15px;
+  flex-direction: column;
 `;
