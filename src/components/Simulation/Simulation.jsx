@@ -51,9 +51,7 @@ const Simulation = ({props}) => {
     if (nframe < simulation.length) {
       setRobots(frame.robots);
       setMissiles(frame.missiles);
-    }
-
-    if (nframe >= simulation.length - 2) {
+    } else {
       setShowWinners(winners);
       stopSimulation();
     }
@@ -86,11 +84,9 @@ const Simulation = ({props}) => {
   };
 
   const resetSimulation = () => {
-    if (nframe > 0) {
-      stopSimulation();
-      setNframe(0);
-      drawFrame(simulation[0]);
-    }
+    stopSimulation();
+    setNframe(0);
+    drawFrame(simulation[0]);
   };
 
   const handlers = {

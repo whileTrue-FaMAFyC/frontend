@@ -15,11 +15,19 @@ const RobotsStatus = ({colors, robots, names, winners}) => {
         />
       ))}
       {winners !== null ? (
-        <div data-testid='winners'>
-          <p>The winners are: </p>
-          {winners.map((winner, idx) => (
-            <li key={`${idx}`}>{winner}</li>
-          ))}
+        <div>
+          {winners.length === 1 ? (
+            <div data-testid='winners'>
+              <p>The winner is: {winners[0]}</p>
+            </div>
+          ) : (
+            <div data-testid='winners'>
+              <p>The winners are: </p>
+              {winners.map((winner, idx) => (
+                <li key={`${idx}`}>{winner}</li>
+              ))}
+            </div>
+          )}
         </div>
       ) : null}
     </StyledEntryCard>
