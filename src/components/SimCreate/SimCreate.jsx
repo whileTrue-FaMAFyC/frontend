@@ -221,7 +221,7 @@ const SimCreate = () => {
               ) : (
                 <Div>
                   <CircularProgress data-testid='loader' />
-                  <p>Te simulation is about to start!</p>
+                  <p>The simulation is about to start!</p>
                 </Div>
               )}
             </form>
