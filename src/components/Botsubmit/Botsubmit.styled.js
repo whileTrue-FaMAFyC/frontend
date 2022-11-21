@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import {InfoCircle} from "@styled-icons/boxicons-solid";
+
+export const Info = styled(InfoCircle)`
+  width: 22px;
+  margin-left: 4px;
+  color: #00c8c8;
+`;
 
 export const StyledButton = styled.button`
   width: ${(props) => (props.full ? "100%" : null)};
@@ -28,6 +35,7 @@ export const StyledEntryCard = styled.div`
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
+  /* margin-right: 30%; */
   h2 {
     font-weight: 500;
     margin-bottom: 50px;
@@ -89,7 +97,6 @@ export const StyledInputGroup = styled.div`
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 70px);
   background-color: #0f1519;
@@ -101,4 +108,31 @@ export const Div = styled.div`
   background-color: #252c32;
   margin: 15px;
   flex-direction: column;
+`;
+
+export const StyledExtraCard = styled.div`
+  width: 110%;
+  position: absolute;
+  max-width: 450px;
+  border-radius: 5px;
+  margin-top: -14%;
+  background-color: #252c32;
+  opacity: 0.7;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
+  /* margin-right: 30%; */
+  pre {
+    font-size: 14px;
+  }
+  display: flex;
+  /* margin-left: 101.8%; */
+  /* z-index: 1; */
+`;
+
+export const Code = styled.pre`
+  font-family: monospace;
+`;
+
+export const Negrita = styled.strong`
+  font-style: italic;
+  color: #00c8c8;
 `;
