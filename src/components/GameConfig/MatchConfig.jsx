@@ -237,7 +237,7 @@ const MatchConfig = () => {
           </StyledInputGroup>
           {!loading ? (
             <StyledButton type='submit' data-testid='submit'>
-              Start simulation
+              Create match
             </StyledButton>
           ) : (
             <Div>
