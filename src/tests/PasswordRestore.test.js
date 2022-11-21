@@ -42,6 +42,8 @@ test("render full password restore component successfully", async () => {
   });
   fireEvent.click(screen.getByTestId("submitButton"));
 
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
   // Render PasswordRestoreView
   await waitFor(() => {
     screen.getByTestId("formPassword");
@@ -75,6 +77,8 @@ test("enter email and enter code with new password", async () => {
     target: {value: "seba@gmail.com"},
   });
   fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
@@ -216,6 +220,8 @@ test("enter email and enter code with passwords that do not match", async () => 
   });
   fireEvent.click(screen.getByTestId("submitButton"));
 
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
       target: {value: "232323"},
@@ -248,6 +254,8 @@ test("enter email and enter code with new passwords with no numbers", async () =
     target: {value: "seba@gmail.com"},
   });
   fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
@@ -286,6 +294,8 @@ test("enter email and enter code with empty password", async () => {
   });
   fireEvent.click(screen.getByTestId("submitButton"));
 
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
+
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
       target: {value: "232323"},
@@ -318,6 +328,8 @@ test("enter email and enter code with new passwords with no numbers", async () =
     target: {value: "seba@gmail.com"},
   });
   fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
@@ -355,6 +367,8 @@ test("enter email and enter code with empty password confirmation", async () => 
     target: {value: "seba@gmail.com"},
   });
   fireEvent.click(screen.getByTestId("submitButton"));
+
+  expect.not.toBeInTheDocument(screen.findByRole("alertError"));
 
   await waitFor(() => {
     fireEvent.change(screen.getByTestId("codeInput"), {
