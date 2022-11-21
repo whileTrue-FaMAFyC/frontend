@@ -146,7 +146,7 @@ const Login = () => {
           </Link>
         </span>
         <span>
-          <p data-testid='notAMemb'>Forgot your password?</p>
+          <p data-testid='restore'>Forgot your password?</p>
           <Link to='/restore' data-testid='linkToReg'>
             Restore it
           </Link>

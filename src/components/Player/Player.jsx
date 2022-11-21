@@ -21,7 +21,7 @@ export const Names = styled.div`
 `;
 
 export const CrownStyled = styled(Crown)`
-  width: 30px;
+  width: 25px;
   fill: #f7b103;
 `;
 
