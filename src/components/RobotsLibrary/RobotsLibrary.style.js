@@ -9,7 +9,7 @@ export const PadreContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 50%;
+  width: min(90%, 1000px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -127,8 +127,8 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
-  margin-left: 83.6%;
-  margin-top: -3%;
+  margin-left: auto;
+  // margin-top: -3%;
   &:hover {
     background-color: #009595;
   }
@@ -136,6 +136,8 @@ export const StyledButton = styled.button`
 
 export const StyledInput = styled.input`
   width: 40%;
+  margin-bottom: 2%;
+  margin-top: 2%:
   outline: none;
   padding: 8px 16px;
   border: 1px solid #00c8c8;

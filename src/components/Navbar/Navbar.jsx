@@ -23,7 +23,7 @@ function Navbar() {
           to='/botsubmit'
           data-testid='toCreateBot'
           className={({isActive}) => (isActive ? "active" : undefined)}>
-          Create Bot
+          Create Robot
         </NavItemLink>
       </LinkContainer>
       <LinkContainer>

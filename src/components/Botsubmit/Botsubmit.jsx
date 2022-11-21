@@ -111,7 +111,7 @@ const Botsubmit = () => {
   return (
     <EntryPage>
       <StyledEntryCard>
-        <h2 style={{color: "white"}}>BOT SUBMIT</h2>
+        <h2>Robot submit</h2>
         <form
           onSubmit={handleSubmit(submitForm)}
           className='requires-validation'>

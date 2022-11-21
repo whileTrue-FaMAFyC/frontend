@@ -141,13 +141,13 @@ const Login = () => {
         )}
         <span>
           <p data-testid='notAMemb'>Not a member?</p>
-          <Link to='/register' data-testid='linkToReg'>
+          <Link style={{color: "#00c8c8"}} to='/register' data-testid='linkToReg'>
             Register
           </Link>
         </span>
         <span>
           <p data-testid='restore'>Forgot your password?</p>
-          <Link to='/restore' data-testid='linkToReg'>
+          <Link style={{color: "#00c8c8"}} to='/restore' data-testid='linkToReg'>
             Restore it
           </Link>
         </span>

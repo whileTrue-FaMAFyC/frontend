@@ -124,7 +124,7 @@ const MatchConfig = () => {
             )}
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Min players:</label>
+            <label style={{width: "100px"}}>Min players:</label>
             <select
               data-testid='minPlayers'
               {...register("min_players", {required: true})}>
@@ -134,7 +134,7 @@ const MatchConfig = () => {
             </select>
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Max players:</label>
+            <label style={{width: "100px"}}>Max players:</label>
             <select
               data-testid='maxPlayers'
               {...register("max_players", {

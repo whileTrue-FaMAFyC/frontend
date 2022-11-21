@@ -179,7 +179,7 @@ const RegisterForm = () => {
         ) : null}
         <span>
           <p data-testid='notAMemb'>Already have an account?</p>
-          <Link to='/login' data-testid='linkToReg'>
+          <Link style={{color: "#00c8c8"}} to='/login' data-testid='linkToReg'>
             Login
           </Link>
         </span>

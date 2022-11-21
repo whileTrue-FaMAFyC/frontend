@@ -25,6 +25,7 @@ export const StyledEntryCard = styled.div`
   max-width: 450px;
   border-radius: 5px;
   padding: 50px;
+  margin-top: 10%;
   margin-bottom: 40px;
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
@@ -62,6 +63,7 @@ export const StyledInput = styled.input`
   border: 1px solid #00c8c8;
   border-radius: 4px;
   font-size: 1rem;
+  caret-color: #ffffff;
   -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
   background-color: #252c32;
