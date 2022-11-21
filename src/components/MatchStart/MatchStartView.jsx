@@ -1,5 +1,6 @@
+import React from "react";
+import {StyledButton} from "./MatchStartView.styled";
 import {start} from "../../services/matchStart.service";
-import {StyledButton} from "./MatchStart.styled";
 
 const MatchStartView = ({isCreator, isReadyToStart, started, matchId}) => {
   return (
@@ -18,4 +19,5 @@ const MatchStartView = ({isCreator, isReadyToStart, started, matchId}) => {
     </div>
   );
 };
+
 export default MatchStartView;

@@ -41,9 +41,9 @@ const RobotsLibrary = () => {
   return (
     <PadreContainer>
       <StyledEntryCard>
-        <Title style={{marginBottom: -25}} data-testid='title'>
+        <h2 style={{marginBottom: -25}} data-testid='title'>
           My robots
-        </Title>
+        </h2>
         <StyledInputGroup>
           <StyledInput
             type='text'

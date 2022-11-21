@@ -12,6 +12,7 @@ import {
   StyledError,
   Div,
 } from "./MatchConfig.styled.js";
+import {CircularProgress} from "@mui/material";
 
 const MatchConfig = () => {
   const {
@@ -24,26 +25,27 @@ const MatchConfig = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
   const [robotsNames, setRobotsNames] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const callGetRobotsNames = async () => {
     try {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
     } catch (error) {
-      console.log(error);
+      setFailure_data(error);
     }
   };
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(10 / 2);
     callGetRobotsNames();
   }, []);
 
   const onSubmit = async (data) => {
     setFailure_data("");
-    const token = await localStorage.getItem("user");
+    setLoading(true);
+    const token = localStorage.getItem("user");
     await fetch(`${process.env.REACT_APP_API_KEY}matches/new-match`, {
       method: "POST",
       headers: {
@@ -55,18 +57,19 @@ const MatchConfig = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSuccess(true);
           setFailure_data("");
           navigate("/listgames");
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
         setFailure_data(data.detail);
@@ -232,9 +235,15 @@ const MatchConfig = () => {
               <StyledError role='alertError'>Robot is required.</StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit' data-testid='submit'>
-            Create
-          </StyledButton>
+          {!loading ? (
+            <StyledButton type='submit' data-testid='submit'>
+              Create match
+            </StyledButton>
+          ) : (
+            <Div>
+              <CircularProgress data-testid='loader' />
+            </Div>
+          )}
         </form>
         {success && (
           <div
@@ -245,7 +254,7 @@ const MatchConfig = () => {
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <StyledError role='alertServer'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
     </EntryPage>

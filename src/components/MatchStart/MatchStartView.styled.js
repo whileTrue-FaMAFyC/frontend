@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  width: ${(props) => (props.full ? "100%" : null)};
+  width: 100%;
   min-width: 64px;
   border: 0;
   border-radius: 4px;
@@ -20,4 +20,10 @@ export const StyledButton = styled.button`
   &:hover {
     background-color: ${(props) => (props.enabledColor ? "gray" : `#009595;`)};
   }
+`;
+
+export const StyledError = styled.p`
+  font-size: 12px;
+  padding: 5px;
+  color: red;
 `;

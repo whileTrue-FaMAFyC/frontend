@@ -1,22 +1,26 @@
 import mockAxios from "axios";
 import {BrowserRouter} from "react-router-dom";
-import {render, screen, waitFor} from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import {gamesMock} from "../__mocks__";
 import userEvent from "@testing-library/user-event";
 import {ListGames} from "../components";
+import {act} from "react-dom/test-utils";
 
 describe("Listar partidas", () => {
   it("Los nombres de partidas estan en el documento", async () => {
     mockAxios.get.mockResolvedValue({data: gamesMock});
-
     render(
       <BrowserRouter>
         <ListGames />
       </BrowserRouter>
     );
-
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `${process.env.REACT_APP_API_KEY}matches/list-matches`,
+      `${process.env.REACT_APP_API_KEY}matches/list-matches?is_owner=None&is_joined=None&started=None`,
       {
         headers: {
           Authorization: localStorage.getItem("user"),
@@ -40,7 +44,10 @@ describe("Listar partidas", () => {
         <ListGames />
       </BrowserRouter>
     );
-    expect(await screen.findByText("No games availables")).toBeInTheDocument();
+
+    waitFor(() =>
+      expect(screen.findByText("No games availables")).toBeInTheDocument()
+    );
   });
 
   it("El usuario refresca la lista de partidas", async () => {
@@ -51,9 +58,9 @@ describe("Listar partidas", () => {
       </BrowserRouter>
     );
 
-    const buttonRefresh = screen.getByRole("button", {name: "Refresh"});
+    act(() => userEvent.click(screen.getByRole("button", {name: "Reload"})));
 
-    userEvent.click(buttonRefresh);
+    //userEvent.click(buttonRefresh);
     const progress = screen.getByTestId("list-progress");
 
     expect(progress).toBeInTheDocument();
@@ -64,7 +71,5 @@ describe("Listar partidas", () => {
         expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
-
-    // screen.debug();
   });
 });

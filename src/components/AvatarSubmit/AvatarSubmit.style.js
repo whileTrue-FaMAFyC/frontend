@@ -7,8 +7,8 @@ export const StyledButton = styled.button`
   border-radius: 4px;
   padding: 8px 16px;
   outline: none;
-  background-color: #2f8bfd;
-  color: #ffffff;
+  background-color: #00c8c8;
+  //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   &:hover {
-    background-color: #0072ff;
+    background-color: #009595;
   }
 `;
 
@@ -26,7 +26,7 @@ export const StyledEntryCard = styled.div`
   border-radius: 5px;
   padding: 50px;
   margin-bottom: 40px;
-  background-color: #ffffff;
+  background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;
   h2 {
@@ -51,6 +51,8 @@ export const StyledInput = styled.input`
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: #888888;
   transition: box-shadow 0.2s;
   &::placeholder {
@@ -82,24 +84,6 @@ export const EntryPage = styled.div`
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #fbfbfb;
+  background-color: #0f1519;
   padding: 20px;
-`;
-
-export const GlobalStyle = createGlobalStyle`
-    * {
-        margin: 0;
-        padding: 0;
-        outline: 0;
-        text-decoration: none;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-size: 16px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: #333;
-        -webkit-font-smoothing: antialised;
-        -moz-osx-font-smoothing: grayscale;
-    }
 `;
