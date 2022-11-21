@@ -67,6 +67,7 @@ const SimCreate = () => {
       body: JSON.stringify(body),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSimulation(data);
@@ -78,6 +79,7 @@ const SimCreate = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
         setFailure_data("Network error");

@@ -41,6 +41,7 @@ const RegisterForm = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201) {
           setSuccess(true);
@@ -52,6 +53,7 @@ const RegisterForm = () => {
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
       });
