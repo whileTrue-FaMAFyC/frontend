@@ -147,7 +147,7 @@ const Login = () => {
         </span>
         <span>
           <p data-testid='restore'>Forgot your password?</p>
-          <Link to='/restore' data-testid='linkToReg'>
+          <Link to='/restore' data-testid='linkToRes'>
             Restore it
           </Link>
         </span>
