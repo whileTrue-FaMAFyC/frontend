@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {color} from "@mui/system";
 
 const UserInfo = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -29,11 +30,13 @@ const UserInfo = () => {
     callGetUserInfo();
   }, []);
   return (
-    <div>
+    <div style={{marginTop: 10, color: "#00c8c8"}}>
       <div>
+        Username:
         <a data-testid='username'>{userInfo.username}</a>
       </div>
       <div>
+        Email:
         <a data-testid='email'>{userInfo.email}</a>
       </div>
     </div>

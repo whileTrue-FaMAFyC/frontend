@@ -188,6 +188,7 @@ const ChangePassword = () => {
                 <StyledButton
                   role='cancel'
                   type='button'
+                  style={{backgroundColor: "#c21807"}}
                   onClick={() => {
                     setChangePasswordOn(false);
                     setPasswordMessage("");

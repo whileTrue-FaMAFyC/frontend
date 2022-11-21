@@ -47,10 +47,12 @@ const ChangeAvatar = () => {
           setAvatarSuccess(true);
         } else {
           setAvatarError(data.detail);
+          setAvatarSuccess(false);
         }
       })
       .catch((error) => {
         setAvatarError(error);
+        setAvatarSuccess(false);
       });
   };
 
@@ -103,14 +105,15 @@ const ChangeAvatar = () => {
             multiple
             onChange={(newPic) => {
               if (
-                newPic.target.files[0].size <= 40000 &&
-                newPic.target.length !== 0
+                newPic.target.length !== 0 &&
+                newPic.target.files[0].size <= 40000
               ) {
                 setChangeAvatarOn(true);
                 onChangePicture(newPic);
                 onUploadFileChange(newPic);
                 setAvatarError("");
               } else {
+                setAvatarSuccess(false);
                 setAvatarError("Insert image under 40 KB");
               }
             }}
@@ -127,7 +130,7 @@ const ChangeAvatar = () => {
             </StyledButton>
             <StyledButton
               role='undo'
-              style={{backgroundColor: "red"}}
+              style={{backgroundColor: "#c21807"}}
               onClick={() => {
                 setNewAvatar(localStorage.getItem("avatar"));
                 setChangeAvatarOn(false);
