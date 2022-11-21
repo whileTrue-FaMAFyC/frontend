@@ -95,3 +95,11 @@ export const StyledSuccess = styled.p`
   padding: 3px;
   color: turquoise;
 `;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #252c32;
+  margin: 15px;
+  flex-direction: column;
+`;
