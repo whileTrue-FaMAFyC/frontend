@@ -48,6 +48,7 @@ const Login = () => {
         } else if (response.status === 200) {
           if (data.authorization) {
             localStorage.setItem("user", data.authorization);
+            localStorage.setItem("avatar", data.avatar);
             setSuccess(true);
             navigate("/home");
           } else {
@@ -145,7 +146,7 @@ const Login = () => {
           </Link>
         </span>
         <span>
-          <p data-testid='notAMemb'>Forgot your password?</p>
+          <p data-testid='restore'>Forgot your password?</p>
           <Link to='/restore' data-testid='linkToReg'>
             Restore it
           </Link>

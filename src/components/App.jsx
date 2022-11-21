@@ -1,102 +1,54 @@
-import {Route, Routes} from "react-router-dom";
-import {
-  Login,
-  Register,
-  Botsubmit,
-  GameConfig,
-  AvatarSubmit,
-  RobotsLibrary,
-  SimCreate,
-  Navbar,
-} from "../components";
-import {ListMatches, Verify, Home, Welcome, Match} from "../pages";
-import PasswordRestore from "./PasswordRestore/PasswordRestore";
+import {lazy, Suspense} from "react";
+import {Route, Routes, BrowserRouter} from "react-router-dom";
+import {Login, Register, AvatarSubmit} from "../components";
 
-function App() {
+import Private from "./Auth/Private";
+import Public from "./Auth/Public";
+import NotFound from "./NotFound/NotFound";
+import Loader from "./Loader";
+
+const PasswordRestore = lazy(() => import("./PasswordRestore/PasswordRestore"));
+const CreateSimulation = lazy(() =>
+  import("../pages/CreateSimulation/CreateSimulation")
+);
+const BotSubmit = lazy(() => import("../pages/BotSubmit/BotSubmitPage"));
+const Library = lazy(() => import("../pages/Library/Library"));
+const Match = lazy(() => import("../pages/Match/Match"));
+const Welcome = lazy(() => import("../pages/Welcome/Welcome"));
+const Home = lazy(() => import("../pages/Home/Home"));
+const Verify = lazy(() => import("../pages/Verify/Verify"));
+const ListMatches = lazy(() => import("../pages/ListMatches/ListMatches"));
+const Profile = lazy(() => import("../pages/Profile/Profile"));
+const MatchConfig = lazy(() => import("../pages/MatchConfig/MatchConfig"));
+
+const App = () => {
   return (
-    <div className='App'>
-      <div>
+    <BrowserRouter>
+      <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path='/' element={<Welcome />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/restore' element={<PasswordRestore />} />
-          <Route
-            path='/listgames'
-            element={
-              <div>
-                <Navbar />
-                <ListMatches />
-              </div>
-            }
-          />
-          <Route
-            path='/botsubmit'
-            element={
-              <div>
-                <Navbar />
-                <Botsubmit />
-              </div>
-            }
-          />
-          <Route
-            path='/gameconfig'
-            element={
-              <div>
-                <Navbar />
-                <GameConfig />
-              </div>
-            }
-          />
-          <Route
-            path='/verify'
-            element={
-              <div>
-                <Verify />
-              </div>
-            }
-          />
-          <Route
-            path='/simCreate'
-            element={
-              <div>
-                <Navbar />
-                <SimCreate />
-              </div>
-            }
-          />
-          <Route
-            path='/avatarSubmit'
-            element={
-              <div>
-                <Navbar />
-                <AvatarSubmit />
-              </div>
-            }
-          />
-          <Route
-            path='/match/:match_id'
-            element={
-              <div>
-                <Navbar />
-                <Match />
-              </div>
-            }
-          />
-          <Route
-            path='/library'
-            element={
-              <div>
-                <Navbar />
-                <RobotsLibrary />
-              </div>
-            }
-          />
+          <Route element={<Private />}>
+            <Route path='/listgames' element={<ListMatches />} />
+            <Route path='/botsubmit' element={<BotSubmit />} />
+            <Route path='/gameconfig' element={<MatchConfig />} />
+            <Route path='/simCreate' element={<CreateSimulation />} />
+            <Route path='/match/:match_id' element={<Match />} />
+            <Route path='/library' element={<Library />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/avatarSubmit' element={<AvatarSubmit />} />
+            <Route path='/*' element={<NotFound />} />
+          </Route>
+          <Route element={<Public />}>
+            <Route path='/' element={<Welcome />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/verify' element={<Verify />} />
+            <Route path='/restore' element={<PasswordRestore />} />
+            <Route path='/*' element={<NotFound />} />
+          </Route>
         </Routes>
-      </div>
-    </div>
+      </Suspense>
+    </BrowserRouter>
   );
-}
-
+};
 export default App;

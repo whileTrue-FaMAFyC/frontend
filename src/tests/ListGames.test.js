@@ -1,6 +1,11 @@
 import mockAxios from "axios";
 import {BrowserRouter} from "react-router-dom";
-import {render, screen, waitFor} from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import {gamesMock} from "../__mocks__";
 import userEvent from "@testing-library/user-event";
 import {ListGames} from "../components";
@@ -43,6 +48,10 @@ describe("Listar partidas", () => {
     waitFor(() =>
       expect(screen.findByText("No games availables")).toBeInTheDocument()
     );
+    // await waitFor(() => {
+    //   expect(screen.getByText("Match list")).toBeInTheDocument();
+    //   expect(screen.getByText("No games availables")).toBeInTheDocument();
+    // });
   });
 
   it("El usuario refresca la lista de partidas", async () => {
@@ -53,7 +62,9 @@ describe("Listar partidas", () => {
       </BrowserRouter>
     );
 
-    act(() => userEvent.click(screen.getByRole("button", {name: "Refresh"})));
+    act(() =>
+      userEvent.click(screen.getByRole("button", {name: "Apply filters"}))
+    );
 
     //userEvent.click(buttonRefresh);
     const progress = screen.getByTestId("list-progress");
@@ -66,7 +77,5 @@ describe("Listar partidas", () => {
         expect(screen.getByText(name)).toBeInTheDocument();
       });
     });
-
-    // screen.debug();
   });
 });

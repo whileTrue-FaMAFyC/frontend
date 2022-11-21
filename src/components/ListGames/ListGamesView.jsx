@@ -12,6 +12,7 @@ import {
   Button,
   StyledEntryCard,
   SelectorGroup,
+  RowHead,
 } from "./ListGames.styled";
 
 const ListGamesView = ({

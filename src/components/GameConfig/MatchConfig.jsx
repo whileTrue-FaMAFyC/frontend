@@ -10,7 +10,6 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-  Div,
 } from "./MatchConfig.styled.js";
 
 const MatchConfig = () => {
@@ -30,7 +29,7 @@ const MatchConfig = () => {
       const response = await getRobotsNames(localStorage.getItem(`user`));
       setRobotsNames(response.data);
     } catch (error) {
-      console.log(error);
+      setFailure_data(error);
     }
   };
 
@@ -42,7 +41,7 @@ const MatchConfig = () => {
 
   const onSubmit = async (data) => {
     setFailure_data("");
-    const token = await localStorage.getItem("user");
+    const token = localStorage.getItem("user");
     await fetch(`${process.env.REACT_APP_API_KEY}matches/new-match`, {
       method: "POST",
       headers: {
@@ -60,7 +59,6 @@ const MatchConfig = () => {
           setFailure_data("");
           navigate("/listgames");
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
@@ -244,7 +242,7 @@ const MatchConfig = () => {
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <StyledError role='alertServer'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
     </EntryPage>

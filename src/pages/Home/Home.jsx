@@ -22,6 +22,9 @@ const Home = () => {
         <Link to='/library' data-testid='robotLibrary'>
           <StyledButton>Robots library</StyledButton>
         </Link>
+        <Link to='/profile' data-testid='profile'>
+          <StyledButton>Profile</StyledButton>
+        </Link>
         <Link to='/' data-testid='logOut'>
           <StyledButton onClick={logOut}>Log Out</StyledButton>
         </Link>
