@@ -48,10 +48,6 @@ describe("Listar partidas", () => {
     waitFor(() =>
       expect(screen.findByText("No games availables")).toBeInTheDocument()
     );
-    // await waitFor(() => {
-    //   expect(screen.getByText("Match list")).toBeInTheDocument();
-    //   expect(screen.getByText("No games availables")).toBeInTheDocument();
-    // });
   });
 
   it("El usuario refresca la lista de partidas", async () => {
@@ -62,9 +58,7 @@ describe("Listar partidas", () => {
       </BrowserRouter>
     );
 
-    act(() =>
-      userEvent.click(screen.getByRole("button", {name: "Apply filters"}))
-    );
+    act(() => userEvent.click(screen.getByRole("button", {name: "Reload"})));
 
     //userEvent.click(buttonRefresh);
     const progress = screen.getByTestId("list-progress");
