@@ -242,7 +242,6 @@ const MatchConfig = () => {
           ) : (
             <Div>
               <CircularProgress data-testid='loader' />
-              <p>The simulation is about to start!</p>
             </Div>
           )}
         </form>
