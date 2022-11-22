@@ -94,7 +94,6 @@ export const EntryPage = styled.div`
   justify-content: center;
   flex-direction: column;
   min-height: calc(100vh - 70px);
-  background-color: #0f1519;
 `;
 
 export const Div = styled.div`
