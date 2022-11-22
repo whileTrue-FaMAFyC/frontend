@@ -14,6 +14,8 @@ import {
   Feedback,
   StyledButton,
   StyledInput,
+  StyledEntryCard,
+  StyledInputGroup,
 } from "./RobotsLibrary.style";
 
 const RobotsLibrary = () => {
@@ -37,23 +39,26 @@ const RobotsLibrary = () => {
 
   return (
     <PadreContainer>
-      <Container>
-        <Title style={{marginBottom: -25}} data-testid='title'>
+      <StyledEntryCard>
+        <h2 style={{marginBottom: -25}} data-testid='title'>
           My robots
-        </Title>
-        <StyledInput
-          type='text'
-          data-testid='filter'
-          placeholder='Find your robot...'
-          style={{
-            height: 30,
-            verticalAlign: "middle",
-            position: "relative",
-            justifyContent: "center",
-            top: "20px",
-          }}
-          onChange={(e) => setQuery(e.target.value.toLowerCase())}
-        />
+        </h2>
+        <StyledInputGroup>
+          <StyledInput
+            type='text'
+            data-testid='filter'
+            placeholder='Find your robot...'
+            style={{
+              height: 30,
+              verticalAlign: "middle",
+              position: "relative",
+              justifyContent: "center",
+              top: "20px",
+              caretColor: "white",
+            }}
+            onChange={(e) => setQuery(e.target.value.toLowerCase())}
+          />
+        </StyledInputGroup>
         {/* <TextField
           fullWidth
           label='Search'
@@ -95,7 +100,7 @@ const RobotsLibrary = () => {
                   <Column>{stats.matches_won}</Column>
                   <Column>{stats.matches_tied}</Column>
                   <Column>{stats.matches_lost}</Column>
-                  <Column>{stats.games_win_rate * 100}%</Column>
+                  <Column>{(stats.games_win_rate * 100).toFixed()}%</Column>
                 </Row>
               ))}
           </Tbody>
@@ -105,10 +110,10 @@ const RobotsLibrary = () => {
             to='/botsubmit'
             data-testid='linkToBotSubmit'
             style={{color: "black", fontWeight: 500}}>
-            Create bot
+            Create robot
           </Link>
         </StyledButton>
-      </Container>
+      </StyledEntryCard>
     </PadreContainer>
   );
 };
