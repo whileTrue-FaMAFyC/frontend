@@ -3,10 +3,8 @@ import styled from "styled-components";
 export const EntryPage = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 50px;
-  flex-direction: column;
-  min-height: calc(100vh - 120px);
+  justify-content: center;
+  min-height: calc(100vh - 100px);
 `;
 
 export const StyledButton = styled.button`
@@ -34,7 +32,7 @@ export const StyledEntryCard = styled.div`
   max-width: 450px;
   border-radius: 5px;
   padding: 50px;
-  margin-bottom: 40px;
+
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
   text-align: center;

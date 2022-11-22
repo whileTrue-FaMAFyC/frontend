@@ -5,8 +5,7 @@ export const EntryPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 50px;
+  justify-content: center;
 `;
 
 export const StyledButton = styled.button`

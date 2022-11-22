@@ -87,10 +87,11 @@ export const StyledSuccess = styled.p`
 `;
 
 export const EntryPage = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #0f1519;
 `;
 
