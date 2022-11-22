@@ -56,6 +56,7 @@ export const EntryPage = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background-color: #0f1519;
+  overflow-x: auto;
 `;
 
 export const StyledLabel = styled.label`

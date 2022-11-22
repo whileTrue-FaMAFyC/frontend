@@ -60,6 +60,7 @@ export const StyledInput = styled.input`
   padding: 8px 16px;
   border: 1px solid #00c8c8;
   border-radius: 4px;
+  caret-color: #ffffff;
   font-size: 1rem;
   -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;

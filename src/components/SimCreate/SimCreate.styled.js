@@ -61,6 +61,11 @@ export const StyledInputGroup = styled.div`
     display: inline-block;
     margin-bottom: 0.5rem;
     color: #fff;
+    margin-right: 10px;
+    width: 70px;
+  };
+  select {
+    width: 150px;
   }
 `;
 
@@ -71,6 +76,7 @@ export const StyledInput = styled.input`
   border: 1px solid #00c8c8;
   border-radius: 4px;
   font-size: 1rem;
+  caret-color: #ffffff;
   -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
   background-color: #252c32;

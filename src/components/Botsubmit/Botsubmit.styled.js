@@ -59,10 +59,12 @@ export const StyledInput = styled.input`
   border: 1px solid turquoise;
   border-radius: 4px;
   font-size: 1rem;
-  color: #0f1519;
-  -webkit-text-fill-color: #dedede;
+  color: #ffffff;
+  // -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
   background-color: #252c32;
+  margin-top: 10px;
+  margin-bottom: 10px;
   &::placeholder {
     color: black;
   }

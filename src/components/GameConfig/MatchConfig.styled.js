@@ -51,6 +51,7 @@ export const StyledInputGroup = styled.div`
     display: inline-block;
     margin-bottom: 0.5rem;
     color: #fff;
+    margin-right: 10px;
   }
 `;
 
@@ -64,6 +65,7 @@ export const StyledInput = styled.input`
   -webkit-text-fill-color: #dedede;
   transition: box-shadow 0.2s;
   background-color: #252c32;
+  caret-color: #ffffff;
   &::placeholder {
     color: blue;
     -webkit-text-fill-color: #b8b8b8;

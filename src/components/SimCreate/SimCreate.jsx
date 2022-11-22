@@ -187,7 +187,7 @@ const SimCreate = () => {
               ) : null}
 
               <StyledInputGroup>
-                <label className='form-label' htmlFor='inputnum_rounds'>
+                <label style={{width: "150px"}} className='form-label' htmlFor='inputnum_rounds'>
                   Number of rounds:
                 </label>
                 <StyledInput
