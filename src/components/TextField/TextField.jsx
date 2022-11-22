@@ -2,6 +2,7 @@ import {useFormContext} from "react-hook-form";
 import {InputContainer, Input, InputError} from "./TextField.styled";
 
 const TextField = ({
+  placeholder,
   type,
   name,
   minLength,
@@ -21,6 +22,8 @@ const TextField = ({
   return (
     <InputContainer>
       <Input
+        autoComplete='off'
+        placeholder={placeholder}
         data-testid={name}
         name={name}
         type={type}

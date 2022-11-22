@@ -1,1 +1,12 @@
-export {default as Home} from "./Home";
+export {default as BotSubmitPage} from "./BotSubmit/BotSubmitPage";
+export {default as CreateSimulation} from "./CreateSimulation/CreateSimulation";
+export {default as Home} from "./Home/Home";
+export {default as Library} from "./Library/Library";
+export {default as ListMatches} from "./ListMatches/ListMatches";
+export {default as Match} from "./Match/Match";
+export {default as MatchView} from "./Match/MatchView";
+export {default as MatchLoader} from "./Match/components/MatchLoader";
+export {default as MatchConfig} from "./MatchConfig/MatchConfig";
+export {default as Profile} from "./Profile/Profile";
+export {default as Verify} from "./Verify/Verify";
+export {default as Welcome} from "./Welcome/Welcome";

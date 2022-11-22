@@ -6,8 +6,14 @@ import {
   StyledInput,
   StyledInputGroup,
   EntryPage,
+  StyledSuccess,
   StyledError,
-} from "./styles";
+  Div,
+} from "./Botsubmit.styled";
+import {CircularProgress} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import {useNavigate} from "react-router-dom";
+import BasicModal from "./codeModal";
 
 const Botsubmit = () => {
   const {
@@ -18,10 +24,16 @@ const Botsubmit = () => {
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
 
-  const [file_cod, setFile_cod] = useState(null); //base64 del codigo
-  const [fileName_cod, setFileName_cod] = useState(null); //filename del codigo
+  const [file_cod, setFile_cod] = useState(""); //base64 del codigo
+  const [fileName_cod, setFileName_cod] = useState(""); //filename del codigo
 
-  const [file_av, setFile_av] = useState(null); //base64 del avatar
+  const [file_av, setFile_av] = useState(""); //base64 del avatar
+  const [imgAvatar, setImgAvatar] = useState(null); //image to show on form
+
+  const [loading, setLoading] = useState(false); //processing post to server state
+  const [isHovering, setIsHovering] = useState(false);
+
+  const navigate = useNavigate();
 
   const fileToBase64 = (file, cb) => {
     const reader = new FileReader();
@@ -53,13 +65,33 @@ const Botsubmit = () => {
     }
   };
 
+  const onChangePicture = (e) => {
+    if (e?.target.files[0]) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgAvatar(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
   const submitForm = async (data) => {
+    setFailure_data("");
+    setLoading(true);
     data.source_code = file_cod;
     data.avatar = file_av;
     data.bot_filename = fileName_cod;
     const token = localStorage.getItem("user");
     try {
-      await fetch("http://localhost:8000/create-bot", {
+      await fetch(`${process.env.REACT_APP_API_KEY}create-bot`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,31 +101,36 @@ const Botsubmit = () => {
         },
         body: JSON.stringify(data),
       }).then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 200 || response.status === 201) {
           setSuccess(true);
+          navigate("/library");
         } else {
           setSuccess(false);
           setFailure_data(data.detail);
         }
       });
     } catch (err) {
-      alert(err);
+      setLoading(false);
+      setSuccess(false);
+      setFailure_data("Network error");
     }
   };
 
   return (
     <EntryPage>
       <StyledEntryCard>
-        <h2>SUBIR BOT</h2>
+        <h2>Robot submit</h2>
         <form
           onSubmit={handleSubmit(submitForm)}
           className='requires-validation'>
           <StyledInputGroup>
             <label className='form-content' htmlFor='name'>
-              nombre:
+              Name
             </label>
             <StyledInput
+              autoComplete='off'
               id='name'
               type='text'
               {...register("name", {
@@ -101,28 +138,30 @@ const Botsubmit = () => {
                 maxLength: 40,
                 pattern: /^[A-Za-z0-9 ]+$/i,
               })}
-              placeholder='Nombre del bot'
             />
             {errors.name?.type === "required" ? (
-              <StyledError role='no_name'>Ingresar nombre</StyledError>
+              <StyledError role='no_name'>Name is required</StyledError>
             ) : null}
             {errors.name?.type === "maxLength" ? (
               <StyledError role='invalid_name_size'>
-                El nombre del bot debe tener como máximo 40 caracteres
+                Bot's name must have less than 40 characters
               </StyledError>
             ) : null}
             {errors.name?.type === "pattern" ? (
               <StyledError role='invalid_name'>
-                No se permiten caracteres especiales
+                Special characters are not allowed
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
-          <StyledInputGroup>
+          <StyledInputGroup className='hide-if-value'>
             <label className='form-content' htmlFor='source_code'>
-              codigo:
+              Code
             </label>
+            <BasicModal />
+
             <StyledInput
+              autoComplete='off'
               id='source_code'
               type='file'
               accept='.py'
@@ -133,7 +172,7 @@ const Botsubmit = () => {
                 validate: (e) => {
                   return (
                     e.length !== 0 &&
-                    new RegExp("python").test(e[0].type) &&
+                    new RegExp(".*.py$").test(e[0].name) &&
                     e[0].size < 40000
                   );
                 },
@@ -141,45 +180,77 @@ const Botsubmit = () => {
             />
             {errors.source_code?.type === "validate" ? (
               <StyledError role='invalid_code'>
-                Ingrese un archivo con extensión .py de menos de 40 kB
+                Insert .py file under 40 KB
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
           <StyledInputGroup>
             <label className='form-content' htmlFor='avatar'>
-              avatar:
+              Avatar
             </label>
+            <Avatar
+              style={{
+                height: 100,
+                width: 100,
+                verticalAlign: "middle",
+                position: "relative",
+                left: "124px",
+                justifyContent: "center",
+                bottom: "10px",
+              }}
+              spacing={2}
+              src={imgAvatar}
+            />
             <StyledInput
+              autoComplete='off'
               id='avatar'
               type='file'
               accept='image/*'
               {...register("avatar", {
-                onChange: (t) => {
-                  onUploadFileChange(t, setFile_av, (e) => {
+                onChange: (file) => {
+                  onUploadFileChange(file, setFile_av, (e) => {
                     return e;
                   });
+                  if (file?.target.files[0] !== undefined) {
+                    onChangePicture(file);
+                  } else {
+                    setImgAvatar(null);
+                  }
                 },
                 validate: (e) => {
                   return (
                     e.length === 0 ||
-                    (new RegExp("image/*").test(e[0].type) && e[0].size < 40000)
+                    (new RegExp(".*.(jpe?g|png)$").test(e[0].name) &&
+                      e[0].size < 40000)
                   );
                 },
               })}
             />
             {errors.avatar?.type === "validate" ? (
               <StyledError role='invalid_avatar'>
-                Se necesita un archivo con extensión .png o .jpg de menos de 40
-                kB
+                The file must be an image of extension .png, .jpg or .jpeg from
+                at most 40KB.
               </StyledError>
             ) : null}
           </StyledInputGroup>
 
-          <StyledButton type='submit'>Subir</StyledButton>
+          {!loading ? (
+            <StyledButton type='submit' data-testid='submit'>
+              Submit
+            </StyledButton>
+          ) : (
+            <Div>
+              <CircularProgress data-testid='loader' />
+            </Div>
+          )}
         </form>
-        {success ? <div role='dialog'>Subido exitosamente</div> : null}
-        {failure_data !== "" ? <div role='alert'>{failure_data}</div> : null}
+        {success ? (
+          <StyledSuccess role='dialog'>Successfully added</StyledSuccess>
+        ) : null}
+        {failure_data !== "" ? (
+          <StyledError role='alert'>{failure_data}</StyledError>
+        ) : null}
       </StyledEntryCard>
     </EntryPage>
   );

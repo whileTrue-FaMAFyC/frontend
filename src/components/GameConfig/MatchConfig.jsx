@@ -1,5 +1,7 @@
 import {useForm} from "react-hook-form";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import {getRobotsNames} from "../../services";
+import {useNavigate} from "react-router-dom";
 
 import {
   StyledButton,
@@ -8,9 +10,11 @@ import {
   StyledInputGroup,
   EntryPage,
   StyledError,
-} from "./GameConfig.styled.js";
+  Div,
+} from "./MatchConfig.styled.js";
+import {CircularProgress} from "@mui/material";
 
-const FormPartidaConfig = () => {
+const MatchConfig = () => {
   const {
     register,
     handleSubmit,
@@ -20,10 +24,29 @@ const FormPartidaConfig = () => {
 
   const [success, setSuccess] = useState(false); //Form subido con exito
   const [failure_data, setFailure_data] = useState(""); //Detalle del servidor
+  const [robotsNames, setRobotsNames] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const callGetRobotsNames = async () => {
+    try {
+      const response = await getRobotsNames(localStorage.getItem(`user`));
+      setRobotsNames(response.data);
+    } catch (error) {
+      setFailure_data(error);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    callGetRobotsNames();
+  }, []);
 
   const onSubmit = async (data) => {
-    const token = await localStorage.getItem("user");
-    await fetch("http://localhost:8000/matches/new-match", {
+    setFailure_data("");
+    setLoading(true);
+    const token = localStorage.getItem("user");
+    await fetch(`${process.env.REACT_APP_API_KEY}matches/new-match`, {
       method: "POST",
       headers: {
         authorization: `${token}`,
@@ -34,17 +57,19 @@ const FormPartidaConfig = () => {
       body: JSON.stringify(data),
     })
       .then(async (response) => {
+        setLoading(false);
         const data = await response.json();
         if (response.status === 201 || response.status === 200) {
           setSuccess(true);
           setFailure_data("");
+          navigate("/listgames");
         } else {
-          alert(data.detail);
           setSuccess(false);
           setFailure_data(data.detail);
         }
       })
       .catch((error) => {
+        setLoading(false);
         alert(error);
         setSuccess(false);
         setFailure_data(data.detail);
@@ -54,13 +79,14 @@ const FormPartidaConfig = () => {
   return (
     <EntryPage>
       <StyledEntryCard className='form_crear_partida'>
-        <h1>Crear Partida</h1>
+        <h2>Create match</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputName'>
-              Nombre de la partida
+              Name:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputName'
               data-testid='name'
@@ -71,26 +97,27 @@ const FormPartidaConfig = () => {
               })}
             />
             {errors.name?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese un nombre para la partida
+              <StyledError data-testid='alertError'>
+                Name is required.
               </StyledError>
             )}
             {errors.name?.type === "maxLength" && (
-              <StyledError role='alertError'>
-                El nombre debe tener a lo sumo 16 caracteres
+              <StyledError data-testid='alertError'>
+                The name must have at most 16 characters.
               </StyledError>
             )}
             {errors.name?.type === "minLength" && (
-              <StyledError role='alertError'>
-                El nombre debe tener al menos 3 caracteres
+              <StyledError data-testid='alertError'>
+                The name must have at least 3 characters.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputPassword'>
-              Contraseña (opcional)
+              Password (optional):
             </label>
             <StyledInput
+              autoComplete='off'
               type='password'
               id='inputPassword'
               data-testid='password'
@@ -99,13 +126,13 @@ const FormPartidaConfig = () => {
               })}
             />
             {errors.password?.type === "maxLength" && (
-              <StyledError role='alertError'>
-                La contraseña debe tener a lo sumo 16 caracteres
+              <StyledError data-testid='alertError'>
+                The password must have at most 16 characters.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Mínimo de jugadores</label>
+            <label style={{width: "100px"}}>Min players:</label>
             <select
               data-testid='minPlayers'
               {...register("min_players", {required: true})}>
@@ -115,7 +142,7 @@ const FormPartidaConfig = () => {
             </select>
           </StyledInputGroup>
           <StyledInputGroup>
-            <label>Máximo de jugadores</label>
+            <label style={{width: "100px"}}>Max players:</label>
             <select
               data-testid='maxPlayers'
               {...register("max_players", {
@@ -129,17 +156,18 @@ const FormPartidaConfig = () => {
               <option value='4'>4</option>
             </select>
             {errors.max_players?.type === "validate" && (
-              <StyledError role='alertError'>
-                El máximo de jugadores debe ser mayor o igual al mínimo
-                establecido
+              <StyledError data-testid='alertError'>
+                The maximum number of players must be greater than or equal to
+                the minimum established.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_games'>
-              Numero de juegos
+              Number of games:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputnum_games'
               data-testid='nGames'
@@ -151,21 +179,22 @@ const FormPartidaConfig = () => {
               })}
             />
             {errors.num_games?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese el numero de juegos
+              <StyledError data-testid='alertError'>
+                Number of games is required.
               </StyledError>
             )}
             {errors.num_games?.type === "validate" && (
-              <StyledError role='alertError'>
-                Ingrese un número entero entre 1 y 200
+              <StyledError data-testid='alertError'>
+                Enter an integer between 1 and 200.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputnum_rounds'>
-              Numero de rondas
+              Number of rounds:
             </label>
             <StyledInput
+              autoComplete='off'
               type='text'
               id='inputnum_rounds'
               data-testid='nRounds'
@@ -177,48 +206,60 @@ const FormPartidaConfig = () => {
               })}
             />
             {errors.num_rounds?.type === "required" && (
-              <StyledError role='alertError'>
-                Ingrese el numero de rondas
+              <StyledError data-testid='alertError'>
+                Number of rounds is required.
               </StyledError>
             )}
             {errors.num_rounds?.type === "validate" && (
-              <StyledError role='alertError'>
-                Ingrese un número entero entre 1 y 10000
+              <StyledError data-testid='alertError'>
+                Enter an integer between 1 and 10000.
               </StyledError>
             )}
           </StyledInputGroup>
           <StyledInputGroup>
             <label className='form-label' htmlFor='inputRobot'>
-              Elegir robot
+              Robot:
             </label>
-            <StyledInput
-              type='text'
-              id='creator_robot'
+            <select
+              id='inputRobot'
               data-testid='nameRobot'
-              {...register("creator_robot", {
-                required: true,
-              })}
-            />{" "}
+              {...register("creator_robot", {required: true})}>
+              {robotsNames.map((a) => (
+                <option key={a.name} value={a.name}>
+                  {a.name}
+                </option>
+              ))}
+              <option key={""} value=''>
+                * Choose a robot *
+              </option>
+            </select>
             {errors.creator_robot?.type === "required" && (
-              <StyledError role='alertError'>Ingrese un robot</StyledError>
+              <StyledError data-testid='alertError'>
+                Robot is required.
+              </StyledError>
             )}
           </StyledInputGroup>
-          <StyledButton type='submit'>Crear</StyledButton>
+          {!loading ? (
+            <StyledButton type='submit' data-testid='submit'>
+              Create match
+            </StyledButton>
+          ) : (
+            <Div>
+              <CircularProgress data-testid='loader' />
+            </Div>
+          )}
         </form>
         {success && (
-          <div
-            className='alert alert-success mt-4'
-            role='alertSuccess'
-            data-testid='exito'>
-            La partida se creó exitosamente
+          <div className='alert alert-success mt-4' data-testid='alertSuccess'>
+            The match was created successfully.
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <StyledError data-testid='alertError'>{failure_data}</StyledError>
         ) : null}
       </StyledEntryCard>
     </EntryPage>
   );
 };
 
-export default FormPartidaConfig;
+export default MatchConfig;

@@ -1,31 +1,73 @@
 import React from "react";
-import {StyledNavbar, NavItemLink} from "./Navbar.styled";
+import {
+  StyledNavbar,
+  NavItemLink,
+  LinkContainer,
+  Header,
+  Burger,
+} from "./Navbar.styled";
+import Avatar from "@mui/material/Avatar";
 
-function Navbar({children}) {
+function Navbar({handleMenu, open}) {
   return (
-    <StyledNavbar data-testid='navbar'>
-      <NavItemLink to='/' data-testid='toHome'>
-        Home
-      </NavItemLink>
-      <NavItemLink to='/login' data-testid='toLogin'>
-        Log In
-      </NavItemLink>
-      <NavItemLink to='/register' data-testid='toReg'>
-        Register
-      </NavItemLink>
-      <NavItemLink to='/listgames' data-testid='toListGames'>
-        List Matches
-      </NavItemLink>
-      <NavItemLink to='/botsubmit' data-testid='toBotsubmit'>
-        Bot Submit
-      </NavItemLink>
-      <NavItemLink to='/gameconfig' data-testid='toGameConfig'>
-        Create Match
-      </NavItemLink>
-      <NavItemLink to='/botInGame' data-testid='botInGame'>
-        Bot In Game
-      </NavItemLink>
-    </StyledNavbar>
+    <Header>
+      <StyledNavbar data-testid='navbar'>
+        <LinkContainer>
+          <NavItemLink to='/home' data-testid='toHome'>
+            Home
+          </NavItemLink>
+        </LinkContainer>
+        <LinkContainer>
+          <NavItemLink
+            to='/gameconfig'
+            data-testid='toCreateMatch'
+            className={({isActive}) => (isActive ? "active" : undefined)}>
+            Create Match
+          </NavItemLink>
+        </LinkContainer>
+        <LinkContainer>
+          <NavItemLink
+            to='/botsubmit'
+            data-testid='toCreateBot'
+            className={({isActive}) => (isActive ? "active" : undefined)}>
+            Create Bot
+          </NavItemLink>
+        </LinkContainer>
+        <LinkContainer>
+          <NavItemLink
+            to='/listgames'
+            data-testid='toListGames'
+            className={({isActive}) => (isActive ? "active" : undefined)}>
+            List Matches
+          </NavItemLink>
+        </LinkContainer>
+        <LinkContainer>
+          <NavItemLink
+            to='/simCreate'
+            data-testid='toSimCreate'
+            className={({isActive}) => (isActive ? "active" : undefined)}>
+            Create Simulation
+          </NavItemLink>
+        </LinkContainer>
+        <LinkContainer>
+          <NavItemLink
+            to='/library'
+            data-testid='robotsLibrary'
+            className={({isActive}) => (isActive ? "active" : undefined)}>
+            Robots Library
+          </NavItemLink>
+        </LinkContainer>
+      </StyledNavbar>
+      {!open && <Burger onClick={() => handleMenu(true)} />}
+      <LinkContainer>
+        <NavItemLink
+          to='/profile'
+          data-testid='profile'
+          className={({isActive}) => (isActive ? "active" : undefined)}>
+          <Avatar spacing={0} src={localStorage.getItem("avatar")} />
+        </NavItemLink>
+      </LinkContainer>
+    </Header>
   );
 }
 
