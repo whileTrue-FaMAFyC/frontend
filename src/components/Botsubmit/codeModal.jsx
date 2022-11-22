@@ -11,7 +11,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 700,
+  width: 800,
   bgcolor: "#252c32",
   border: "2px solid #000",
   boxShadow: 24,
@@ -57,7 +57,7 @@ const shooterRobot = `class ShooterRobot(Robot):
     def respond(self):
         self.point_scanner(self.degrees, 10)
         if self.scanned() != None:
-            self.cannon(self.degrees, self.scanned())
+            self.cannon(self.degrees, self.scanprened())
         else:
             self.degrees = (self.degrees + 10) % 360`;
 
@@ -80,38 +80,50 @@ export default function BasicModal() {
           <Typography
             id='modal-modal-title'
             variant='h4'
-            component='h2'
-            style={{fontFamily: "Times new roman"}}>
+            component='span'
+            style={{fontFamily: "Times new roman", color: "white"}}>
             Instruction set
           </Typography>
-          <Typography id='modal-modal-description' sx={{mt: 1}} variant='body1'>
+          <Typography
+            id='modal-modal-description'
+            sx={{mt: 1, color: "white"}}
+            component='span'
+            variant='body1'>
             <GameInfo />
           </Typography>
           <Typography
             id='modal-modal-title'
             variant='h4'
-            component='h2'
-            sx={{mt: 1.5, fontFamily: "Times new roman"}}>
+            component='span'
+            sx={{mt: 1.5, fontFamily: "Times new roman", color: "white"}}>
+            <br />
             Robot code examples
           </Typography>
           <Typography
             id='modal-modal-title'
             variant='h6'
-            component='h2'
-            sx={{mt: 3}}>
+            component='span'
+            sx={{mt: 3, color: "white"}}>
+            <br />
             Example 1: runner_robot.py
           </Typography>
-          <Typography id='modal-modal-description' sx={{mt: 1}}>
+          <Typography
+            id='modal-modal-description'
+            component='span'
+            sx={{mt: 1, color: "white"}}>
             <Code>{runnerRobot}</Code>
           </Typography>
           <Typography
             id='modal-modal-title'
             variant='h5'
-            component='h2'
-            sx={{mt: 3}}>
+            component='span'
+            sx={{mt: 3, color: "white"}}>
             Example 2: shooter_robot.py
           </Typography>
-          <Typography id='modal-modal-description' sx={{mt: 1}}>
+          <Typography
+            id='modal-modal-description'
+            sx={{mt: 1, color: "white"}}
+            component='span'>
             <Code>{shooterRobot}</Code>
           </Typography>
         </Box>
