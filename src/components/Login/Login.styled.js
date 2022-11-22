@@ -25,7 +25,6 @@ export const StyledEntryCard = styled.div`
   max-width: 450px;
   border-radius: 5px;
   padding: 50px;
-  margin-top: 10%;
   margin-bottom: 40px;
   background-color: #252c32;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(0, 0, 0, 0.06);
