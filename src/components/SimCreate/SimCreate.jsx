@@ -80,7 +80,6 @@ const SimCreate = () => {
       })
       .catch((error) => {
         setLoading(false);
-        alert(error);
         setSuccess(false);
         setFailure_data("Network error");
       });
@@ -187,7 +186,10 @@ const SimCreate = () => {
               ) : null}
 
               <StyledInputGroup>
-                <label style={{width: "150px"}} className='form-label' htmlFor='inputnum_rounds'>
+                <label
+                  style={{width: "150px"}}
+                  className='form-label'
+                  htmlFor='inputnum_rounds'>
                   Number of rounds:
                 </label>
                 <StyledInput
