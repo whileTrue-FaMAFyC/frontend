@@ -13,6 +13,7 @@ import {
 import {CircularProgress} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {useNavigate} from "react-router-dom";
+import BasicModal from "./codeModal";
 
 const Botsubmit = () => {
   const {
@@ -30,6 +31,7 @@ const Botsubmit = () => {
   const [imgAvatar, setImgAvatar] = useState(null); //image to show on form
 
   const [loading, setLoading] = useState(false); //processing post to server state
+  const [isHovering, setIsHovering] = useState(false);
 
   const navigate = useNavigate();
 
@@ -71,6 +73,14 @@ const Botsubmit = () => {
       });
       reader.readAsDataURL(e.target.files[0]);
     }
+  };
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
   };
 
   const submitForm = async (data) => {
@@ -148,6 +158,8 @@ const Botsubmit = () => {
             <label className='form-content' htmlFor='source_code'>
               Code
             </label>
+            <BasicModal />
+
             <StyledInput
               autoComplete='off'
               id='source_code'
