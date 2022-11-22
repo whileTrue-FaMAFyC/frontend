@@ -94,3 +94,11 @@ export const EntryPage = styled.div`
   min-height: 100vh;
   background-color: #0f1519;
 `;
+
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #252c32;
+  margin: 15px;
+  flex-direction: column;
+`;

@@ -11,16 +11,6 @@ describe("Profile tests", () => {
   beforeEach(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
-  //   beforeEach(async () => {
-  //     mockAxios.get.mockResolvedValue({data: robotsMock});
-  //     render(<FormPartidaConfig />);
-
-  //     await waitFor(() => {
-  //       robotsMock.forEach(({name}) => {
-  //         expect(screen.getByText(name)).toBeInTheDocument();
-  //       });
-  //     });
-  //   });
 
   let inputAvatarImage;
   let username;
@@ -47,14 +37,6 @@ describe("Profile tests", () => {
     inputAvatarImage = screen.getByTestId("avatarImage");
     username = screen.getByTestId("username");
     email = screen.getByTestId("email");
-    // inputCurrentPassword = screen.getByTestId("currentPassword");
-    // inputNewPassword = screen.getByTestId("newPassword");
-    // inputNewPasswordConfirmation = screen.getByTestId(
-    //   "newPasswordConfirmation"
-    // );
-    // applyButton = screen.getByRole("apply");
-    // undoButton = screen.getByRole("undo");
-    // submitButton = screen.getByRole("submit");
     changePasswordButton = screen.getByRole("changePassword");
     expect(mockAxios.get).toHaveBeenCalledWith(
       `${process.env.REACT_APP_API_KEY}user-profile`,
@@ -74,12 +56,6 @@ describe("Profile tests", () => {
     expect.toBeInTheDocument(inputAvatarImage);
     expect.toBeInTheDocument(username);
     expect.toBeInTheDocument(email);
-    // expect.toBeInTheDocument(inputCurrentPassword);
-    // expect.toBeInTheDocument(inputNewPassword);
-    // expect.toBeInTheDocument(inputNewPasswordConfirmation);
-    // expect.toBeInTheDocument(applyButton);
-    // expect.toBeInTheDocument(undoButton);
-    // expect.toBeInTheDocument(submitButton);
     expect.toBeInTheDocument(changePasswordButton);
   });
 
@@ -98,26 +74,7 @@ describe("Profile tests", () => {
     expect.toBeInTheDocument(inputCurrentPassword);
     expect.toBeInTheDocument(inputNewPassword);
     expect.toBeInTheDocument(inputNewPasswordConfirmation);
-    // expect(mockAxios.get).toHaveBeenCalledWith(
-    //   `${process.env.REACT_APP_API_KEY}user-profile`,
-    //   {
-    //     headers: {
-    //       Authorization: localStorage.getItem("user"),
-    //     },
-    //   }
-    // );
 
-    // expect(mockAxios.get).toHaveBeenCalledTimes(1);
-    // expect(
-    //   await waitFor(() => userInfo.forEach(({data})) screen.findByText("Adolfo"))
-    // ).toBeInTheDocument();
-
-    // await waitFor(() => {
-    //   userInfo.forEach(({username, email}) => {
-    //     expect(screen.getByText(username)).toBeInTheDocument();
-    //   });
-    // });
-    // userEvent.type(inputCurrentPassword, "asdasdA1");
     const av = new File(["holis"], "aaavatar.png", {type: "image/png"});
     userEvent.upload(inputAvatarImage, av);
     applyButton = screen.getByRole("apply");
@@ -128,9 +85,37 @@ describe("Profile tests", () => {
     expect.toBeInTheDocument(submitButton);
   });
 
-  it("Aparece usuario y email", async () => {});
+  it("Aparece usuario y email", async () => {
+    mockAxios.get.mockResolvedValue({data: userInfo});
+    render(
+      <div>
+        <Router>
+          <Profile />;
+        </Router>
+      </div>
+    );
+    const email = await screen.findByText("aestusemburgo@gmail.com");
+    const usuario = await screen.findByText("Adolfo");
+    expect(email).toBeInTheDocument(email);
+    expect(usuario).toBeInTheDocument(usuario);
+  });
 
-  it("Cambiar avatar", async () => {});
+  it("Cambiar avatar", async () => {
+    server.use(
+      rest.put(
+        `${process.env.REACT_APP_API_KEY}change-avatar`,
+        async (req, res, ctx) => {
+          return res.once(ctx.status(200), ctx.json({status: 200}));
+        }
+      )
+    );
+    const av = new File(["holis"], "aaavatar.png", {type: "image/png"});
+    userEvent.upload(inputAvatarImage, av);
+    applyButton = screen.getByRole("apply");
+    userEvent.click(applyButton);
+    const alert = await screen.findByTestId("alertSuccess");
+    expect(alert).toBeInTheDocument(alert);
+  });
 
   it("Deshacer cambio de avatar", async () => {
     const av = new File(["holis"], "aaavatar.png", {type: "image/png"});
@@ -140,27 +125,27 @@ describe("Profile tests", () => {
   });
 
   it("Cambiar contraseña con exito", async () => {
-    // server.use(
-    //   rest.patch(
-    //     `${process.env.REACT_APP_API_KEY}change-password`,
-    //     async (req, res, ctx) => {
-    //       return res.once(ctx.status(200), ctx.json({status: 200}));
-    //     }
-    //   )
-    // );
-    // userEvent.click(changePasswordButton);
-    // inputCurrentPassword = screen.getByTestId("currentPassword");
-    // inputNewPassword = screen.getByTestId("newPassword");
-    // inputNewPasswordConfirmation = screen.getByTestId(
-    //   "newPasswordConfirmation"
-    // );
-    // submitButton = screen.getByRole("submit");
-    // userEvent.type(inputCurrentPassword, "asdasdA1");
-    // userEvent.type(inputNewPassword, "asdasdB1");
-    // userEvent.type(inputNewPasswordConfirmation, "asdasdB1");
-    // userEvent.click(submitButton);
-    // const alert = await screen.findByRole("alertSuccess");
-    // expect(alert).toHaveTextContent("Password was changed successfully");
+    server.use(
+      rest.patch(
+        `${process.env.REACT_APP_API_KEY}change-password`,
+        async (req, res, ctx) => {
+          return res.once(ctx.status(200), ctx.json({status: 200}));
+        }
+      )
+    );
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    inputNewPassword = screen.getByTestId("newPassword");
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "asdasdA1");
+    userEvent.type(inputNewPassword, "asdasdB1");
+    userEvent.type(inputNewPasswordConfirmation, "asdasdB1");
+    () => userEvent.click(submitButton);
+    const alert = await screen.findByTestId("alert");
+    expect(alert).toBeInTheDocument(alert);
   });
 
   it("Contraseña actual con pocos caracteres", async () => {
@@ -315,7 +300,32 @@ describe("Profile tests", () => {
     );
   });
 
-  it("Contraseña actual distinta a la cargada en el sistema", async () => {});
+  it("Contraseña actual distinta a la cargada en el sistema", async () => {
+    server.use(
+      rest.patch(
+        `${process.env.REACT_APP_API_KEY}change-password`,
+        async (req, res, ctx) => {
+          return res.once(
+            ctx.status(400),
+            ctx.json({status: 400, detail: "Invalid credentials"})
+          );
+        }
+      )
+    );
+    userEvent.click(changePasswordButton);
+    inputCurrentPassword = screen.getByTestId("currentPassword");
+    inputNewPassword = screen.getByTestId("newPassword");
+    inputNewPasswordConfirmation = screen.getByTestId(
+      "newPasswordConfirmation"
+    );
+    submitButton = screen.getByRole("submit");
+    userEvent.type(inputCurrentPassword, "asdasdA1");
+    userEvent.type(inputNewPassword, "asdasdB1");
+    userEvent.type(inputNewPasswordConfirmation, "asdasdB1");
+    () => userEvent.click(submitButton);
+    const alert = await screen.findByTestId("alert");
+    expect(alert).toBeInTheDocument(alert);
+  });
 
   it("Confirmación de nueva contraseña distinta a la nueva contraseña", async () => {
     userEvent.click(changePasswordButton);
