@@ -20,7 +20,6 @@ const AvatarSubmit = () => {
   const [success, setSuccess] = useState(false);
   const [failure_data, setFailure_data] = useState("");
   const [file, setFile] = useState(null);
-  const [fileName, setFileName] = useState(null);
   const navigate = useNavigate();
   const [imgData, setImgData] = useState(null);
 
@@ -44,11 +43,9 @@ const AvatarSubmit = () => {
         fileToBase64(target.files[0], (err, result) => {
           if (result) {
             setFile(result);
-            setFileName(target.files[0]);
           }
         });
       } else {
-        setFileName("");
         setFile("");
       }
     }
@@ -143,20 +140,22 @@ const AvatarSubmit = () => {
             })}
           />
           {errors.avatar?.type === "validate" && (
-            <StyledError role='alertError'>
+            <StyledError data-testid='alertError'>
               The file must be an image of extension .png, .jpg or .jpeg from at
               most 40KB.
             </StyledError>
           )}
-          <StyledButton type='submit'>Submit</StyledButton>
+          <StyledButton type='submit' data-testid='button'>
+            Submit
+          </StyledButton>
         </form>
         {success && (
-          <div className='alert alert-success mt-4' role='alertSuccess'>
+          <div className='alert alert-success mt-4' data-testid='alertSuccess'>
             Successfully added
           </div>
         )}
         {failure_data !== "" ? (
-          <div role='alertServer'>{failure_data}</div>
+          <div data-testid='alertServer'>{failure_data}</div>
         ) : null}
       </StyledEntryCard>
     </EntryPage>

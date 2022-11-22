@@ -37,7 +37,7 @@ describe("Register form test", () => {
     inputEmail = screen.getByTestId("Email");
     inputPassword = screen.getByTestId("Password");
     inputConfirmPassword = screen.getByTestId("Confirm password");
-    button = screen.getByRole("button");
+    button = screen.getByTestId("button");
   });
 
   // RENDERIZADO DE COMPONENTES
@@ -46,7 +46,7 @@ describe("Register form test", () => {
     expect.toBeInTheDocument(screen.getByTestId("Email"));
     expect.toBeInTheDocument(screen.getByTestId("Password"));
     expect.toBeInTheDocument(screen.getByTestId("Confirm password"));
-    expect.toBeInTheDocument(screen.getByRole("button"));
+    expect.toBeInTheDocument(screen.getByTestId("button"));
 
     expect(alert);
   });
@@ -60,7 +60,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert);
   });
@@ -72,7 +72,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Username is required");
   });
@@ -84,7 +84,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("Email is required");
   });
 
@@ -95,7 +95,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("Password is required");
   });
 
@@ -105,7 +105,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("Password is required");
   });
 
@@ -116,7 +116,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("Enter your password again");
   });
 
@@ -129,7 +129,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert);
   });
@@ -143,7 +143,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "Username must be at most 16 characters long."
     );
@@ -157,7 +157,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "Username must be at least 3 characters long."
     );
@@ -172,7 +172,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("The email format is incorrect");
   });
 
@@ -185,7 +185,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
@@ -199,7 +199,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
@@ -213,7 +213,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
@@ -227,7 +227,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent(
       "The password must contain at least 8 characters, one uppercase, lowercase and number"
     );
@@ -242,7 +242,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
     expect(alert).toHaveTextContent("Passwords do not match");
   });
 
@@ -263,7 +263,7 @@ describe("Register form test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertServer");
+    const alert = await screen.findByTestId("alertServer");
 
     expect(alert).toBeInTheDocument();
   });

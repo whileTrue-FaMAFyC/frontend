@@ -23,13 +23,13 @@ describe("Avatar test", () => {
     );
 
     inputAvatar = screen.getByTestId(/Avatar/i);
-    button = screen.getByRole("button");
+    button = screen.getByTestId("button");
   });
 
   // Render
   test("0. render components successfully", async () => {
     expect.toBeInTheDocument(screen.getByTestId(/Avatar/i));
-    expect.toBeInTheDocument(screen.getByRole("button"));
+    expect.toBeInTheDocument(screen.getByTestId("button"));
 
     expect(alert);
   });
@@ -42,7 +42,7 @@ describe("Avatar test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert);
   });
@@ -54,7 +54,7 @@ describe("Avatar test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert);
   });
@@ -62,7 +62,7 @@ describe("Avatar test", () => {
   test("3. Do not upload file", async () => {
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert);
   });
@@ -75,7 +75,7 @@ describe("Avatar test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert);
   });

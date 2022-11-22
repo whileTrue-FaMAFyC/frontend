@@ -76,7 +76,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert).toHaveTextContent("The match was created successfully.");
   });
@@ -92,7 +92,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Name is required.");
   });
@@ -107,7 +107,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Number of games is required.");
   });
@@ -122,7 +122,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Number of rounds is required.");
   });
@@ -137,7 +137,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Robot is required.");
   });
@@ -152,7 +152,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
     expect(inputMinPlayers).toHaveValue("2");
     expect(alert).toHaveTextContent("The match was created successfully.");
   });
@@ -167,7 +167,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
     expect(inputMaxPlayers).toHaveValue("2");
     expect(alert).toHaveTextContent("The match was created successfully.");
   });
@@ -183,7 +183,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertSuccess");
+    const alert = await screen.findByTestId("alertSuccess");
 
     expect(alert).toHaveTextContent("The match was created successfully.");
   });
@@ -200,7 +200,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent(
       "The name must have at most 16 characters."
@@ -218,7 +218,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent(
       "The name must have at least 3 characters."
@@ -237,7 +237,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent(
       "The password must have at most 16 characters."
@@ -256,7 +256,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent(
       "The maximum number of players must be greater than or equal to the minimum established."
@@ -275,7 +275,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
@@ -291,7 +291,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
@@ -307,7 +307,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
@@ -323,7 +323,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 200.");
   });
@@ -340,7 +340,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
@@ -356,7 +356,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
@@ -372,7 +372,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
@@ -388,7 +388,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertError");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toHaveTextContent("Enter an integer between 1 and 10000.");
   });
@@ -413,7 +413,7 @@ describe("Configuracion de partida test", () => {
 
     userEvent.click(button);
 
-    const alert = await screen.findByRole("alertServer");
+    const alert = await screen.findByTestId("alertError");
 
     expect(alert).toBeInTheDocument();
   });
