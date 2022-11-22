@@ -30,7 +30,7 @@ export const Burger = styled(Menu)`
   fill: #fff;
   cursor: pointer;
   display: none;
-  @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1100px) {
     display: flex;
   }
 `;
