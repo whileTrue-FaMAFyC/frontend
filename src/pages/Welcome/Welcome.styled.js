@@ -37,13 +37,12 @@ export const StyledButton = styled.button`
   position: relative;
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border: none;
   padding: 8px 16px;
   margin: 5px;
 
   outline: none;
   background-color: #00c8c8;
-  //color: #252c32;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.5;
