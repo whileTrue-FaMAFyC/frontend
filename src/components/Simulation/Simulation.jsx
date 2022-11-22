@@ -12,7 +12,7 @@ const Simulation = ({props}) => {
   const [showWinners, setShowWinners] = useState(null);
   const interval = useRef(null);
 
-  const colorsRobots = ["red", "turquoise", "orange", "pink"];
+  const colorsRobots = ["red", "turquoise", "brown", "pink"];
 
   const colors = {};
   const robot_names = {};
