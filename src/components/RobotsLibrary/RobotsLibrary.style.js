@@ -65,7 +65,6 @@ export const Table = styled.table`
   border-radius: 4px;
   margin: 5px;
   width: 100%;
-  min-width: 700px;
   display: flex;
   flex-direction: column;
   overflow-x: auto;
